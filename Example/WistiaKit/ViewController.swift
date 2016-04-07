@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import WistiaKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
+    let wistiaPlayerVC = WistiaPlayerViewController(referrer: "WistiaKitDemo", requireHLS: false)
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    @IBOutlet weak var hashedIDTextField: UITextField!
 
+    @IBAction func playTapped(sender: AnyObject) {
+        if let hashedID = hashedIDTextField.text {
+            wistiaPlayerVC.replaceCurrentVideoWithVideoForHashedID(hashedID)
+            self.presentViewController(wistiaPlayerVC, animated: true, completion: nil)
+        }
+    }
 }
 

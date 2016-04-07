@@ -1,0 +1,23 @@
+PODS:
+  - Alamofire (3.3.0)
+  - Nimble (3.2.0)
+  - Quick (0.9.1)
+  - WistiaKit (0.1.0):
+    - Alamofire (~> 3.3)
+
+DEPENDENCIES:
+  - Nimble (~> 3.0)
+  - Quick (~> 0.8)
+  - WistiaKit (from `../`)
+
+EXTERNAL SOURCES:
+  WistiaKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
+  Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
+  Quick: a5221fc21788b6aeda934805e68b061839bc3165
+  WistiaKit: 0681a0c3d0885f425b781dd953370843c1e80260
+
+COCOAPODS: 0.39.0

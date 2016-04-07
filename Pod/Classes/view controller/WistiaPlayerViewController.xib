@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WistiaPlayerViewController" customModule="WistiaKit" customModuleProvider="target">
+            <connections>
+                <outlet property="controlsPlayPauseButton" destination="sqf-SN-EOA" id="mJ0-Dy-FXO"/>
+                <outlet property="extraCloseButton" destination="xLH-gl-vos" id="gfT-7i-Bud"/>
+                <outlet property="playbackControlsContainer" destination="WIg-R7-qh3" id="pOf-pM-2QL"/>
+                <outlet property="playbackControlsInnerContainer" destination="3DG-iO-w5X" id="pwc-QC-0CP"/>
+                <outlet property="player360View" destination="FoK-e2-L2L" id="stX-jr-y7O"/>
+                <outlet property="player360ViewHeightConstraint" destination="SK3-1M-ADA" id="yg2-4m-G73"/>
+                <outlet property="player360ViewWidthConstraint" destination="abv-rc-91c" id="4eh-7T-twM"/>
+                <outlet property="playerContainer" destination="BwG-ri-99v" id="bSh-7e-cfb"/>
+                <outlet property="playerFlatView" destination="RK7-ta-7jO" id="G2Y-BK-Jdr"/>
+                <outlet property="posterErrorIndicator" destination="1gl-Xk-GqW" id="QI0-Au-6RY"/>
+                <outlet property="posterLoadingIndicator" destination="eLB-Ll-7u3" id="ANs-Rs-3n2"/>
+                <outlet property="posterPlayButtonContainer" destination="22B-T6-9B2" id="FSS-xY-ta3"/>
+                <outlet property="scrubTrackTimeLabelCenterConstraint" destination="LCo-vR-8WK" id="7kD-oE-Ueu"/>
+                <outlet property="scrubberCurrentProgressView" destination="MhK-r1-66L" id="Jmt-aB-VX6"/>
+                <outlet property="scrubberCurrentProgressViewWidthConstraint" destination="nzr-0e-mFQ" id="A07-h2-pKJ"/>
+                <outlet property="scrubberTrackContainerView" destination="q2t-fG-lfU" id="MI9-pl-Xpv"/>
+                <outlet property="scrubberTrackCurrentTimeLabel" destination="uR2-Mn-8aW" id="n5n-aJ-PCi"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BwG-ri-99v" userLabel="Video Container">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RK7-ta-7jO" customClass="WistiaFlatPlayerView" customModule="WistiaKit" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="131" width="600" height="337.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="RK7-ta-7jO" secondAttribute="height" multiplier="16:9" id="voz-6h-ij5"/>
+                            </constraints>
+                        </view>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoK-e2-L2L" userLabel="Wistia 360 Player View" customClass="Wistia360PlayerView" customModule="WistiaKit" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <subviews>
+                                <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alB-fx-TeD">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <gestureRecognizers/>
+                                </sceneKitView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstItem="alB-fx-TeD" firstAttribute="top" secondItem="FoK-e2-L2L" secondAttribute="top" id="Bek-wR-RhR"/>
+                                <constraint firstAttribute="height" constant="600" id="SK3-1M-ADA"/>
+                                <constraint firstAttribute="bottom" secondItem="alB-fx-TeD" secondAttribute="bottom" id="ZFV-z8-kri"/>
+                                <constraint firstAttribute="width" constant="600" id="abv-rc-91c"/>
+                                <constraint firstItem="alB-fx-TeD" firstAttribute="leading" secondItem="FoK-e2-L2L" secondAttribute="leading" id="kY5-Tp-eMJ"/>
+                                <constraint firstAttribute="trailing" secondItem="alB-fx-TeD" secondAttribute="trailing" id="mdo-QA-7ei"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="sceneView" destination="alB-fx-TeD" id="KK5-Eo-dr3"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="RK7-ta-7jO" firstAttribute="centerY" secondItem="BwG-ri-99v" secondAttribute="centerY" id="0g1-bn-yKJ"/>
+                        <constraint firstAttribute="trailing" secondItem="RK7-ta-7jO" secondAttribute="trailing" id="8LZ-kV-ypV"/>
+                        <constraint firstItem="FoK-e2-L2L" firstAttribute="centerX" secondItem="BwG-ri-99v" secondAttribute="centerX" id="T2J-f5-UcC"/>
+                        <constraint firstItem="RK7-ta-7jO" firstAttribute="leading" secondItem="BwG-ri-99v" secondAttribute="leading" id="mXp-ho-CKL"/>
+                        <constraint firstItem="FoK-e2-L2L" firstAttribute="centerY" secondItem="BwG-ri-99v" secondAttribute="centerY" id="wVO-vN-4dP"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBy-7d-odP" userLabel="Overlay Container">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WIg-R7-qh3" userLabel="Playback Controls Visual Effect View">
+                            <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                            <view key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="gdY-in-cWT">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3DG-iO-w5X">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <view key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="dWr-ea-TeB">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHT-K1-I6Z">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqf-SN-EOA" userLabel="Toggle Play Pause Button">
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="44"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="60" id="3BG-5A-yOW"/>
+                                                            </constraints>
+                                                            <state key="normal" image="smallPlay"/>
+                                                            <connections>
+                                                                <action selector="controlsPlayPausePressed:" destination="-1" eventType="touchUpInside" id="41Y-g5-ewG"/>
+                                                            </connections>
+                                                        </button>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2t-fG-lfU" userLabel="Scrubber Track Container View">
+                                                            <rect key="frame" x="60" y="0.0" width="420" height="44"/>
+                                                            <subviews>
+                                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhK-r1-66L" userLabel="Scrubber Current Progress">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="167" height="44"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uR2-Mn-8aW">
+                                                                            <rect key="frame" x="120.5" y="12" width="38" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.14873383618275868" colorSpace="calibratedRGB"/>
+                                                                    <gestureRecognizers/>
+                                                                    <constraints>
+                                                                        <constraint firstItem="uR2-Mn-8aW" firstAttribute="centerY" secondItem="MhK-r1-66L" secondAttribute="centerY" id="LCo-vR-8WK"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="uR2-Mn-8aW" secondAttribute="trailing" priority="998" constant="8" id="chm-JK-uVU"/>
+                                                                        <constraint firstAttribute="width" constant="167" id="nzr-0e-mFQ"/>
+                                                                        <constraint firstItem="uR2-Mn-8aW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MhK-r1-66L" secondAttribute="leading" priority="999" id="oOP-WH-fNN"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10420258622413794" colorSpace="calibratedRGB"/>
+                                                            <gestureRecognizers/>
+                                                            <constraints>
+                                                                <constraint firstItem="MhK-r1-66L" firstAttribute="top" secondItem="q2t-fG-lfU" secondAttribute="top" id="JYh-hQ-iNK"/>
+                                                                <constraint firstItem="MhK-r1-66L" firstAttribute="leading" secondItem="q2t-fG-lfU" secondAttribute="leading" id="Yl0-Xr-bSf"/>
+                                                                <constraint firstAttribute="bottom" secondItem="MhK-r1-66L" secondAttribute="bottom" id="za9-4J-PzQ"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outletCollection property="gestureRecognizers" destination="05V-xK-gSM" appends="YES" id="wph-OL-BmL"/>
+                                                                <outletCollection property="gestureRecognizers" destination="Eab-2n-9li" appends="YES" id="Aeb-Om-XAo"/>
+                                                            </connections>
+                                                        </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9Y-rG-pln" userLabel="Action Button">
+                                                            <rect key="frame" x="480" y="0.0" width="60" height="44"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="60" id="ngd-Te-6OY"/>
+                                                            </constraints>
+                                                            <state key="normal" image="action"/>
+                                                            <connections>
+                                                                <action selector="controlsActionPressed:" destination="-1" eventType="touchUpInside" id="nbd-NX-04o"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdA-x0-aCn" userLabel="Close Button">
+                                                            <rect key="frame" x="540" y="0.0" width="60" height="44"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="60" id="tLK-I2-kZL"/>
+                                                            </constraints>
+                                                            <state key="normal" image="x-close"/>
+                                                            <connections>
+                                                                <action selector="controlsClosePressed:" destination="-1" eventType="touchUpInside" id="pIe-XI-Ud9"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="VHT-K1-I6Z" firstAttribute="leading" secondItem="dWr-ea-TeB" secondAttribute="leading" id="5KG-N5-XKe"/>
+                                                <constraint firstAttribute="bottom" secondItem="VHT-K1-I6Z" secondAttribute="bottom" id="CnY-Gl-9uf"/>
+                                                <constraint firstAttribute="trailing" secondItem="VHT-K1-I6Z" secondAttribute="trailing" id="XZc-Pp-9Up"/>
+                                                <constraint firstItem="VHT-K1-I6Z" firstAttribute="top" secondItem="dWr-ea-TeB" secondAttribute="top" id="Z07-aL-wrN"/>
+                                            </constraints>
+                                        </view>
+                                        <vibrancyEffect>
+                                            <blurEffect style="dark"/>
+                                        </vibrancyEffect>
+                                    </visualEffectView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="3DG-iO-w5X" secondAttribute="trailing" id="BDn-6p-0lg"/>
+                                    <constraint firstItem="3DG-iO-w5X" firstAttribute="top" secondItem="gdY-in-cWT" secondAttribute="top" id="P50-58-FWr"/>
+                                    <constraint firstAttribute="bottom" secondItem="3DG-iO-w5X" secondAttribute="bottom" id="bHW-Cy-eUl"/>
+                                    <constraint firstItem="3DG-iO-w5X" firstAttribute="leading" secondItem="gdY-in-cWT" secondAttribute="leading" id="lMq-s6-GW7"/>
+                                </constraints>
+                            </view>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="I6j-uV-eGi"/>
+                            </constraints>
+                            <blurEffect style="light"/>
+                        </visualEffectView>
+                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22B-T6-9B2" userLabel="Poster Play Button Visual Effect View">
+                            <rect key="frame" x="216" y="248" width="168" height="104"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pPe-VU-6rr">
+                                <rect key="frame" x="0.0" y="0.0" width="168" height="104"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sHV-Sn-NoT">
+                                        <rect key="frame" x="0.0" y="0.0" width="168" height="104"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="eTV-xB-Ed3">
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="104"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aY4-5G-flB" userLabel="Poster Play Button">
+                                                    <rect key="frame" x="0.0" y="0.0" width="168" height="104"/>
+                                                    <state key="normal" image="largePlay"/>
+                                                    <connections>
+                                                        <action selector="posterPlayPressed:" destination="-1" eventType="touchUpInside" id="bWs-tx-rap"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="aY4-5G-flB" secondAttribute="trailing" id="3at-hQ-z7S"/>
+                                                <constraint firstAttribute="bottom" secondItem="aY4-5G-flB" secondAttribute="bottom" id="Jdn-Ag-amY"/>
+                                                <constraint firstItem="aY4-5G-flB" firstAttribute="leading" secondItem="eTV-xB-Ed3" secondAttribute="leading" id="YSd-0C-P1r"/>
+                                                <constraint firstItem="aY4-5G-flB" firstAttribute="top" secondItem="eTV-xB-Ed3" secondAttribute="top" id="mgT-Mx-1tS"/>
+                                            </constraints>
+                                        </view>
+                                        <vibrancyEffect>
+                                            <blurEffect style="dark"/>
+                                        </vibrancyEffect>
+                                    </visualEffectView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="sHV-Sn-NoT" secondAttribute="bottom" id="0rz-jz-fEF"/>
+                                    <constraint firstItem="sHV-Sn-NoT" firstAttribute="leading" secondItem="pPe-VU-6rr" secondAttribute="leading" id="2nl-gW-SdP"/>
+                                    <constraint firstItem="sHV-Sn-NoT" firstAttribute="top" secondItem="pPe-VU-6rr" secondAttribute="top" id="6zz-hK-OWC"/>
+                                    <constraint firstAttribute="trailing" secondItem="sHV-Sn-NoT" secondAttribute="trailing" id="Yei-sE-CEY"/>
+                                </constraints>
+                            </view>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="104" id="BYA-At-cX0"/>
+                                <constraint firstAttribute="width" constant="168" id="ecz-4A-tbO"/>
+                            </constraints>
+                            <blurEffect style="light"/>
+                        </visualEffectView>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="eLB-Ll-7u3" userLabel="Poster Loading Activity Indicator">
+                            <rect key="frame" x="282" y="281" width="37" height="37"/>
+                        </activityIndicatorView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skullNBones" translatesAutoresizingMaskIntoConstraints="NO" id="1gl-Xk-GqW" userLabel="Poster Error Indicator">
+                            <rect key="frame" x="285" y="284" width="30" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="OAu-rg-ENp"/>
+                                <constraint firstAttribute="height" constant="32" id="U09-34-oC9"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLH-gl-vos" userLabel="Extra Close Button">
+                            <rect key="frame" x="540" y="556" width="60" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="33C-1J-wTC"/>
+                                <constraint firstAttribute="height" constant="44" id="eOj-Q1-c8P"/>
+                            </constraints>
+                            <state key="normal" image="x-close"/>
+                            <connections>
+                                <action selector="controlsClosePressed:" destination="-1" eventType="touchUpInside" id="CLe-JT-IDo"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="WIg-R7-qh3" secondAttribute="trailing" id="Dwe-xb-bNH"/>
+                        <constraint firstItem="1gl-Xk-GqW" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="EYk-hf-6ws"/>
+                        <constraint firstItem="WIg-R7-qh3" firstAttribute="leading" secondItem="lBy-7d-odP" secondAttribute="leading" id="FyQ-tF-Tmd"/>
+                        <constraint firstAttribute="bottom" secondItem="xLH-gl-vos" secondAttribute="bottom" id="L8z-gi-kUq"/>
+                        <constraint firstAttribute="bottom" secondItem="WIg-R7-qh3" secondAttribute="bottom" id="Q40-Wh-zvj"/>
+                        <constraint firstItem="1gl-Xk-GqW" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="RJE-7q-GTi"/>
+                        <constraint firstItem="22B-T6-9B2" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="SD0-Lj-X9Q"/>
+                        <constraint firstItem="eLB-Ll-7u3" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="U95-d7-gE0"/>
+                        <constraint firstItem="eLB-Ll-7u3" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="Vjg-UH-5Ej"/>
+                        <constraint firstAttribute="trailing" secondItem="xLH-gl-vos" secondAttribute="trailing" id="Xl0-xV-AjY"/>
+                        <constraint firstItem="22B-T6-9B2" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="wkZ-Cf-4Wl"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="LU0-Yk-luK" appends="YES" id="wpd-Vh-ljc"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="lBy-7d-odP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="L5Z-kR-9dk"/>
+                <constraint firstItem="lBy-7d-odP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NKI-iZ-Gys"/>
+                <constraint firstAttribute="bottom" secondItem="BwG-ri-99v" secondAttribute="bottom" id="XaR-Xq-YUP"/>
+                <constraint firstAttribute="trailing" secondItem="BwG-ri-99v" secondAttribute="trailing" id="YoS-oQ-Zbg"/>
+                <constraint firstAttribute="trailing" secondItem="lBy-7d-odP" secondAttribute="trailing" id="bDI-lp-pQc"/>
+                <constraint firstItem="BwG-ri-99v" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ijI-Re-22F"/>
+                <constraint firstAttribute="bottom" secondItem="lBy-7d-odP" secondAttribute="bottom" id="nj9-lt-6Jt"/>
+                <constraint firstItem="BwG-ri-99v" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="udY-Na-wMw"/>
+            </constraints>
+            <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="ADo-gH-m8Y" appends="YES" id="ldQ-Ea-Gqv"/>
+                <outletCollection property="gestureRecognizers" destination="rEG-OK-3Hn" appends="YES" id="mCJ-dx-aOZ"/>
+                <outletCollection property="gestureRecognizers" destination="zKO-dx-lUh" appends="YES" id="qJM-W4-B26"/>
+                <outletCollection property="gestureRecognizers" destination="Tak-v9-yyY" appends="YES" id="dqQ-YF-0OQ"/>
+                <outletCollection property="gestureRecognizers" destination="1hW-g7-1JG" appends="YES" id="feX-Jg-rON"/>
+            </connections>
+        </view>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="05V-xK-gSM" userLabel="Scrubber Pan Gesture Recognizer">
+            <connections>
+                <action selector="handleScrubbing:" destination="-1" id="y0p-fI-y5g"/>
+            </connections>
+        </panGestureRecognizer>
+        <tapGestureRecognizer id="Eab-2n-9li" userLabel="Scrubber Tap Gesture Recognizer">
+            <connections>
+                <action selector="handleScrubberTap:" destination="-1" id="x4K-tn-Sn5"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="LU0-Yk-luK" userLabel="Overlay Tap Gesture Recognizer">
+            <connections>
+                <action selector="playerContainerTapped:" destination="-1" id="5dE-1b-UQq"/>
+            </connections>
+        </tapGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="ADo-gH-m8Y" userLabel="360 Pan Gesture Recognizer">
+            <connections>
+                <action selector="handlePan:" destination="FoK-e2-L2L" id="z48-Vu-44v"/>
+            </connections>
+        </panGestureRecognizer>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="rEG-OK-3Hn" userLabel="360 Long Press Gesture Recognizer">
+            <connections>
+                <action selector="handleLongPress:" destination="FoK-e2-L2L" id="YT6-fC-MHE"/>
+            </connections>
+        </pongPressGestureRecognizer>
+        <pinchGestureRecognizer id="zKO-dx-lUh" userLabel="360 Pinch Gesture Recognizer">
+            <connections>
+                <action selector="handlePinch:" destination="FoK-e2-L2L" id="IXE-Wk-sfv"/>
+            </connections>
+        </pinchGestureRecognizer>
+        <tapGestureRecognizer numberOfTouchesRequired="2" id="Tak-v9-yyY" userLabel="360 two touch single tap">
+            <connections>
+                <action selector="handleTwoTouchSingleTap:" destination="FoK-e2-L2L" id="5n5-bj-gjd"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer numberOfTapsRequired="2" id="1hW-g7-1JG" userLabel="360 one touch double tap">
+            <connections>
+                <action selector="handleOneTouchDoubleTap:" destination="FoK-e2-L2L" id="Obi-0r-Dvz"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="action" width="25" height="25"/>
+        <image name="largePlay" width="36" height="52"/>
+        <image name="skullNBones" width="30" height="32"/>
+        <image name="smallPlay" width="15" height="21"/>
+        <image name="x-close" width="22" height="22"/>
+    </resources>
+</document>
