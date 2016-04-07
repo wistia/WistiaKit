@@ -23,6 +23,16 @@
       "Pod/Assets/*.xcassets"
     ]
   },
+  "frameworks": [
+    "AdSupport",
+    "AVFoundation",
+    "AVKit",
+    "CoreMotion",
+    "Foundation",
+    "SceneKit",
+    "SpriteKit",
+    "UIKit"
+  ],
   "dependencies": {
     "Alamofire": [
       "~> 3.3"

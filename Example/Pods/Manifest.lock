@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.3.0)
+  - Alamofire (3.3.1)
   - Nimble (3.2.0)
   - Quick (0.9.1)
   - WistiaKit (0.1.0):
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
   Quick: a5221fc21788b6aeda934805e68b061839bc3165
-  WistiaKit: 0681a0c3d0885f425b781dd953370843c1e80260
+  WistiaKit: de93f1930df25302f9c3ad9a4f7e09fb74216c9d
 
 COCOAPODS: 0.39.0

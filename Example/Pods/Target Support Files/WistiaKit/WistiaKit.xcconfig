@@ -1,5 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/WistiaKit" "${PODS_ROOT}/Headers/Public"
+OTHER_LDFLAGS = -framework "AVFoundation" -framework "AVKit" -framework "AdSupport" -framework "CoreMotion" -framework "Foundation" -framework "SceneKit" -framework "SpriteKit" -framework "UIKit"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_ROOT = ${SRCROOT}
 SKIP_INSTALL = YES
