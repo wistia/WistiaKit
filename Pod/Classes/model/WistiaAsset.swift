@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public struct WistiaAsset {
 
     var media: WistiaMedia
