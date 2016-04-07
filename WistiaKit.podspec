@@ -35,9 +35,13 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'WistiaKit' => ['Pod/Assets/*.xcassets']
-  }
+
+  # Although resource_bundles is the new recommended hotness, it doens't play well with Asset Catalogs.
+  # Fortunately, the old resources method will faithfully copy the catalog in such a way that it 'just works'
+  s.resources = 'Pod/Assets/**/*.xcassets'
+  #s.resource_bundles = {
+  #   'Assets' => ['Pod/Assets/**/*.xcassets']
+  # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'CoreMotion', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'

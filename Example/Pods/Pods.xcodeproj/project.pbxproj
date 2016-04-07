@@ -36,17 +36,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>015BE8F2EA965DC0FBDCAEE14E3B6EF6</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>WistiaKit-WistiaKit</string>
-			<key>target</key>
-			<string>3528ECB9C55D9E2ADAB0D45E421DB555</string>
-			<key>targetProxy</key>
-			<string>077312E39EEC87FBE74C928CDAAB9056</string>
-		</dict>
 		<key>03281948BAFF38B41064D66E01FE7C6F</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -76,6 +65,21 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>04E830A6DD51DD098CC1A4A9010C3D60</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_WistiaKit_Example.framework</string>
+			<key>path</key>
+			<string>Pods_WistiaKit_Example.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
 		<key>05FDF68BCE3B4A1A8FCB392B4E652F42</key>
 		<dict>
 			<key>children</key>
@@ -91,21 +95,6 @@
 			<string>extension</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>06535BC9B27BCB1D20C12BBFFB02B9D4</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>WistiaKit.bundle</string>
-			<key>path</key>
-			<string>WistiaKit.bundle</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>065A3AB05F314435BC93F615C9F08EC7</key>
 		<dict>
@@ -133,19 +122,6 @@
 			<string>6BB185EC14B948F35FA991D8617C6672</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>077312E39EEC87FBE74C928CDAAB9056</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>3528ECB9C55D9E2ADAB0D45E421DB555</string>
-			<key>remoteInfo</key>
-			<string>WistiaKit-WistiaKit</string>
 		</dict>
 		<key>08EB29D5DA737B974DB5CEAE3BAF9EC6</key>
 		<dict>
@@ -576,7 +552,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1A3F541D94BB52946F71954974494580</key>
+		<key>1B6FCBD75B5EB82977B6EB934F965D85</key>
 		<dict>
 			<key>explicitFileType</key>
 			<string>wrapper.framework</string>
@@ -585,9 +561,24 @@
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>Pods_WistiaKit_Tests.framework</string>
+			<string>Quick.framework</string>
 			<key>path</key>
-			<string>Pods_WistiaKit_Tests.framework</string>
+			<string>Quick.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>1B8A45E6E7D88E69E3621A14A16FE4EA</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Alamofire.framework</string>
+			<key>path</key>
+			<string>Alamofire.framework</string>
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
@@ -726,17 +717,6 @@
 			<string>Info.plist</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>231806A25009FFA81181F44CEB281B15</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
 		</dict>
 		<key>233712231EADECE8AC4E73085CD36E1A</key>
 		<dict>
@@ -1115,21 +1095,6 @@
 				</array>
 			</dict>
 		</dict>
-		<key>2F63A0505CE14D6616E7E17D3B4A706D</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>WistiaKit.framework</string>
-			<key>path</key>
-			<string>WistiaKit.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
 		<key>302A5030BA17CEB0FE07B828A215FD8E</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1229,31 +1194,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>3528ECB9C55D9E2ADAB0D45E421DB555</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>A45E18832D753BFD5A91F73356D46662</string>
-			<key>buildPhases</key>
-			<array>
-				<string>231806A25009FFA81181F44CEB281B15</string>
-				<string>C015E8DE534F4516136A6A634D73B13C</string>
-				<string>FDE9974013F512C1FB82CF61658370C5</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>WistiaKit-WistiaKit</string>
-			<key>productName</key>
-			<string>WistiaKit-WistiaKit</string>
-			<key>productReference</key>
-			<string>06535BC9B27BCB1D20C12BBFFB02B9D4</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle</string>
-		</dict>
 		<key>366B8065FE98F48548F8B50A715FFD48</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1301,7 +1241,7 @@
 			<array>
 				<string>8269A081064F7A3E709F82CF3FA6F5AA</string>
 				<string>F4783192BE34A8F05D75899A83818700</string>
-				<string>EBBE61B46736C59B466A5A8D1415A90A</string>
+				<string>B70A2996B26EDAA0E62AC2DC77A6DD94</string>
 				<string>0B05C0ED259B5FD88A27102E643B926A</string>
 			</array>
 			<key>buildRules</key>
@@ -1309,7 +1249,6 @@
 			<key>dependencies</key>
 			<array>
 				<string>8059C585A99C0F5CE974390783078EDA</string>
-				<string>015BE8F2EA965DC0FBDCAEE14E3B6EF6</string>
 			</array>
 			<key>isa</key>
 			<string>PBXNativeTarget</string>
@@ -1318,7 +1257,7 @@
 			<key>productName</key>
 			<string>WistiaKit</string>
 			<key>productReference</key>
-			<string>2F63A0505CE14D6616E7E17D3B4A706D</string>
+			<string>9922271794C72975E8B784AF96C16E13</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
@@ -2094,13 +2033,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>57563639CFF1DA30AE04088D3F68D927</key>
-		<dict>
-			<key>fileRef</key>
-			<string>06535BC9B27BCB1D20C12BBFFB02B9D4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>57E47DCFCB6FA1925BC2C08D063CD37F</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2392,6 +2324,21 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>63DD3A4D6DD87AAEF69B44BDA6AD089E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Nimble.framework</string>
+			<key>path</key>
+			<string>Nimble.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
 		<key>64539BE196D1741570018FFF86F14133</key>
 		<dict>
 			<key>fileRef</key>
@@ -2531,7 +2478,7 @@
 			<key>productName</key>
 			<string>Pods-WistiaKit_Example</string>
 			<key>productReference</key>
-			<string>D7970BCE4B73AF264D0FAD18C1C89D74</string>
+			<string>04E830A6DD51DD098CC1A4A9010C3D60</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
@@ -2547,25 +2494,6 @@
 			<string>DSL+Wait.swift</string>
 			<key>path</key>
 			<string>Sources/Nimble/DSL+Wait.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6998DD9AAE8BE481B026E8B3E2F2D06A</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>A59A8C492FDD05D2291A77CA83E87F12</string>
-				<string>B0D29701E1B682137102137ED383E0B2</string>
-				<string>D7970BCE4B73AF264D0FAD18C1C89D74</string>
-				<string>1A3F541D94BB52946F71954974494580</string>
-				<string>7EC4386A94D7834BDAFC7FE2B07A9255</string>
-				<string>06535BC9B27BCB1D20C12BBFFB02B9D4</string>
-				<string>2F63A0505CE14D6616E7E17D3B4A706D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2894,7 +2822,7 @@
 			<key>productName</key>
 			<string>Alamofire</string>
 			<key>productReference</key>
-			<string>A59A8C492FDD05D2291A77CA83E87F12</string>
+			<string>1B8A45E6E7D88E69E3621A14A16FE4EA</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
@@ -2979,7 +2907,7 @@
 				<string>57FCADDE171443D4D6040F05140D499D</string>
 				<string>AA373338A09E9A4F0F69F1D1B0153916</string>
 				<string>635C2F9694D9BE5806AD8C40278A2DE5</string>
-				<string>6998DD9AAE8BE481B026E8B3E2F2D06A</string>
+				<string>F8F509CA3D9744A7F8BD307FDCB7A51E</string>
 				<string>498D150B3A7C9589BC3880082E71AFB1</string>
 			</array>
 			<key>isa</key>
@@ -3094,21 +3022,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>7EC4386A94D7834BDAFC7FE2B07A9255</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Quick.framework</string>
-			<key>path</key>
-			<string>Quick.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
 		<key>7EE9D307513D95F583E967B2F48BB3C1</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3168,7 +3081,7 @@
 			<key>productName</key>
 			<string>Pods-WistiaKit_Tests</string>
 			<key>productReference</key>
-			<string>1A3F541D94BB52946F71954974494580</string>
+			<string>90B1BE3129AD6D502BB36897B7432504</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
@@ -3452,6 +3365,21 @@
 				</array>
 			</dict>
 		</dict>
+		<key>90B1BE3129AD6D502BB36897B7432504</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_WistiaKit_Tests.framework</string>
+			<key>path</key>
+			<string>Pods_WistiaKit_Tests.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
 		<key>91ED5B067FCA3CBD48E3114672941051</key>
 		<dict>
 			<key>fileRef</key>
@@ -3725,6 +3653,21 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>9922271794C72975E8B784AF96C16E13</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>WistiaKit.framework</string>
+			<key>path</key>
+			<string>WistiaKit.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
 		<key>9993015CB88B8CD73711DE85EC22E2B4</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3908,20 +3851,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>A45E18832D753BFD5A91F73356D46662</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>F74598F3E359F22BB2E7A92955F9D658</string>
-				<string>B8817ACAEEFE8C5A5588996B2CFE6B16</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
 		<key>A55C2EC6C0C77D15029F178AB59C227B</key>
 		<dict>
 			<key>isa</key>
@@ -3940,20 +3869,12 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>A59A8C492FDD05D2291A77CA83E87F12</key>
+		<key>A563D1A45D4A979788BB7E6AAF125AB4</key>
 		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
+			<key>fileRef</key>
+			<string>DA3C52D55190993C0E7ACAD2BB188CDA</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Alamofire.framework</string>
-			<key>path</key>
-			<string>Alamofire.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>A79E62750D4F4C29FB65EE6A2CD91EDE</key>
 		<dict>
@@ -4103,21 +4024,6 @@
 			<string>37BFABC0E2BCAFBD74EE4900AB9FC2E9</string>
 			<key>remoteInfo</key>
 			<string>WistiaKit</string>
-		</dict>
-		<key>B0D29701E1B682137102137ED383E0B2</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Nimble.framework</string>
-			<key>path</key>
-			<string>Nimble.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>B1729F851F648EC60EE93CDB3C8BAEAD</key>
 		<dict>
@@ -4299,6 +4205,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>B70A2996B26EDAA0E62AC2DC77A6DD94</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>A563D1A45D4A979788BB7E6AAF125AB4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
 		<key>B7B1ED1C6AEE5BC3FABC2375439D0328</key>
 		<dict>
 			<key>fileRef</key>
@@ -4312,28 +4231,6 @@
 			<string>511149DC0F77786FC9525976BD5DA35F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>B8817ACAEEFE8C5A5588996B2CFE6B16</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>25DBB6650245E6EA626D9B0894CEDC76</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>PRODUCT_NAME</key>
-				<string>WistiaKit</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>bundle</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
 		</dict>
 		<key>B894DF9B23D292652BE8FAC4EBEE786B</key>
 		<dict>
@@ -4500,17 +4397,6 @@
 			<string>Sources/Nimble/Matchers/EndWith.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C015E8DE534F4516136A6A634D73B13C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
 		</dict>
 		<key>C0DB70AB368765DC64BFB5FEA75E0696</key>
 		<dict>
@@ -4888,7 +4774,7 @@
 			<key>mainGroup</key>
 			<string>7DB346D0F39D3F0E887471402A8071AB</string>
 			<key>productRefGroup</key>
-			<string>6998DD9AAE8BE481B026E8B3E2F2D06A</string>
+			<string>F8F509CA3D9744A7F8BD307FDCB7A51E</string>
 			<key>projectDirPath</key>
 			<string></string>
 			<key>projectReferences</key>
@@ -4903,7 +4789,6 @@
 				<string>7FE9E05997EFA5F0F60644D538242700</string>
 				<string>D4D31359E260E2CDDA3B89F2DF6B70CB</string>
 				<string>37BFABC0E2BCAFBD74EE4900AB9FC2E9</string>
-				<string>3528ECB9C55D9E2ADAB0D45E421DB555</string>
 			</array>
 		</dict>
 		<key>D41F628A81153A978EB209E4FE925700</key>
@@ -4948,7 +4833,7 @@
 			<key>productName</key>
 			<string>Quick</string>
 			<key>productReference</key>
-			<string>7EC4386A94D7834BDAFC7FE2B07A9255</string>
+			<string>1B6FCBD75B5EB82977B6EB934F965D85</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
@@ -4988,21 +4873,6 @@
 			<string>Source/Request.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D7970BCE4B73AF264D0FAD18C1C89D74</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods_WistiaKit_Example.framework</string>
-			<key>path</key>
-			<string>Pods_WistiaKit_Example.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>D80967324C15D2DFD4CDC512C5891752</key>
 		<dict>
@@ -5393,19 +5263,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>EBBE61B46736C59B466A5A8D1415A90A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>57563639CFF1DA30AE04088D3F68D927</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>EC06A0BF28B2405DA77269A891ADCEC0</key>
 		<dict>
 			<key>isa</key>
@@ -5418,13 +5275,6 @@
 			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/XCTest.framework</string>
 			<key>sourceTree</key>
 			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>EDB3FF6D8369587D180F58E562DE3EB6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DA3C52D55190993C0E7ACAD2BB188CDA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>EF08D447769800282D2A3DF083C64842</key>
 		<dict>
@@ -5590,28 +5440,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>F74598F3E359F22BB2E7A92955F9D658</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>25DBB6650245E6EA626D9B0894CEDC76</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>PRODUCT_NAME</key>
-				<string>WistiaKit</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>bundle</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
 		<key>F78BB899597323EAEAD83389F18AF86E</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -5649,6 +5477,24 @@
 			<string>734A841FC39FB9EBB5E096987F18605E</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>F8F509CA3D9744A7F8BD307FDCB7A51E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1B8A45E6E7D88E69E3621A14A16FE4EA</string>
+				<string>63DD3A4D6DD87AAEF69B44BDA6AD089E</string>
+				<string>04E830A6DD51DD098CC1A4A9010C3D60</string>
+				<string>90B1BE3129AD6D502BB36897B7432504</string>
+				<string>1B6FCBD75B5EB82977B6EB934F965D85</string>
+				<string>9922271794C72975E8B784AF96C16E13</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>F93E3713F39F43DD839BDDC8EFE55BB4</key>
 		<dict>
@@ -5769,19 +5615,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>FDE9974013F512C1FB82CF61658370C5</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EDB3FF6D8369587D180F58E562DE3EB6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>FED1F8D91DC819E7EEA9F62A0FD89A48</key>
 		<dict>
 			<key>isa</key>
@@ -5891,7 +5724,7 @@
 			<key>productName</key>
 			<string>Nimble</string>
 			<key>productReference</key>
-			<string>B0D29701E1B682137102137ED383E0B2</string>
+			<string>63DD3A4D6DD87AAEF69B44BDA6AD089E</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>

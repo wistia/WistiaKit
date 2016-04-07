@@ -456,10 +456,11 @@ internal extension WistiaPlayerViewController {
     }
 
     func presentPlayPauseButtonForPlaying(playing:Bool){
+        let podBundle = NSBundle(forClass: self.classForCoder)
         if playing {
-            controlsPlayPauseButton.setImage(UIImage(named: "smallPause", inBundle: NSBundle(forClass: self.classForCoder), compatibleWithTraitCollection: nil), forState: .Normal)
+            controlsPlayPauseButton.setImage(UIImage(named: "smallPause", inBundle: podBundle, compatibleWithTraitCollection: nil), forState: .Normal)
         } else {
-            controlsPlayPauseButton.setImage(UIImage(named: "smallPlay", inBundle: NSBundle(forClass: self.classForCoder), compatibleWithTraitCollection: nil), forState: .Normal)
+            controlsPlayPauseButton.setImage(UIImage(named: "smallPlay", inBundle: podBundle, compatibleWithTraitCollection: nil), forState: .Normal)
         }
     }
 

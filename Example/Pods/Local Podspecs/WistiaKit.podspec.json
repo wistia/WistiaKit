@@ -18,11 +18,7 @@
   },
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*",
-  "resource_bundles": {
-    "WistiaKit": [
-      "Pod/Assets/*.xcassets"
-    ]
-  },
+  "resources": "Pod/Assets/**/*.xcassets",
   "frameworks": [
     "AdSupport",
     "AVFoundation",

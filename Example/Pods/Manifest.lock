@@ -18,6 +18,6 @@ SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
   Quick: a5221fc21788b6aeda934805e68b061839bc3165
-  WistiaKit: de93f1930df25302f9c3ad9a4f7e09fb74216c9d
+  WistiaKit: fdd8b2089d5517f5be52cc5fb20f648fccefcc5e
 
 COCOAPODS: 0.39.0
