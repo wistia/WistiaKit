@@ -40,6 +40,6 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit'
+  s.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'CoreMotion', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
   s.dependency 'Alamofire', '~> 3.3'
 end
