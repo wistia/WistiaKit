@@ -63,7 +63,7 @@ public final class WistiaPlayer: NSObject {
         self.replaceCurrentVideoWithVideoForHashedID(hashedID)
     }
 
-    // This player will disable the idle timer during playback (ie. video rate > 0) and
+    // This player will disable the iOS idle timer during playback (ie. video rate > 0) and
     // re-enable the idle timer when the video is paused.
     // If you wish to have total control over the idle timer, set this to false.
     // Changing the value has no immediate effect on the idle timer.
