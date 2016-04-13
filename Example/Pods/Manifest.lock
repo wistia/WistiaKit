@@ -2,7 +2,7 @@ PODS:
   - Alamofire (3.3.1)
   - Nimble (3.2.0)
   - Quick (0.9.1)
-  - WistiaKit (0.1.0):
+  - WistiaKit (0.1.1):
     - Alamofire (~> 3.3)
 
 DEPENDENCIES:
@@ -18,6 +18,6 @@ SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
   Quick: a5221fc21788b6aeda934805e68b061839bc3165
-  WistiaKit: fdd8b2089d5517f5be52cc5fb20f648fccefcc5e
+  WistiaKit: 590a6d8ba118d7f925b40fcfdded46b1557c86f4
 
 COCOAPODS: 0.39.0

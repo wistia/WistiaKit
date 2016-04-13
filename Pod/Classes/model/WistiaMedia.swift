@@ -18,6 +18,7 @@ public struct WistiaMedia {
     var spherical: Bool
     var name: String
     var unnamedAssets: [WistiaAsset]
+    var embedOptions: WistiaMediaEmbedOptions
     
     var distilleryURL: NSURL {
         get {
