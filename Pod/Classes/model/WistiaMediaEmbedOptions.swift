@@ -13,7 +13,14 @@ import Foundation
  * embed_options.  These are stored as a WistiaMediaEmbedOptions on the
  * WistiaMedia to which they apply.
  *
- * Customizations not currently supported:
+ * Customizations may be visualized by using the WistiaPlayerViewController and
+ * accompanying xib for display.  If you are using the WistiaPlayer to vend an
+ * AVPlayerLayer that you are rendering yourself, only the customizations related
+ * directly to playback (autoplay and end behavior) will have an effect.  NB: The
+ * poster image (stillURL) is a seperate UI element and only affects the
+ * WistiaPlayerViewController.
+ *
+ * Wistia customizations not currently supported:
  * - Turnstyle
  * - Call To Action & Annotation Links
  * - Social Bar (replaced with standard iOS action button)
@@ -35,7 +42,7 @@ public struct WistiaMediaEmbedOptions {
     var autoplay: Bool = false
     //What do do when the video ends (default: PauseOnLastFrame)
     var endVideoBehaviorString: String = "pause" {
-        didSet(oldBehavior) {
+        didSet {
             self.endVideoBehavior = WistiaEndVideoBehavior.fromString(self.endVideoBehaviorString)
         }
     }

@@ -29,6 +29,24 @@ public final class WistiaPlayerViewController: UIViewController {
     }()
     private var referrer:String?
     private var requireHLS = true
+    //we don't care about the media, but we do care what it says about customizing the UI
+    private var activeEmbedOptions = WistiaMediaEmbedOptions() {
+        didSet {
+            customizeViewFor(activeEmbedOptions)
+        }
+    }
+    private var currentMediaEmbedOptions:WistiaMediaEmbedOptions? = nil {
+        didSet {
+            chooseActiveEmbedOptions()
+        }
+    }
+    //Setting this will override the embed options from any video loaded unless and until
+    //this is set to nil
+    public var overridingEmbedOptions:WistiaMediaEmbedOptions? = nil {
+        didSet {
+            chooseActiveEmbedOptions()
+        }
+    }
 
     //MARK: Scrubbing
     private var playerRateBeforeScrubbing:Float = 0.0
@@ -39,12 +57,16 @@ public final class WistiaPlayerViewController: UIViewController {
     private var autoplayVideoWhenReady = false
 
     //MARK: - IB Outlets
+    //MARK: Gesture Recognizers
+    @IBOutlet weak private var overlayTapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak private var overlayDoubleTapGestureRecognizer: UITapGestureRecognizer!
+
     //MARK: Players
     @IBOutlet weak private var playerContainer: UIView!
     @IBOutlet weak private var playerFlatView: WistiaFlatPlayerView!
     @IBOutlet weak private var player360View: Wistia360PlayerView!
-    @IBOutlet weak var player360ViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var player360ViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var player360ViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var player360ViewWidthConstraint: NSLayoutConstraint!
     private var needsManualLayoutFor360View = true
     private var playing360 = false
 
@@ -57,13 +79,14 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak private var playbackControlsContainer: UIVisualEffectView!
     @IBOutlet weak private var playbackControlsInnerContainer: UIVisualEffectView!
     @IBOutlet weak private var controlsPlayPauseButton: UIButton!
+    @IBOutlet weak private var controlsActionButton: UIButton!
     @IBOutlet weak private var scrubberTrackContainerView: UIView!
     @IBOutlet weak private var scrubberCurrentProgressView: UIView!
     @IBOutlet weak private var scrubberCurrentProgressViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak private var scrubberTrackCurrentTimeLabel: UILabel!
     private var chromeInteractionTimer:NSTimer?
 
-    @IBOutlet weak var extraCloseButton: UIButton!
+    @IBOutlet weak private var extraCloseButton: UIButton!
 
     //MARK: - UIViewController Normal Stuff
 
@@ -94,6 +117,8 @@ public final class WistiaPlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification, object: nil, queue: nil) { (note) -> Void in
             self.autoplayVideoWhenReady = false
         }
+
+        overlayTapGestureRecognizer.requireGestureRecognizerToFail(overlayDoubleTapGestureRecognizer)
     }
 
     override public func viewWillDisappear(animated: Bool) {
@@ -310,6 +335,9 @@ extension WistiaPlayerViewController {
         }
     }
 
+    @IBAction func playerContainerDoubleTapped(sender: UITapGestureRecognizer) {
+        togglePlayPause()
+    }
 }
 
 //MARK: - Wistia Player Delegate
@@ -373,11 +401,43 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
             playerFlatView.hidden = false
             playerFlatView.playerLayer = wPlayer.newPlayerLayer()
         }
+
+        currentMediaEmbedOptions = media.embedOptions
     }
 }
 
 //MARK: - View Presentation
 internal extension WistiaPlayerViewController {
+
+    private func chooseActiveEmbedOptions() {
+        if let overridingOptions = overridingEmbedOptions {
+            activeEmbedOptions = overridingOptions
+        } else if let currentOptions = currentMediaEmbedOptions {
+            activeEmbedOptions = currentOptions
+        } else {
+            activeEmbedOptions = WistiaMediaEmbedOptions()
+        }
+    }
+
+    private func customizeViewFor(embedOptions:WistiaMediaEmbedOptions) {
+        //TODO: Player Color
+
+        //smallPlayButton
+        controlsPlayPauseButton.hidden = !embedOptions.smallPlayButton
+
+        //playbar (aka scrubber)
+        scrubberTrackContainerView.alpha = (embedOptions.playbar ? 1.0 : 0.0)
+
+        //TODO: fullscreen
+        //TODO: stillURL
+
+        //actionButton
+        controlsActionButton.hidden = !embedOptions.actionButton
+
+        //The following are implemented dynamically:
+        // * bigPlayButton (see presentForFirstPlayback())
+        // * controlsVisibleOnLoad (see presentForFirstPlayback())
+    }
 
     func presentForPreLoading() {
         cancelChromeInteractionTimer()
@@ -414,8 +474,8 @@ internal extension WistiaPlayerViewController {
         playerContainer.hidden = false
         posterLoadingIndicator.stopAnimating()
         posterErrorIndicator.hidden = true
-        posterPlayButtonContainer.hidden = false
-        showPlaybackControls(true, extraClose: false)
+        posterPlayButtonContainer.hidden = !activeEmbedOptions.bigPlayButton
+        showPlaybackControls(activeEmbedOptions.controlsVisibleOnLoad, extraClose: false)
         presentForProgress(0, currentTime: nil)
     }
 

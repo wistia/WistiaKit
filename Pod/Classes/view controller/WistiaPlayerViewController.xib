@@ -7,8 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WistiaPlayerViewController" customModule="WistiaKit" customModuleProvider="target">
             <connections>
+                <outlet property="controlsActionButton" destination="l9Y-rG-pln" id="dGE-of-0WN"/>
                 <outlet property="controlsPlayPauseButton" destination="sqf-SN-EOA" id="mJ0-Dy-FXO"/>
                 <outlet property="extraCloseButton" destination="xLH-gl-vos" id="gfT-7i-Bud"/>
+                <outlet property="overlayDoubleTapGestureRecognizer" destination="Y8p-oM-YKo" id="8N7-VB-RZB"/>
+                <outlet property="overlayTapGestureRecognizer" destination="LU0-Yk-luK" id="irZ-JQ-Pt3"/>
                 <outlet property="playbackControlsContainer" destination="WIg-R7-qh3" id="pOf-pM-2QL"/>
                 <outlet property="playbackControlsInnerContainer" destination="3DG-iO-w5X" id="pwc-QC-0CP"/>
                 <outlet property="player360View" destination="FoK-e2-L2L" id="stX-jr-y7O"/>
@@ -268,6 +271,7 @@
                     </constraints>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="LU0-Yk-luK" appends="YES" id="wpd-Vh-ljc"/>
+                        <outletCollection property="gestureRecognizers" destination="Y8p-oM-YKo" appends="YES" id="LD9-yb-GSQ"/>
                     </connections>
                 </view>
             </subviews>
@@ -304,6 +308,11 @@
         <tapGestureRecognizer id="LU0-Yk-luK" userLabel="Overlay Tap Gesture Recognizer">
             <connections>
                 <action selector="playerContainerTapped:" destination="-1" id="5dE-1b-UQq"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer numberOfTapsRequired="2" id="Y8p-oM-YKo" userLabel="Overlay Double Tap Gesture Recognizer">
+            <connections>
+                <action selector="playerContainerDoubleTapped:" destination="-1" id="tmq-3Q-gRP"/>
             </connections>
         </tapGestureRecognizer>
         <panGestureRecognizer minimumNumberOfTouches="1" id="ADo-gH-m8Y" userLabel="360 Pan Gesture Recognizer">
