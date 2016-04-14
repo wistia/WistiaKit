@@ -32,6 +32,9 @@
   "dependencies": {
     "Alamofire": [
       "~> 3.3"
+    ],
+    "AlamofireImage": [
+      "~> 2.4"
     ]
   }
 }

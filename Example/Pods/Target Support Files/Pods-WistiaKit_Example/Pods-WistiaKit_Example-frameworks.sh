@@ -85,9 +85,11 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-WistiaKit_Example/Alamofire.framework"
+  install_framework "Pods-WistiaKit_Example/AlamofireImage.framework"
   install_framework "Pods-WistiaKit_Example/WistiaKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-WistiaKit_Example/Alamofire.framework"
+  install_framework "Pods-WistiaKit_Example/AlamofireImage.framework"
   install_framework "Pods-WistiaKit_Example/WistiaKit.framework"
 fi

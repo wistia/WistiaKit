@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WistiaPlayerViewController" customModule="WistiaKit" customModuleProvider="target">
             <connections>
                 <outlet property="controlsActionButton" destination="l9Y-rG-pln" id="dGE-of-0WN"/>
+                <outlet property="controlsCloseButton" destination="HdA-x0-aCn" id="dhJ-qu-us1"/>
                 <outlet property="controlsPlayPauseButton" destination="sqf-SN-EOA" id="mJ0-Dy-FXO"/>
                 <outlet property="extraCloseButton" destination="xLH-gl-vos" id="gfT-7i-Bud"/>
                 <outlet property="overlayDoubleTapGestureRecognizer" destination="Y8p-oM-YKo" id="8N7-VB-RZB"/>
@@ -21,7 +22,10 @@
                 <outlet property="playerFlatView" destination="RK7-ta-7jO" id="G2Y-BK-Jdr"/>
                 <outlet property="posterErrorIndicator" destination="1gl-Xk-GqW" id="QI0-Au-6RY"/>
                 <outlet property="posterLoadingIndicator" destination="eLB-Ll-7u3" id="ANs-Rs-3n2"/>
+                <outlet property="posterPlayButton" destination="aY4-5G-flB" id="9uZ-LQ-cP0"/>
                 <outlet property="posterPlayButtonContainer" destination="22B-T6-9B2" id="FSS-xY-ta3"/>
+                <outlet property="posterStillImage" destination="x6T-Ec-xgg" id="Eih-kr-tDV"/>
+                <outlet property="posterStillImageContainer" destination="vEk-Kj-i2O" id="dWh-gl-3ry"/>
                 <outlet property="scrubTrackTimeLabelCenterConstraint" destination="LCo-vR-8WK" id="7kD-oE-Ueu"/>
                 <outlet property="scrubberCurrentProgressView" destination="MhK-r1-66L" id="Jmt-aB-VX6"/>
                 <outlet property="scrubberCurrentProgressViewWidthConstraint" destination="nzr-0e-mFQ" id="A07-h2-pKJ"/>
@@ -67,12 +71,30 @@
                                 <outlet property="sceneView" destination="alB-fx-TeD" id="KK5-Eo-dr3"/>
                             </connections>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vEk-Kj-i2O" userLabel="poster still image container">
+                            <rect key="frame" x="0.0" y="131" width="600" height="337.5"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x6T-Ec-xgg" userLabel="poster still image">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="337.5"/>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="x6T-Ec-xgg" secondAttribute="trailing" id="I0j-zO-jlX"/>
+                                <constraint firstItem="x6T-Ec-xgg" firstAttribute="top" secondItem="vEk-Kj-i2O" secondAttribute="top" id="ZPI-Us-T85"/>
+                                <constraint firstItem="x6T-Ec-xgg" firstAttribute="leading" secondItem="vEk-Kj-i2O" secondAttribute="leading" id="aVL-YP-J28"/>
+                                <constraint firstAttribute="bottom" secondItem="x6T-Ec-xgg" secondAttribute="bottom" id="zmi-e3-q53"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="RK7-ta-7jO" firstAttribute="centerY" secondItem="BwG-ri-99v" secondAttribute="centerY" id="0g1-bn-yKJ"/>
+                        <constraint firstItem="vEk-Kj-i2O" firstAttribute="trailing" secondItem="RK7-ta-7jO" secondAttribute="trailing" id="36x-mG-mMe"/>
                         <constraint firstAttribute="trailing" secondItem="RK7-ta-7jO" secondAttribute="trailing" id="8LZ-kV-ypV"/>
+                        <constraint firstItem="vEk-Kj-i2O" firstAttribute="leading" secondItem="RK7-ta-7jO" secondAttribute="leading" id="Cms-gB-Swo"/>
+                        <constraint firstItem="vEk-Kj-i2O" firstAttribute="bottom" secondItem="RK7-ta-7jO" secondAttribute="bottom" id="Js1-uC-lXG"/>
                         <constraint firstItem="FoK-e2-L2L" firstAttribute="centerX" secondItem="BwG-ri-99v" secondAttribute="centerX" id="T2J-f5-UcC"/>
+                        <constraint firstItem="vEk-Kj-i2O" firstAttribute="top" secondItem="RK7-ta-7jO" secondAttribute="top" id="b7v-cf-vL4"/>
                         <constraint firstItem="RK7-ta-7jO" firstAttribute="leading" secondItem="BwG-ri-99v" secondAttribute="leading" id="mXp-ho-CKL"/>
                         <constraint firstItem="FoK-e2-L2L" firstAttribute="centerY" secondItem="BwG-ri-99v" secondAttribute="centerY" id="wVO-vN-4dP"/>
                     </constraints>
@@ -112,7 +134,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="167" height="44"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uR2-Mn-8aW">
-                                                                            <rect key="frame" x="120.5" y="12" width="38" height="20.5"/>
+                                                                            <rect key="frame" x="121" y="12" width="38" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AlamofireImage
 
 public protocol WistiaPlayerViewControllerDelegate : class {
     //For WistiaKit, will probably want to expand on this delegate to be more like what's on web
@@ -71,7 +72,11 @@ public final class WistiaPlayerViewController: UIViewController {
     private var playing360 = false
 
     //MARK: Poster
+
+    @IBOutlet weak private var posterStillImageContainer: UIView!
+    @IBOutlet weak private var posterStillImage: UIImageView!
     @IBOutlet weak private var posterPlayButtonContainer: UIVisualEffectView!
+    @IBOutlet weak private var posterPlayButton: UIButton!
     @IBOutlet weak private var posterLoadingIndicator: UIActivityIndicatorView!
 
     //MARK: Playback controls
@@ -80,6 +85,7 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak private var playbackControlsInnerContainer: UIVisualEffectView!
     @IBOutlet weak private var controlsPlayPauseButton: UIButton!
     @IBOutlet weak private var controlsActionButton: UIButton!
+    @IBOutlet weak private var controlsCloseButton: UIButton!
     @IBOutlet weak private var scrubberTrackContainerView: UIView!
     @IBOutlet weak private var scrubberCurrentProgressView: UIView!
     @IBOutlet weak private var scrubberCurrentProgressViewWidthConstraint: NSLayoutConstraint!
@@ -132,8 +138,6 @@ public final class WistiaPlayerViewController: UIViewController {
     //MARK: - Public API
 
     weak var delegate:WistiaPlayerViewControllerDelegate?
-
-    //TODO: implement playMediaWithHashedID()
 
     public convenience init(referrer: String, requireHLS: Bool = false){
         self.init()
@@ -420,7 +424,12 @@ internal extension WistiaPlayerViewController {
     }
 
     private func customizeViewFor(embedOptions:WistiaMediaEmbedOptions) {
-        //TODO: Player Color
+        //playerColor
+        controlsPlayPauseButton.backgroundColor = embedOptions.playerColor
+        scrubberTrackContainerView.backgroundColor = embedOptions.playerColor
+        controlsActionButton.backgroundColor = embedOptions.playerColor
+        controlsCloseButton.backgroundColor = embedOptions.playerColor
+        posterPlayButton.backgroundColor = embedOptions.playerColor
 
         //smallPlayButton
         controlsPlayPauseButton.hidden = !embedOptions.smallPlayButton
@@ -429,7 +438,14 @@ internal extension WistiaPlayerViewController {
         scrubberTrackContainerView.alpha = (embedOptions.playbar ? 1.0 : 0.0)
 
         //TODO: fullscreen
-        //TODO: stillURL
+
+        //stillURL
+        if let stillURL = embedOptions.stillURL {
+            posterStillImage.hidden = false
+            posterStillImage.af_setImageWithURL(stillURL)
+        } else {
+            posterStillImage.hidden = true
+        }
 
         //actionButton
         controlsActionButton.hidden = !embedOptions.actionButton
@@ -437,6 +453,7 @@ internal extension WistiaPlayerViewController {
         //The following are implemented dynamically:
         // * bigPlayButton (see presentForFirstPlayback())
         // * controlsVisibleOnLoad (see presentForFirstPlayback())
+        // * stillURL (see presetnForFirstPlayback())
     }
 
     func presentForPreLoading() {
@@ -445,6 +462,7 @@ internal extension WistiaPlayerViewController {
         posterLoadingIndicator.stopAnimating()
         posterErrorIndicator.hidden = true
         posterPlayButtonContainer.hidden = true
+        posterStillImageContainer.hidden = true
         showPlaybackControls(false, extraClose: false)
         presentForProgress(0, currentTime: nil)
     }
@@ -455,6 +473,7 @@ internal extension WistiaPlayerViewController {
         posterLoadingIndicator.startAnimating()
         posterErrorIndicator.hidden = true
         posterPlayButtonContainer.hidden = true
+        posterStillImageContainer.hidden = true
         showPlaybackControls(false, extraClose: true)
         presentForProgress(0, currentTime: nil)
     }
@@ -465,6 +484,7 @@ internal extension WistiaPlayerViewController {
         posterLoadingIndicator.stopAnimating()
         posterErrorIndicator.hidden = false
         posterPlayButtonContainer.hidden = true
+        posterStillImageContainer.hidden = true
         showPlaybackControls(false, extraClose: true)
         presentForProgress(0, currentTime: nil)
     }
@@ -475,6 +495,7 @@ internal extension WistiaPlayerViewController {
         posterLoadingIndicator.stopAnimating()
         posterErrorIndicator.hidden = true
         posterPlayButtonContainer.hidden = !activeEmbedOptions.bigPlayButton
+        posterStillImageContainer.hidden = false
         showPlaybackControls(activeEmbedOptions.controlsVisibleOnLoad, extraClose: false)
         presentForProgress(0, currentTime: nil)
     }
@@ -484,6 +505,7 @@ internal extension WistiaPlayerViewController {
         posterLoadingIndicator.stopAnimating()
         posterErrorIndicator.hidden = true
         posterPlayButtonContainer.hidden = true
+        posterStillImageContainer.hidden = true
 
         UIView.animateWithDuration(NSTimeInterval(0.5), animations: { () -> Void in
             //Don't change alpha of UIVisualEffectView.  
