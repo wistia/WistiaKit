@@ -110,7 +110,7 @@ class WistiaStatsManager {
             do {
                 let jsonData = try NSJSONSerialization.dataWithJSONObject(event.json, options: NSJSONWritingOptions(rawValue: 0))
 
-                Alamofire.request(.POST, event.url, parameters: nil, encoding: .Custom({ (requestConvertable, params) -> (NSMutableURLRequest, NSError?) in
+                Alamofire.request(.POST, event.url, parameters: event.json, encoding: .Custom({ (requestConvertable, params) -> (NSMutableURLRequest, NSError?) in
                     let mutableRequest = requestConvertable.URLRequest.copy() as! NSMutableURLRequest
                     mutableRequest.HTTPBody = jsonData.base64EncodedDataWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
                     return (mutableRequest, nil)
