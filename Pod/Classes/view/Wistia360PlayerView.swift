@@ -89,10 +89,11 @@ internal class Wistia360PlayerView: UIView {
 
     //Look Vector (aka Camera Position) Tracking
     //mostly in the extension, but can't (easily) add stored variables in extensions
-    internal let LookVectorUnchangedTemporalRequirement = NSTimeInterval(1.0)
+    internal let LookVectorUnchangedTemporalRequirement = NSTimeInterval(0.2)
     internal let LookVectorUnchangedSpatialRequirement = HeadingPitch(heading: 10, pitch: 5)
     internal var lastLookVector = HeadingPitch(heading: 0, pitch: 0)
     internal var lookVectorStatsTimer: NSTimer?
+    internal var lookVectorIsSettled = false
 
     //MARK:- View Lifecycle
 
