@@ -104,10 +104,12 @@ internal class Wistia360PlayerView: UIView {
 
     internal func play() {
         videoNode?.play()
+        wPlayer?.logEvent(.Play)
     }
 
     internal func pause() {
         videoNode?.pause()
+        wPlayer?.logEvent(.Pause)
     }
 
     //MARK:- Gesture Recognizers
