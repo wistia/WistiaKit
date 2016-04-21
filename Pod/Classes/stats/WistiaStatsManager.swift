@@ -109,20 +109,21 @@ class WistiaStatsManager {
         for event in eventsToSend {
             do {
                 let jsonData = try NSJSONSerialization.dataWithJSONObject(event.json, options: NSJSONWritingOptions(rawValue: 0))
-                if let urlWithData = NSURL(string: "\(event.url.absoluteString)?data=\(jsonData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue:0)))") {
-                    Alamofire.request(.POST, urlWithData, parameters: nil, encoding: .JSON, headers: nil)
-                        .response { request, response, data, error in
-                            if error != nil {
-                                print("ERROR sending stats: \(error)")
-                                if event.ttl > 0 {
-                                    self.eventsPending.append(StatsEvent(url: event.url, json: event.json, ttl: event.ttl-1))
-                                } else {
-                                    print("TTL=0, dropping event: \(event)")
-                                }
+
+                Alamofire.request(.POST, event.url, parameters: nil, encoding: .Custom({ (requestConvertable, params) -> (NSMutableURLRequest, NSError?) in
+                    let mutableRequest = requestConvertable.URLRequest.copy() as! NSMutableURLRequest
+                    mutableRequest.HTTPBody = jsonData.base64EncodedDataWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+                    return (mutableRequest, nil)
+                }), headers: nil)
+                    .response { request, response, data, error in
+                        if error != nil {
+                            print("ERROR sending stats: \(error)")
+                            if event.ttl > 0 {
+                                self.eventsPending.append(StatsEvent(url: event.url, json: event.json, ttl: event.ttl-1))
+                            } else {
+                                print("TTL=0, dropping event: \(event)")
                             }
-                    }
-                } else {
-                    print("Could not create url with base \(event.url) and data \(event.json)")
+                        }
                 }
             } catch {
                 print("ERROR: \(error)")
