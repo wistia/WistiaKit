@@ -10,7 +10,7 @@ import Alamofire
 
 internal class WistiaAPI {
 
-    static func mediaInfoForHash(hash:String, completionHandler: (media:WistiaMedia?)->() ) {
+    internal static func mediaInfoForHash(hash:String, completionHandler: (media:WistiaMedia?)->() ) {
         Alamofire.request(.GET, "https://fast.wistia.net/embed/medias/\(hash).json", parameters: nil)
             .responseJSON { response in
 

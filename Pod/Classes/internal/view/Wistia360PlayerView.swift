@@ -264,7 +264,7 @@ internal class Wistia360PlayerView: UIView {
             // A vector, in transformed camera space, that points to the bottom of the world (ie. at south pole of sphere)
             let cameraSpaceZAxisVector = SCNVector3Make(0, 0, 1)
             let cameraSpaceDownVector = SCNVector3FromGLKVector3(GLKMatrix4MultiplyVector3(SCNMatrix4ToGLKMatrix4(inverseCameraTransform), GLKVector3Make(0, 0, 1)))
-            pitchVector = cameraSpaceZAxisVector.cross(cameraSpaceDownVector).normalized()
+            pitchVector = cameraSpaceZAxisVector.wk_cross(cameraSpaceDownVector).wk_normalized()
         } else {
             // 1) Without device motion: camera was oriented properly when setup
 

@@ -21,7 +21,7 @@ import SceneKit
  *        NB: Not logging each 200ms, just the first time the looks settles
  *  2b)   Else (heading/pitch left the 5x5) if “look_settled == true”, log the (exit) event and set “look_settled = false"
  */
-extension Wistia360PlayerView {
+internal extension Wistia360PlayerView {
     typealias LatitudeLongitude = (latitude: Float, longitude: Float)
     typealias HeadingPitch = (heading: Float, pitch: Float)
 

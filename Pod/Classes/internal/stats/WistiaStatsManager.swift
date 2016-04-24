@@ -27,7 +27,7 @@
 import UIKit
 import Alamofire
 
-class WistiaStatsManager {
+internal class WistiaStatsManager {
 
     //MARK: - Private Constants
 
@@ -152,7 +152,7 @@ class WistiaStatsManager {
     }
 }
 
-protocol WistiaEventCollector : class {
+internal protocol WistiaEventCollector : class {
     //The manager that will process events held by this collector
     weak var manager:WistiaStatsManager? { get set }
 

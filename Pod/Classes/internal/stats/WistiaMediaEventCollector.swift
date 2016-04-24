@@ -13,7 +13,7 @@
 import UIKit
 import AdSupport
 
-class WistiaMediaEventCollector : WistiaEventCollector {
+internal class WistiaMediaEventCollector : WistiaEventCollector {
 
     //MARK: - Private Constants
 

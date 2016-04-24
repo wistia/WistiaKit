@@ -1,5 +1,5 @@
 //
-//  WistiaPlayer.swift
+//  WistiaPlayer_internal.swift
 //  Playback
 //
 //  Created by Daniel Spinosa on 1/7/16.
@@ -83,86 +83,6 @@ public final class WistiaPlayer: NSObject {
         removePlayerObservers(self.avPlayer)
     }
 
-    //MARK: - AVPlayer API facade
-
-    //idempotent
-    func play() {
-        if avPlayer.rate == 0 {
-            avPlayer.play()
-            logEvent(.Play)
-        }
-    }
-
-    //idempotent
-    func pause() {
-        if avPlayer.rate > 0 {
-            avPlayer.pause()
-            logEvent(.Pause)
-        }
-    }
-
-    func togglePlayPause() {
-        if avPlayer.rate > 0 {
-            avPlayer.pause()
-            logEvent(.Pause)
-        } else {
-            avPlayer.play()
-            logEvent(.Play)
-        }
-    }
-
-    func seekToTime(time:CMTime, completionHandler: ((Bool) -> Void)?){
-        let tolerance = CMTime(seconds: 1, preferredTimescale: 10)
-        self.avPlayer.seekToTime(time, toleranceBefore: tolerance, toleranceAfter: tolerance) { (finished) -> Void in
-            if finished {
-                self.logEvent(.Seek)
-            }
-            completionHandler?(finished)
-        }
-    }
-
-    //Get an new AVPlayerLayer configured for the our AVPlayer.  Will remove the player from any
-    //previously fetched AVPlayerLayers
-    func newPlayerLayer() -> AVPlayerLayer? {
-        return AVPlayerLayer(player: avPlayer)
-    }
-
-    var currentItem:AVPlayerItem? {
-        get {
-            return avPlayer.currentItem
-        }
-    }
-
-    var rate:Float {
-        get {
-            return avPlayer.rate
-        }
-        set(newRate) {
-            avPlayer.rate = newRate
-            if newRate == 1.0 {
-                logEvent(.Play)
-            } else if rate == 0.0 {
-                logEvent(.Pause)
-            }
-        }
-    }
-
-    func currentTime() -> CMTime {
-        return avPlayer.currentTime()
-    }
-
-    // Replaces the non-CoreData playback methods, commented out below.
-    // Like AVPlayer, if the new media is the same as the currently playing media, this is a noop
-    // Returns false on the event of a noop.  True otherwise.
-    func replaceCurrentVideoWithVideoForMedia(media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
-        guard media != self.media else { return false }
-        pause()
-
-        let slug:String? = (asset != nil ? asset!.slug : nil)
-        self.readyPlaybackForMedia(media, choosingAssetWithSlug: slug)
-        return true
-    }
-
     //Pauses playback of the current video, loads the media for the given hashedID asynchronously.
     //If a slug is included, will choose the asset matching that slug, overriding everything.
     // Like AVPlayer, if the new media is the same as the currently playing media, this is a noop
@@ -184,7 +104,7 @@ public final class WistiaPlayer: NSObject {
 
     //MARK: - Private Helpers
 
-    private func readyPlaybackForMedia(media: WistiaMedia, choosingAssetWithSlug slug: String?) {
+    internal func readyPlaybackForMedia(media: WistiaMedia, choosingAssetWithSlug slug: String?) {
         self.media = media
         self.state = .VideoPreLoading
 
