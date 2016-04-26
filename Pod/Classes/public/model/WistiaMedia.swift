@@ -13,6 +13,7 @@ public struct WistiaMedia {
     var distilleryURLString: String
     var accountKey: String
     var mediaKey: String
+    var status: WistiaObjectStatus
     var duration: Float
     var hashedID: String
     var spherical: Bool

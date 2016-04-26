@@ -20,6 +20,7 @@ internal class WistiaAPI {
                     distilleryURLString = media["distilleryUrl"] as? String,
                     accountKey = media["accountKey"] as? String,
                     mediaKey = media["mediaKey"] as? String,
+                    mediaStatus = media["status"] as? Int,
                     duration = media["duration"] as? Float,
                     hashedID = media["hashedId"] as? String,
                     embedOptions = media["embed_options"] as? [String:AnyObject],
@@ -31,7 +32,7 @@ internal class WistiaAPI {
                     let mediaEmbedOptions = embedOptionsFrom(embedOptions)
 
                     // -- Wistia Media --
-                    var wMedia = WistiaMedia(distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, duration: duration, hashedID: hashedID, spherical: spherical, name: name, unnamedAssets: [WistiaAsset](), embedOptions: mediaEmbedOptions)
+                    var wMedia = WistiaMedia(distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, status: WistiaObjectStatus(failsafeFromRaw: mediaStatus), duration: duration, hashedID: hashedID, spherical: spherical, name: name, unnamedAssets: [WistiaAsset](), embedOptions: mediaEmbedOptions)
 
                     // -- Unamed Assets --
                     let wistiaAssets = wistiaAssetsFrom(unnamedAssets, forMedia:wMedia)
@@ -55,13 +56,14 @@ internal class WistiaAPI {
                 size = rawAsset["size"] as? Int,
                 ext = rawAsset["ext"] as? String,
                 bitrate = rawAsset["bitrate"] as? Int,
+                assetStatus = rawAsset["status"] as? Int,
                 urlString = rawAsset["url"] as? String,
                 slug = rawAsset["slug"] as? String {
                 //optional attribrutes
                 let container = rawAsset["container"] as? String ?? ""
                 let codec = rawAsset["codec"] as? String ?? ""
 
-                let wistiaAsset = WistiaAsset(media: media, type: type, displayName: displayName, container: container, codec: codec, width: Int64(width), height: Int64(height), size: Int64(size), ext: ext, bitrate: Int64(bitrate), urlString: urlString, slug: slug)
+                let wistiaAsset = WistiaAsset(media: media, type: type, displayName: displayName, container: container, codec: codec, width: Int64(width), height: Int64(height), size: Int64(size), ext: ext, bitrate: Int64(bitrate), status: WistiaObjectStatus(failsafeFromRaw: assetStatus), urlString: urlString, slug: slug)
 
                 wistiaAssets.append(wistiaAsset)
             }

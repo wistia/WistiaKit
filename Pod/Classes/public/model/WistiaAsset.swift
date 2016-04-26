@@ -20,6 +20,7 @@ public struct WistiaAsset {
     var size: Int64
     var ext: String
     var bitrate: Int64
+    var status: WistiaObjectStatus
     var urlString: String
     var slug: String
 
