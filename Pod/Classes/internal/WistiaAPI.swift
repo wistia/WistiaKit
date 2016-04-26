@@ -23,7 +23,7 @@ internal class WistiaAPI {
                     duration = media["duration"] as? Float,
                     hashedID = media["hashedId"] as? String,
                     embedOptions = media["embed_options"] as? [String:AnyObject],
-                    unnamedAssets = media["unnamed_assets"] as? [[String:AnyObject]] {
+                    unnamedAssets = media["assets"] as? [[String:AnyObject]] {
                     //optional attributes
                     let spherical = (media["spherical"] as? Bool) ?? false
 
