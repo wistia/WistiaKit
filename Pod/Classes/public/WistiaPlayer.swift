@@ -112,4 +112,24 @@ public extension WistiaPlayer {
         }
     }
 
+    //MARK: - WistiaPlayer State Enumeration
+    public enum State {
+        case Initialized,
+        VideoPreLoading,
+        VideoLoading,
+        VideoError(description:String),
+        //This state is only entered once per video loaded.  Player remains in this state while the video
+        //is playing.  Use the delegate for playback state changes.
+        VideoReadyForPlayback
+    }
+
+}
+
+//MARK: - WistiaPlayerDelegate
+public protocol WistiaPlayerDelegate : class {
+    func wistiaPlayer(player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State)
+    func wistiaPlayer(player:WistiaPlayer, didChangePlaybackRateTo newRate:Float)
+    func wistiaPlayer(player:WistiaPlayer, didChangePlaybackProgressTo progress:Float, atCurrentTime currentTime:CMTime, ofDuration:CMTime)
+    func wistiaPlayerDidPlayToEndTime(player:WistiaPlayer)
+    func wistiaPlayer(player:WistiaPlayer, willLoadVideoForAsset asset:WistiaAsset, fromMedia media:WistiaMedia)
 }
