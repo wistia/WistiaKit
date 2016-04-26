@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B114C6E964044568656EA3A3'
+               BlueprintIdentifier = 'F77E297A7DAB5E20821BF8E8'
                BlueprintName = 'WistiaKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'WistiaKit.framework'>

@@ -8,14 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = "WistiaKit"
-  s.version          = "0.1.1"
+  s.version          = "0.1.2"
   s.summary          = "Access and playback all of your Wistia media"
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
 Wistia is a great web video host.  But why shackle ourselves to the world wide web?
 
@@ -36,7 +31,7 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
 
   s.source_files = 'Pod/Classes/**/*'
 
-  # Although resource_bundles is the new recommended hotness, it doens't play well with Asset Catalogs.
+  # Although resource_bundles is the new recommended hotness, it doesn't play well with Asset Catalogs.
   # Fortunately, the old resources method will faithfully copy the catalog in such a way that it 'just works'
   s.resources = 'Pod/Assets/**/*.xcassets'
   #s.resource_bundles = {
