@@ -117,7 +117,11 @@ public extension WistiaPlayer {
         case Initialized,
         VideoPreLoading,
         VideoLoading,
-        VideoError(description:String),
+
+        MediaNotFoundError(badHashedID: String),
+        VideoLoadingError(description:String, problemMedia: WistiaMedia?, problemAsset: WistiaAsset?),
+        VideoPlaybackError(description:String),
+        
         //This state is only entered once per video loaded.  Player remains in this state while the video
         //is playing.  Use the delegate for playback state changes.
         VideoReadyForPlayback

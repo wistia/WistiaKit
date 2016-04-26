@@ -96,7 +96,7 @@ public final class WistiaPlayer: NSObject {
                 self.media = m
                 self.readyPlaybackForMedia(m, choosingAssetWithSlug: slug)
             } else {
-                self.state = .VideoError(description: "Could not find media with hashed ID \(hashedID)")
+                self.state = .MediaNotFoundError(badHashedID: hashedID)
             }
         }
         return true
@@ -108,10 +108,21 @@ public final class WistiaPlayer: NSObject {
         self.media = media
         self.state = .VideoPreLoading
 
+        guard media.status != .Failed else {
+            self.state = .VideoLoadingError(description: "Media \(media.hashedID) failed processing", problemMedia: media, problemAsset: nil)
+            return
+        }
+
+        guard media.status != .Queued else {
+            self.state = .VideoLoadingError(description: "Media \(media.hashedID) has not started processing", problemMedia: media, problemAsset: nil)
+            return
+        }
+
         //assuming playback on local device, target asset width is the largest dimension of device
         let targetAssetWidth = media.spherical ? SphericalTargetAssetWidth : Int64(max(UIScreen.mainScreen().nativeBounds.width, UIScreen.mainScreen().nativeBounds.height))
 
-        if let url = bestPlaybackURLForMedia(media, assetWithSlug: slug, requireHLS: self.requireHLS, targetWidth: targetAssetWidth) {
+        do {
+            let url = try bestPlaybackURLForMedia(media, assetWithSlug: slug, requireHLS: self.requireHLS, targetWidth: targetAssetWidth)
             //-- Out with the old (if applicable)
             removePlayerItemObservers(avPlayer.currentItem)
 
@@ -123,8 +134,14 @@ public final class WistiaPlayer: NSObject {
             let avPlayerItem = AVPlayerItem(asset: avAsset)
             addPlayerItemObservers(avPlayerItem)
             avPlayer.replaceCurrentItemWithPlayerItem(avPlayerItem)
-        } else {
-            self.state = .VideoError(description: "Media \(media.hashedID) has no assets compatible with this player's configuration")
+        } catch URLDeterminationError.NoAsset {
+            self.state = .VideoLoadingError(description: "Media \(media.hashedID) has no assets compatible with this player's configuration.", problemMedia: media, problemAsset: nil)
+        } catch URLDeterminationError.NoHLSAsset {
+            self.state = .VideoLoadingError(description: "Media \(media.hashedID) has no HLS assets compatible with this WistiaPlayer, configured to require HLS for playback.", problemMedia: media, problemAsset: nil)
+        } catch URLDeterminationError.AssetNotReady(let asset) {
+            self.state = .VideoLoadingError(description: "Asset with slug \(asset.slug), for media \(media.hashedID), is not ready.", problemMedia: media, problemAsset: asset)
+        } catch {
+            self.state = .VideoLoadingError(description: "Something unexpected happened looking for an asset to play for media \(media.hashedID).", problemMedia: media, problemAsset: nil)
         }
     }
 
@@ -132,34 +149,43 @@ public final class WistiaPlayer: NSObject {
     //https://github.com/wistia/wistia/blob/master/app/assets/javascripts/external/E-v1/_judge_judy.coffee
     //
     //We just need HLS (if required), otherwise mp4.  If there are options, we pick the best sized.
-    private func bestPlaybackURLForMedia(media:WistiaMedia, assetWithSlug assetSlug: String?, requireHLS: Bool, targetWidth: Int64) -> NSURL? {
+    private func bestPlaybackURLForMedia(media:WistiaMedia, assetWithSlug assetSlug: String?, requireHLS: Bool, targetWidth: Int64) throws -> NSURL {
         //If a particular asset is requested using the slug, that overrides all other configuration
         if let slug = assetSlug {
             if let assetMatchingSlug = (media.unnamedAssets.filter { $0.slug == slug }).first {
+                guard assetMatchingSlug.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: assetMatchingSlug) }
                 delegate?.wistiaPlayer(self, willLoadVideoForAsset: assetMatchingSlug, fromMedia: media)
                 return assetMatchingSlug.url
             } else {
-                return nil
+                throw URLDeterminationError.NoAsset
             }
         }
 
         //Preffered playback of HLS assets, which come in m3u8 containers
         let preferredAssets = media.unnamedAssets.filter { $0.container == "m3u8" }
         if let asset = largestAssetIn(preferredAssets, withoutGoingUnder: targetWidth) {
+            guard asset.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForAsset: asset, fromMedia: media)
             return asset.url
         } else if requireHLS {
-            return nil
+            throw URLDeterminationError.NoHLSAsset
         }
 
         // We can also playback assets in the mp4 container.
         let playableAssets = media.unnamedAssets.filter { $0.container == "mp4" }
         if let asset = largestAssetIn(playableAssets, withoutGoingUnder: targetWidth) {
+            guard asset.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForAsset: asset, fromMedia: media)
             return asset.url
         } else {
-            return nil
+            throw URLDeterminationError.NoAsset
         }
+    }
+
+    internal enum URLDeterminationError : ErrorType {
+        case NoAsset
+        case NoHLSAsset
+        case AssetNotReady(asset:WistiaAsset)
     }
 
     //NB: May go under in size if there are no assets at least as large as the targetWidth
@@ -189,7 +215,7 @@ public final class WistiaPlayer: NSObject {
     private func playerItem(playerItem:AVPlayerItem, statusWas oldStatus:AVPlayerStatus?, changedTo newStatus:AVPlayerStatus){
         switch newStatus {
         case .Failed:
-            self.state = .VideoError(description: "Player Item Failed")
+            self.state = .VideoPlaybackError(description: "Player Item Failed")
         case .Unknown:
             break
         case .ReadyToPlay:
@@ -300,7 +326,9 @@ public func == (a: WistiaPlayer.State, b: WistiaPlayer.State) -> Bool {
     case (.Initialized, .Initialized): return true
     case (.VideoPreLoading, .VideoPreLoading): return true
     case (.VideoLoading, .VideoLoading): return true
-    case (.VideoError(_), .VideoError(_)): return true
+    case (.MediaNotFoundError(_), .MediaNotFoundError(_)): return true
+    case (.VideoLoadingError(_, _, _), .VideoLoadingError(_, _, _)): return true
+    case (.VideoPlaybackError(_), .VideoPlaybackError(_)): return true
     case (.VideoReadyForPlayback, .VideoReadyForPlayback): return true
     default:
         return false

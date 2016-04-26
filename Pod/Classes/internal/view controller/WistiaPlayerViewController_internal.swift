@@ -174,8 +174,12 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
                 presentForFirstPlayback()
             }
 
-        case .VideoError(let description):
-            print("WistiaPlayer ERROR \(description)")
+        case .MediaNotFoundError(_):
+            fallthrough
+        case .VideoLoadingError(_, _, _):
+            fallthrough
+        case .VideoPlaybackError(_):
+            //IMPROVE ME: Show more useful errors to users depending on root cause
             presentForError()
         }
     }
