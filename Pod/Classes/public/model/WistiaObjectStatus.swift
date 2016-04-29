@@ -26,4 +26,19 @@ extension WistiaObjectStatus {
             self = WistiaObjectStatus.Failed
         }
     }
+
+    init(failsafeFromRawString rawString: String) {
+        switch rawString {
+        case "failed":
+            self = Failed
+        case "queued":
+            self = Queued
+        case "processing":
+            self = Processing
+        case "ready":
+            self = Ready
+        default:
+            self = Failed
+        }
+    }
 }

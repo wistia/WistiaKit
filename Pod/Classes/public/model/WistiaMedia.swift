@@ -10,20 +10,27 @@ import Foundation
 
 public struct WistiaMedia {
 
-    var distilleryURLString: String
-    var accountKey: String
-    var mediaKey: String
+    public var mediaID: Int?
+    var distilleryURLString: String?
+    var accountKey: String?
+    var mediaKey: String?
     var status: WistiaObjectStatus
     var duration: Float
-    var hashedID: String
+    public var hashedID: String
+    public var description: String?
     var spherical: Bool
-    var name: String
-    var unnamedAssets: [WistiaAsset]
-    var embedOptions: WistiaMediaEmbedOptions
+    public var name: String?
+    public var assets: [WistiaAsset]
+    public var thumbnail: (url: String, width: Int, height: Int)?
+    var embedOptions: WistiaMediaEmbedOptions?
     
-    var distilleryURL: NSURL {
+    var distilleryURL: NSURL? {
         get {
-            return NSURL(string: self.distilleryURLString)!
+            if let urlString = self.distilleryURLString, url = NSURL(string: urlString) {
+                return url
+            } else {
+                return nil
+            }
         }
     }
 }

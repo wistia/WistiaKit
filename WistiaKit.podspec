@@ -26,10 +26,12 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.source           = { :git => "https://github.com/wistia/WistiaKit.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/wistia'
 
-  s.platform     = :ios, '9.0'
+  s.ios.deployment_target = '9.0'
+  s.tvos.deployment_target = '9.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
+  s.tvos.source_files = 'Pod/Classes/**/*.^(xib)'
 
   # Although resource_bundles is the new recommended hotness, it doesn't play well with Asset Catalogs.
   # Fortunately, the old resources method will faithfully copy the catalog in such a way that it 'just works'
@@ -39,7 +41,9 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'CoreMotion', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
+
+  #NEed to include CoreMotion in ios only
+  s.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
   s.dependency 'Alamofire', '~> 3.3'
   s.dependency 'AlamofireImage', '~> 2.4'
 end

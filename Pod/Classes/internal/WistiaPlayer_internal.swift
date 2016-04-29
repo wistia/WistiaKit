@@ -24,7 +24,7 @@ import AVFoundation
 public final class WistiaPlayer: NSObject {
 
     //Upon setting delegate, you will immediately receve a state change callback with the current state
-    weak var delegate:WistiaPlayerDelegate? {
+    public weak var delegate:WistiaPlayerDelegate? {
         didSet {
             if let d = delegate {
                 d.wistiaPlayer(self, didChangeStateTo: self.state)
@@ -37,7 +37,7 @@ public final class WistiaPlayer: NSObject {
         }
     }
 
-    internal var avPlayer:AVPlayer
+    public var avPlayer:AVPlayer
     internal var media:WistiaMedia?
     private var statsCollector:WistiaMediaEventCollector?
     private let referrer:String
@@ -58,7 +58,7 @@ public final class WistiaPlayer: NSObject {
     // is being played back (ie. "ProductTourViewController" or "SplashViewController.page1(uncoverted_email)")
     // If HLS playback is required (Apple requires HLS for video > 10m in length played over cellular connections),
     // only compatible assets will be played, or player will enter an error state.  Default, and suggested, it true.
-    convenience init(hashedID:String, referrer:String, requireHLS: Bool = true) {
+    public convenience init(hashedID:String, referrer:String, requireHLS: Bool = true) {
         self.init(referrer:referrer, requireHLS:requireHLS)
         self.replaceCurrentVideoWithVideoForHashedID(hashedID)
     }
@@ -69,7 +69,7 @@ public final class WistiaPlayer: NSObject {
     // Changing the value has no immediate effect on the idle timer.
     var preventIdleTimerDuringPlayback = true
 
-    init(referrer: String, requireHLS: Bool) {
+    public init(referrer: String, requireHLS: Bool) {
         self.referrer = referrer
         self.requireHLS = requireHLS
         self.avPlayer = AVPlayer()
@@ -87,7 +87,7 @@ public final class WistiaPlayer: NSObject {
     //If a slug is included, will choose the asset matching that slug, overriding everything.
     // Like AVPlayer, if the new media is the same as the currently playing media, this is a noop
     // Returns false on the event of a noop.  True otherwise.
-    internal func replaceCurrentVideoWithVideoForHashedID(hashedID: String, assetWithSlug slug: String? = nil) -> Bool {
+    public func replaceCurrentVideoWithVideoForHashedID(hashedID: String, assetWithSlug slug: String? = nil) -> Bool {
         guard media?.hashedID != hashedID else { return false }
         avPlayer.pause()
 
@@ -152,7 +152,7 @@ public final class WistiaPlayer: NSObject {
     private func bestPlaybackURLForMedia(media:WistiaMedia, assetWithSlug assetSlug: String?, requireHLS: Bool, targetWidth: Int64) throws -> NSURL {
         //If a particular asset is requested using the slug, that overrides all other configuration
         if let slug = assetSlug {
-            if let assetMatchingSlug = (media.unnamedAssets.filter { $0.slug == slug }).first {
+            if let assetMatchingSlug = (media.assets.filter { $0.slug == slug }).first {
                 guard assetMatchingSlug.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: assetMatchingSlug) }
                 delegate?.wistiaPlayer(self, willLoadVideoForAsset: assetMatchingSlug, fromMedia: media)
                 return assetMatchingSlug.url
@@ -162,7 +162,7 @@ public final class WistiaPlayer: NSObject {
         }
 
         //Preffered playback of HLS assets, which come in m3u8 containers
-        let preferredAssets = media.unnamedAssets.filter { $0.container == "m3u8" }
+        let preferredAssets = media.assets.filter { $0.container == "m3u8" }
         if let asset = largestAssetIn(preferredAssets, withoutGoingUnder: targetWidth) {
             guard asset.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForAsset: asset, fromMedia: media)
@@ -172,7 +172,7 @@ public final class WistiaPlayer: NSObject {
         }
 
         // We can also playback assets in the mp4 container.
-        let playableAssets = media.unnamedAssets.filter { $0.container == "mp4" }
+        let playableAssets = media.assets.filter { $0.container == "mp4" }
         if let asset = largestAssetIn(playableAssets, withoutGoingUnder: targetWidth) {
             guard asset.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForAsset: asset, fromMedia: media)

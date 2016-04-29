@@ -36,14 +36,18 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
         self.eventMetadata = [
             //TODO: Get this from a module versions file
             "sdk_version": "iOS,0.1",
-            "account_key": media.accountKey,
-            "media_id": media.mediaKey,
             //on web, event_key is unique per media, per per player, per page, per page load
             "event_key": "\(self.dynamicType.guidPrefix())_\(NSUUID().UUIDString)",
             "media_duration": String(media.duration),
             "visitor_version": "1",
             //constant for this viewer (unless and until they reset their device)
             "session_id": self.dynamicType.sessionID()]
+        if let ak = media.accountKey {
+            eventMetadata["account_key"] = ak
+        }
+        if let mk = media.mediaKey {
+            eventMetadata["media_id"] = mk
+        }
         if let ref = referrer {
             //on web, referrer is the url of the current page.
             //on iOS this should be a universal link to the point in the app where the video is played
@@ -102,9 +106,9 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
 
         let lastAccount:String?
         let lastMedia:String?
-        if event == .Initialized || event == .Play {
+        if let ak = media.accountKey where event == .Initialized || event == .Play {
             //The IDs used for account and media cannot collide.  accountKey and hashedID satisfy that requirement.
-            lastAccount = WistiaMediaEventCollector.recordTimeOfEvent(event, forID: media.accountKey) ?? "none"
+            lastAccount = WistiaMediaEventCollector.recordTimeOfEvent(event, forID: ak) ?? "none"
             lastMedia = WistiaMediaEventCollector.recordTimeOfEvent(event, forID: media.hashedID) ?? "none"
         } else {
             lastAccount = nil
