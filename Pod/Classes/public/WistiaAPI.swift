@@ -58,7 +58,7 @@ extension WistiaAPI {
 // http://wistia.com/doc/data-api#projects
 extension WistiaAPI {
 
-    public func listProjects(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)?, completionHandler: (projects:[WistiaProject])->() ) {
+    public func listProjects(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, completionHandler: (projects:[WistiaProject])->() ) {
         let params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
 
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/projects.json", parameters: params)
@@ -110,7 +110,7 @@ extension WistiaAPI {
 
     //Use the medias/list route but return medias organized by project
     //leave project nil to get for any/all projects
-    public func listMediasGroupedByProject(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)?, limitedToProject project: WistiaProject? = nil, completionHandler: (projects:[WistiaProject])->() ) {
+    public func listMediasGroupedByProject(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, limitedToProject project: WistiaProject? = nil, completionHandler: (projects:[WistiaProject])->() ) {
         var params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
         if let proj = project {
             params["project_id"] = proj.projectID
@@ -146,7 +146,7 @@ extension WistiaAPI {
         }
     }
 
-    public func listMedias(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)?, limitedToProject project: WistiaProject? = nil, completionHandler: (medias:[WistiaMedia])->() ) {
+    public func listMedias(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, limitedToProject project: WistiaProject? = nil, completionHandler: (medias:[WistiaMedia])->() ) {
         var params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
         if let proj = project {
             params["project_id"] = proj.projectID
