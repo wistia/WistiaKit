@@ -18,6 +18,27 @@ public class WistiaAPI {
         self.apiToken = apiToken
     }
 
+    public func showAccount(completionHander: (account: WistiaAccount?) -> () ){
+        let params: [String : AnyObject] = ["api_password" : apiToken]
+
+        Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/account.json", parameters: params)
+            .responseJSON { response in
+
+                if let JSON = response.result.value as? [String: AnyObject],
+                    accountID = JSON["id"] as? Int,
+                    name = JSON["name"] as? String,
+                    accountURLString = JSON["url"] as? String,
+                    mediaCount = JSON["mediaCount"] as? Int {
+
+                    let account = WistiaAccount(accountID: accountID, name: name, accountURLString: accountURLString, mediaCount: mediaCount)
+                    completionHander(account: account)
+                } else {
+                    completionHander(account: nil)
+                }
+
+            }
+    }
+
     //data api docs: http://wistia.com/doc/data-api#projects_list
     public func listProjects(page page: Int = 1, perPage: Int = 10 /* TODO: SORT */, completionHandler: (projects:[WistiaProject])->() ) {
         let params: [String : AnyObject] = ["page" : page, "per_page" : perPage, "api_password" : apiToken, "sort_by" : "updated", "sort_direction" : 1]
