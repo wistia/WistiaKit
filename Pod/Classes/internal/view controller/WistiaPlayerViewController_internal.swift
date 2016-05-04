@@ -6,11 +6,12 @@
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 
+//Until we support 360 on TV, just killing this entire thing
+#if os(iOS)
+
 import UIKit
 import AVFoundation
 import AlamofireImage
-
-
 
 //MARK: - Rotation
 //NB: The 360 view assumes and requires that it's always displayed Portrait.
@@ -528,3 +529,5 @@ internal extension WistiaPlayerViewController {
     }
 
 }
+
+#endif //os(iOS)

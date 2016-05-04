@@ -6,6 +6,9 @@
 //
 //
 
+//Until we support 360 on TV, just killing this entire thing
+#if os(iOS)
+
 import Foundation
 
 public protocol WistiaPlayerViewControllerDelegate : class {
@@ -200,3 +203,5 @@ public final class WistiaPlayerViewController: UIViewController {
     }
 
 }
+
+#endif //os(iOS)

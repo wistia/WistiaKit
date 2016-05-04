@@ -31,17 +31,17 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.requires_arc = true
 
   s.ios.source_files = 'Pod/Classes/**/*'
-  s.tvos.source_files = 'Pod/Classes/**/*.^(xib)'
+  s.tvos.source_files = 'Pod/Classes/**/*.swift'
 
   # Although resource_bundles is the new recommended hotness, it doesn't play well with Asset Catalogs.
   # Fortunately, the old resources method will faithfully copy the catalog in such a way that it 'just works'
-  s.resources = 'Pod/Assets/**/*.xcassets'
   # s.resource_bundles = {
   #   'Assets' => ['Pod/Assets/**/*.xcassets']
   # }
+  s.resources = 'Pod/Assets/**/*.xcassets'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
 
+  # No CoreMotion on tvOS
   s.ios.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'CoreMotion', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
   s.tvos.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
 

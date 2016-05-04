@@ -6,6 +6,9 @@
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 
+//Until we support 360 on TV, just killing this entire thing
+#if os(iOS)
+
 import UIKit
 import SceneKit
 import SpriteKit
@@ -386,3 +389,5 @@ internal class Wistia360PlayerView: UIView {
     }
     
 }
+
+#endif //os(iOS)

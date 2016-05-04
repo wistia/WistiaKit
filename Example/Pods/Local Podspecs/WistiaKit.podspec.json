@@ -32,7 +32,7 @@
     ]
   },
   "tvos": {
-    "source_files": "Pod/Classes/**/*.^(xib)",
+    "source_files": "Pod/Classes/**/*.swift",
     "frameworks": [
       "AdSupport",
       "AVFoundation",
