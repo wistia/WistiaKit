@@ -17,7 +17,19 @@ public class WistiaAPI {
     public init(apiToken:String) {
         self.apiToken = apiToken
     }
-    
+
+    public enum SortBy: String {
+        case Name = "name",
+        MediaCount = "mediaCount",
+        Created = "created",
+        Updated = "updated"
+    }
+
+    public enum SortDirection: Int {
+        case Descending = 0,
+        Ascending = 1
+    }
+
 }
 
 //MARK: - Account
@@ -30,8 +42,8 @@ extension WistiaAPI {
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/account.json", parameters: params)
             .responseJSON { response in
 
-                if let JSON = response.result.value as? [String: AnyObject] {
-                    let account = ModelBuilder.accountFromHash(JSON)
+                if let JSON = response.result.value as? [String: AnyObject],
+                    account = ModelBuilder.accountFromHash(JSON) {
                     completionHander(account: account)
                 } else {
                     completionHander(account: nil)
@@ -45,8 +57,9 @@ extension WistiaAPI {
 //MARK: - Projects
 // http://wistia.com/doc/data-api#projects
 extension WistiaAPI {
-    public func listProjects(page page: Int = 1, perPage: Int = 10 /* TODO: SORT */, completionHandler: (projects:[WistiaProject])->() ) {
-        let params: [String : AnyObject] = ["page" : page, "per_page" : perPage, "api_password" : apiToken, "sort_by" : "updated", "sort_direction" : 1]
+
+    public func listProjects(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)?, completionHandler: (projects:[WistiaProject])->() ) {
+        let params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
 
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/projects.json", parameters: params)
             .responseJSON { response in
@@ -56,8 +69,6 @@ extension WistiaAPI {
                     for projectHash in JSON {
                         if let p = ModelBuilder.projectFromHash(projectHash) {
                             projects.append(p)
-                        } else {
-                            print("ERROR parsing project hash: \(projectHash)")
                         }
                     }
                     completionHandler(projects: projects)
@@ -68,6 +79,29 @@ extension WistiaAPI {
             }
     }
 
+    public func showProject(projectHashedID: String, completionHandler: (project: WistiaProject?)->() ) {
+        let params:[String: AnyObject] = ["api_password" : apiToken]
+
+        Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", parameters: params)
+            .responseJSON { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    project = ModelBuilder.projectFromHash(JSON) {
+                    completionHandler(project: project)
+
+                } else {
+                    completionHandler(project: nil)
+                }
+        }
+    }
+
+    //TODO: Create
+
+    //TODO: Update
+
+    //TODO: Delete
+
+    //TODO: Copy
+
 }
 
 //MARK: - Medias
@@ -76,8 +110,8 @@ extension WistiaAPI {
 
     //Use the medias/list route but return medias organized by project
     //leave project nil to get for any/all projects
-    public func listMediasGroupedByProject(page page: Int = 1, perPage: Int = 10 /* TODO: SORT */, limitedToProject project: WistiaProject? = nil, completionHandler: (projects:[WistiaProject])->() ) {
-        var params: [String : AnyObject] = ["page" : page, "per_page" : perPage, "api_password" : apiToken]
+    public func listMediasGroupedByProject(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)?, limitedToProject project: WistiaProject? = nil, completionHandler: (projects:[WistiaProject])->() ) {
+        var params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
         if let proj = project {
             params["project_id"] = proj.projectID
         }
@@ -111,4 +145,52 @@ extension WistiaAPI {
                 }
         }
     }
+
+    public func listMedias(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)?, limitedToProject project: WistiaProject? = nil, completionHandler: (medias:[WistiaMedia])->() ) {
+        var params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
+        if let proj = project {
+            params["project_id"] = proj.projectID
+        }
+
+        Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/medias.json", parameters: params)
+            .responseJSON { response in
+
+                if let JSON = response.result.value as? [[String: AnyObject]] {
+                    var medias = [WistiaMedia]()
+
+                    for mediaHash in JSON {
+                        if let media = ModelBuilder.mediaFromHash(mediaHash) {
+                            medias.append(media)
+                        }
+                    }
+                    completionHandler(medias: medias)
+
+                } else {
+                    completionHandler(medias: [])
+                }
+        }
+    }
+
+    public func showMedia(mediaHashedID: String, completionHandler: (media: WistiaMedia?)->() ) {
+        let params:[String: AnyObject] = ["api_password" : apiToken]
+
+        Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", parameters: params)
+            .responseJSON { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    media = ModelBuilder.mediaFromHash(JSON) {
+                    completionHandler(media: media)
+
+                } else {
+                    completionHandler(media: nil)
+                }
+        }
+    }
+
+    //TODO: Update
+
+    //TODO: Delete
+
+    //TODO: Copy
+
+    //TODO: Stats
 }

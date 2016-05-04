@@ -25,7 +25,15 @@ internal extension WistiaAPI {
                     completionHandler(media: nil)
                 }
         }
-        
     }
-    
+
+    internal static func addSorting(sorting: (by: SortBy, direction: SortDirection)?, to params: [String: AnyObject]) -> [String: AnyObject] {
+        var p = params
+        if let sortBy = sorting?.by, sortDirection = sorting?.direction {
+            p["sort_by"] = sortBy.rawValue
+            p["sort_direction"] = sortDirection.rawValue
+        }
+        return p
+    }
+
 }
