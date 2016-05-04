@@ -83,7 +83,6 @@ public class WistiaAPI {
                         if let media = WistiaAPI.mediaFrom(mediaHash) {
 
                             //2) Find project it's in (or create it anew)
-                            let targetProject:WistiaProject
                             if let projectHash = mediaHash["project"] as? [String: AnyObject], var project = WistiaAPI.projectFrom(projectHash) {
                                 if projectsByHashedID.indexForKey(project.hashedID) == nil {
                                     project.medias = [WistiaMedia]()
