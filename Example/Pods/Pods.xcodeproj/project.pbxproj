@@ -25,6 +25,21 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>00E2594DA58E8BE3A58B82E4E6ACF8AB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>80A4CB7FA92D22D4C05E887DF88FD942</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>model</string>
+			<key>path</key>
+			<string>model</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>032E3A7952DF27685FD7FDACC9F0A22F</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -46,19 +61,6 @@
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
-		</dict>
-		<key>0392D5A3A1A36C5DB465D463EF60D2B2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaMediaEmbedOptions.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>05094CC4A047119F7ADC14EE74C4881C</key>
 		<dict>
@@ -100,6 +102,22 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>0663AADD28B7643D95353FC61714AC4A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7903655C513CEC6802BDD9C154623A3E</string>
+				<string>7245C9628785862913C274B1647706B4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Classes</string>
+			<key>path</key>
+			<string>Classes</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>074CC37003A343DA496283EA39DB44CA</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -107,39 +125,6 @@
 			<key>files</key>
 			<array>
 				<string>1488A1EBA09DFFFE01D672BC41F405E8</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>0761A2ACCD151C5FDE4CEDADD7EF2A02</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>4E5160B914F4AEB5E43C56EFF0282BB1</string>
-				<string>9674A6C9E6B821A1C60EC67C826D3793</string>
-				<string>DE427AE45B02F9ECAA1CCF7B4E2F9481</string>
-				<string>39BEA3B7AB9497FA11E4C004BDCEBE52</string>
-				<string>45D0440D384D66EA050FB8D92DCDD0C6</string>
-				<string>468E2FC1C062FF18DF97B951B56448D5</string>
-				<string>DFBB4C70CE17F0083664954619141E2E</string>
-				<string>49FAB12F0451B555B0C4815DAD926AE6</string>
-				<string>B0BEAC9A4F064D40D4B60D10034AC5AD</string>
-				<string>F6217373C9E03D50094D8AE49D6FF8CF</string>
-				<string>EBCF48396588F7AB01F1CC9B8375BFCE</string>
-				<string>99961B385C63D9CB80AF8E74F2B3E702</string>
-				<string>C84446E59052B3388F95330B35ED83F0</string>
-				<string>B6384A0139A6DB6EDC0A4343390B1DE5</string>
-				<string>48599CB1B58457C28DBD29CBB8FD106C</string>
-				<string>4344F8854F580986283DFD5FD72A194E</string>
-				<string>BAD5CF8CCE5E386604443D182762AA60</string>
-				<string>7D241E404D24011A62631F7081731D03</string>
-				<string>E3133566BFF8BC7924468C1AF3C4D2B6</string>
-				<string>D32DCA804D0A6CDF5A8C0F134F8516CC</string>
-				<string>FE9FE5B307B84AECA240063301AF63C4</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -226,10 +211,30 @@
 			<key>remoteInfo</key>
 			<string>WistiaKit</string>
 		</dict>
+		<key>13F25CC7AA17FA9867F6A047319882CB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaFlatPlayerView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>1488A1EBA09DFFFE01D672BC41F405E8</key>
 		<dict>
 			<key>fileRef</key>
 			<string>407F047EBEF9ACEC944A3A07C925E20C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>15118B113C776898359A10195EC63BB1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88E66418BF8F3E2C05C060626277787D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -358,6 +363,26 @@
 				</array>
 			</dict>
 		</dict>
+		<key>1ABBADF813CC0B7EA9ACCC86E76BA0F0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaAsset.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1BD7A7D9F8DCAFE7FF964714F8EF10FC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BDAAAD1C119BAA732C015A8E52DB7E8C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>1BF73D4CA7FD9020885A907609C8D8F7</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -368,6 +393,19 @@
 			<string>sourcecode.c.h</string>
 			<key>path</key>
 			<string>WistiaKit-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1D95AA853FF2791C7F60427E4B9BBE92</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaAPI_internal.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -445,6 +483,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>227E06808C271FAB7E460358B9919530</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>WistiaPlayerViewController.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>22833EA8BF539CB47F20DBA7266DFE69</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -457,6 +508,20 @@
 			<string>Info.plist</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2396E922C219811634659AB91914D191</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A6CCFF23EE87698E6D2DB7626D45852A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2511498BA1575B5EA8FA60EF14482315</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3E60A39A2B250B75D1F7F709D3391458</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>25DBB6650245E6EA626D9B0894CEDC76</key>
 		<dict>
@@ -562,7 +627,7 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>3E48EC50B57A0EF5533D85E732ABAFBB</string>
+				<string>0663AADD28B7643D95353FC61714AC4A</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -592,6 +657,23 @@
 			<string>79C040AFDDCE1BCBF6D8B5EB0B85887F</string>
 			<key>remoteInfo</key>
 			<string>Alamofire</string>
+		</dict>
+		<key>2AE517B064807DFDA944F333B4D82A7A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>88E66418BF8F3E2C05C060626277787D</string>
+				<string>FFA180DE0779FD6D2C9B6EBA2BCA47B5</string>
+				<string>13F25CC7AA17FA9867F6A047319882CB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>view</string>
+			<key>path</key>
+			<string>view</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>2AE773CD2B7CA2B99528BC2AC8CEBF49</key>
 		<dict>
@@ -755,6 +837,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>31601A00F84E09431F7479B195FD895D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>96C0F182B0112C7ABF66E29D5410C481</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>325BCF9F72B02CC53C20B1391D0E36FF</key>
 		<dict>
 			<key>baseConfigurationReference</key>
@@ -868,23 +957,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>353F3B9EF05266843DB9AC9AFB840289</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>72073E4027F1035DD9B3B164E9903FFA</string>
-				<string>9EC6393AB839F4E3B938F2BCEBF29A5E</string>
-				<string>5FA519DFB9F286FAE66768FD4AC8083E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>extension</string>
-			<key>path</key>
-			<string>extension</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>366B8065FE98F48548F8B50A715FFD48</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -926,25 +998,12 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>39BEA3B7AB9497FA11E4C004BDCEBE52</key>
+		<key>3AA10BBBA4479ECD28F408319BC4BA9F</key>
 		<dict>
 			<key>fileRef</key>
-			<string>C327E5C8E727C80659DBEE15B4FC00C4</string>
+			<string>4A6115F73A5AA8C7406761A3B8ADD4C0</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>3AE87D137CE158107F2CEE3F3AB32048</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaMediaEventCollector.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>3CFB42910790CF0BDBCCEBAACD6B9367</key>
 		<dict>
@@ -973,19 +1032,16 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>3E48EC50B57A0EF5533D85E732ABAFBB</key>
+		<key>3E60A39A2B250B75D1F7F709D3391458</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>970F2C1953C6B6097BA15D5974DE913C</string>
-				<string>CC43E0DBE6ACA7D0C0DE79804E8C549B</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Classes</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
 			<key>path</key>
-			<string>Classes</string>
+			<string>WistiaPlayerViewController_internal.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1061,19 +1117,6 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>426F4FD5EF790E3B3BDBC61A5FE5E45A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaProject.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>43087C8D315AA446F58DB0E7A7A82223</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1100,13 +1143,6 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>4344F8854F580986283DFD5FD72A194E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8CDB2D311AB4EDA8ABB3E26CBB6B4F7B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>43BA3067FB4C1D9ABB79D440E6AE35FC</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1124,20 +1160,6 @@
 		<dict>
 			<key>fileRef</key>
 			<string>36BEE7460BDCDB9D08B36B345F8E297F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>45D0440D384D66EA050FB8D92DCDD0C6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E7B59B40FEEF7159826DE40C05930DEE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>468E2FC1C062FF18DF97B951B56448D5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8D67F75A38043393F89B00BA1C723EE2</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -1250,10 +1272,10 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>48599CB1B58457C28DBD29CBB8FD106C</key>
+		<key>49037C57EA49D4617B5D15FAFC3694DA</key>
 		<dict>
 			<key>fileRef</key>
-			<string>D5AE152CCB031BAD278FD1F8B897B078</string>
+			<string>1ABBADF813CC0B7EA9ACCC86E76BA0F0</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -1297,21 +1319,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>49FAB12F0451B555B0C4815DAD926AE6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7A4FB3FB87EF1115493ED8759B6E2C87</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4E5160B914F4AEB5E43C56EFF0282BB1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>72073E4027F1035DD9B3B164E9903FFA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4E99AE1DF918AD29AF2719E74A452364</key>
+		<key>4A6115F73A5AA8C7406761A3B8ADD4C0</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1320,7 +1328,7 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.swift</string>
 			<key>path</key>
-			<string>WistiaFlatPlayerView.swift</string>
+			<string>WistiaPlayer_internal.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1331,12 +1339,38 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>516A6474FF0752E38AE8FD05B2E4C21F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaAccount.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>51C7B03FC104B84744C83B8F4787279D</key>
 		<dict>
 			<key>fileRef</key>
 			<string>BD13F9498961CBAA32075869F79A1CEF</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>5395001090F235C64C01EEF0B5394A5E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaPlayerViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>54D8F2298C2398D87688EAE097ECC4C9</key>
 		<dict>
@@ -1350,6 +1384,13 @@
 			<string>Pods-WistiaKit_Tests-frameworks.sh</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5785941404E083A5BC58B365BCA178B5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E1758F81233C00963ACAB728A34502D7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>57FCADDE171443D4D6040F05140D499D</key>
 		<dict>
@@ -1504,19 +1545,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>5FA519DFB9F286FAE66768FD4AC8083E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>UINavigationControllerExtensions.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>5FC607D3BF7ECEBB8C977F945DB33352</key>
 		<dict>
 			<key>isa</key>
@@ -1527,6 +1555,20 @@
 			<string>79C040AFDDCE1BCBF6D8B5EB0B85887F</string>
 			<key>targetProxy</key>
 			<string>B8C72DB775BAD212A9E5132819675B4B</string>
+		</dict>
+		<key>613919897C5DF2C4BB151C42B1B42255</key>
+		<dict>
+			<key>fileRef</key>
+			<string>80A4CB7FA92D22D4C05E887DF88FD942</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6274A66ECEEBC07A81A87E98B6A504AD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F7F60CCB0EF1DC137F979B7484CB4900</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>62E8346F03C03E7F4D631361F325689E</key>
 		<dict>
@@ -1579,16 +1621,16 @@
 			<key>remoteInfo</key>
 			<string>AlamofireImage</string>
 		</dict>
-		<key>6AAF639B27CD5D1D7C64FD6B9627A4AF</key>
+		<key>6AA09AF5421B12B50DC03D7190A22E5D</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>file.xib</string>
+			<string>sourcecode.swift</string>
 			<key>path</key>
-			<string>WistiaPlayerViewController.xib</string>
+			<string>WistiaProject.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1598,23 +1640,6 @@
 			<string>28F253358F2CF5E56B33EC4A53BAFD35</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>6D2B655D1250390ED391F7A0A41878C3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E7B59B40FEEF7159826DE40C05930DEE</string>
-				<string>C327E5C8E727C80659DBEE15B4FC00C4</string>
-				<string>4E99AE1DF918AD29AF2719E74A452364</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>view</string>
-			<key>path</key>
-			<string>view</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>6D61970B6BFA1B5006B0A5CEBB4EED0F</key>
 		<dict>
@@ -1628,6 +1653,29 @@
 			<string>Stream.swift</string>
 			<key>path</key>
 			<string>Source/Stream.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6FC55287EA0E26F0AC14BBA1937B9019</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DAB70D2E327D747CFB4145FF4130F58D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>70A9F5FD8C297E3AFAD3B912A138E61B</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F7F60CCB0EF1DC137F979B7484CB4900</string>
+				<string>B983A16083DB4EC9E6A17CA67F5B1B0C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>stats</string>
+			<key>path</key>
+			<string>stats</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1663,18 +1711,30 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>72073E4027F1035DD9B3B164E9903FFA</key>
+		<key>7245C9628785862913C274B1647706B4</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>96C0F182B0112C7ABF66E29D5410C481</string>
+				<string>A6CCFF23EE87698E6D2DB7626D45852A</string>
+				<string>5395001090F235C64C01EEF0B5394A5E</string>
+				<string>78C15ADB87C10B48B06542DA335056AF</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>public</string>
 			<key>path</key>
-			<string>SCNVector3Extensions.swift</string>
+			<string>public</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7263215C18BE7DC1B66508D218C92B5F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D5BF88FE43AEC9C228D64FD725A7348B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>72F94C03FAD5C92CEFEAE876C6829F0D</key>
 		<dict>
@@ -1688,19 +1748,6 @@
 			<string>UIButton+AlamofireImage.swift</string>
 			<key>path</key>
 			<string>Source/UIButton+AlamofireImage.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>74843DAF64BBF8BDE971A882957B7186</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaObjectStatus.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1772,6 +1819,13 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
+		<key>752C64018E2345807BA4653A296AF47A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CFE0111CA2AB9528C2FC0C938DD1F234</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>776C545D13DEF56849B8B3F3E1A91341</key>
 		<dict>
 			<key>fileRef</key>
@@ -1803,12 +1857,60 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>786BACF5518909587DBBCF430D58FF31</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6AA09AF5421B12B50DC03D7190A22E5D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>78C15ADB87C10B48B06542DA335056AF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>516A6474FF0752E38AE8FD05B2E4C21F</string>
+				<string>1ABBADF813CC0B7EA9ACCC86E76BA0F0</string>
+				<string>E1758F81233C00963ACAB728A34502D7</string>
+				<string>BE99B94F715220EB4F67C865592ADEC7</string>
+				<string>D5BF88FE43AEC9C228D64FD725A7348B</string>
+				<string>6AA09AF5421B12B50DC03D7190A22E5D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>model</string>
+			<key>path</key>
+			<string>model</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>78C81844E7B8B2EEA16321296D8D3497</key>
 		<dict>
 			<key>fileRef</key>
 			<string>BB22AE5939252512ED61EC60C35A96F9</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>7903655C513CEC6802BDD9C154623A3E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1D95AA853FF2791C7F60427E4B9BBE92</string>
+				<string>4A6115F73A5AA8C7406761A3B8ADD4C0</string>
+				<string>9A60C1C72AF625D1416596EA8E806649</string>
+				<string>00E2594DA58E8BE3A58B82E4E6ACF8AB</string>
+				<string>70A9F5FD8C297E3AFAD3B912A138E61B</string>
+				<string>2AE517B064807DFDA944F333B4D82A7A</string>
+				<string>FF07B048C6F82219FFB57D23FE1197C2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>internal</string>
+			<key>path</key>
+			<string>internal</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
@@ -1834,19 +1936,6 @@
 			<string>189F107BE2AC883DEE34D0C404A8BD48</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
-		</dict>
-		<key>7A4FB3FB87EF1115493ED8759B6E2C87</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaAsset.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>7A55AF822A1D049EB8FC54B82E51B5B5</key>
 		<dict>
@@ -1878,13 +1967,6 @@
 		<dict>
 			<key>fileRef</key>
 			<string>15336EBB4828410FB080381877C1CBB9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>7D241E404D24011A62631F7081731D03</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6AAF639B27CD5D1D7C64FD6B9627A4AF</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -1959,6 +2041,19 @@
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
+		<key>80A4CB7FA92D22D4C05E887DF88FD942</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>ModelBuilder.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>80CAA5CE880541B781DFC0A305FB8B01</key>
 		<dict>
 			<key>fileRef</key>
@@ -2006,19 +2101,16 @@
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
-		<key>84D6E3E8D744D9601FFB4491D59DD9CE</key>
+		<key>88E66418BF8F3E2C05C060626277787D</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>3AE87D137CE158107F2CEE3F3AB32048</string>
-				<string>92C210C201E3BD2F5B01B538A9FDF57E</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>stats</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
 			<key>path</key>
-			<string>stats</string>
+			<string>Wistia360PlayerView.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2032,6 +2124,13 @@
 			<string>Alamofire.modulemap</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8AA30EEBAC3DE5253C5047F7304A98FC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>227E06808C271FAB7E460358B9919530</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>8AD67AFE53809A2FBA30234B2DB46946</key>
 		<dict>
@@ -2095,31 +2194,12 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>8CDB2D311AB4EDA8ABB3E26CBB6B4F7B</key>
+		<key>8B629154EF5111C27EBBFF5A036EA183</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>5395001090F235C64C01EEF0B5394A5E</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaPlayer_internal.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8D67F75A38043393F89B00BA1C723EE2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaAccount.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>8D7563421CB3D736181DD7A3A00A3AA0</key>
 		<dict>
@@ -2228,32 +2308,6 @@
 				</array>
 			</dict>
 		</dict>
-		<key>926F95BB1EC68CDFCBE5800F69698973</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaMedia.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>92C210C201E3BD2F5B01B538A9FDF57E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaStatsManager.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>934AEDD310A835EEBADF648837A8F45D</key>
 		<dict>
 			<key>baseConfigurationReference</key>
@@ -2337,6 +2391,13 @@
 				</array>
 			</dict>
 		</dict>
+		<key>953CB00F61A98FD3E831268AE42FA813</key>
+		<dict>
+			<key>fileRef</key>
+			<string>065B9F5459D4B1D85130851F3B8865A2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>954DFF83096B2C34928E142024B88DF9</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2404,13 +2465,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>9674A6C9E6B821A1C60EC67C826D3793</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9EC6393AB839F4E3B938F2BCEBF29A5E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>96B5A76E3F5B44FC4C04541C9D6B0D30</key>
 		<dict>
 			<key>buildConfigurations</key>
@@ -2425,23 +2479,16 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>970F2C1953C6B6097BA15D5974DE913C</key>
+		<key>96C0F182B0112C7ABF66E29D5410C481</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>D12956A1F9F6C48628E1FD54953ACF83</string>
-				<string>8CDB2D311AB4EDA8ABB3E26CBB6B4F7B</string>
-				<string>353F3B9EF05266843DB9AC9AFB840289</string>
-				<string>84D6E3E8D744D9601FFB4491D59DD9CE</string>
-				<string>6D2B655D1250390ED391F7A0A41878C3</string>
-				<string>E27B70E6D5FDBE5E7B20F179FE0217DF</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>internal</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
 			<key>path</key>
-			<string>internal</string>
+			<string>WistiaAPI.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2482,13 +2529,6 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>99961B385C63D9CB80AF8E74F2B3E702</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0392D5A3A1A36C5DB465D463EF60D2B2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>9A0CD02A624A7B9F8E33495140DA3680</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -2501,6 +2541,23 @@
 			<string>PBXHeadersBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
+		</dict>
+		<key>9A60C1C72AF625D1416596EA8E806649</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BDAAAD1C119BAA732C015A8E52DB7E8C</string>
+				<string>DAB70D2E327D747CFB4145FF4130F58D</string>
+				<string>CFE0111CA2AB9528C2FC0C938DD1F234</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>extension</string>
+			<key>path</key>
+			<string>extension</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>9BEF004F964BB7DABD23CD37E5CA978D</key>
 		<dict>
@@ -2517,19 +2574,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>9EC6393AB839F4E3B938F2BCEBF29A5E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>UIColorExtensions.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>A0FFC85DF3CBE0FA0E896567E7FC3566</key>
 		<dict>
 			<key>children</key>
@@ -2543,6 +2587,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>A33F390E65CF0F6394324EF63CB56BBE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>13F25CC7AA17FA9867F6A047319882CB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>A461F322348E831BD5ECAD2C80E9A95D</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2553,6 +2604,19 @@
 			<string>sourcecode.c.h</string>
 			<key>path</key>
 			<string>Alamofire-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A6CCFF23EE87698E6D2DB7626D45852A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaPlayer.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2588,6 +2652,41 @@
 			<string>8FA12CFBEFA8665E06FDC738B3A99B7C</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>AB0BB0DA61328BA5C9D96E03A36A57E7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>613919897C5DF2C4BB151C42B1B42255</string>
+				<string>1BD7A7D9F8DCAFE7FF964714F8EF10FC</string>
+				<string>6FC55287EA0E26F0AC14BBA1937B9019</string>
+				<string>752C64018E2345807BA4653A296AF47A</string>
+				<string>E51F52EF865739B93E89719F6052C037</string>
+				<string>15118B113C776898359A10195EC63BB1</string>
+				<string>B0700F4DE1B5FE3B6A9CE4CA617320FB</string>
+				<string>31601A00F84E09431F7479B195FD895D</string>
+				<string>B98CA87240773CBBBD9DCB6D38C4DFF9</string>
+				<string>49037C57EA49D4617B5D15FAFC3694DA</string>
+				<string>A33F390E65CF0F6394324EF63CB56BBE</string>
+				<string>953CB00F61A98FD3E831268AE42FA813</string>
+				<string>5785941404E083A5BC58B365BCA178B5</string>
+				<string>B3CEEFAA13E11D8B0A49774FC56EE3BF</string>
+				<string>6274A66ECEEBC07A81A87E98B6A504AD</string>
+				<string>7263215C18BE7DC1B66508D218C92B5F</string>
+				<string>2396E922C219811634659AB91914D191</string>
+				<string>3AA10BBBA4479ECD28F408319BC4BA9F</string>
+				<string>8B629154EF5111C27EBBFF5A036EA183</string>
+				<string>8AA30EEBAC3DE5253C5047F7304A98FC</string>
+				<string>2511498BA1575B5EA8FA60EF14482315</string>
+				<string>786BACF5518909587DBBCF430D58FF31</string>
+				<string>E7BE45D7255A4FB04C566F82BAEBF68F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
 		</dict>
 		<key>ADF19C953CE2A7D0B72EC93A81FCCC26</key>
 		<dict>
@@ -2660,10 +2759,10 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>B0BEAC9A4F064D40D4B60D10034AC5AD</key>
+		<key>B0700F4DE1B5FE3B6A9CE4CA617320FB</key>
 		<dict>
 			<key>fileRef</key>
-			<string>4E99AE1DF918AD29AF2719E74A452364</string>
+			<string>516A6474FF0752E38AE8FD05B2E4C21F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -2728,6 +2827,13 @@
 			<key>targetProxy</key>
 			<string>68C978F0CF0AC7DCF36105218993BB1E</string>
 		</dict>
+		<key>B3CEEFAA13E11D8B0A49774FC56EE3BF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BE99B94F715220EB4F67C865592ADEC7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>B42A735E6DB7ECE2C1061ED7B65DFED4</key>
 		<dict>
 			<key>isa</key>
@@ -2783,13 +2889,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>B6384A0139A6DB6EDC0A4343390B1DE5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>74843DAF64BBF8BDE971A882957B7186</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>B65385A402635DE86337F3307033C819</key>
 		<dict>
 			<key>children</key>
@@ -2837,6 +2936,26 @@
 			<string>05094CC4A047119F7ADC14EE74C4881C</string>
 			<key>targetProxy</key>
 			<string>E0B08972F51DA20DB17B78F0DD816EDB</string>
+		</dict>
+		<key>B983A16083DB4EC9E6A17CA67F5B1B0C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaStatsManager.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B98CA87240773CBBBD9DCB6D38C4DFF9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1D95AA853FF2791C7F60427E4B9BBE92</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>B9F6D1BB2928BD7D3ABA7444ABE7BB17</key>
 		<dict>
@@ -2924,13 +3043,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>BAD5CF8CCE5E386604443D182762AA60</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C1FE2EB6BB584C22312FF0A9ED08EDF1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>BB22AE5939252512ED61EC60C35A96F9</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2974,6 +3086,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>BDAAAD1C119BAA732C015A8E52DB7E8C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SCNVector3Extensions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>BE41196F6A3903E59C3306FE3F8B43FE</key>
 		<dict>
 			<key>fileRef</key>
@@ -2981,38 +3106,25 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>BE99B94F715220EB4F67C865592ADEC7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaMediaEmbedOptions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>C0DB70AB368765DC64BFB5FEA75E0696</key>
 		<dict>
 			<key>fileRef</key>
 			<string>D89DBE304DB2033CDF99CF9A23354D04</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>C1FE2EB6BB584C22312FF0A9ED08EDF1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaPlayerViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C327E5C8E727C80659DBEE15B4FC00C4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Wistia360PlayerView+LookVectorTracking.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>C353EF8CECF13CB746532E7CCF3D354C</key>
 		<dict>
@@ -3033,13 +3145,6 @@
 		<dict>
 			<key>fileRef</key>
 			<string>2E2B4F32C4D92F1ACC0215E05EBEC2B6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C84446E59052B3388F95330B35ED83F0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3AE87D137CE158107F2CEE3F3AB32048</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -3084,50 +3189,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>CC43E0DBE6ACA7D0C0DE79804E8C549B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>D5AE152CCB031BAD278FD1F8B897B078</string>
-				<string>C1FE2EB6BB584C22312FF0A9ED08EDF1</string>
-				<string>CCA2E20AF59F44F5B47D5D57CD56AF29</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>public</string>
-			<key>path</key>
-			<string>public</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CCA2E20AF59F44F5B47D5D57CD56AF29</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>8D67F75A38043393F89B00BA1C723EE2</string>
-				<string>7A4FB3FB87EF1115493ED8759B6E2C87</string>
-				<string>926F95BB1EC68CDFCBE5800F69698973</string>
-				<string>0392D5A3A1A36C5DB465D463EF60D2B2</string>
-				<string>74843DAF64BBF8BDE971A882957B7186</string>
-				<string>426F4FD5EF790E3B3BDBC61A5FE5E45A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>model</string>
-			<key>path</key>
-			<string>model</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>CE141053060775B8906E1B6C844064BB</key>
 		<dict>
 			<key>buildConfigurationList</key>
 			<string>96B5A76E3F5B44FC4C04541C9D6B0D30</string>
 			<key>buildPhases</key>
 			<array>
-				<string>0761A2ACCD151C5FDE4CEDADD7EF2A02</string>
+				<string>AB0BB0DA61328BA5C9D96E03A36A57E7</string>
 				<string>032E3A7952DF27685FD7FDACC9F0A22F</string>
 				<string>430B4656D9B998CC293EDD0BD7C3D401</string>
 				<string>1E8C383D254AB87BB76CFC4CACF1409D</string>
@@ -3163,6 +3231,19 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>CFE0111CA2AB9528C2FC0C938DD1F234</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UINavigationControllerExtensions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>CFF69021BC41F50BFDD6BF6B7B72D1FD</key>
 		<dict>
 			<key>buildConfigurations</key>
@@ -3176,19 +3257,6 @@
 			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
-		</dict>
-		<key>D12956A1F9F6C48628E1FD54953ACF83</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaAPI.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>D130328D30A9DE02340C7D46B7B97D7C</key>
 		<dict>
@@ -3306,13 +3374,6 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>D32DCA804D0A6CDF5A8C0F134F8516CC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>426F4FD5EF790E3B3BDBC61A5FE5E45A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>D402C965854A55E24EDC621B87371CA4</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3381,7 +3442,7 @@
 				<string>CE141053060775B8906E1B6C844064BB</string>
 			</array>
 		</dict>
-		<key>D5AE152CCB031BAD278FD1F8B897B078</key>
+		<key>D5BF88FE43AEC9C228D64FD725A7348B</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3390,7 +3451,7 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.swift</string>
 			<key>path</key>
-			<string>WistiaPlayer.swift</string>
+			<string>WistiaObjectStatus.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3404,19 +3465,6 @@
 			<string>79C040AFDDCE1BCBF6D8B5EB0B85887F</string>
 			<key>targetProxy</key>
 			<string>2A84B99B2BB4C81AD50B79558BAB1DCA</string>
-		</dict>
-		<key>D888F3DFEBD1117361C6662C29C786DF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>WistiaPlayerViewController_internal.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>D89DBE304DB2033CDF99CF9A23354D04</key>
 		<dict>
@@ -3476,6 +3524,19 @@
 			<string>Request+AlamofireImage.swift</string>
 			<key>path</key>
 			<string>Source/Request+AlamofireImage.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DAB70D2E327D747CFB4145FF4130F58D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UIColorExtensions.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3550,20 +3611,6 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>DE427AE45B02F9ECAA1CCF7B4E2F9481</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5FA519DFB9F286FAE66768FD4AC8083E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DFBB4C70CE17F0083664954619141E2E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D12956A1F9F6C48628E1FD54953ACF83</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>E0364FE690EBE64B8F544F945ED7F212</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3592,19 +3639,16 @@
 			<key>remoteInfo</key>
 			<string>AlamofireImage</string>
 		</dict>
-		<key>E27B70E6D5FDBE5E7B20F179FE0217DF</key>
+		<key>E1758F81233C00963ACAB728A34502D7</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>6AAF639B27CD5D1D7C64FD6B9627A4AF</string>
-				<string>D888F3DFEBD1117361C6662C29C786DF</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>view controller</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
 			<key>path</key>
-			<string>view controller</string>
+			<string>WistiaMedia.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3630,13 +3674,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>E3133566BFF8BC7924468C1AF3C4D2B6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D888F3DFEBD1117361C6662C29C786DF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>E3718C0E11363B38B9128FC0A6BA3B60</key>
 		<dict>
 			<key>containerPortal</key>
@@ -3649,6 +3686,13 @@
 			<string>79C040AFDDCE1BCBF6D8B5EB0B85887F</string>
 			<key>remoteInfo</key>
 			<string>Alamofire</string>
+		</dict>
+		<key>E51F52EF865739B93E89719F6052C037</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FFA180DE0779FD6D2C9B6EBA2BCA47B5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>E552F0515070FE3ADD1C30FAF7AE5CB1</key>
 		<dict>
@@ -3665,18 +3709,12 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>E7B59B40FEEF7159826DE40C05930DEE</key>
+		<key>E7BE45D7255A4FB04C566F82BAEBF68F</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>B983A16083DB4EC9E6A17CA67F5B1B0C</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Wistia360PlayerView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>E9A4C26E35F94752237863ED856CA841</key>
 		<dict>
@@ -3689,13 +3727,6 @@
 		<dict>
 			<key>fileRef</key>
 			<string>9833A6F2889EEA6E2A252E753E167DB7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EBCF48396588F7AB01F1CC9B8375BFCE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>926F95BB1EC68CDFCBE5800F69698973</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -3776,13 +3807,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>F6217373C9E03D50094D8AE49D6FF8CF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>065B9F5459D4B1D85130851F3B8865A2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>F68D23A29E51FBB144AE9A8FC1B26142</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -3813,6 +3837,19 @@
 			<string>text</string>
 			<key>path</key>
 			<string>Pods-WistiaKit_Example-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F7F60CCB0EF1DC137F979B7484CB4900</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>WistiaMediaEventCollector.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3854,12 +3891,34 @@
 			<key>remoteInfo</key>
 			<string>WistiaKit</string>
 		</dict>
-		<key>FE9FE5B307B84AECA240063301AF63C4</key>
+		<key>FF07B048C6F82219FFB57D23FE1197C2</key>
 		<dict>
-			<key>fileRef</key>
-			<string>92C210C201E3BD2F5B01B538A9FDF57E</string>
+			<key>children</key>
+			<array>
+				<string>227E06808C271FAB7E460358B9919530</string>
+				<string>3E60A39A2B250B75D1F7F709D3391458</string>
+			</array>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>view controller</string>
+			<key>path</key>
+			<string>view controller</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FFA180DE0779FD6D2C9B6EBA2BCA47B5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Wistia360PlayerView+LookVectorTracking.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

@@ -8,15 +8,15 @@
 
 Pod::Spec.new do |s|
   s.name             = "WistiaKit"
-  s.version          = "0.1.3"
+  s.version          = "0.2.1"
   s.summary          = "Access and playback all of your Wistia media"
 
   s.description      = <<-DESC
 Wistia is a great web video host.  But why shackle ourselves to the world wide web?
 
-With WistiaKit you can easily access and play back all of your Wistia hosted content natively on iOS.
+With WistiaKit you can easily access and play back all of your Wistia hosted content natively on iOS and tvOS.
 
-We've built for you a beautiful high level view controller (like AVPlayerViewController) sitting atop a powerful lower level player (like AVPlayer) providing all of the power of Wistia on iOS.
+We've built for you a beautiful high level view controller (like AVPlayerViewController) sitting atop a powerful lower level player (like AVPlayer) providing all of the power of Wistia on iOS and tvOS.
                        DESC
 
   s.homepage         = "https://github.com/wistia/WistiaKit"
