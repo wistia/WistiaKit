@@ -1,4 +1,5 @@
 # WistiaKit
+The best way to play Wistia video on iPhone, iPad, and Apple TV.
 
 [![CI Status](http://img.shields.io/travis/wistia/WistiaKit.svg?style=flat)](https://travis-ci.org/spinosa/WistiaKit)
 [![Version](https://img.shields.io/cocoapods/v/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
@@ -17,6 +18,15 @@ Ok, got that out of the way.  Now for the fun and fairly easy part!
 3.  Choose the "WistiaKit-Example" project next to the play icon and press play!
 
 This simple app lets you enter the Hashed ID of any media and play it.  Look at the code in `WistiaKit/Example for Wistia Kit/ViewCongtroller.swift` and look at the basic interface in `WistiaKit/Example for Wistia Kit/Main.storyboard`.  That's all there is to it; two interface outlets, one custom instance variable, and three lines of code to play the video.
+
+## Your Video on tvOS (Apple TV)
+
+Just add the `WistiaKit` pod to any tvOS project.  Yup, that's it.  
+
+Two caveats:
+
+1. There is not yet an example project (like above).  So it may take more than 5 minutes.
+2. The `WistiaPlayerViewController` is not available on tvOS.  Instead, create a `WistiaPlayer` and an `AVPlayerViewController` and marry them with `avPlayerVC.player = wistiaPlayer.avPlayer`.  We think the `AVPlayerViewController` looks great on the TV and would be hard pressed to do better.
 
 ## You Improve WistiaKit
 
