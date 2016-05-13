@@ -47,13 +47,139 @@ pod "WistiaKit"
 
 ## Usage
 
-This section needs a lot of TLC.  Until that happens, please check out the example app and/or get in touch with us directly.
+WistiaKit is conceptually divided into two tranches; **playback** and **data**.  Depending on your application, you may use both components -- which work seamlessly together -- or either of them independently.  Let's briefly get to know them before diving into the details.
 
-You deserve great documentation.  And you shall receive it!  But we erred on the side of early over complete to get your feedback during development of WistiaKit.  We'd love for you to be a part of this journey with us. 
+**Playback** is akin to a web embed.  You can present a `WistiaPlayerViewController` and play any of your videos using nothing but its `hashedID`.  Customizations are applied to the player and statistics are tracked like normal; you need do nothing extra.  Run the example project in this pod to see it in action (`pod try WistiaKit` then hit ▶ in Xcode = 7.3).
+
+If you don't want all the chrome (ie. player controls, scrubber, time, initial poster, etc.) you can get a little lower level with `WistiaPlayer`.  You still need just a `hashedID`, but all you get is an `AVPlayerLayer` which you can present and gussy up however you wish.  All your Wistia statistics ~~are belong to us~~ are tracked like normal.  Psst: the `WistiaPlayerViewController` uses the `WistiaPlayer` under the hood.
+
+**Data** is provided through the [Data API](http://wistia.com/doc/data-api).  We've Swift'd it up, built a bunch of structs, and added some nice syntactic sugar.  And the end result -- we hope -- is that it feels natural whether you're coming from another code-level interface to the Data API or the web view you use to manage your account.  Initialize a `WistiaAPI` object with an API Token from your account and you're off to the races.  View account details, list your projects, dig into your medias; everything you can do from the Data API, you can do from here.
+
+Bring them both together: create a `WistiaAPI` to browse your `WistiaProject`s, choose a `WistiaMedia`, use that `WistiaMedia` object to initialize a `WistiaPlayerViewController`, and then `self.presentViewController(_:animated:completion:)`!  It's so easy, I bet you could build a pretty nice Apple TV app in a hackathon...
+
+### Data
+
+I guess there's not much to say here.  Mostly just refer to the [Data API](http://wistia.com/doc/data-api) docs.  And of course, you should use an instance of `WistiaAPI` to intrect with the API.  For example:
+
+```swift
+import WistiaKit
+
+let globalAPI = WistiaAPI(apiToken:"C4NTB3L13V3TH1S1SARAND0MT0K3N")
+
+func printMediasByProject(){
+    globalAPI.listProjects { (projects) in
+        for project in projects {
+            print("\(project) medias:")
+            globalAPI.listMedias(limitedToProject: project, completionHandler: { (medias) in
+                for media in medias {
+                    print("  \(media)")
+                }
+            })
+        }
+    }
+}
+```
+
+Caveat: WistiaKit is not yet [Data API](http://wistia.com/doc/data-api) complete.  But it will be.  If there's some functionality that you want, but is not yet available, let us know by submitting a Pull Request ☺ or creating an issue.
+
+```
+**A Note About Structs**
+
+New to iOS programming, via Swift, is the expanded availability of value semantics.  Well get to that in a second.
+
+In the good old days of Objective-C you had objects.  These were your classes and what not.  When you passed objects into methods, or stored them in variables, you were always talking about the same object.  This is because your object was a _reference type_.  You were actually passing around _references_ (aka pointers) to the object.
+
+But even then you had _value types_.  A good example were your integers.  If you said `a = 4` and `b = a`, you set both `a` and `b` to the value of 4.  They weren't pointing to an object.  So `b++` didn't change the value of `a`, it would remain 4.
+
+Enter Swift and a whole lot more value types!  Now we have _struct_s (and _enum_s and tuples) that may remind us of reference types, but are actually value types.  In `WistiaKit`, your data objects are _struct_s.  So if you `let a = someMedia` and `let b = a`, your variables `a` and `b` have independent copies of that `WistiaMedia`.  If you change something, like `a.name = "whatever"`, this won't affect `b.name`.
+
+We think this makes `WistiaKit` less error prone and makes it easier to reason about your code.
+
+If you want to spend some guru meditation time on this, you could do worse than starting with the [Swift Blog](https://developer.apple.com/swift/blog/?id=10) and a [WWDC 2015 talk](https://developer.apple.com/videos/play/wwdc2015/414/).
+```
+
+### Playback
+
+The first thing to do is decide how you'd like your video player to look.  If you're familiar with video playback on iOS already, then all you need to know is: `WistiaPlayerViewController ~= AVPlayerViewController` and `WistiaPlayer ~= AVPlayer`.  If you're new to video on iOS, or just need a refresher, read on.
+
+Those who like the look of our web player -- including (most) customizations -- and/or don't want to do a ton of UI buliding should use the `WistiaPlayerViewController`.  You may present it fullscreen or within a `ContainerView` inside your own `ViewController`.  It comes with standard playback controls and some nice delegate methods for you to hook into.
+
+For those of you who want total control, you want the `WistiaPlayer`.  To see the video you will need to present the `AVPlayerLayer` vended by your instance of the `WistiaPlayer`.  And you'll need to programatically control the `WistiaPlayer` yourself; an `AVPlayerLayer` renders only video and includes no player controls or other UI.  As you can see, with great power comes great responsibility.  :-P
+
+
+#### Initializing `WistiaPlayerViewController` or `WistiaPlayer`
+
+* `referrer` - We recommend using a universal link to the video.  This will allow you to click that link from the Wistia stats page while still recording the in-app playback location.
+* `requireHLS` - Apple has [specific requirements]() for playing video within apps with which Wistia is fully compliant.  It boils down to this: if you want to play video over 10 minutes in length over the celluar network (ie. you don't force wifi), then you must use HLS.  We recommend leaving this to `true` which is the default.
+
+
+#### `WistiaPlayerViewController` Example
+
+Lets say we're building an app that has an introductory section.  We can use a single 
+If you are playing a fullscreen video, or multiple videos, in one section of your app, you can resuse a single `WistiaPlayerViewController` as in the following example:
+
+```swift
+import WistiaKit
+
+class IntroductionViewController: UIViewController {
+
+  let wistiaPlayerVC = WistiaPlayerViewController(referrer: "https://wistia.tv/intro")
+
+  func loadVideoWithHashedID(hashedID: String) {
+    wistiaPlayerVC.replaceCurrentVideoWithVideoForHashedID(hashedID)
+    self.presentViewController(wistiaPlayerVC, animated: true, completion: nil)
+  }
+}
+```
+
+#### `WistiaPlayer` Example
+
+If we want our intro video to behave a little differently, we might use a `WistiaPlayer`.  In the following example, we play an intro video without giving the user any way to control the video.  They have to sit there and watch it! <evil>bwaa ha ha ha!</evil>  When video playback completes done, we automatically progress to the next intro screen.
+
+
+```swift
+import WistiaKit
+
+class IntroductionViewController: UIViewController, WistiaPlayerDelegate {
+
+  let wistiaPlayer = WistiaPlayer(referrer: "https://wistia.tv/intro")
+  
+  @IBOutlet weak var playerContainer: UIView!
+  
+  override public func viewDidLoad() {
+    wistiaPlayer.delegate = self
+    playerContainer.layer.addSublayer(wistiaPlayer.newPlayerLayer())
+    wistiaPlayer.replaceCurrentVideoWithVideoForHashedID(IntroVideoHashedID)
+  }
+  
+  //Mark: - WistiaPlayerDelegate
+  
+  public func wistiaPlayer(player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State) {
+    switch newState {
+    case .VideoReadyForPlayback:
+      wistiaPlayer.play()
+    default:
+      //ignoring, but probably shouldn't
+    }
+  }
+
+  public func wistiaPlayerDidPlayToEndTime(player: WistiaPlayer) {
+    self.showNextIntroScreen()
+  }
+  
+  // ... rest of delegate methods ...
+  
+}
+```
+
+## Player APIs
+
+Up above are a bunch of words that explain how WistiaKit is structured, how to approach it, and some examples of how to use it.  It's good to know the lay of the land.  But as they say, _the map is not the terrain_.  You're ready young padawan, go forth and read the [appledoc](http://WistiaKitAppleDocs.todo).
+
 
 ## Author
 
-spinosa, spinosa@gmail.com
+d j spinosa, spinosa@gmail.com
 
 ## License
 
