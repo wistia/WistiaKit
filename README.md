@@ -49,7 +49,7 @@ pod "WistiaKit"
 
 WistiaKit is conceptually divided into two tranches; **playback** and **data**.  Depending on your application, you may use both components -- which work seamlessly together -- or either of them independently.  Let's briefly get to know them before diving into the details.
 
-**Playback** is akin to a web embed.  You can present a `WistiaPlayerViewController` and play any of your videos using nothing but its `hashedID`.  Customizations are applied to the player and statistics are tracked like normal; you need do nothing extra.  Run the example project in this pod to see it in action (`pod try WistiaKit` then hit ▶ in Xcode = 7.3).
+**Playback** is akin to a web embed.  You can present a `WistiaPlayerViewController` and play any of your videos using nothing but its `hashedID`.  Customizations are applied to the player and statistics are tracked like normal; you need do nothing extra.  Run the example project in this pod to see it in action (`pod try WistiaKit` then hit ▶ in Xcode >= 7.3).
 
 If you don't want all the chrome (ie. player controls, scrubber, time, initial poster, etc.) you can get a little lower level with `WistiaPlayer`.  You still need just a `hashedID`, but all you get is an `AVPlayerLayer` which you can present and gussy up however you wish.  All your Wistia statistics ~~are belong to us~~ are tracked like normal.  Psst: the `WistiaPlayerViewController` uses the `WistiaPlayer` under the hood.
 
@@ -82,21 +82,20 @@ func printMediasByProject(){
 
 Caveat: WistiaKit is not yet [Data API](http://wistia.com/doc/data-api) complete.  But it will be.  If there's some functionality that you want, but is not yet available, let us know by submitting a Pull Request ☺ or creating an issue.
 
-```
-**A Note About Structs**
 
-New to iOS programming, via Swift, is the expanded availability of value semantics.  Well get to that in a second.
-
-In the good old days of Objective-C you had objects.  These were your classes and what not.  When you passed objects into methods, or stored them in variables, you were always talking about the same object.  This is because your object was a _reference type_.  You were actually passing around _references_ (aka pointers) to the object.
-
-But even then you had _value types_.  A good example were your integers.  If you said `a = 4` and `b = a`, you set both `a` and `b` to the value of 4.  They weren't pointing to an object.  So `b++` didn't change the value of `a`, it would remain 4.
-
-Enter Swift and a whole lot more value types!  Now we have _struct_s (and _enum_s and tuples) that may remind us of reference types, but are actually value types.  In `WistiaKit`, your data objects are _struct_s.  So if you `let a = someMedia` and `let b = a`, your variables `a` and `b` have independent copies of that `WistiaMedia`.  If you change something, like `a.name = "whatever"`, this won't affect `b.name`.
-
-We think this makes `WistiaKit` less error prone and makes it easier to reason about your code.
-
-If you want to spend some guru meditation time on this, you could do worse than starting with the [Swift Blog](https://developer.apple.com/swift/blog/?id=10) and a [WWDC 2015 talk](https://developer.apple.com/videos/play/wwdc2015/414/).
-```
+>**A Note About Structs**
+>
+>New to iOS programming, via Swift, is the expanded availability of value semantics.  We'll discuss exatly what that means in soon.
+>
+>In the good old days of Objective-C you had objects.  These were your classes and what not.  When you passed objects into methods, or stored them in variables, you were always talking about the same object.  This is because your object was a _reference type_.  You were actually passing around _references_ (aka pointers) to the object.
+>
+>But even then you had _value types_.  A good example were your integers.  If you said `a = 4` and `b = a`, you set both `a` and `b` to the value of 4.  They weren't pointing to an object.  So `b++` didn't change the value of `a`, it would remain 4.
+>
+>Enter Swift and a whole lot more value types!  Now we have _struct_ s (and _enum_ s and tuples) that may remind us of reference types, but are actually value types.  In `WistiaKit`, your data objects are _struct_ s.  So if you `let a = someMedia` and `let b = a`, your variables `a` and `b` have independent copies of that `WistiaMedia`.  If you change something, like `a.name = "whatever"`, this won't affect `b.name`.
+>
+>We think this makes `WistiaKit` less error prone and makes it easier to reason about your code.
+>
+>If you want to spend some guru meditation time on this, you could do worse than starting with the [Swift Blog](https://developer.apple.com/swift/blog/?id=10) and a [WWDC 2015 talk](https://developer.apple.com/videos/play/wwdc2015/414/).
 
 ### Playback
 
@@ -110,13 +109,12 @@ For those of you who want total control, you want the `WistiaPlayer`.  To see th
 #### Initializing `WistiaPlayerViewController` or `WistiaPlayer`
 
 * `referrer` - We recommend using a universal link to the video.  This will allow you to click that link from the Wistia stats page while still recording the in-app playback location.
-* `requireHLS` - Apple has [specific requirements]() for playing video within apps with which Wistia is fully compliant.  It boils down to this: if you want to play video over 10 minutes in length over the celluar network (ie. you don't force wifi), then you must use HLS.  We recommend leaving this to `true` which is the default.
+* `requireHLS` - Apple has [specific requirements](https://developer.apple.com/app-store/review/guidelines/#media-content) for playing video within apps.  It boils down to this: if you want to play video over 10 minutes in length over the celluar network (ie. you don't force wifi), then you must use [HLS](https://developer.apple.com/streaming/).  And Wistia fully supports and has thoroughly tested our HLS implementation with Apple.   We recommend leaving this to `true` which is the default.
 
 
 #### `WistiaPlayerViewController` Example
 
-Lets say we're building an app that has an introductory section.  We can use a single 
-If you are playing a fullscreen video, or multiple videos, in one section of your app, you can resuse a single `WistiaPlayerViewController` as in the following example:
+Lets say we're building an app that has an introductory section.  We can use a single `WistiaPlayerViewController` to load any number of intro videos and present them full screen, as in the following example:
 
 ```swift
 import WistiaKit
@@ -132,9 +130,11 @@ class IntroductionViewController: UIViewController {
 }
 ```
 
+This will load the video, but it is up to the user to play and otherwise interact with the content.
+
 #### `WistiaPlayer` Example
 
-If we want our intro video to behave a little differently, we might use a `WistiaPlayer`.  In the following example, we play an intro video without giving the user any way to control the video.  They have to sit there and watch it! <evil>bwaa ha ha ha!</evil>  When video playback completes done, we automatically progress to the next intro screen.
+If we want our intro video to behave a little differently, we might use a `WistiaPlayer`.  In the following example, we play an intro video without giving the user any way to control the video.  They have to sit there and watch it! `<evil>`bwaa ha ha ha!`</evil>`  When video playback completes, we automatically progress to the next intro screen.
 
 
 ```swift
