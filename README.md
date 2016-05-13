@@ -174,7 +174,7 @@ class IntroductionViewController: UIViewController, WistiaPlayerDelegate {
 
 ## Player APIs
 
-Up above are a bunch of words that explain how WistiaKit is structured, how to approach it, and some examples of how to use it.  It's good to know the lay of the land.  But as they say, _the map is not the terrain_.  You're ready young padawan, go forth and read the [appledoc](http://WistiaKitAppleDocs.todo).
+Up above are a bunch of words that explain how WistiaKit is structured, how to approach it, and some examples of how to use it.  It's good to know the lay of the land.  But as they say, _the map is not the terrain_.  You're ready young padawan, go forth and read the [appledoc](http://cocoadocs.org/docsets/WistiaKit).
 
 
 ## Author
