@@ -21,86 +21,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-public final class WistiaPlayer: NSObject {
-
-    //Upon setting delegate, you will immediately receve a state change callback with the current state
-    public weak var delegate:WistiaPlayerDelegate? {
-        didSet {
-            if let d = delegate {
-                d.wistiaPlayer(self, didChangeStateTo: self.state)
-            }
-        }
-    }
-    private(set) var state:State = .Initialized {
-        didSet {
-            self.delegate?.wistiaPlayer(self, didChangeStateTo: state)
-        }
-    }
-
-    public var avPlayer:AVPlayer
-    internal var media:WistiaMedia?
-    private var statsCollector:WistiaMediaEventCollector?
-    private let referrer:String
-
-    //Change this before calling replaceCurrentVideoWithVideoForHashedID to have an effect
-    var requireHLS:Bool
-
-    // The 4K mp4s were not playing well.  
-    // Keeping max at 1920 seems good on testing thus far.
-    // XXX: This should be revisited when we have HLS assets for 360 videos
-    private let SphericalTargetAssetWidth:Int64 = 1920
-
-    // Returns a WistiaPlayer that is initialized and asynchronously loading the media for playback.
-    // Use the state updates of the delegate or the `state` variable to determine if this WistiaPlayer
-    // has been initialized.
-    // referrer should be a universal link to the given video.  In the case it can't be, it should be 
-    // a descriptive string identifying the location (and possibly state) of your app where this video
-    // is being played back (ie. "ProductTourViewController" or "SplashViewController.page1(uncoverted_email)")
-    // If HLS playback is required (Apple requires HLS for video > 10m in length played over cellular connections),
-    // only compatible assets will be played, or player will enter an error state.  Default, and suggested, it true.
-    public convenience init(hashedID:String, referrer:String, requireHLS: Bool = true) {
-        self.init(referrer:referrer, requireHLS:requireHLS)
-        self.replaceCurrentVideoWithVideoForHashedID(hashedID)
-    }
-
-    // This player will disable the iOS idle timer during playback (ie. video rate > 0) and
-    // re-enable the idle timer when the video is paused.
-    // If you wish to have total control over the idle timer, set this to false.
-    // Changing the value has no immediate effect on the idle timer.
-    var preventIdleTimerDuringPlayback = true
-
-    public init(referrer: String, requireHLS: Bool) {
-        self.referrer = referrer
-        self.requireHLS = requireHLS
-        self.avPlayer = AVPlayer()
-        super.init()
-
-        addPlayerObservers(self.avPlayer)
-    }
-
-    deinit {
-        removePlayerItemObservers(self.avPlayer.currentItem)
-        removePlayerObservers(self.avPlayer)
-    }
-
-    //Pauses playback of the current video, loads the media for the given hashedID asynchronously.
-    //If a slug is included, will choose the asset matching that slug, overriding everything.
-    // Like AVPlayer, if the new media is the same as the currently playing media, this is a noop
-    // Returns false on the event of a noop.  True otherwise.
-    public func replaceCurrentVideoWithVideoForHashedID(hashedID: String, assetWithSlug slug: String? = nil) -> Bool {
-        guard media?.hashedID != hashedID else { return false }
-        avPlayer.pause()
-
-        WistiaAPI.mediaInfoForHash(hashedID) { (media) -> () in
-            if let m = media {
-                self.media = m
-                self.readyPlaybackForMedia(m, choosingAssetWithSlug: slug)
-            } else {
-                self.state = .MediaNotFoundError(badHashedID: hashedID)
-            }
-        }
-        return true
-    }
+internal extension WistiaPlayer {
 
     //MARK: - Private Helpers
 
@@ -149,7 +70,7 @@ public final class WistiaPlayer: NSObject {
     //https://github.com/wistia/wistia/blob/master/app/assets/javascripts/external/E-v1/_judge_judy.coffee
     //
     //We just need HLS (if required), otherwise mp4.  If there are options, we pick the best sized.
-    private func bestPlaybackURLForMedia(media:WistiaMedia, assetWithSlug assetSlug: String?, requireHLS: Bool, targetWidth: Int64) throws -> NSURL {
+    internal func bestPlaybackURLForMedia(media:WistiaMedia, assetWithSlug assetSlug: String?, requireHLS: Bool, targetWidth: Int64) throws -> NSURL {
         //If a particular asset is requested using the slug, that overrides all other configuration
         if let slug = assetSlug {
             if let assetMatchingSlug = (media.assets.filter { $0.slug == slug }).first {
@@ -189,7 +110,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     //NB: May go under in size if there are no assets at least as large as the targetWidth
-    private func largestAssetIn(assets:[WistiaAsset], withoutGoingUnder targetWidth:Int64) -> WistiaAsset? {
+    internal func largestAssetIn(assets:[WistiaAsset], withoutGoingUnder targetWidth:Int64) -> WistiaAsset? {
         let sortedAssets = assets.sort { $0.width > $1.width }
         var largestWithoutGoingUnder:WistiaAsset? =  sortedAssets.first
 
@@ -212,7 +133,7 @@ public final class WistiaPlayer: NSObject {
 
     //MARK:- Value add observation
 
-    private func playerItem(playerItem:AVPlayerItem, statusWas oldStatus:AVPlayerStatus?, changedTo newStatus:AVPlayerStatus){
+    internal func playerItem(playerItem:AVPlayerItem, statusWas oldStatus:AVPlayerStatus?, changedTo newStatus:AVPlayerStatus){
         switch newStatus {
         case .Failed:
             self.state = .VideoPlaybackError(description: "Player Item Failed")
@@ -227,7 +148,7 @@ public final class WistiaPlayer: NSObject {
         }
     }
 
-    private func player(player:AVPlayer, rateChangedTo rate:Float){
+    internal func player(player:AVPlayer, rateChangedTo rate:Float){
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.delegate?.wistiaPlayer(self, didChangePlaybackRateTo: rate)
         }
@@ -237,7 +158,7 @@ public final class WistiaPlayer: NSObject {
         logEvent(.PlaybackRateChange, value: String(format:"%f", rate))
     }
 
-    private func onPlayerTimeUpdate(time:CMTime) {
+    internal func onPlayerTimeUpdate(time:CMTime) {
         //time and duration must both be valid and definite
         guard (time.flags.contains(.Valid)) else { return }
         guard let duration = avPlayer.currentItem?.duration where duration.flags.contains(.Valid) else { return }
@@ -252,7 +173,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     internal func playerItemPlayedToEnd(notification:NSNotification) {
-        dispatch_async(dispatch_get_main_queue()) { 
+        dispatch_async(dispatch_get_main_queue()) {
             self.delegate?.wistiaPlayerDidPlayToEndTime(self)
         }
         logEvent(.End)
@@ -264,29 +185,25 @@ public final class WistiaPlayer: NSObject {
 
     //MARK: - Raw Observeration
 
-    private var playerItemContext = 1
-    private var playerContext = 2
-    private var periodicTimeObserver:AnyObject?
-
-    private func addPlayerItemObservers(playerItem:AVPlayerItem) {
+    internal func addPlayerItemObservers(playerItem:AVPlayerItem) {
         playerItem.addObserver(self, forKeyPath: "status", options: [.Old, .New], context: &playerItemContext)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WistiaPlayer.playerItemPlayedToEnd(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WistiaPlayer.playerItemFailedToPlayToEnd(_:)), name: AVPlayerItemFailedToPlayToEndTimeNotification, object: playerItem)
     }
 
-    private func removePlayerItemObservers(playerItem:AVPlayerItem?){
+    internal func removePlayerItemObservers(playerItem:AVPlayerItem?){
         playerItem?.removeObserver(self, forKeyPath: "status", context: &playerItemContext)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemFailedToPlayToEndTimeNotification, object: playerItem)
     }
 
-    private func addPlayerObservers(player:AVPlayer) {
+    internal func addPlayerObservers(player:AVPlayer) {
         player.addObserver(self, forKeyPath: "rate", options: .New, context: &playerContext)
         //observe time updates every 0.1 seconds
         periodicTimeObserver = player.addPeriodicTimeObserverForInterval(CMTime(seconds: 0.1, preferredTimescale: 10), queue: nil, usingBlock: onPlayerTimeUpdate)
     }
 
-    private func removePlayerObservers(player:AVPlayer?) {
+    internal func removePlayerObservers(player:AVPlayer?) {
         if let player = player {
             player.removeObserver(self, forKeyPath: "rate", context: &playerContext)
             player.removeTimeObserver(periodicTimeObserver!)
@@ -310,28 +227,15 @@ public final class WistiaPlayer: NSObject {
         } else if context == &playerContext {
             if let newRate = change?[NSKeyValueChangeNewKey] as? Float
                 where keyPath == "rate" {
-                    self.player(avPlayer, rateChangedTo:newRate)
+                self.player(avPlayer, rateChangedTo:newRate)
             } else {
                 assertionFailure("Bad observation configuration on player")
             }
-
+            
         } else {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
     }
-}
 
-public func == (a: WistiaPlayer.State, b: WistiaPlayer.State) -> Bool {
-    switch(a, b){
-    case (.Initialized, .Initialized): return true
-    case (.VideoPreLoading, .VideoPreLoading): return true
-    case (.VideoLoading, .VideoLoading): return true
-    case (.MediaNotFoundError(_), .MediaNotFoundError(_)): return true
-    case (.VideoLoadingError(_, _, _), .VideoLoadingError(_, _, _)): return true
-    case (.VideoPlaybackError(_), .VideoPlaybackError(_)): return true
-    case (.VideoReadyForPlayback, .VideoReadyForPlayback): return true
-    default:
-        return false
-    }
 }
 
