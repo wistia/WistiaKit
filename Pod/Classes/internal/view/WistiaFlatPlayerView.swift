@@ -19,7 +19,7 @@ import AVFoundation
 
 internal class WistiaFlatPlayerView: UIView {
 
-    public var playerLayer:AVPlayerLayer? {
+    internal var playerLayer:AVPlayerLayer? {
         didSet(oldLayer) {
             oldLayer?.removeFromSuperlayer()
 
@@ -47,7 +47,7 @@ internal class WistiaFlatPlayerView: UIView {
         }
     }
 
-    override public func layoutSubviews() {
+    override internal func layoutSubviews() {
         //Run normal layout mechanisms (ie. iOS solves constraints and updates frames)
         super.layoutSubviews()
 

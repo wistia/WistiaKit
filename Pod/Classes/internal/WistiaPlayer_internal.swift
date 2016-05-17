@@ -210,7 +210,7 @@ internal extension WistiaPlayer {
         }
     }
 
-    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    internal func _wkObserveValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if context == &playerItemContext {
             if let newValue = change?[NSKeyValueChangeNewKey] as? Int, newStatus = AVPlayerStatus(rawValue: newValue), playerItem = object as? AVPlayerItem where keyPath == "status" {
                 let oldStatus:AVPlayerStatus?

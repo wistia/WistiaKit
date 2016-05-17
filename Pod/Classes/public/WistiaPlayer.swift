@@ -499,6 +499,10 @@ public final class WistiaPlayer: NSObject {
     internal var playerItemContext = 1
     internal var playerContext = 2
     internal var periodicTimeObserver:AnyObject?
+
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        _wkObserveValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+    }
 }
 
 //MARK: - WistiaPlayer.State Equality
