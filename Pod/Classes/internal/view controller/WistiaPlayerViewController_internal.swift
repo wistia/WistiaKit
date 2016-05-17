@@ -124,9 +124,9 @@ internal extension WistiaPlayerViewController {
             let activityVC = UIActivityViewController(activityItems: [shareString], applicationActivities: nil)
             activityVC.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) -> Void in
                 self.restorePlayerRate()
-                self.delegate?.wistiaPlayerViewController(self, actionSheetDidCompleteForMedia: media, withActivityType: activityType, completed: completed, returnedItems: returnedItems, activityError: activityError)
+                self.delegate?.wistiaPlayerViewController(self, activityViewControllerDidCompleteForMedia: media, withActivityType: activityType, completed: completed, activityError: activityError)
             }
-            self.delegate?.wistiaPlayerViewController(self, ActionSheetWillAppearForMedia: media)
+            self.delegate?.wistiaPlayerViewController(self, activityViewControllerWillAppearForMedia: media)
             presentViewController(activityVC, animated: true, completion: nil)
             
         } else {

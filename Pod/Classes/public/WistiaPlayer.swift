@@ -105,6 +105,9 @@ public protocol WistiaPlayerDelegate : class {
     - Important: Render the video by presenting the `AVPlayerLayer` vended by `newPlayerLayer()`.  If you
     want this handled for you, including playback controls, see `WistiaPlayerViewController` or use
     a standard `AVPlayerViewController` via `WistiaPlayer.configureWithUnderlyingPlayer(_:)`.
+ 
+    Spherical, 360°, binocular, or any other kind of video that needs to be presented in a non-flat way is
+    not specially hanlded by `WistiaPlayer`.  Use the `WistiaPlayerViewController` to properly present these media types.
 
     - Note: The underlying `AVPlayer` is not exposed to facilitate the proper collection and reporting
     of important Wistia statistics.  Common functionality of the `AVPLayer` is available through
@@ -261,6 +264,9 @@ public final class WistiaPlayer: NSObject {
      - Note: This method is a no-op if the given `WistiaMedia` matches the currently loaded `WistiaMedia`.  Will return
      `False` in that case and will not change the current playback rate.
      
+     - Important: The `WistiaMedia` should be fully fleshed out from the API and include assets.  Otherwise, use the 
+     _hashedID_ version of this method directly, **do not create a `WistiaMedia` and set the _hashedID_**.
+     
      - Parameters:
         - media: The `WistiaMedia` from which to choose an asset to load for playback.
         - asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.  
@@ -277,12 +283,6 @@ public final class WistiaPlayer: NSObject {
         readyPlaybackForMedia(media, choosingAssetWithSlug: slug)
         return true
     }
-
-
-    //Pauses playback of the current video, loads the media for the given hashedID asynchronously.
-    //If a slug is included, will choose the asset matching that slug, overriding everything.
-    // Like AVPlayer, if the new media is the same as the currently playing media, this is a noop
-    // Returns false on the event of a noop.  True otherwise.
 
     /**
      Use this method to initiate the asynchronous loading of a video.  Pauses the currently playing video before
