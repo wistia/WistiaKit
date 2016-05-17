@@ -45,6 +45,8 @@ internal class ModelBuilder {
             let description = projectHash["description"] as? String
             let mediaCount = projectHash["mediaCount"] as? Int
 
+            //TODO: Check for medias array and build them too
+
             return WistiaProject(projectID: projectID, name: name, description: description, mediaCount: mediaCount, hashedID: hashedID, medias: nil)
         }
         
