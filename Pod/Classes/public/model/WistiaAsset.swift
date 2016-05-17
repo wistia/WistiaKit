@@ -8,25 +8,49 @@
 
 import Foundation
 
+/**
+ Represents one of the many actual files backing a `WistiaMedia`.
+ 
+ - Note: Some of the attributes in this struct are obtained through an internal API different from the
+ public Data API.  These attributes are undocumented and marked internal.
+
+ See [Wistia Data API: Asset](http://wistia.com/doc/data-api#asset_object_response)
+ */
 public struct WistiaAsset {
 
+    /// The `WistiaMedia` this is a derivative of.
     public var media: WistiaMedia
-    public var type: String
-    public var displayName: String?
-    public var container: String?
-    var codec: String?
-    public var width: Int64
-    public var height: Int64
-    public var size: Int64?
-    var ext: String?
-    var bitrate: Int64?
-    public var status: WistiaObjectStatus?
-    public var urlString: String
-    var slug: String?
 
+    /// A direct-access URL to the content of the asset (as a String).
+    public var urlString: String
+
+    /// A direct-access URL to the content of the asset.
     public var url:NSURL {
         get {
             return NSURL(string: self.urlString)!
         }
     }
+
+    /// The width of this specific asset, if applicable.
+    public var width: Int64
+
+    /// The height of this specific asset, if applicable.
+    public var height: Int64
+
+    /// The size of the asset file that's referenced by url, measured in bytes.
+    public var size: Int64?
+
+    /// The internal type of the asset, describing how the asset should be used. Values can include OriginalFile, FlashVideoFile, MdFlashVideoFile, HdFlashVideoFile, Mp4VideoFile, MdMp4VideoFile, HdMp4VideoFile, IPhoneVideoFile, StillImageFile, SwfFile, Mp3AudioFile, and LargeImageFile.
+    public var type: String
+
+    /// The status of this asset
+    public var status: WistiaObjectStatus?
+
+    // MARK: - ------------Internal------------
+    var slug: String?
+    public var displayName: String?
+    public var container: String?
+    var codec: String?
+    var ext: String?
+    var bitrate: Int64?
 }

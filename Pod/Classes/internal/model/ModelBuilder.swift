@@ -93,7 +93,7 @@ internal class ModelBuilder {
             let embedOptions = mediaHash["embed_options"] as? [String:AnyObject]
             let mediaEmbedOptions = ModelBuilder.embedOptionsFromHash(embedOptions)
 
-            var wMedia = WistiaMedia(mediaID: mediaID, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, status: status, duration: duration, hashedID: hashedID, description: description, spherical: spherical, name: name, assets: [WistiaAsset](), thumbnail: thumbnail, embedOptions: mediaEmbedOptions)
+            var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, assets: [WistiaAsset](), description: description, hashedID: hashedID, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical, embedOptions: mediaEmbedOptions)
 
             // -- Assets --
             let wistiaAssets = wistiaAssetsFromHash(assets, forMedia:wMedia)
@@ -135,7 +135,7 @@ internal class ModelBuilder {
                 }
                 let slug = rawAsset["slug"] as? String
 
-                let wistiaAsset = WistiaAsset(media: media, type: type, displayName: displayName, container: container, codec: codec, width: Int64(width), height: Int64(height), size: size, ext: ext, bitrate: bitrate, status: status, urlString: urlString, slug: slug)
+                let wistiaAsset = WistiaAsset(media: media, urlString: urlString, width: Int64(width), height: Int64(height), size: size, type: type, status: status, slug: slug, displayName: displayName, container: container, codec: codec, ext: ext, bitrate: bitrate)
 
                 wistiaAssets.append(wistiaAsset)
             }

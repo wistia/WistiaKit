@@ -8,23 +8,29 @@
 
 import Foundation
 
-/*
- id	Numeric id of the account
- name	Account name
- url	Account's main Wistia URL (e.g. http://brendan.wistia.com)
- mediaCount	The total number of medias in this account
- */
+/**
+ Basic information about your account.
 
+ See [Wistia Data API: Account](http://wistia.com/doc/data-api#account)
+ */
 public struct WistiaAccount {
 
+    /// Numeric id of the account
     public let accountID:Int
+
+    /// Account name
     public let name:String
+
+    /// Account's main Wistia URL (e.g. http://brendan.wistia.com) as a String
     public let accountURLString:String
+
+    /// Account's main Wistia URL (e.g. http://brendan.wistia.com)
     var accountURL: NSURL {
         get {
             return NSURL(string: accountURLString)!
         }
     }
+
+    /// The total number of medias in this account
     public let mediaCount:Int
-    
 }
