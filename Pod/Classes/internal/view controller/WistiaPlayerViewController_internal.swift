@@ -101,7 +101,7 @@ extension WistiaPlayerViewController {
 }
 
 //MARK: - IB Actions
-extension WistiaPlayerViewController {
+internal extension WistiaPlayerViewController {
 
     @IBAction func posterPlayPressed(sender: AnyObject) {
         play()

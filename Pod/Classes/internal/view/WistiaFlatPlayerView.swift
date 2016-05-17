@@ -17,7 +17,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-public class WistiaFlatPlayerView: UIView {
+internal class WistiaFlatPlayerView: UIView {
 
     public var playerLayer:AVPlayerLayer? {
         didSet(oldLayer) {
