@@ -1,6 +1,6 @@
 //
 //  UINavigationControllerExtensions.swift
-//  Stargazer
+//  WistiaKit
 //
 //  Created by Daniel Spinosa on 2/10/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

@@ -1,9 +1,9 @@
 //
 //  WistiaObjectStatus.swift
-//  Pods
+//  WistiaKit
 //
 //  Created by Daniel Spinosa on 4/26/16.
-//
+//  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 
 import Foundation

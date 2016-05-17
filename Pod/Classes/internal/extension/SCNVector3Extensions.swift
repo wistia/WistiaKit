@@ -1,3 +1,11 @@
+//
+//  SCNVector3Extensions.swift
+//  WistiaKit
+//
+//  Created by Daniel Spinosa on 2/24/16.
+//  Copyright © 2016 Wistia, Inc. All rights reserved.
+//
+
 import Foundation
 import SceneKit
 

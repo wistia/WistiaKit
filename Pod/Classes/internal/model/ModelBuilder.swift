@@ -1,8 +1,9 @@
 //
 //  ModelBuilder.swift
-//  Pods
+//  WistiaKit
 //
 //  Created by Daniel Spinosa on 5/4/16.
+//  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 //  Converts JSON-like Hashes to Structs
 

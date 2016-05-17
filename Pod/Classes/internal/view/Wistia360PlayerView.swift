@@ -1,6 +1,6 @@
 //
 //  Wistia360PlayerView.swift
-//  Playback
+//  WistiaKit
 //
 //  Created by Daniel Spinosa on 1/15/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

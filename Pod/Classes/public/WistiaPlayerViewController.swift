@@ -1,9 +1,9 @@
 //
 //  WistiaPlayerViewController.swift
-//  Pods
+//  WistiaKit
 //
 //  Created by Daniel Spinosa on 4/22/16.
-//
+//  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 
 //Until we support 360 on TV, just killing this entire thing

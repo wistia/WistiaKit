@@ -1,6 +1,6 @@
 //
 //  WistiaStatsManager.swift
-//  Playback
+//  WistiaKit
 //
 //  Created by Daniel Spinosa on 12/31/15.
 //  Copyright © 2015 Wistia, Inc. All rights reserved.

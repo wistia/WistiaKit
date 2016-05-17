@@ -1,6 +1,6 @@
 //
 //  WistiaAsset.swift
-//  Stargazer
+//  WistiaKit
 //
 //  Created by Daniel Spinosa on 1/25/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
