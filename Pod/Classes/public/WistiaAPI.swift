@@ -85,16 +85,15 @@ public class WistiaAPI {
 
 }
 
-//MARK: - Account
 extension WistiaAPI {
+    //MARK: - Account
 
     /**
      Get account information.  
      
      See [Wistia Data API - Account](http://wistia.com/doc/data-api#account)
      
-     - Parameters:
-        - completionHandler: The block to invoke when the API call completes.
+     - Parameter completionHandler: The block to invoke when the API call completes.
          The block takes one argument: \
         `account` \
         The `WistiaAccount` object created from the API response.
@@ -118,20 +117,18 @@ extension WistiaAPI {
 
 }
 
-//MARK: - Projects
-// http://wistia.com/doc/data-api#projects
 extension WistiaAPI {
+    //MARK: - Projects
 
     /**
      List the projects in your accont.  
      
      See [Wistia Data API - Projects: List](http://wistia.com/doc/data-api#projects_list).
      
-     - Parameters:
-        - page: The page of results to show.  Ex: `page` 2 with a `pageCount` of 10 will return results starting with the 11th object.
-        - perPage: The number of results in a page.  This is the maximum number of results that may be returned in a single request.
-        - sorting: A tuple specifying what attribute to sort by and the direction to sort in.
-        - completionHandler: The block to invoke when the API call completes.
+     - Parameter page: The page of results to show.  Ex: `page` 2 with a `pageCount` of 10 will return results starting with the 11th object.
+     - Parameter perPage: The number of results in a page.  This is the maximum number of results that may be returned in a single request.
+     - Parameter sorting: A tuple specifying what attribute to sort by and the direction to sort in.
+     - Parameter completionHandler: The block to invoke when the API call completes.
         The block takes one argument: \
         `projects` \
         An array of `WistiaProject` objects created from the API response.  May be empty.
@@ -165,9 +162,8 @@ extension WistiaAPI {
      
      See [Wistia Data API - Projects: Show](http://wistia.com/doc/data-api#projects_show).
 
-     - Parameters:
-        - projectHashedID: The unique `hashed ID` of the project for which you want details.
-        - completionHandler: The block to invoke when the API call completes.
+     - Parameter projectHashedID: The unique `hashed ID` of the project for which you want details.
+     - Parameter completionHandler: The block to invoke when the API call completes.
         The block takes one argument: \
         `project` \
         The `WistiaProject` specified. `nil` if there was no match.
@@ -198,9 +194,8 @@ extension WistiaAPI {
 
 }
 
-//MARK: - Medias
-// http://wistia.com/doc/data-api#medias
 extension WistiaAPI {
+    //MARK: - Medias
 
     /**
      List the media in your account.  Request media with paging and sorting applied to the media attributes, but
@@ -211,12 +206,11 @@ extension WistiaAPI {
      - Note: Convenience method.  See `listMedias(page:perPage:sorting:limitedToProject:completionHandler:)` 
      for the direct mirror of the Data API method.
 
-     - Parameters:
-         - page: The page of results to show.  Ex: `page` 2 with a `pageCount` of 10 will return results starting with the 11th object.
-         - perPage: The number of results in a page.  This is the maximum number of results that may be returned in a single request.
-         - sorting: A tuple specifying what attribute to sort by and the direction to sort in.
-         - limitedToProject: Limit results to `WistiaMedia` within this `WistiaProject`
-         - completionHandler: The block to invoke when the API call completes.
+     - Parameter page: The page of results to show.  Ex: `page` 2 with a `pageCount` of 10 will return results starting with the 11th object.
+     - Parameter perPage: The number of results in a page.  This is the maximum number of results that may be returned in a single request.
+     - Parameter sorting: A tuple specifying what attribute to sort by and the direction to sort in.
+     - Parameter limitedToProject: Limit results to `WistiaMedia` within this `WistiaProject`
+     - Parameter completionHandler: The block to invoke when the API call completes.
          The block takes one argument: \
          `projects` \
          An array of `WistiaProject` objects containing the returned `WistiaMedia` objects.  Will not contain empty projects.
@@ -266,12 +260,11 @@ extension WistiaAPI {
      
      - Note: Full filtering support is forthcoming.
 
-     - Parameters:
-         - page: The page of results to show.  Ex: `page` 2 with a `pageCount` of 10 will return results starting with the 11th object.
-         - perPage: The number of results in a page.  This is the maximum number of results that may be returned in a single request.
-         - sorting: A tuple specifying what attribute to sort by and the direction to sort in.
-         - limitedToProject: Limit results to `WistiaMedia` within this `WistiaProject`
-         - completionHandler: The block to invoke when the API call completes.
+     - Parameter page: The page of results to show.  Ex: `page` 2 with a `pageCount` of 10 will return results starting with the 11th object.
+     - Parameter perPage: The number of results in a page.  This is the maximum number of results that may be returned in a single request.
+     - Parameter sorting: A tuple specifying what attribute to sort by and the direction to sort in.
+     - Parameter limitedToProject: Limit results to `WistiaMedia` within this `WistiaProject`
+     - Parameter completionHandler: The block to invoke when the API call completes.
          The block takes one argument: \
          `medias` \
          An array of `WistiaMedia` objects returned by the API call.  Will be empty when request page starts beyond the last item.
@@ -308,9 +301,8 @@ extension WistiaAPI {
 
      See [Wistia Data API - Medias: Show](http://wistia.com/doc/data-api#medias_show).
 
-     - Parameters:
-        - mediaHashedID: The unique `hashed ID` of the media for which you want details.
-         - completionHandler: The block to invoke when the API call completes.
+     - Parameter mediaHashedID: The unique `hashed ID` of the media for which you want details.
+     - Parameter completionHandler: The block to invoke when the API call completes.
          The block takes one argument: \
          `media` \
          The `WistiaMedia` specified. `nil` if there was no match.

@@ -25,7 +25,7 @@ public struct WistiaAccount {
     public let accountURLString:String
 
     /// Account's main Wistia URL (e.g. http://brendan.wistia.com)
-    var accountURL: NSURL {
+    public var accountURL: NSURL {
         get {
             return NSURL(string: accountURLString)!
         }

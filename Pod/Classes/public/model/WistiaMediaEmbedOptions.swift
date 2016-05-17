@@ -30,43 +30,44 @@ import Foundation
 public struct WistiaMediaEmbedOptions {
 
     /// Tint for controls (default: #7b796a)
-    var playerColor: UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+    public var playerColor: UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 
     /// Overlay large play button on poster view before playback has started (default: true)
-    var bigPlayButton: Bool = true
+    public var bigPlayButton: Bool = true
 
     /// Show play/pause button on playbar (default: true)
-    var smallPlayButton: Bool = true
+    public var smallPlayButton: Bool = true
 
     /// Show the scrubber (default: true)
-    var playbar: Bool = true
+    public var playbar: Bool = true
 
     /// Show the fullscreen button on playbar (default: true)
-    var fullscreenButton: Bool = true
+    public var fullscreenButton: Bool = true
 
     /// Show the playbar on poster view before playback has started (default: true)
-    var controlsVisibleOnLoad: Bool = true
+    public var controlsVisibleOnLoad: Bool = true
 
     /// Automatically play the video once it has loaded (default: false)
-    var autoplay: Bool = false
+    public var autoplay: Bool = false
 
     /// What do do when the video ends (default: PauseOnLastFrame) as a String
-    var endVideoBehaviorString: String = "pause" {
+    public var endVideoBehaviorString: String = "pause" {
         didSet {
             self.endVideoBehavior = WistiaEndVideoBehavior.fromString(self.endVideoBehaviorString)
         }
     }
+    
     /// What do do when the video ends (default: PauseOnLastFrame) as a String
-    var endVideoBehavior: WistiaEndVideoBehavior = .PauseOnLastFrame
+    public var endVideoBehavior: WistiaEndVideoBehavior = .PauseOnLastFrame
 
     /// Image to show for poster before playback (default: nil - the first frame of video is shown)
-    var stillURL: NSURL? = nil
+    public var stillURL: NSURL? = nil
 
     /// Show the standard iOS action button (similar to Wistia Social Bar on web) (default: false)
-    var actionButton: Bool = false
+    public var actionButton: Bool = false
 
     /// Show captions by default (default: false)
-    var captions: Bool = false
+    public var captions: Bool = false
 
     /**
      Enumeration of options of what should happen automatically when a video reaches the end.

@@ -26,13 +26,13 @@ public struct WistiaMedia {
     public var name: String?
 
     /// Post upload processing status. There are four statuses: queued, processing, ready, and failed.
-    var status: WistiaObjectStatus
+    public var status: WistiaObjectStatus
 
     /// An object representing the thumbnail for this media. The attributes are URL, width, and height.
     public var thumbnail: (url: String, width: Int, height: Int)?
 
     /// Specifies the length (in seconds) for audio and video files. Specifies number of pages in the document. Omitted for other types of media.
-    var duration: Float
+    public var duration: Float
 
     /// An array of the assets available for this media.
     public var assets: [WistiaAsset]
@@ -43,12 +43,14 @@ public struct WistiaMedia {
     /// A unique alphanumeric identifier for this media.
     public var hashedID: String
 
+    /// The visual and behavioral customizations to apply to this media
+    public var embedOptions: WistiaMediaEmbedOptions?
+
     // MARK: - ------------Internal------------
     var distilleryURLString: String?
     var accountKey: String?
     var mediaKey: String?
     var spherical: Bool
-    var embedOptions: WistiaMediaEmbedOptions?
     var distilleryURL: NSURL? {
         get {
             if let urlString = self.distilleryURLString, url = NSURL(string: urlString) {
@@ -60,6 +62,8 @@ public struct WistiaMedia {
     }
 
 }
+
+//MARK: - WistiaMedia Equality
 
 extension WistiaMedia: Equatable { }
 

@@ -26,9 +26,8 @@ public protocol WistiaPlayerDelegate : class {
      - Note: Upon registration of a delegate, this method will be called with the state of
      the WistiaPlayer at the time of registration.
      
-     - Parameters:
-        - player: The `WistiaPlayer` that has changed state.
-        - newState: The new (and now-current) state of the player.
+     - Parameter player: The `WistiaPlayer` that has changed state.
+     - Parameter newState: The new (and now-current) state of the player.
     */
     func wistiaPlayer(player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State)
 
@@ -36,9 +35,8 @@ public protocol WistiaPlayerDelegate : class {
      Informs the delegate the playback rate of the underlying `AVPlayer` has changed.  A rate of 0.0
      means the video is paused.  Normal playback rate is 1.0.
      
-     - Parameters:
-        - player: The `WistiaPlayer` for which the playback rate changed.
-        - newRate: The new playback rate of the current media.
+     - Parameter player: The `WistiaPlayer` for which the playback rate changed.
+     - Parameter newRate: The new playback rate of the current media.
      */
     func wistiaPlayer(player:WistiaPlayer, didChangePlaybackRateTo newRate:Float)
 
@@ -55,11 +53,10 @@ public protocol WistiaPlayerDelegate : class {
      
      An observer is registered with the underlying `AVPlayer` whether the `WistiaPlayer` has a delegate or not.
      
-     - Parameters:
-        - player: The `WistiaPlayer` for which playback progress has changed.
-        - progress: The amount of video that has been played back as a percentage (ranges from 0.0 to 1.0).
-        - currentTime: The current time in the video for which playback is occurring.
-        - duration: The total length of the video (used, along with currentTime, to calculate progress).
+     - Parameter player: The `WistiaPlayer` for which playback progress has changed.
+     - Parameter progress: The amount of video that has been played back as a percentage (ranges from 0.0 to 1.0).
+     - Parameter currentTime: The current time in the video for which playback is occurring.
+     - Parameter duration: The total length of the video (used, along with currentTime, to calculate progress).
     */
     func wistiaPlayer(player:WistiaPlayer, didChangePlaybackProgressTo progress:Float, atCurrentTime currentTime:CMTime, ofDuration duration:CMTime)
 
@@ -83,9 +80,8 @@ public protocol WistiaPlayerDelegate : class {
      that will always be the one used.  Otherwise, heuristics will use the current value of `requireHLS` and
      device characteristics to select the best asset.
      
-     - Parameters:
-        - asset: The `WistiaAsset` that will be loaded for playback.
-        - media: The `WistiaMedia` from which this asset was chosen.
+     - Parameter asset: The `WistiaAsset` that will be loaded for playback.
+     - Parameter media: The `WistiaMedia` from which this asset was chosen.
      */
     func wistiaPlayer(player:WistiaPlayer, willLoadVideoForAsset asset:WistiaAsset, fromMedia media:WistiaMedia)
 }
@@ -123,8 +119,7 @@ public final class WistiaPlayer: NSObject {
      Use the state updates of the delegate or the `state` variable to determine if and when this 
      `WistiaPlayer` has been initialized for playback
      
-     - Parameters:
-        - referrer: The referrer shown when viewing your video statstics on Wistia.
+     - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
             
             We recommend using a universal link to the video.
             This will allow you to click that link from the Wistia stats page
@@ -134,7 +129,7 @@ public final class WistiaPlayer: NSObject {
             (and possibly state) of your app where this video isbeing played back
             eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
 
-        - requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
+     - Parameter requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
             for any given `WistiaMedia` or `hashedID`)?
      
             Apple requires HLS for video over 10m in length played over cellular connections.
@@ -158,10 +153,9 @@ public final class WistiaPlayer: NSObject {
      Use the state updates of the delegate or the `state` variable to determine if and when this
      `WistiaPlayer` has been initialized for playback
 
-     - Parameters:
-        - hashedID: The ID of the media you wish to load asynchronously.
+     - Parameter hashedID: The ID of the media you wish to load asynchronously.
 
-        - referrer: The referrer shown when viewing your video statstics on Wistia.
+     - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
 
          We recommend using a universal link to the video.
          This will allow you to click that link from the Wistia stats page
@@ -171,7 +165,7 @@ public final class WistiaPlayer: NSObject {
          (and possibly state) of your app where this video isbeing played back
          eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
 
-         - requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
+     - Parameter requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
          for any given `WistiaMedia` or `hashedID`)?
 
          Apple requires HLS for video over 10m in length played over cellular connections.
@@ -191,25 +185,24 @@ public final class WistiaPlayer: NSObject {
      Use the state updates of the delegate or the `state` variable to determine if and when this
      `WistiaPlayer` has been initialized for playback
 
-     - Parameters:
-     - media: The `WistiaMedia` you wish to load asynchronously.
+     - Parameter media: The `WistiaMedia` you wish to load asynchronously.
 
-     - referrer: The referrer shown when viewing your video statstics on Wistia.
+     - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
 
-     We recommend using a universal link to the video.
-     This will allow you to click that link from the Wistia stats page
-     while still recording the in-app playback location.
+         We recommend using a universal link to the video.
+         This will allow you to click that link from the Wistia stats page
+         while still recording the in-app playback location.
 
-     In the case it can't be a universal link, it should be a descriptive string identifying the location
-     (and possibly state) of your app where this video isbeing played back
-     eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
+         In the case it can't be a universal link, it should be a descriptive string identifying the location
+         (and possibly state) of your app where this video isbeing played back
+         eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
 
-     - requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
-     for any given `WistiaMedia` or `hashedID`)?
+     - Parameter requireHLS: Should this player choose only HLS assets for playback (failing if there is not 
+        one available for any given `WistiaMedia` or `hashedID`)?
 
-     Apple requires HLS for video over 10m in length played over cellular connections.
+        Apple requires HLS for video over 10m in length played over cellular connections.
 
-     Default, which we recommend, is `true`.
+        Default, which we recommend, is `true`.
 
      - Returns: A `WistiaPlayer` that is initialized and asynchronously loading the media for playback.
      */
@@ -267,9 +260,8 @@ public final class WistiaPlayer: NSObject {
      - Important: The `WistiaMedia` should be fully fleshed out from the API and include assets.  Otherwise, use the 
      _hashedID_ version of this method directly, **do not create a `WistiaMedia` and set the _hashedID_**.
      
-     - Parameters:
-        - media: The `WistiaMedia` from which to choose an asset to load for playback.
-        - asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.  
+     - Parameter media: The `WistiaMedia` from which to choose an asset to load for playback.
+     - Parameter asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.
         Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
      
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
@@ -293,9 +285,8 @@ public final class WistiaPlayer: NSObject {
      - Note: This method is a no-op if the given `hashedID` matches the `hashedID` of the currently loaded `WistiaMedia`.  
      Will return `False` in that case and will not change the current playback rate.
 
-     - Parameters:
-        - hashedID: The ID of a Wistia media from which to choose an asset to load for playback.
-        - slug: The slug of a Wistia asset (of the media matching the given `hashedID`) to load for playback.  
+     - Parameter hashedID: The ID of a Wistia media from which to choose an asset to load for playback.
+     - Parameter slug: The slug of a Wistia asset (of the media matching the given `hashedID`) to load for playback.
         Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
 
      - Returns: `False` if the current `WistiaMedia.hashedID` matches the parameter (resulting in a no-op).  `True` otherwise,
@@ -350,11 +341,10 @@ public final class WistiaPlayer: NSObject {
      
      - Note: It is best practice to pause the video during interactive scrubbing.
      
-     - Parameters: 
-        - time: The target time to move the playhead.
-        - tolerance: How close to the target time must the seek move the playhead.  Smaller tolerances may result in
+     - Parameter time: The target time to move the playhead.
+     - Parameter tolerance: How close to the target time must the seek move the playhead.  Smaller tolerances may result in
         slower seeking due to additional required video decoding.
-        - completionHandler: The block to invoke when seeking is complete.  This block takes one parameter, `finished`,
+     - Parameter completionHandler: The block to invoke when seeking is complete.  This block takes one parameter, `finished`,
         which indicates if the seek operation completed.  `False` indicates another seek request interrupted this one.
 
     */
@@ -466,7 +456,7 @@ public final class WistiaPlayer: NSObject {
     }
 
 
-    //MARK: - -----------Internal-----------
+    //MARK: - Internal
 
     deinit {
         removePlayerItemObservers(self.avPlayer.currentItem)

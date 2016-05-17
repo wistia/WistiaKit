@@ -47,10 +47,10 @@ public struct WistiaAsset {
     public var status: WistiaObjectStatus?
 
     // MARK: - ------------Internal------------
-    var slug: String?
-    public var displayName: String?
-    public var container: String?
-    var codec: String?
-    var ext: String?
-    var bitrate: Int64?
+    internal var slug: String?
+    internal var displayName: String?
+    internal var container: String?
+    internal var codec: String?
+    internal var ext: String?
+    internal var bitrate: Int64?
 }

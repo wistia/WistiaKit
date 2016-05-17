@@ -40,9 +40,8 @@
          The user has tapped the action button and the activity view will appear.  Called just before
          the `UIActivityViewController` is presented.
          
-         - Parameters:
-            - vc: The `WistiaPlayerViewController` that is presenting the `UIActivityViewController`
-            - media: The currently loaded media that is the object of the activity
+         - Parameter vc: The `WistiaPlayerViewController` that is presenting the `UIActivityViewController`
+         - Parameter media: The currently loaded media that is the object of the activity
         */
         func wistiaPlayerViewController(vc: WistiaPlayerViewController, activityViewControllerWillAppearForMedia media:WistiaMedia)
 
@@ -53,12 +52,11 @@
          For parameters `activityType`, `completed`, and `activityError`, see the documentation for 
          `UIActivityViewController.UIActivityViewControllerCompletionWithItemsHandler` (mostly copied here for your convenience).
 
-         - Parameters:
-         - vc: The `WistiaPlayerViewController` that is presenting the `UIActivityViewController`
-         - media: The currently loaded media that was the object of the activity
-         - activityType: The type of the service that was selected by the user. For custom services, this is the value returned by the activityType method of a UIActivity object. For system-defined activities, it is one of the strings listed in "Built-in Activity Types” in UIActivity Class Reference.
-         - completed: `True` if the service was performed or `False` if it was not. This parameter is also set to `False` when the user dismisses the view controller without selecting a service.
-         - activityError: An error object if the activity failed to complete, or nil if the the activity completed normally.
+         - Parameter vc: The `WistiaPlayerViewController` that is presenting the `UIActivityViewController`
+         - Parameter media: The currently loaded media that was the object of the activity
+         - Parameter activityType: The type of the service that was selected by the user. For custom services, this is the value returned by the activityType method of a UIActivity object. For system-defined activities, it is one of the strings listed in "Built-in Activity Types” in UIActivity Class Reference.
+         - Parameter completed: `True` if the service was performed or `False` if it was not. This parameter is also set to `False` when the user dismisses the view controller without selecting a service.
+         - Parameter activityError: An error object if the activity failed to complete, or nil if the the activity completed normally.
          */
         func wistiaPlayerViewController(vc: WistiaPlayerViewController, activityViewControllerDidCompleteForMedia media:WistiaMedia, withActivityType activityType: String?, completed: Bool, activityError: NSError?)
     }
@@ -91,8 +89,7 @@
         /**
          Initialize a new `WistiaPlayerViewController` without an initial video for playback.
 
-         - Parameters:
-             - referrer: The referrer shown when viewing your video statstics on Wistia.
+         - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
 
                  We recommend using a universal link to the video.
                  This will allow you to click that link from the Wistia stats page
@@ -102,7 +99,7 @@
                  (and possibly state) of your app where this video isbeing played back
                  eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
 
-             - requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
+         - Parameter requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
              for any given `WistiaMedia` or `hashedID`)?
 
                 Apple requires HLS for video over 10m in length played over cellular connections.
@@ -156,8 +153,7 @@
          - Note: This method is a no-op if the given `hashedID` matches the `hashedID` of the currently loaded `WistiaMedia`.
          Will return `False` in that case and will not change the current playback rate.
 
-         - Parameters:
-            - hashedID: The ID of a Wistia media from which to choose an asset to load for playback.
+         - Parameter hashedID: The ID of a Wistia media from which to choose an asset to load for playback.
 
          - Returns: `False` if the current `WistiaMedia.hashedID` matches the parameter (resulting in a no-op).  `True` otherwise,
          _which does not guarantee success of the asynchronous video load_.
@@ -179,11 +175,10 @@
          - Important: The `WistiaMedia` should be fully fleshed out from the API and include assets.  Otherwise, use the
          _hashedID_ version of this method directly, **do not create a `WistiaMedia` and set the _hashedID_**.
 
-         - Parameters:
-            - media: The `WistiaMedia` from which to choose an asset to load for playback.
-            - asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.
+         - Parameters media: The `WistiaMedia` from which to choose an asset to load for playback.
+         - Parameter asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.
          Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
-            - autoplay: If set to `True`, playback will begin immediately upon loading the video.  If the video is 
+         - Parameter autoplay: If set to `True`, playback will begin immediately upon loading the video.  If the video is
             already loaded, playback will be resumed.
 
          - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,

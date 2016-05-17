@@ -96,7 +96,7 @@ internal class ModelBuilder {
             let embedOptions = mediaHash["embed_options"] as? [String:AnyObject]
             let mediaEmbedOptions = ModelBuilder.embedOptionsFromHash(embedOptions)
 
-            var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, assets: [WistiaAsset](), description: description, hashedID: hashedID, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical, embedOptions: mediaEmbedOptions)
+            var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, assets: [WistiaAsset](), description: description, hashedID: hashedID, embedOptions: mediaEmbedOptions, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical)
 
             // -- Assets --
             let wistiaAssets = wistiaAssetsFromHash(assets, forMedia:wMedia)
