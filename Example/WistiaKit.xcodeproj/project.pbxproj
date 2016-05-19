@@ -12,8 +12,10 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		7962486EB107C6BDF7DD492B /* Pods_WistiaKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3402765CB18C804EDFC421D3 /* Pods_WistiaKit_Example.framework */; };
+		91D1AADF1CEDFB2000356871 /* WistiaAPIAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */; };
+		91D1AAE11CEDFE4A00356871 /* WistiaAPIProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D1AAE01CEDFE4A00356871 /* WistiaAPIProjectTests.swift */; };
+		91D1AAE31CEDFE7900356871 /* WistiaAPIMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D1AAE21CEDFE7900356871 /* WistiaAPIMediaTests.swift */; };
 		E6324EF284EDC90BD9EBB731 /* Pods_WistiaKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F094601CBB8DF688BCD6189E /* Pods_WistiaKit_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,8 +45,10 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* WistiaKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WistiaKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		8AFBB3813F3C480958BA308D /* WistiaKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WistiaKit.podspec; path = ../WistiaKit.podspec; sourceTree = "<group>"; };
+		91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIAccountTests.swift; sourceTree = "<group>"; };
+		91D1AAE01CEDFE4A00356871 /* WistiaAPIProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIProjectTests.swift; sourceTree = "<group>"; };
+		91D1AAE21CEDFE7900356871 /* WistiaAPIMediaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIMediaTests.swift; sourceTree = "<group>"; };
 		9978CBBD3C2BA638EC4ABE81 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F094601CBB8DF688BCD6189E /* Pods_WistiaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WistiaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -115,7 +119,9 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */,
+				91D1AAE01CEDFE4A00356871 /* WistiaAPIProjectTests.swift */,
+				91D1AAE21CEDFE7900356871 /* WistiaAPIMediaTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -368,7 +374,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				91D1AADF1CEDFB2000356871 /* WistiaAPIAccountTests.swift in Sources */,
+				91D1AAE11CEDFE4A00356871 /* WistiaAPIProjectTests.swift in Sources */,
+				91D1AAE31CEDFE7900356871 /* WistiaAPIMediaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
