@@ -206,7 +206,7 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
         self.pause()
     }
 
-    public func wistiaPlayer(player: WistiaPlayer, willLoadVideoForAsset asset: WistiaAsset, fromMedia media:WistiaMedia) {
+    public func wistiaPlayer(player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
         if media.spherical {
             playing360 = true
             player360View.hidden = false

@@ -75,28 +75,32 @@ internal extension WistiaPlayer {
         if let slug = assetSlug {
             if let assetMatchingSlug = (media.assets.filter { $0.slug == slug }).first {
                 guard assetMatchingSlug.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: assetMatchingSlug) }
-                delegate?.wistiaPlayer(self, willLoadVideoForAsset: assetMatchingSlug, fromMedia: media)
+                delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: assetMatchingSlug, usingHLSMasterIndexManifest: false)
                 return assetMatchingSlug.url
             } else {
                 throw URLDeterminationError.NoAsset
             }
         }
 
-        //Preffered playback of HLS assets, which come in m3u8 containers
+        // If HLS is required we use the "manifest of manifests" that includes all of the alternate streams
+        if requireHLS {
+            delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: nil, usingHLSMasterIndexManifest: true)
+            return media.hlsMasterIndexManifestURL
+        }
+
+        //If HLS isn't required, still prefer playback of HLS assets, which come in m3u8 containers
         let preferredAssets = media.assets.filter { $0.container == "m3u8" }
         if let asset = largestAssetIn(preferredAssets, withoutGoingUnder: targetWidth) {
             guard asset.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: asset) }
-            delegate?.wistiaPlayer(self, willLoadVideoForAsset: asset, fromMedia: media)
+            delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: asset, usingHLSMasterIndexManifest: false)
             return asset.url
-        } else if requireHLS {
-            throw URLDeterminationError.NoHLSAsset
         }
 
         // We can also playback assets in the mp4 container.
         let playableAssets = media.assets.filter { $0.container == "mp4" }
         if let asset = largestAssetIn(playableAssets, withoutGoingUnder: targetWidth) {
             guard asset.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: asset) }
-            delegate?.wistiaPlayer(self, willLoadVideoForAsset: asset, fromMedia: media)
+            delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: asset, usingHLSMasterIndexManifest: false)
             return asset.url
         } else {
             throw URLDeterminationError.NoAsset

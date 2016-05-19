@@ -80,10 +80,13 @@ public protocol WistiaPlayerDelegate : class {
      that will always be the one used.  Otherwise, heuristics will use the current value of `requireHLS` and
      device characteristics to select the best asset.
      
-     - Parameter asset: The `WistiaAsset` that will be loaded for playback.
      - Parameter media: The `WistiaMedia` from which this asset was chosen.
+     - Parameter asset: The `WistiaAsset` that will be loaded for playback, if the HLS master index manifest was not used.
+     - Parameter usingHLSMasterIndexManifest: `True` iff playback is using the HLS master index manifest 
+        (aka Manifest of Manifests). `asset` will be `nil`.
+
      */
-    func wistiaPlayer(player:WistiaPlayer, willLoadVideoForAsset asset:WistiaAsset, fromMedia media:WistiaMedia)
+    func wistiaPlayer(player:WistiaPlayer, willLoadVideoForMedia media:WistiaMedia, usingAsset asset:WistiaAsset?, usingHLSMasterIndexManifest: Bool)
 }
 
 
@@ -120,21 +123,23 @@ public final class WistiaPlayer: NSObject {
      `WistiaPlayer` has been initialized for playback
      
      - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
-            
+            \
             We recommend using a universal link to the video.
             This will allow you to click that link from the Wistia stats page
             while still recording the in-app playback location.
-        
+            \
             In the case it can't be a universal link, it should be a descriptive string identifying the location
             (and possibly state) of your app where this video isbeing played back
             eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
 
-     - Parameter requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
-            for any given `WistiaMedia` or `hashedID`)?
-     
+     - Parameter requireHLS: Should this player use only the HLS master index manifest for playback (failing if there 
+            is not one available for any given `WistiaMedia` or `hashedID`)?
+            \
             Apple requires HLS for video over 10m in length played over cellular connections.
-     
+            \
             Default, which we recommend, is `true`.
+            \
+            **NOTE:** You must have HLS enabled for your Wistia account.  Contact support@wistia.com if you're not sure.
 
      - Returns: An idle `WistiaPlayer` not yet displayed.
      */
@@ -156,21 +161,23 @@ public final class WistiaPlayer: NSObject {
      - Parameter hashedID: The ID of the media you wish to load asynchronously.
 
      - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
-
+        \
          We recommend using a universal link to the video.
          This will allow you to click that link from the Wistia stats page
          while still recording the in-app playback location.
-
+        \
          In the case it can't be a universal link, it should be a descriptive string identifying the location
          (and possibly state) of your app where this video isbeing played back
          eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
 
-     - Parameter requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
-         for any given `WistiaMedia` or `hashedID`)?
-
+     - Parameter requireHLS: Should this player use only the HLS master index manifest for playback (failing if there
+         is not one available for any given `WistiaMedia` or `hashedID`)?
+         \
          Apple requires HLS for video over 10m in length played over cellular connections.
-
+         \
          Default, which we recommend, is `true`.
+         \
+         **NOTE:** You must have HLS enabled for your Wistia account.  Contact support@wistia.com if you're not sure.
 
      - Returns: A `WistiaPlayer` that is initialized and asynchronously loading the media for playback.
      */

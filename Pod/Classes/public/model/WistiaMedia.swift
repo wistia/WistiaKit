@@ -46,6 +46,23 @@ public struct WistiaMedia {
     /// The visual and behavioral customizations to apply to this media
     public var embedOptions: WistiaMediaEmbedOptions?
 
+    /**
+     The URL serving the master index manifest for HLS streams.  This manifest includes references to all of the
+     alternate HLS streams and is used by AVKit to dynamically choose the best stream for current conditions.
+     
+     The Wistia HLS alternate streams and master index manifest are engineered specificaly to satisfy Apple's 
+     HLS requirements for the App Store.
+
+     - Note: The Master index manifest may also be called the "manifest of manifests" in some places.
+     
+     - Note: Not all `WistiaMedia` has HLS derivatives available yet.
+     */
+    public var hlsMasterIndexManifestURL: NSURL {
+        get {
+            return NSURL(string: "https://fast.wistia.net/embed/medias/\(self.hashedID).m3u8")!
+        }
+    }
+
     // MARK: - ------------Internal------------
     var distilleryURLString: String?
     var accountKey: String?

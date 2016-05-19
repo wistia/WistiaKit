@@ -90,21 +90,23 @@
          Initialize a new `WistiaPlayerViewController` without an initial video for playback.
 
          - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
+            \
+             We recommend using a universal link to the video.
+             This will allow you to click that link from the Wistia stats page
+             while still recording the in-app playback location.
+            \
+             In the case it can't be a universal link, it should be a descriptive string identifying the location
+             (and possibly state) of your app where this video isbeing played back
+             eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
 
-                 We recommend using a universal link to the video.
-                 This will allow you to click that link from the Wistia stats page
-                 while still recording the in-app playback location.
-
-                 In the case it can't be a universal link, it should be a descriptive string identifying the location
-                 (and possibly state) of your app where this video isbeing played back
-                 eg. _ProductTourViewController_ or _SplashViewController.page1(uncoverted_email)_
-
-         - Parameter requireHLS: Should this player choose only HLS assets for playback (failing if there is not one available
-             for any given `WistiaMedia` or `hashedID`)?
-
-                Apple requires HLS for video over 10m in length played over cellular connections.
-
-                Default, which we recommend, is `true`.
+         - Parameter requireHLS: Should this player use only the HLS master index manifest for playback (failing if there
+             is not one available for any given `WistiaMedia` or `hashedID`)?
+             \
+             Apple requires HLS for video over 10m in length played over cellular connections.
+             \
+             Default, which we recommend, is `true`.
+             \
+             **NOTE:** You must have HLS enabled for your Wistia account.  Contact support@wistia.com if you're not sure.
 
          - Returns: An idle `WistiaPlayerViewController` not yet displayed.
          */
