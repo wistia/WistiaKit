@@ -45,19 +45,31 @@ internal class ModelBuilder {
             let description = projectHash["description"] as? String
             let mediaCount = projectHash["mediaCount"] as? Int
 
-            //TODO: Check for medias array and build them too
+            var medias:[WistiaMedia]? = nil
+            if let mediasHashArray = projectHash["medias"] as? [[String:AnyObject]] {
+                medias = mediasFromHashArray(mediasHashArray)
+            }
 
-            return WistiaProject(projectID: projectID, name: name, description: description, mediaCount: mediaCount, hashedID: hashedID, medias: nil)
+            return WistiaProject(projectID: projectID, name: name, description: description, mediaCount: mediaCount, hashedID: hashedID, medias: medias)
         }
         
         return nil
     }
 
+    internal static func mediasFromHashArray(mediasHashArray:[[String:AnyObject]]) -> [WistiaMedia] {
+        var medias = [WistiaMedia]()
+        for mediaHash in mediasHashArray {
+            if let media = mediaFromHash(mediaHash) {
+                medias.append(media)
+            }
+        }
+        return medias
+    }
+
     internal static func mediaFromHash(mediaHash:[String: AnyObject]) -> WistiaMedia? {
         if let
             //required
-            duration = mediaHash["duration"] as? Float,
-            assets = mediaHash["assets"] as? [[String:AnyObject]] {
+            duration = mediaHash["duration"] as? Float {
             let status:WistiaObjectStatus
             if let statusString = mediaHash["status"] as? String {
                 status = WistiaObjectStatus(failsafeFromRawString: statusString)
@@ -98,9 +110,10 @@ internal class ModelBuilder {
 
             var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, assets: [WistiaAsset](), description: description, hashedID: hashedID, embedOptions: mediaEmbedOptions, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical)
 
-            // -- Assets --
-            let wistiaAssets = wistiaAssetsFromHash(assets, forMedia:wMedia)
-            wMedia.assets = wistiaAssets
+            // -- Assets (are optional) --
+            if let assets = mediaHash["assets"] as? [[String:AnyObject]] {
+                wMedia.assets = wistiaAssetsFromHash(assets, forMedia:wMedia)
+            }
 
             return wMedia
         }

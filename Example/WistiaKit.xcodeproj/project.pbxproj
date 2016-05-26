@@ -16,6 +16,7 @@
 		91D1AADF1CEDFB2000356871 /* WistiaAPIAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */; };
 		91D1AAE11CEDFE4A00356871 /* WistiaAPIProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D1AAE01CEDFE4A00356871 /* WistiaAPIProjectTests.swift */; };
 		91D1AAE31CEDFE7900356871 /* WistiaAPIMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D1AAE21CEDFE7900356871 /* WistiaAPIMediaTests.swift */; };
+		91D49C7A1CF789D300299798 /* ModelBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D49C791CF789D300299798 /* ModelBuilderTests.swift */; };
 		E6324EF284EDC90BD9EBB731 /* Pods_WistiaKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F094601CBB8DF688BCD6189E /* Pods_WistiaKit_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIAccountTests.swift; sourceTree = "<group>"; };
 		91D1AAE01CEDFE4A00356871 /* WistiaAPIProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIProjectTests.swift; sourceTree = "<group>"; };
 		91D1AAE21CEDFE7900356871 /* WistiaAPIMediaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIMediaTests.swift; sourceTree = "<group>"; };
+		91D49C791CF789D300299798 /* ModelBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelBuilderTests.swift; sourceTree = "<group>"; };
 		9978CBBD3C2BA638EC4ABE81 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F094601CBB8DF688BCD6189E /* Pods_WistiaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WistiaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -122,6 +124,7 @@
 				91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */,
 				91D1AAE01CEDFE4A00356871 /* WistiaAPIProjectTests.swift */,
 				91D1AAE21CEDFE7900356871 /* WistiaAPIMediaTests.swift */,
+				91D49C791CF789D300299798 /* ModelBuilderTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -375,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91D1AADF1CEDFB2000356871 /* WistiaAPIAccountTests.swift in Sources */,
+				91D49C7A1CF789D300299798 /* ModelBuilderTests.swift in Sources */,
 				91D1AAE11CEDFE4A00356871 /* WistiaAPIProjectTests.swift in Sources */,
 				91D1AAE31CEDFE7900356871 /* WistiaAPIMediaTests.swift in Sources */,
 			);
