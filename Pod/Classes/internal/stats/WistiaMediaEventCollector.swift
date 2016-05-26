@@ -3,7 +3,7 @@
 //  WistiaKit
 //
 //  Created by Daniel Spinosa on 12/31/15.
-//  Copyright © 2015 Wistia, Inc. All rights reserved.
+//  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 //  A WistiaMediaEventCollector should be associated with a single player-media tuple.  If the same piece
 //  of media is loaded in a different player, a new WistiaMediaEventCollector should be used.  Similarly,

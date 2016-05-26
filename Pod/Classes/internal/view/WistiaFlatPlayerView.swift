@@ -3,7 +3,7 @@
 //  WistiaKit
 //
 //  Created by Daniel Spinosa on 11/15/15.
-//  Copyright © 2015 Wistia, Inc. All rights reserved.
+//  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 //  A slightly smarter View for AVPlayerLayers
 //

@@ -3,7 +3,7 @@
 //  WistiaKit
 //
 //  Created by Daniel Spinosa on 5/19/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 
 import XCTest

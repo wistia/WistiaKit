@@ -3,7 +3,7 @@
 //  WistiaKit
 //
 //  Created by spinosa on 04/05/2016.
-//  Copyright (c) 2016 spinosa. All rights reserved.
+//  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 
 import UIKit
