@@ -34,6 +34,12 @@ public struct WistiaMedia {
     /// Specifies the length (in seconds) for audio and video files. Specifies number of pages in the document. Omitted for other types of media.
     public var duration: Float
 
+    /// The date when the media was originally uploaded.
+    public var created: NSDate?
+
+    /// The date when the media was last changed.
+    public var updated: NSDate?
+
     /// An array of the assets available for this media.
     public var assets: [WistiaAsset]
 

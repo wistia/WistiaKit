@@ -27,4 +27,17 @@ class ModelBuilderTests: XCTestCase {
         waitForExpectationsWithTimeout(3, handler: nil)
     }
 
+    //MARK: - Media
+
+    func testDateFormat() {
+        let expectation = expectationWithDescription("media has non-nil dates")
+
+        wAPI.showMedia("aza8hcsnd8") { (media) in
+            if media?.created != nil && media?.updated != nil {
+                expectation.fulfill()
+            }
+        }
+
+        waitForExpectationsWithTimeout(3, handler: nil)
+    }
 }

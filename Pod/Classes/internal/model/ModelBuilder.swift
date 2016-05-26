@@ -11,6 +11,13 @@ import Foundation
 
 internal class ModelBuilder {
 
+    internal static let RFC3339DateFormatter: NSDateFormatter = {
+        let df = NSDateFormatter()
+        df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        return df
+    }()
+
     internal static func accountFromHash(accountHash:[String: AnyObject]) -> WistiaAccount? {
 
         if let
@@ -91,6 +98,14 @@ internal class ModelBuilder {
             let mediaID = mediaHash["id"] as? Int
             let name = mediaHash["name"] as? String
             let description = mediaHash["description"] as? String
+            var created: NSDate? = nil
+            if let c = mediaHash["created"] as? String {
+                created = RFC3339DateFormatter.dateFromString(c)
+            }
+            var updated: NSDate? = nil
+            if let u = mediaHash["updated"] as? String {
+                updated = RFC3339DateFormatter.dateFromString(u)
+            }
             let spherical = (mediaHash["spherical"] as? Bool) ?? false
             let thumbnail:(String, Int, Int)?
             if let thumbnailHash = mediaHash["thumbnail"] as? [String: AnyObject],
@@ -108,7 +123,7 @@ internal class ModelBuilder {
             let embedOptions = mediaHash["embed_options"] as? [String:AnyObject]
             let mediaEmbedOptions = ModelBuilder.embedOptionsFromHash(embedOptions)
 
-            var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, assets: [WistiaAsset](), description: description, hashedID: hashedID, embedOptions: mediaEmbedOptions, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical)
+            var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, created: created, updated: updated, assets: [WistiaAsset](), description: description, hashedID: hashedID, embedOptions: mediaEmbedOptions, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical)
 
             // -- Assets (are optional) --
             if let assets = mediaHash["assets"] as? [[String:AnyObject]] {
