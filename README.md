@@ -1,7 +1,7 @@
 # WistiaKit
 The best way to play Wistia video on iPhone, iPad, and Apple TV.
 
-[![CI Status](http://img.shields.io/travis/wistia/WistiaKit.svg?style=flat)](https://travis-ci.org/spinosa/WistiaKit)
+[![CI Status](http://img.shields.io/travis/wistia/WistiaKit.svg?style=flat)](https://travis-ci.org/wistia/WistiaKit)
 [![Version](https://img.shields.io/cocoapods/v/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
 [![License](https://img.shields.io/cocoapods/l/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
 [![Platform](https://img.shields.io/cocoapods/p/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
