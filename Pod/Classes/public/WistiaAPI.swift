@@ -117,8 +117,8 @@ extension WistiaAPI {
 
 }
 
+//MARK: - Projects
 extension WistiaAPI {
-    //MARK: - Projects
 
     /**
      List the projects in your accont.  
@@ -184,18 +184,179 @@ extension WistiaAPI {
         }
     }
 
-    //TODO: Create
+    // Create
 
-    //TODO: Update
+    /**
+     Create a new project in your Wistia account.
+     
+     Returns the newly created `WistiaProject`.
+     
+     See [Wistia Data API - Projects: Create](https://wistia.com/doc/data-api#projects_create)
+     
+     - Parameter name: The name of the project you want to create (required).
+     - Parameter adminEmail: The email address of the person you want to set as the owner of this project. 
+        Defaults to the Wistia Account Owner.
+     - Parameter anonymousCanUpload: A flag indicating whether or not anonymous users may upload files to this 
+        project.  Defaults to false.
+     - Parameter anonymousCanDownload: A flag indicating whether or not anonymous users may download files from 
+        this project.  Defaults to false.
+     - Parameter public: A flag indicating whether or not the project is enabled for public access.  Defaults to
+        false.
+     - Parameter completionHandler: The block to invoke when the API call completes.
+        The block takes one argument: \
+        `project` \
+        The newly created `WistiaProject` or nil if there was an error.
 
-    //TODO: Delete
+     */
+    public func createProject(name: String, adminEmail: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?, completionHandler: (project: WistiaProject?)->() ) {
+        var params:[String: AnyObject] = ["api_password" : apiToken]
+        updateParamsWith(&params, name: name, adminEmail: adminEmail, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic)
 
-    //TODO: Copy
 
+        Alamofire.request(.POST, "\(WistiaAPI.APIBaseURL)/projects.json", parameters: params)
+            .responseJSON { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    project = ModelBuilder.projectFromHash(JSON) {
+                    completionHandler(project: project)
+
+                } else {
+                    completionHandler(project: nil)
+                }
+            }
+    }
+
+    // Update
+
+    /**
+     Update an existing project in your Wistia account.
+
+     The updated `WistiaProject` is returned.
+
+     See [Wistia Data API - Projects: Update](https://wistia.com/doc/data-api#projects_update)
+
+     - Parameter projectHashedID: The unique `hashed ID` of the project you want to update.
+     - Parameter name: The project's new name.
+     - Parameter anonymousCanUpload: A flag indicating whether or not anonymous users may upload files to this
+        project.  Defaults to false.
+     - Parameter anonymousCanDownload: A flag indicating whether or not anonymous users may download files from
+        this project.  Defaults to false.
+     - Parameter public: A flag indicating whether or not the project is enabled for public access.  Defaults to
+        false.
+     - Parameter completionHandler: The block to invoke when the API call completes.
+        The block takes two arguments: \
+        `success` \
+        True if the project was updated. \
+        `updatedProject` \
+        The `WistiaProject` with updated attributes.
+     */
+    public func updateProject(projectHashedID: String, name: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?, completionHandler: (success: Bool, updatedProject: WistiaProject?)->() ) {
+        var params:[String: AnyObject] = ["api_password" : apiToken]
+        updateParamsWith(&params, name: name, adminEmail: nil, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic)
+
+        Alamofire.request(.PUT, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", parameters: params)
+            .responseJSON(completionHandler: { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 200 {
+                    completionHandler(success: true, updatedProject: project)
+                } else {
+                    completionHandler(success: true, updatedProject: nil)
+                }
+            })
+    }
+
+    // Delete
+
+    /**
+     Delete an existing project in your Wistia account.
+
+     The returned `WistiaProject` no longer exists in your account.
+
+     See [Wistia Data API - Projects: Delete](https://wistia.com/doc/data-api#projects_delete).
+
+     - Parameter projectHashedID: The unique hashed ID of the project you want to delete.
+     - Parameter completionHandler: The block to invoke when the API call completes.
+        The block takes two arguments: \
+        `success`\
+        True if the project was deleted.
+        `deletedProject` \
+        The `WistiaProject` that was deleted. `nil` if there was no match.
+
+     */
+    public func deleteProject(projectHashedID: String, completionHandler: (success: Bool, deletedProject: WistiaProject?)->() ) {
+        var params:[String: AnyObject] = ["api_password" : apiToken]
+
+        Alamofire.request(.DELETE, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", parameters: params)
+            .responseJSON(completionHandler: { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 200 {
+                    completionHandler(success: true, deletedProject: project)
+                } else {
+                    completionHandler(success: true, deletedProject: nil)
+                }
+            })
+    }
+
+    // Copy
+
+    /**
+     Copy a project, including all media and sections.
+
+     The returned `WistiaProject` represents the *new copy* of the project.
+
+     See [Wistia Data API - Projects: Copy](https://wistia.com/doc/data-api#projects_copy).
+     
+     - Note: This method does not copy the projects sharing information (i.e. users that could see the old project 
+        will not automatically be able to see the new one).
+
+     - Parameter projectHashedID: The unique hashed ID of the project you want to copy.
+     - Parameter adminEmail: The email address of the account Manager that will be the owner of the 
+        new project. Defaults to the Account Owner if invalid or omitted.
+     - Parameter completionHandler: The block to invoke when the API call completes.
+        The block takes two arguments: \
+        `success`\
+        True if the project was copied. \
+        `newProject` \
+        The newly created `WistiaProject`; a copy of the project specified by hashed ID.  `nil` if unsuccessful.
+
+     */
+    public func copyProject(projectHashedID: String, adminEmail: String?, completionHandler: (success: Bool, newProject: WistiaProject?)->() ) {
+        var params:[String: AnyObject] = ["api_password" : apiToken]
+        updateParamsWith(&params, name: nil, adminEmail: adminEmail, anonymousCanUpload: nil, anonymousCanDownload: nil, isPublic: nil)
+
+        Alamofire.request(.POST, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID)/copy.json", parameters: params)
+            .responseJSON(completionHandler: { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 201 {
+                    completionHandler(success: true, newProject: project)
+                } else {
+                    completionHandler(success: true, newProject: nil)
+                }
+            })
+    }
+
+
+    //--- Helpers ---
+    private func updateParamsWith(inout params: [String: AnyObject], name: String?, adminEmail: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?) {
+        if let n = name {
+            params["name"] = n
+        }
+        if let ae = adminEmail {
+            params["adminEmail"] = ae
+        }
+        if let up = anonymousCanUpload {
+            params["anonymousCanUpload"] = up ? "1" : "0"
+        }
+        if let down = anonymousCanDownload {
+            params["anonymousCanDownload"] = down ? "1" : "0"
+        }
+        if let pub = isPublic {
+            params["public"] = pub ? "1" : "0"
+        }
+    }
 }
 
+//MARK: - Medias
 extension WistiaAPI {
-    //MARK: - Medias
 
     /**
      List the media in your account.  Request media with paging and sorting applied to the media attributes, but
