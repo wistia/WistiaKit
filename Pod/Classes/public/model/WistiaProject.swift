@@ -29,28 +29,43 @@ public struct WistiaProject {
     public var mediaCount: Int?
 
     /// The date that the project was originally created.
-//    public var created: NSDate
+    public var created: NSDate?
 
     /// The date that the project was last updated.
-//    public var updated: NSDate
+    public var updated: NSDate?
 
     /// A private hashed id, uniquely identifying the project within the system.
     public let hashedID: String
 
     /// A boolean indicating whether or not anonymous uploads are enabled for the project.
-//    public var anonymousCanUpload: Bool
+    public var anonymousCanUpload: Bool
 
     /// A boolean indicating whether or not anonymous downloads are enabled for this project.
-//    public var anonymousCanDownload: Bool
+    public var anonymousCanDownload: Bool
 
     /// A boolean indicating whether the project is available for public (anonymous) viewing.
-//    public var isPublic: Bool
+    public var isPublic: Bool
 
     /// If the project is public, this field contains a string representing the ID used for referencing the project in public URLs.
-//    public var publicID: String?
+    public var publicID: String?
 
     /// An optional, not necessarily exhaustive array of `WistiaMedia` within this project.
     /// Array is `nil` if it hasn't been fetched, empty if it was fetched and returned zero elements.
     public var medias: [WistiaMedia]?
 
+}
+
+//MARK: - WistiaProject Equality
+
+extension WistiaProject: Equatable { }
+
+/**
+ Compare two `WistiaProject`s for equality.
+
+ - Returns: `True` if the `hashedID`s of the given `WistiaProject`s match.
+
+ */
+public func ==(lhs: WistiaProject, rhs: WistiaProject) -> Bool {
+
+    return lhs.hashedID == rhs.hashedID
 }

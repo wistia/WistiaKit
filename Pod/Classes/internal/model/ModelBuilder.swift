@@ -51,13 +51,25 @@ internal class ModelBuilder {
             let name = projectHash["name"] as? String
             let description = projectHash["description"] as? String
             let mediaCount = projectHash["mediaCount"] as? Int
+            var created: NSDate? = nil
+            if let c = projectHash["created"] as? String {
+                created = RFC3339DateFormatter.dateFromString(c)
+            }
+            var updated: NSDate? = nil
+            if let u = projectHash["updated"] as? String {
+                updated = RFC3339DateFormatter.dateFromString(u)
+            }
+            let anonymousCanUpload = (projectHash["anonymousCanUpload"] as? Bool) ?? false
+            let anonymousCanDownload = (projectHash["anonymousCanDownload"] as? Bool) ?? false
+            let isPublic = (projectHash["public"] as? Bool) ?? false
+            let publicID = projectHash["publicID"] as? String
 
             var medias:[WistiaMedia]? = nil
             if let mediasHashArray = projectHash["medias"] as? [[String:AnyObject]] {
                 medias = mediasFromHashArray(mediasHashArray)
             }
 
-            return WistiaProject(projectID: projectID, name: name, description: description, mediaCount: mediaCount, hashedID: hashedID, medias: medias)
+            return WistiaProject(projectID: projectID, name: name, description: description, mediaCount: mediaCount, created: created, updated: updated, hashedID: hashedID, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic, publicID: publicID, medias: medias)
         }
         
         return nil
