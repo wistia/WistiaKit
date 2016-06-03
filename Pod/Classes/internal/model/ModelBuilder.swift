@@ -229,12 +229,27 @@ internal class ModelBuilder {
         }
 
         if let plugin = embedOptionsHash["plugin"] as? [String:AnyObject] {
-            if let _ = plugin["socialbar-v1"] {
+            if let socialBarHash = plugin["socialbar-v1"] as? [String:AnyObject] {
+                // presence of this hash means sharing is on unless it's explcity set to off
                 mediaEmbedOptions.actionButton = true
+                if let socialBarOn = socialBarHash["on"] {
+                    mediaEmbedOptions.actionButton = socialBarOn.boolValue
+                }
+                if let pageURL = socialBarHash["pageUrl"] as? String {
+                    mediaEmbedOptions.actionShareURLString = pageURL
+                }
+                if let pageTitle = socialBarHash["pageTitle"] as? String {
+                    mediaEmbedOptions.actionShareTitle = pageTitle
+                }
             }
+            
             if let captionsHash = plugin["captions-v1"] as? [String:AnyObject],
-                captionsOn = captionsHash["onByDefault"] as? NSString {
-                mediaEmbedOptions.captions = captionsOn.boolValue
+                captionsAvailable = captionsHash["on"] as? NSString {
+                mediaEmbedOptions.captionsAvailable = captionsAvailable.boolValue
+                if let captionsOnByDefault = captionsHash["onByDefault"] as? NSString {
+                    mediaEmbedOptions.captionsOnByDefault = captionsAvailable.boolValue && captionsOnByDefault.boolValue
+                }
+
             }
         }
         

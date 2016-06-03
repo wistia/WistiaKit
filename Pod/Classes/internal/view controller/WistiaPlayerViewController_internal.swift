@@ -117,9 +117,16 @@ internal extension WistiaPlayerViewController {
     @IBAction func controlsActionPressed(sender: UIButton) {
         self.storePlayerRateAndPause()
         if let media = wPlayer.media {
-            let hashedID = media.hashedID
-            let videoTitle = media.name
-            let shareString = "\(videoTitle) https://fast.wistia.net/360/\(hashedID)"
+            let videoTitle: String
+            if let customTitle = media.embedOptions?.actionShareTitle {
+                videoTitle = customTitle
+            } else if let mediaName = media.name {
+                videoTitle = mediaName
+            } else {
+                videoTitle = ""
+            }
+            let videoUrl = media.embedOptions?.actionShareURLString ?? "https://fast.wistia.com/embed/medias/\(media.hashedID)"
+            let shareString = "\(videoTitle) \(videoUrl)"
 
             let activityVC = UIActivityViewController(activityItems: [shareString], applicationActivities: nil)
             activityVC.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) -> Void in

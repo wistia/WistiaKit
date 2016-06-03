@@ -66,8 +66,17 @@ public struct WistiaMediaEmbedOptions {
     /// Show the standard iOS action button (similar to Wistia Social Bar on web) (default: false)
     public var actionButton: Bool = false
 
+    /// The link to use when sharing
+    public var actionShareURLString: String? = nil
+
+    /// The copy to use when sharing
+    public var actionShareTitle: String? = nil
+
+    /// Are captions available and enabled for this video (default: false)
+    public var captionsAvailable: Bool = false
+
     /// Show captions by default (default: false)
-    public var captions: Bool = false
+    public var captionsOnByDefault: Bool = false
 
     /**
      Enumeration of options of what should happen automatically when a video reaches the end.
