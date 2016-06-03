@@ -24,8 +24,8 @@ import Alamofire
  Some additional convenience methods are provided that do not map directly to a single Data API endpoint.
  These are provided as grease for common operations and called out appropriately.
  
- - TODO: The `WistiaAPI` is not yet feature complete.  You will see **TODO** comments for the work remaining.
- This warning will remain in the documentation until the class is complete.
+ - NOTE: `WistiaAPI` is foundationally complete.  But it does not yet cover 100% of the [Wistia Data API](https://wistia.com/doc/data-api).
+ If there is coverage you need, please submit an issue (or pull request!) at [WistiaKit on GitHub](https://github.com/wistia/WistiaKit).
 
  */
 public class WistiaAPI {
@@ -414,28 +414,38 @@ extension WistiaAPI {
         }
     }
 
-    // TODO: include filtering options
     /**
-     List the media in your account.  Supports paging and filtering.
+     List the media in your account.  Supports paging and [filtering](https://wistia.com/doc/data-api#filtering).
      
      See [Wistia Data API - Medias: List](http://wistia.com/doc/data-api#medias_list).
-     
-     - Note: Full filtering support is forthcoming.
 
      - Parameter page: The page of results to show.  Ex: `page` 2 with a `pageCount` of 10 will return results starting with the 11th object.
      - Parameter perPage: The number of results in a page.  This is the maximum number of results that may be returned in a single request.
      - Parameter sorting: A tuple specifying what attribute to sort by and the direction to sort in.
-     - Parameter limitedToProject: Limit results to `WistiaMedia` within this `WistiaProject`
+     - Parameter filterByProject: Limit results to `WistiaMedia` within this `WistiaProject`
+     - Parameter filterByName: Find a media or medias whose name exactly matches this parameter.
+     - Parameter filterByType: A string specifying which type of media you would like to get. Values can be Video, Audio, Image,
+        PdfDocument, MicrosoftOfficeDocument, Swf, or UnknownType.
+     - Parameter filterByHashedID: Find the media by `hashedID`
      - Parameter completionHandler: The block to invoke when the API call completes.
          The block takes one argument: \
          `medias` \
          An array of `WistiaMedia` objects returned by the API call.  Will be empty when request page starts beyond the last item.
 
      */
-    public func listMedias(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, limitedToProject project: WistiaProject? = nil, completionHandler: (medias:[WistiaMedia])->() ) {
+    public func listMedias(page page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, filterByProject project: WistiaProject? = nil, filterByName name: String? = nil, filterByType type: String? = nil, filterByHashedID hashedID: String? = nil, completionHandler: (medias:[WistiaMedia])->() ) {
         var params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
         if let proj = project {
             params["project_id"] = proj.projectID
+        }
+        if let n = name {
+            params["name"] = n
+        }
+        if let t = type {
+            params["type"] = t
+        }
+        if let hid = hashedID {
+            params["hashed_id"] = hid
         }
 
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/medias.json", parameters: params)
