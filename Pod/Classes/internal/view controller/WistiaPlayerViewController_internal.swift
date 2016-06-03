@@ -209,8 +209,20 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
     }
 
     public func wistiaPlayerDidPlayToEndTime(player: WistiaPlayer) {
-        //workaround SKVideoNode and/or SceneKit bug: video rapidly toggles between paused/playing upon reaching end
-        self.pause()
+        switch (activeEmbedOptions.endVideoBehavior) {
+        case .LoopVideo:
+            self.wPlayer.seekToTime(CMTime(seconds: 0, preferredTimescale: 10), completionHandler: { (didSeek) in
+                self.play()
+            })
+        case .PauseOnLastFrame:
+            //NB: SKVideoNode and/or SceneKit bug: video rapidly toggles between paused/playing upon reaching end unless explicitly paused
+            self.pause()
+        case .ResetToTimeZero:
+            self.pause()
+            self.wPlayer.seekToTime(CMTime(seconds: 0, preferredTimescale: 10), completionHandler: { (didSeek) in
+                self.presentPlayPauseButtonForPlaying(false)
+            })
+        }
     }
 
     public func wistiaPlayer(player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {

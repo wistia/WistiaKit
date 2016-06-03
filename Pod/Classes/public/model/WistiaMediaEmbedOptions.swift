@@ -14,13 +14,8 @@ import Foundation
  `WistiaMedia` to which they apply.
 
  Customizations may be visualized by using the `WistiaPlayerViewController` and
- accompanying xib for display.  If you are using the `WistiaPlayer` to vend an
- `AVPlayerLayer` that you are rendering yourself (or configure an `AVPlayerViewController`),
- only the customizations related directly to playback (autoplay and end behavior) will have 
- an effect.
- 
- - Note: The poster image (stillURL) is a seperate UI element and only affects the
- WistiaPlayerViewController.
+ accompanying xib for display.  If you are using the `WistiaPlayer`, customizations 
+ will not have any effect.
 
  - Note: Wistia customizations not currently supported:
  - Turnstyle

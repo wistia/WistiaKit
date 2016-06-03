@@ -253,6 +253,7 @@
         internal var activeEmbedOptions = WistiaMediaEmbedOptions() {
             didSet {
                 customizeViewFor(activeEmbedOptions)
+                autoplayVideoWhenReady = activeEmbedOptions.autoplay
             }
         }
         internal var currentMediaEmbedOptions:WistiaMediaEmbedOptions? = nil {
