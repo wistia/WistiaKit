@@ -151,7 +151,7 @@ class WistiaAPIProjectTests: XCTestCase {
     func testCCopyProject() {
         guard let hashedID = WistiaAPIProjectTests.tempProjectHashedID else { XCTFail("prerequisite fail: no project"); return }
 
-        let expectation = expectationWithDescription("updated the project")
+        let expectation = expectationWithDescription("copied the project")
 
         wAPI.copyProject(hashedID, adminEmail: nil) { (success, copiedProject) in
             if let p = copiedProject where success && p.hashedID != hashedID {

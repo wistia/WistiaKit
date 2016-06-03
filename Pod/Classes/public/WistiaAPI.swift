@@ -283,7 +283,7 @@ extension WistiaAPI {
 
      */
     public func deleteProject(projectHashedID: String, completionHandler: (success: Bool, deletedProject: WistiaProject?)->() ) {
-        var params:[String: AnyObject] = ["api_password" : apiToken]
+        let params:[String: AnyObject] = ["api_password" : apiToken]
 
         Alamofire.request(.DELETE, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", parameters: params)
             .responseJSON(completionHandler: { (response) in
@@ -484,11 +484,149 @@ extension WistiaAPI {
         }
     }
 
-    //TODO: Update
+    // Update
+    /**
+     Update attributes on a piece of media.
+     
+     See [Wistia Data API - Medias: Update](http://wistia.com/doc/data-api#medias_update).
+     
+     - Parameter mediaHashedID: The unique `hashedID` of the media you want to update.
+     - Parameter name: The media's new name.
+     - Parameter newStillMediaId: The `hashedID` of an image that will replace the still that's displayed before the player starts playing. Media to update must be a video and new still must reference an image, or the call will fail.
+     - Parameter description: A new description for this media. Accepts plain text or markdown.
+     - Parameter completionHandler: The block to invoke when the API call completes.
+        The block takes two arguments: \
+        `success` \
+        True if the media was updated. \
+        `updatedMedia` \
+        The `WistiaMedia` with updated attributes.
+     */
+    public func updateMedia(mediaHashedID: String, name: String?, newStillMediaId: String?, description: String?, completionHandler: (success: Bool, updatedMedia: WistiaMedia?)->() ) {
+        var params:[String: AnyObject] = ["api_password" : apiToken]
+        if let n = name {
+            params["name"] = n
+        }
+        if let nsmi = newStillMediaId {
+            params["new_still_media_id"] = nsmi
+        }
+        if let d = description {
+            params["description"] = d
+        }
 
-    //TODO: Delete
+        Alamofire.request(.PUT, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", parameters: params)
+            .responseJSON(completionHandler: { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 200 {
+                    completionHandler(success: true, updatedMedia: media)
+                } else {
+                    completionHandler(success: true, updatedMedia: nil)
+                }
+            })
+    }
 
-    //TODO: Copy
+    // Delete
 
-    //TODO: Stats
+    /**
+     Delete an existing media in your Wistia account.
+
+     The returned `WistiaMedia` no longer exists in your account.
+
+     See [Wistia Data API - Medias: Delete](https://wistia.com/doc/data-api#medias_delete).
+
+     - Parameter mediaHashedID: The unique hashed ID of the media you want to delete.
+     - Parameter completionHandler: The block to invoke when the API call completes.
+        The block takes two arguments: \
+        `success`\
+        True if the media was deleted.
+        `deletedMedia` \
+        The `WistiaMedia` that was deleted. `nil` if there was no match.
+
+     */
+    public func deleteMedia(mediaHashedID: String, completionHandler: (success: Bool, deletedMedia: WistiaMedia?)->() ) {
+        let params:[String: AnyObject] = ["api_password" : apiToken]
+
+        Alamofire.request(.DELETE, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", parameters: params)
+            .responseJSON(completionHandler: { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 200 {
+                    completionHandler(success: true, deletedMedia: media)
+                } else {
+                    completionHandler(success: true, deletedMedia: nil)
+                }
+            })
+    }
+
+    // Copy
+
+    /**
+     Copy a piece of media, optionally moving to a new project or changing ownership.
+
+     The returned `WistiaMedia` represents the *new copy* of the media.
+
+     See [Wistia Data API - Medias: Copy](https://wistia.com/doc/data-api#medias_copy).
+
+     - Parameter mediaHashedID: The unique `hashedID` of the media you want to copy.
+     - Parameter projectID: The ID of the project where you want the new copy placed. If this value is invalid or omitted,
+        defaults to the source media's current project.
+     - Parameter owner: An email address specifying the owner of the new media. If this value is invalid or omitted, 
+        defaults to the source media's current owner.
+     - Parameter completionHandler: The block to invoke when the API call completes.
+        The block takes two arguments: \
+        `success`\
+        True if the media was copied. \
+        `copiedMedia` \
+        The newly created `WistiaMedia`; a copy of the media specified by hashed ID.  `nil` if unsuccessful.
+
+     */
+    public func copyMedia(mediaHashedID: String, projectID: String?, owner: String?, completionHandler: (success: Bool, copiedMedia: WistiaMedia?)->() ) {
+        var params:[String: AnyObject] = ["api_password" : apiToken]
+        if let p = projectID {
+            params["project_id"] = p
+        }
+        if let o = owner {
+            params["owner"] = o
+        }
+
+        Alamofire.request(.POST, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/copy.json", parameters: params)
+            .responseJSON(completionHandler: { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 201 {
+                    completionHandler(success: true, copiedMedia: media)
+                } else {
+                    completionHandler(success: true, copiedMedia: nil)
+                }
+            })
+    }
+
+    // Stats
+
+    /**
+     Get aggregated tracking statistics for a video that has been embedded on your site.
+     
+     The `WistiaMedia` returned will include a `WistiaMediaStats` object with the statistics.
+     
+     See [Wistia Data API - Medias: Stats](https://wistia.com/doc/data-api#medias_stats).
+     
+     - Parameter mediaHashedID: The unique `hashedID` of the media for which you want statistics.
+     - Parameter completionHandler: The block to invoke when the API call completes.
+        The block takes one argument: \
+        `media` \
+        The `WistiaMedia` for which stats were requested. `nil` if there was no match.
+
+    */
+    public func statsForMedia(mediaHashedID: String, completionHandler: (media: WistiaMedia?)->() ) {
+        let params:[String: AnyObject] = ["api_password" : apiToken]
+
+        Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/stats.json", parameters: params)
+            .responseJSON { (response) in
+                if let JSON = response.result.value as? [String: AnyObject],
+                    media = ModelBuilder.mediaFromHash(JSON) {
+                    completionHandler(media: media)
+
+                } else {
+                    completionHandler(media: nil)
+                }
+        }
+    }
+
 }

@@ -32,7 +32,7 @@ public struct WistiaMedia {
     public var thumbnail: (url: String, width: Int, height: Int)?
 
     /// Specifies the length (in seconds) for audio and video files. Specifies number of pages in the document. Omitted for other types of media.
-    public var duration: Float
+    public var duration: Float?
 
     /// The date when the media was originally uploaded.
     public var created: NSDate?
@@ -51,6 +51,10 @@ public struct WistiaMedia {
 
     /// The visual and behavioral customizations to apply to this media
     public var embedOptions: WistiaMediaEmbedOptions?
+
+    /// Aggregated tracking statistics for this video.
+    /// - Note: Must be specifically retrieved through `WistiaAPI.statsForMedia(::)`
+    public var stats: WistiaMediaStats?
 
     /**
      The URL serving the master index manifest for HLS streams.  This manifest includes references to all of the
