@@ -1,10 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'WistiaKit_Example', :exclusive => true do
+target 'WistiaKit_Example' do
   pod 'WistiaKit', :path => '../'
 end
 
-target 'WistiaKit_Tests', :exclusive => true do
+target 'WistiaKit_Tests' do
   pod 'WistiaKit', :path => '../'
 end
