@@ -271,8 +271,6 @@ internal extension WistiaPlayerViewController {
         //playbar (aka scrubber)
         scrubberTrackContainerView.alpha = (embedOptions.playbar ? 1.0 : 0.0)
 
-        //TODO: fullscreen
-
         //stillURL
         if let stillURL = embedOptions.stillURL {
             posterStillImage.hidden = false
