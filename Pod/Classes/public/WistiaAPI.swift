@@ -121,7 +121,7 @@ extension WistiaAPI {
 extension WistiaAPI {
 
     /**
-     List the projects in your accont.  
+     List the projects in your accont.
      
      See [Wistia Data API - Projects: List](http://wistia.com/doc/data-api#projects_list).
      
@@ -414,6 +414,7 @@ extension WistiaAPI {
         }
     }
 
+    // TODO: include filtering options
     /**
      List the media in your account.  Supports paging and filtering.
      

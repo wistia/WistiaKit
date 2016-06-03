@@ -22,7 +22,6 @@
 //     key "event_details" at the top level of the data sent to the event endpoint (overriding anything at they key
 //     if included in the eventMetadata)
 //
-//  TODO: Persist unsent events when we are terminated without the chance to send them.
 
 import UIKit
 import Alamofire

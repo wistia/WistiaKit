@@ -22,7 +22,6 @@ import CoreMotion
 
  - The Metal renderer doesn't update texture when scene isn't moving, causing video to look still while audio continues
  - FIX: Set Open GL renderer in Interface Builder
- - TODO: Investigate Metal renderer options
  - SKVideoNode mimics AVPlayerLayer w/r/t anchor (so video is centered on node's position)
  - FIX: Change the anchor to (0,0) to get video to fill entire SpriteKit scene
  - Size of video texture (ie. SKScene size) should match video itself to reduce up/down sampling
