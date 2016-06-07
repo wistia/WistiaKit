@@ -1,7 +1,7 @@
 # WistiaKit
 ![WistiaKit](/../assets/wistia_kit_stack_logo.png)
 
-The best way to play Wistia video on iPhone, iPad, and Apple TV.
+The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swift.
 
 [![CI Status](http://img.shields.io/travis/wistia/WistiaKit.svg?style=flat)](https://travis-ci.org/wistia/WistiaKit)
 [![Version](https://img.shields.io/cocoapods/v/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
