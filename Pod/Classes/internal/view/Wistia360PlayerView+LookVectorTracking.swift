@@ -25,8 +25,8 @@ import SceneKit
  *  2b)   Else (heading/pitch left the 5x5) if “look_settled == true”, log the (exit) event and set “look_settled = false"
  */
 internal extension Wistia360PlayerView {
-    typealias LatitudeLongitude = (latitude: Float, longitude: Float)
-    typealias HeadingPitch = (heading: Float, pitch: Float)
+    internal typealias LatitudeLongitude = (latitude: Float, longitude: Float)
+    internal typealias HeadingPitch = (heading: Float, pitch: Float)
 
     internal func startLookVectorTracking() {
         if lookVectorStatsTimer == nil {
