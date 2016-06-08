@@ -8,24 +8,28 @@
 
 //Until we support 360 on TV, just killing this entire thing
 #if os(iOS)
-
 import UIKit
 import AVFoundation
 import AlamofireImage
+#endif //os(iOS)
 
 //MARK: - Rotation
 //NB: The 360 view assumes and requires that it's always displayed Portrait.
 // The following code sets up then maintains portrait orientation for 360 player
 extension WistiaPlayerViewController {
+//Until we support 360 on TV, just killing this entire thing
+#if os(iOS)
 
-    override public func viewWillAppear(animated: Bool) {
+    /// Internal override.
+    override final public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         seekToStartIfAtEnd()
         needsManualLayoutFor360View = true
         self.delegate?.wistiaPlayerViewControllerViewWillAppear(self)
     }
 
-    override public func viewDidLayoutSubviews() {
+    /// Internal override.
+    override final public func viewDidLayoutSubviews() {
 
         if needsManualLayoutFor360View {
             needsManualLayoutFor360View = false
@@ -54,7 +58,8 @@ extension WistiaPlayerViewController {
         }
     }
 
-    override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    /// Internal override.
+    override final public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
         //update current progress for new size
@@ -98,10 +103,13 @@ extension WistiaPlayerViewController {
         }
     }
 
+#endif //os(iOS)
 }
 
 //MARK: - IB Actions
 internal extension WistiaPlayerViewController {
+//Until we support 360 on TV, just killing this entire thing
+#if os(iOS)
 
     @IBAction func posterPlayPressed(sender: AnyObject) {
         play()
@@ -160,12 +168,17 @@ internal extension WistiaPlayerViewController {
     @IBAction func playerContainerDoubleTapped(sender: UITapGestureRecognizer) {
         togglePlayPause()
     }
+
+#endif //os(iOS)
 }
 
 //MARK: - Wistia Player Delegate
 extension WistiaPlayerViewController: WistiaPlayerDelegate {
+//Until we support 360 on TV, just killing this entire thing
+#if os(iOS)
 
-    public func wistiaPlayer(player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State) {
+    /// Internal.
+    public final func wistiaPlayer(player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State) {
         switch newState {
         case .Initialized: fallthrough
         case .VideoPreLoading:
@@ -192,7 +205,8 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
         }
     }
 
-    public func wistiaPlayer(player:WistiaPlayer, didChangePlaybackRateTo newRate:Float) {
+    /// Internal.
+    public final func wistiaPlayer(player:WistiaPlayer, didChangePlaybackRateTo newRate:Float) {
 
         let playing = newRate > 0.0
         if playing {
@@ -201,14 +215,16 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
         presentPlayPauseButtonForPlaying(playing)
     }
 
-    public func wistiaPlayer(player: WistiaPlayer, didChangePlaybackProgressTo progress: Float, atCurrentTime currentTime: CMTime, ofDuration: CMTime) {
+    /// Internal.
+    public final func wistiaPlayer(player: WistiaPlayer, didChangePlaybackProgressTo progress: Float, atCurrentTime currentTime: CMTime, ofDuration: CMTime) {
         //playhead tracks user's finger when scrubbing
         if !scrubbing {
             presentForProgress(progress, currentTime: currentTime)
         }
     }
 
-    public func wistiaPlayerDidPlayToEndTime(player: WistiaPlayer) {
+    /// Internal.
+    public final func wistiaPlayerDidPlayToEndTime(player: WistiaPlayer) {
         switch (activeEmbedOptions.endVideoBehavior) {
         case .LoopVideo:
             self.wPlayer.seekToTime(CMTime(seconds: 0, preferredTimescale: 10), completionHandler: { (didSeek) in
@@ -225,7 +241,8 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
         }
     }
 
-    public func wistiaPlayer(player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
+    /// Internal.
+    public final func wistiaPlayer(player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
         if media.spherical {
             playing360 = true
             player360View.hidden = false
@@ -242,10 +259,14 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
 
         currentMediaEmbedOptions = media.embedOptions
     }
+
+#endif //os(iOS)
 }
 
 //MARK: - View Presentation
 internal extension WistiaPlayerViewController {
+//Until we support 360 on TV, just killing this entire thing
+#if os(iOS)
 
     internal func chooseActiveEmbedOptions() {
         if let overridingOptions = overridingEmbedOptions {
@@ -427,10 +448,13 @@ internal extension WistiaPlayerViewController {
         extraCloseButton.hidden = !showExtraClose
     }
 
+#endif //os(iOS)
 }
 
 //MARK: - Scrubbing
 internal extension WistiaPlayerViewController {
+//Until we support 360 on TV, just killing this entire thing
+#if os(iOS)
 
     @IBAction internal func handleScrubberTap(sender: UITapGestureRecognizer) {
         if let seekTo = seekTimeForScrubberTrackContainerLocation(sender.locationInView(scrubberTrackContainerView)) {
@@ -545,6 +569,5 @@ internal extension WistiaPlayerViewController {
 
     }
 
-}
-
 #endif //os(iOS)
+}
