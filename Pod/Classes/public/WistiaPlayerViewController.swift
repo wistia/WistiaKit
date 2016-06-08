@@ -16,7 +16,6 @@ import Foundation
  */
 public protocol WistiaPlayerViewControllerDelegate : class {
 //Until we support 360 on TV, just killing this entire thing
-#if os(iOS)
 
     /**
      The user has tapped the close button; you should dismiss the `WistiaPlayerViewController` at
@@ -58,7 +57,6 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      */
     func wistiaPlayerViewController(vc: WistiaPlayerViewController, activityViewControllerDidCompleteForMedia media:WistiaMedia, withActivityType activityType: String?, completed: Bool, activityError: NSError?)
 
-#endif
 }
 
 

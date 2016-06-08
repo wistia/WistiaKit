@@ -172,10 +172,10 @@ internal extension WistiaPlayerViewController {
 #endif //os(iOS)
 }
 
-//MARK: - Wistia Player Delegate
-extension WistiaPlayerViewController: WistiaPlayerDelegate {
 //Until we support 360 on TV, just killing this entire thing
 #if os(iOS)
+//MARK: - Wistia Player Delegate
+extension WistiaPlayerViewController: WistiaPlayerDelegate {
 
     /// Internal.
     public final func wistiaPlayer(player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State) {
@@ -260,8 +260,8 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
         currentMediaEmbedOptions = media.embedOptions
     }
 
-#endif //os(iOS)
 }
+#endif //os(iOS)
 
 //MARK: - View Presentation
 internal extension WistiaPlayerViewController {
