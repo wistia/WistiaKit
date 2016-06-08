@@ -497,7 +497,8 @@ public final class WistiaPlayer: NSObject {
     internal var playerContext = 2
     internal var periodicTimeObserver:AnyObject?
 
-    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    /// Calls super if the posted KVO isn't handled.  Declared `final` becuase overriding would cause incorrect behavior.
+    override final public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         _wkObserveValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
     }
 }
