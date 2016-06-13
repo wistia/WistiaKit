@@ -34,7 +34,7 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
         guard let distilleryURL = media.distilleryURL else { return nil }
 
         self.initTime = NSDate()
-        self.eventEndpoint = media.distilleryURL
+        self.eventEndpoint = distilleryURL
         self.media = media
         self.eventMetadata = [
             //TODO: Get this from a module versions file
