@@ -30,6 +30,9 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
     internal private(set) var eventMetadata = [String: AnyObject]()
 
     internal init?(media:WistiaMedia, referrer:String?){
+        //If we do not have a valid stats endpoint, don't collect events
+        guard let distilleryURL = media.distilleryURL else { return nil }
+
         self.initTime = NSDate()
         self.eventEndpoint = media.distilleryURL
         self.media = media
@@ -38,7 +41,7 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
             "sdk_version": "iOS,0.1",
             //on web, event_key is unique per media, per per player, per page, per page load
             "event_key": "\(self.dynamicType.guidPrefix())_\(NSUUID().UUIDString)",
-            "media_duration": String(media.duration),
+            "media_duration": String(media.duration != nil ? media.duration! : Float(0.0)),
             "visitor_version": "1",
             //constant for this viewer (unless and until they reset their device)
             "session_id": self.dynamicType.sessionID()]
@@ -53,11 +56,6 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
             //on iOS this should be a universal link to the point in the app where the video is played
             //but ultimately it's up to the developer
             eventMetadata["referrer"] = ref
-        }
-
-        //If we do not have a valid stats endpoint, don't collect events
-        if self.eventEndpoint.host == nil {
-            return nil
         }
     }
 
