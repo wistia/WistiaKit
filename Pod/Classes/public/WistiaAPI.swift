@@ -33,6 +33,7 @@ public class WistiaAPI {
     private static let APIBaseURL = "https://api.wistia.com/v1"
 
     private let apiToken: String
+    private let debuggingLevel: DebuggingLevel
 
     //MARK: - Initialization
 
@@ -41,7 +42,9 @@ public class WistiaAPI {
 
      - Parameter apiToken: The API Token that will be used to access the [Wistia Data API](http://wistia.com/doc/data-api).
      */
+    public init(apiToken:String, debuggingLevel: DebuggingLevel = .None) {
         self.apiToken = apiToken
+        self.debuggingLevel = debuggingLevel
     }
 
     //MARK: - Sorting
@@ -117,6 +120,11 @@ extension WistiaAPI {
                     
                     case .Failure(let error):
                         
+                        // Let the user know there is an issue.
+                        printErrorForDebuggingLevel(
+                            debuggingLevel: self.debuggingLevel,
+                            message: WistiaAccount.Error.InvalidAPIPassword.description,
+                            error: error)
                         
                         completionHander(account: nil)
                 }
@@ -160,6 +168,11 @@ extension WistiaAPI {
                             // We map each JSON to WistiaProject objects, and filter out any nil values
                             let projects = JSON.flatMap { ModelBuilder.projectFromHash($0) }
                             
+                            // Let the user know if a project is empty.  This isnt a bug per se, but if the user is expecting something and there are no projects, it a good opportunity to inform.
+                            if projects.isEmpty {
+                                printErrorForDebuggingLevel(debuggingLevel: self.debuggingLevel, message: WistiaProject.Error.NoProjects.description)
+                            }
+                            
                             // Hand over the array of parsed projects
                             completionHandler(projects: projects)
                             
@@ -167,6 +180,7 @@ extension WistiaAPI {
                         
                     case .Failure(let error):
                         
+                        printErrorForDebuggingLevel(debuggingLevel: self.debuggingLevel, message: WistiaProject.Error.HashedIdInvalid.description, error: error)
                         
                         completionHandler(projects: [])
                     }
