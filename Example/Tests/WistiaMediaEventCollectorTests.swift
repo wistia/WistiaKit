@@ -12,14 +12,14 @@ import XCTest
 class WistiaMediaEventCollectorTests: XCTestCase {
 
     func testInitializerReturnsNilWithoutDistilleryURL() {
-        let m = WistiaMedia(mediaID: nil, name: nil, status: .Ready, thumbnail: nil, duration: 33.33, created: nil, updated: nil, assets: [WistiaAsset](), description: nil, hashedID: "hash", embedOptions: nil, stats: nil, distilleryURLString: nil, accountKey: nil, mediaKey: nil, spherical: false, captions: nil)
+        let m = WistiaMedia(mediaID: nil, name: nil, status: .Ready, thumbnail: nil, duration: 33.33, created: nil, updated: nil, assets: [WistiaAsset](), description: nil, hashedID: "hash", embedOptions: nil, stats: nil, distilleryURLString: nil, accountKey: nil, mediaKey: nil, spherical: false)
 
         let collector = WistiaMediaEventCollector(media: m, referrer: "ref")
         XCTAssertNil(collector)
     }
 
     func testInitializesWithCorrectFormatting() {
-        let m = WistiaMedia(mediaID: nil, name: nil, status: .Ready, thumbnail: nil, duration: 33.33, created: nil, updated: nil, assets: [WistiaAsset](), description: nil, hashedID: "hash", embedOptions: nil, stats: nil, distilleryURLString: "http://wistia.net", accountKey: "AK", mediaKey: "MK", spherical: false, captions: nil)
+        let m = WistiaMedia(mediaID: nil, name: nil, status: .Ready, thumbnail: nil, duration: 33.33, created: nil, updated: nil, assets: [WistiaAsset](), description: nil, hashedID: "hash", embedOptions: nil, stats: nil, distilleryURLString: "http://wistia.net", accountKey: "AK", mediaKey: "MK", spherical: false)
 
         let collector = WistiaMediaEventCollector(media: m, referrer: "ref")
         XCTAssertEqual(collector?.eventMetadata["media_duration"] as? String, "33.33")

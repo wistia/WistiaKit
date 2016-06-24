@@ -245,8 +245,6 @@ public final class WistiaPlayerViewController: UIViewController {
         let wp = WistiaPlayer(referrer: self.referrer ?? "set_referrer_when_initializing_\(self.dynamicType)",
                               requireHLS: self.requireHLS)
         wp.delegate = self
-        wp.captionsRenderer.delegate = self
-        wp.captionsRenderer.captionsView = self.captionsLabel
         return wp
     }()
     internal var referrer:String?
@@ -263,6 +261,7 @@ public final class WistiaPlayerViewController: UIViewController {
             chooseActiveEmbedOptions()
         }
     }
+
 
     //MARK: Scrubbing
     internal var playerRateBeforeScrubbing:Float = 0.0
@@ -297,7 +296,6 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak internal var playbackControlsContainer: UIVisualEffectView!
     @IBOutlet weak internal var playbackControlsInnerContainer: UIVisualEffectView!
     @IBOutlet weak internal var controlsPlayPauseButton: UIButton!
-    @IBOutlet weak internal var controlsCaptionsButton: UIButton!
     @IBOutlet weak internal var controlsActionButton: UIButton!
     @IBOutlet weak internal var controlsCloseButton: UIButton!
     @IBOutlet weak internal var scrubberTrackContainerView: UIView!
@@ -307,10 +305,6 @@ public final class WistiaPlayerViewController: UIViewController {
     internal var chromeInteractionTimer:NSTimer?
 
     @IBOutlet weak internal var extraCloseButton: UIButton!
-
-    //MARK: IB Outlets: Captions
-    @IBOutlet weak internal var captionsLabel: UILabel!
-    @IBOutlet weak internal var captionsLanguagePickerView: UIPickerView!
 
     //MARK: UIViewController Overrides
 

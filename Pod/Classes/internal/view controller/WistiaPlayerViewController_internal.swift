@@ -122,11 +122,6 @@ internal extension WistiaPlayerViewController {
         startOrResetChromeInteractionTimer()
     }
 
-    @IBAction func controlsCaptionsPressed(sender: AnyObject) {
-        startOrResetChromeInteractionTimer()
-        toggleCaptionsChooserVisibility()
-    }
-
     @IBAction func controlsActionPressed(sender: UIButton) {
         self.storePlayerRateAndPause()
         if let media = wPlayer.media {
@@ -268,18 +263,6 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
 }
 #endif //os(iOS)
 
-//MARK: - Wistia Captions Renderer Delegate
-extension WistiaPlayerViewController: WistiaCaptionsRendererDelegate {
-
-    public func captionsRenderer(renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable: [String]) {
-        //UIPicker not supported on TV.  Captions should be done natively, anyway.
-        #if os(iOS)
-        captionsLanguagePickerView.reloadAllComponents()
-        #endif //os(iOS)
-    }
-
-}
-
 //MARK: - View Presentation
 internal extension WistiaPlayerViewController {
 //Until we support 360 on TV, just killing this entire thing
@@ -299,7 +282,6 @@ internal extension WistiaPlayerViewController {
         //playerColor
         controlsPlayPauseButton.backgroundColor = embedOptions.playerColor
         scrubberTrackContainerView.backgroundColor = embedOptions.playerColor
-        controlsCaptionsButton.backgroundColor = embedOptions.playerColor
         controlsActionButton.backgroundColor = embedOptions.playerColor
         controlsCloseButton.backgroundColor = embedOptions.playerColor
         posterPlayButton.backgroundColor = embedOptions.playerColor
@@ -318,9 +300,8 @@ internal extension WistiaPlayerViewController {
             posterStillImage.hidden = true
         }
 
-        //optional controls buttons
+        //actionButton
         controlsActionButton.hidden = !embedOptions.actionButton
-        controlsCaptionsButton.hidden = !embedOptions.captionsAvailable
 
         //The following are implemented dynamically:
         // * bigPlayButton (see presentForFirstPlayback())
@@ -390,7 +371,6 @@ internal extension WistiaPlayerViewController {
             } else {
                 self.playbackControlsContainer.effect = nil
                 self.playbackControlsInnerContainer.effect = nil
-                self.hideCaptionsChooser()
             }
             }) { (finished) -> Void in
                 self.showStatusBar = showChrome
@@ -578,6 +558,7 @@ internal extension WistiaPlayerViewController {
         }
     }
 
+
     internal func seekToStartIfAtEnd(tolerance: CMTime = CMTime(seconds: 0.1, preferredTimescale: 10)) {
         let currentTime = wPlayer.currentTime()
         if let duration = wPlayer.currentItem?.duration {
@@ -590,70 +571,3 @@ internal extension WistiaPlayerViewController {
 
 #endif //os(iOS)
 }
-
-//UIPicker not supported on TV.  Captions should be done natively, anyway.
-#if os(iOS)
-//MARK: - Captions Chooser
-extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSource {
-
-    func showCaptionsChooser() {
-        captionsLanguagePickerView.hidden = false
-        cancelChromeInteractionTimer()
-    }
-
-    func hideCaptionsChooser() {
-        captionsLanguagePickerView.hidden = true
-        startOrResetChromeInteractionTimer()
-    }
-
-    func toggleCaptionsChooserVisibility() {
-        if captionsLanguagePickerView.hidden {
-            showCaptionsChooser()
-        } else {
-            hideCaptionsChooser()
-        }
-    }
-
-    public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if row == 0 {
-            wPlayer.captionsRenderer.enabled = false
-        } else {
-            wPlayer.captionsRenderer.enabled = true
-            wPlayer.captionsRenderer.captionsLanguageCode = wPlayer.captionsRenderer.captionsLanguagesAvailable[row-1]
-        }
-        hideCaptionsChooser()
-    }
-
-    //delegate
-    public func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 30
-    }
-
-    public func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return 100
-    }
-
-    public func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let title:String
-        if row == 0 {
-            title = "off"
-        } else {
-            title = wPlayer.captionsRenderer.captionsLanguagesAvailable[row-1]
-        }
-
-        return NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-    }
-
-    //data source
-
-    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return wPlayer.captionsRenderer.captionsLanguagesAvailable.count + 1
-    }
-
-
-}
-#endif //os(iOS)
