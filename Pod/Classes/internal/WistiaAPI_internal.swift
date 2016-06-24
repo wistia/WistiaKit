@@ -29,7 +29,7 @@ internal extension WistiaAPI {
                         completionHandler(captions: captions)
                     }
 
-                case .Failure(let error):
+                case .Failure:
                     //TODO: Incorporate error handling from public API
                     completionHandler(captions: [WistiaCaptions]())
                 }
