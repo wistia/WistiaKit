@@ -436,7 +436,9 @@ public final class WistiaPlayer: NSObject {
         case VideoReadyForPlayback
     }
 
-    //MARK: - Displaying Video
+    //MARK: -
+
+    //MARK: Displaying Video
 
     /**
      Create a new `AVPlayerLayer` configured for this instance of `WistiaPlayer`.  This will remove
@@ -462,6 +464,20 @@ public final class WistiaPlayer: NSObject {
         vc.player = self.avPlayer
     }
 
+    //MARK: Displaying Captions
+
+    /**
+     The `WistiaCaptionsRenderer` configured for this instance of `WistiaPlayer`.  Connect that
+     object's `captionsView` and set `enabled` to `true` to begin displaying captions.
+     
+     A `WistiaCaptionsRenderer` will continue to work for the `WistiaPlayer` that vended it, even when the
+     video being played is changed.
+     
+     - Important: `WistiaPlayerViewController` handles captions (using a renderer vended by this function) by default.
+     No additional work is needed on your part, but the video must have captions and they must be enabled in the
+     video's customizations.
+    */
+    let captionsRenderer = WistiaCaptionsRenderer()
 
     //MARK: - Internal
 
@@ -483,7 +499,11 @@ public final class WistiaPlayer: NSObject {
     }
     internal var avPlayer:AVPlayer
 
-    internal var media:WistiaMedia?
+    internal var media:WistiaMedia? {
+        didSet {
+            captionsRenderer.media = media
+        }
+    }
     internal var statsCollector:WistiaMediaEventCollector?
     internal let referrer:String
 

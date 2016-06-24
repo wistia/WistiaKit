@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -7,7 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WistiaPlayerViewController" customModule="WistiaKit" customModuleProvider="target">
             <connections>
+                <outlet property="captionsLabel" destination="Bg2-Fz-eJ0" id="VaM-hx-CB3"/>
+                <outlet property="captionsLanguagePickerView" destination="jpw-n2-nW7" id="qT1-cK-bVt"/>
                 <outlet property="controlsActionButton" destination="l9Y-rG-pln" id="dGE-of-0WN"/>
+                <outlet property="controlsCaptionsButton" destination="nZL-yc-o0z" id="ZFC-A0-EAn"/>
                 <outlet property="controlsCloseButton" destination="HdA-x0-aCn" id="dhJ-qu-us1"/>
                 <outlet property="controlsPlayPauseButton" destination="sqf-SN-EOA" id="mJ0-Dy-FXO"/>
                 <outlet property="extraCloseButton" destination="xLH-gl-vos" id="gfT-7i-Bud"/>
@@ -102,6 +105,27 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBy-7d-odP" userLabel="Overlay Container">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Captions Go Here!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bg2-Fz-eJ0" userLabel="Captions Label" customClass="CaptionsLabel" customModule="WistiaKit" customModuleProvider="target">
+                            <rect key="frame" x="231" y="528" width="138.5" height="19.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="leftEdgeInset">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="rightEdgeInset">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="topEdgeInset">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="bottomEdgeInset">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WIg-R7-qh3" userLabel="Playback Controls Visual Effect View">
                             <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                             <view key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="gdY-in-cWT">
@@ -120,7 +144,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqf-SN-EOA" userLabel="Toggle Play Pause Button">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="3BG-5A-yOW"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="60" identifier="play pause width" id="3BG-5A-yOW"/>
                                                             </constraints>
                                                             <state key="normal" image="smallPlay"/>
                                                             <connections>
@@ -128,7 +152,7 @@
                                                             </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2t-fG-lfU" userLabel="Scrubber Track Container View">
-                                                            <rect key="frame" x="60" y="0.0" width="420" height="44"/>
+                                                            <rect key="frame" x="60" y="0.0" width="360" height="44"/>
                                                             <subviews>
                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhK-r1-66L" userLabel="Scrubber Current Progress">
                                                                     <rect key="frame" x="0.0" y="0.0" width="167" height="44"/>
@@ -162,10 +186,21 @@
                                                                 <outletCollection property="gestureRecognizers" destination="Eab-2n-9li" appends="YES" id="Aeb-Om-XAo"/>
                                                             </connections>
                                                         </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZL-yc-o0z" userLabel="Captions Button">
+                                                            <rect key="frame" x="420" y="0.0" width="60" height="44"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" priority="999" constant="60" identifier="captions width" id="poy-Mj-dfp"/>
+                                                            </constraints>
+                                                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                            <state key="normal" image="closedCaptions"/>
+                                                            <connections>
+                                                                <action selector="controlsCaptionsPressed:" destination="-1" eventType="touchUpInside" id="Pti-eF-B31"/>
+                                                            </connections>
+                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9Y-rG-pln" userLabel="Action Button">
                                                             <rect key="frame" x="480" y="0.0" width="60" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="ngd-Te-6OY"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="60" identifier="action width" id="ngd-Te-6OY"/>
                                                             </constraints>
                                                             <state key="normal" image="action"/>
                                                             <connections>
@@ -175,7 +210,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdA-x0-aCn" userLabel="Close Button">
                                                             <rect key="frame" x="540" y="0.0" width="60" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="tLK-I2-kZL"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="60" identifier="close width" id="tLK-I2-kZL"/>
                                                             </constraints>
                                                             <state key="normal" image="x-close"/>
                                                             <connections>
@@ -275,6 +310,18 @@
                                 <action selector="controlsClosePressed:" destination="-1" eventType="touchUpInside" id="CLe-JT-IDo"/>
                             </connections>
                         </button>
+                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpw-n2-nW7">
+                            <rect key="frame" x="420" y="448" width="100" height="100"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="SJ5-HG-yP0"/>
+                                <constraint firstAttribute="width" constant="100" id="iYq-QD-zEY"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="cQr-vc-a1e"/>
+                                <outlet property="delegate" destination="-1" id="ZDi-ip-lPq"/>
+                            </connections>
+                        </pickerView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
@@ -283,10 +330,14 @@
                         <constraint firstItem="1gl-Xk-GqW" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="EYk-hf-6ws"/>
                         <constraint firstItem="WIg-R7-qh3" firstAttribute="leading" secondItem="lBy-7d-odP" secondAttribute="leading" id="FyQ-tF-Tmd"/>
                         <constraint firstAttribute="bottom" secondItem="xLH-gl-vos" secondAttribute="bottom" id="L8z-gi-kUq"/>
+                        <constraint firstItem="WIg-R7-qh3" firstAttribute="top" secondItem="Bg2-Fz-eJ0" secondAttribute="bottom" constant="8" symbolic="YES" id="PaK-eV-AWK"/>
                         <constraint firstAttribute="bottom" secondItem="WIg-R7-qh3" secondAttribute="bottom" id="Q40-Wh-zvj"/>
                         <constraint firstItem="1gl-Xk-GqW" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="RJE-7q-GTi"/>
                         <constraint firstItem="22B-T6-9B2" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="SD0-Lj-X9Q"/>
+                        <constraint firstItem="xLH-gl-vos" firstAttribute="top" secondItem="jpw-n2-nW7" secondAttribute="bottom" constant="8" symbolic="YES" id="TvT-uI-q4n"/>
                         <constraint firstItem="eLB-Ll-7u3" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="U95-d7-gE0"/>
+                        <constraint firstItem="Bg2-Fz-eJ0" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="UmA-xd-gPh"/>
+                        <constraint firstItem="jpw-n2-nW7" firstAttribute="leading" secondItem="nZL-yc-o0z" secondAttribute="leading" id="VO4-0e-ReV"/>
                         <constraint firstItem="eLB-Ll-7u3" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="Vjg-UH-5Ej"/>
                         <constraint firstAttribute="trailing" secondItem="xLH-gl-vos" secondAttribute="trailing" id="Xl0-xV-AjY"/>
                         <constraint firstItem="22B-T6-9B2" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="wkZ-Cf-4Wl"/>
@@ -365,6 +416,7 @@
     </objects>
     <resources>
         <image name="action" width="25" height="25"/>
+        <image name="closedCaptions" width="181" height="144"/>
         <image name="largePlay" width="36" height="52"/>
         <image name="skullNBones" width="30" height="32"/>
         <image name="smallPlay" width="15" height="21"/>

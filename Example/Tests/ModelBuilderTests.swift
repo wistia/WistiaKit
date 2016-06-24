@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import WistiaKit
+@testable import WistiaKit
 
 class ModelBuilderTests: XCTestCase {
 
@@ -34,6 +34,20 @@ class ModelBuilderTests: XCTestCase {
 
         wAPI.showMedia("aza8hcsnd8") { (media) in
             if media?.created != nil && media?.updated != nil {
+                expectation.fulfill()
+            }
+        }
+
+        waitForExpectationsWithTimeout(3, handler: nil)
+    }
+
+    //MARK: - Captions
+
+    func testValidCaptions() {
+        let expectation = expectationWithDescription("captions are parsed")
+
+        WistiaAPI._captionsForHash("8tjg8ftj2p") { (captions) in
+            if captions.count > 0 && captions[0].captionSegments.count > 0 {
                 expectation.fulfill()
             }
         }
