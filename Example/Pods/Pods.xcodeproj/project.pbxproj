@@ -9,80 +9,81 @@
 /* Begin PBXBuildFile section */
 		0225BB2868831C7F57DF0057B6484900 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E62C64642925AB080E3E1391EFD2C179 /* AdSupport.framework */; };
 		06C256627A96A2A814E6BDC6FB104A4B /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE395757CDFC797405D056EA15FE55B /* AVKit.framework */; };
+		06E5D2039C1822002A46AAB457CB0D2A /* WistiaMediaEventCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A841068042CC455742126154A3B99F6 /* WistiaMediaEventCollector.swift */; };
 		095406039B4D371E48D08B38A2975AC8 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725213121FEC12F519BF19475C52042 /* Error.swift */; };
-		10377DC4C3E776A73D7EC8411422B59C /* WistiaAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE22CC58952757FD84141DE145ED9FC /* WistiaAsset.swift */; };
 		11D1C30F956A0B9D5010E9E164975DF8 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF004F964BB7DABD23CD37E5CA978D /* Image.swift */; };
-		12F930A1DAB359E3B18D2D6D110D1E49 /* SCNVector3Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962767B00AE60552CE750FC0621A5EFE /* SCNVector3Extensions.swift */; };
-		13043939B0CCDF4F98FD0164200881BA /* Wistia360PlayerView+LookVectorTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA0588D2D8C15FE1B0043B32639C9C2 /* Wistia360PlayerView+LookVectorTracking.swift */; };
 		16102E4E35FAA0FC4161282FECE56469 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBBE1DBE80C8043D1AACFF35388DE8C /* Timeline.swift */; };
 		173F1D294E3BA40503404C15F6699D7D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9833A6F2889EEA6E2A252E753E167DB7 /* Alamofire.framework */; };
-		207BFDD693A16DCE07F5D6D9E4D62512 /* Wistia360PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C289C3429FED2482A7BA4E9D2DCCC1 /* Wistia360PlayerView.swift */; };
-		284F52EBBFEF44CEBE525AEED901BD7F /* WistiaPlayer_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354B10EA1D3339B4016BE7CB3C5BB8DC /* WistiaPlayer_internal.swift */; };
-		28DADBFEEC2364E5057A9BA2236F7AF6 /* WistiaProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F9A64BC941C0ED4B78C460B23274C /* WistiaProject.swift */; };
+		1D3D2817A9DFD32E003B6EBFD52348F0 /* WistiaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FECFF69ADEAB2BD4A2A349E6121B31E /* WistiaPlayerViewController.swift */; };
+		1F0CF85AEE3FE79C2C603F208E01CDC3 /* UINavigationControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6738CC5F70176049CD0EC7CA9FAFEF7 /* UINavigationControllerExtensions.swift */; };
+		2B495A6388584064D8129503A38380B7 /* Wistia360PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E9E211A349E5F343355C4FE5F96030 /* Wistia360PlayerView.swift */; };
+		2C6ADF931212ECA7830886DCF007BA25 /* WistiaPlayer_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0AC81E0719A6250B3E917F5A1DC50 /* WistiaPlayer_internal.swift */; };
 		2D3405986FC586FA6C0A5E0B6BA7E64E /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000FE400CCE7F9E913DA8C8C46677610 /* Validation.swift */; };
-		3123B5639F257FE9B11664DC496A4206 /* WistiaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FECFF69ADEAB2BD4A2A349E6121B31E /* WistiaPlayerViewController.swift */; };
+		2E3609475CE07FE2EA818D4D65B94927 /* WistiaAPI_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A08758282F466A36C0C08161D81057 /* WistiaAPI_internal.swift */; };
 		34CCDCA848A701466256BC2927DA8856 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12F90872EA732E2762D108D5F0D0CA9 /* NetworkReachabilityManager.swift */; };
-		36C6D125CBE15C785083A2CE2B7DBFC2 /* WistiaKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 065B9F5459D4B1D85130851F3B8865A2 /* WistiaKit-dummy.m */; };
-		3C4F511FDBCD06BAC449F6C466E49C81 /* WistiaAPI_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FB08AAD2E180F207ACCB9585EEDD38 /* WistiaAPI_internal.swift */; };
-		3DD156B3F2AEA44467BBD41AA06585A2 /* WistiaStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19698C361DF2B5A7BB6EC61EF68004A1 /* WistiaStatsManager.swift */; };
 		3E201DAA26772146376918572B73502A /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A55AF822A1D049EB8FC54B82E51B5B5 /* AlamofireImage.framework */; };
 		3EA37E67C1BD7A8C3A6FE455A445DE21 /* WistiaKitAssetCatalog.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA3C52D55190993C0E7ACAD2BB188CDA /* WistiaKitAssetCatalog.xcassets */; };
 		3EA8F215C9C1432D74E5CCA4834AA8C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207B6A1EED33AB5585A574103334B8CD /* ResponseSerialization.swift */; };
 		3FBA01F04B8DD5DE765957F40C752B59 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3291230C4FFBED4021914428C63AD3C7 /* AVFoundation.framework */; };
 		4081EA628AF0B73AC51FFB9D7AB3B89E /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C353EF8CECF13CB746532E7CCF3D354C /* Manager.swift */; };
-		4335F02662A31D62BF1667D512E63705 /* WistiaMediaStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DCC387E990F21D0C033C16452E55A2 /* WistiaMediaStats.swift */; };
+		4398EA6AAA4CF01B0E908DC2D2203469 /* SCNVector3Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB36E1485E2F88E6E7AB12935E0EBCF /* SCNVector3Extensions.swift */; };
 		44D0FF87F8A99E3D32047169E247A8DC /* UIImage+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BEE7460BDCDB9D08B36B345F8E297F /* UIImage+AlamofireImage.swift */; };
 		483847789FF2B9D24CC6EF897ABF12FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA19C340E23F63D20A46573C707C3414 /* Foundation.framework */; };
+		4BD35DDBED6ECCB01A54E16FABB975B4 /* CaptionsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D454E2430A989033896253F78F72E6B /* CaptionsLabel.swift */; };
 		4C8EC0D7CFD43C54BA66AAAB8E2424AC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3B19DD6781BCC059E5EFCEDA925A14 /* UIKit.framework */; };
-		4F25E20460570096C8521C27D898EEE6 /* WistiaPlayerViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = D2418D17D83D9056212FE2E8D64652FD /* WistiaPlayerViewController.xib */; };
 		51C7B03FC104B84744C83B8F4787279D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD13F9498961CBAA32075869F79A1CEF /* ImageCache.swift */; };
-		5A0308FA3F43B332A9E37E55CB28FA29 /* WistiaCaptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB4A036DB99C170399BD42A0CBEDDA4 /* WistiaCaptions.swift */; };
 		5BC19E6E0F199276003F0AF96838BCE5 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFDE69441C3DCB515C7CD4545124C6F /* Upload.swift */; };
 		5CB05FBCB32D21E194B5ECF680CB6AE0 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = E552F0515070FE3ADD1C30FAF7AE5CB1 /* Download.swift */; };
+		6086B10A8DE63283B3215945F2962CF2 /* WistiaMediaStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DCC387E990F21D0C033C16452E55A2 /* WistiaMediaStats.swift */; };
 		6114BDF9B03567B9E788F2C7FC26D55D /* Pods-WistiaKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 43BA3067FB4C1D9ABB79D440E6AE35FC /* Pods-WistiaKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62E8346F03C03E7F4D631361F325689E /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDACAD1D8B293EDE9515FA531593649A /* Response.swift */; };
 		659154EFAB24807AEC847F09F54F3961 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0675D841D8C298DC32B04D1565222FBA /* SpriteKit.framework */; };
 		66E9E6FE8E117D8603C88951B569C866 /* Request+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB21497F843DA83273C5AAA8ADAA81A /* Request+AlamofireImage.swift */; };
-		6B6566014A1D01A59A085F4A8717902C /* WistiaObjectStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E29F14A15D228472EA885C6DCE039 /* WistiaObjectStatus.swift */; };
-		75ABDB23353ABD9BE1C37C0D4CFA2A47 /* WistiaMediaEmbedOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD4987B7BBDD3BB6E2B863631A3AC1F /* WistiaMediaEmbedOptions.swift */; };
+		6E3A8CFB8FFE44AF2B01B17729961F1D /* WistiaCaptionsRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6941EF2F7A3C10F3C3A140EF6F0CADEE /* WistiaCaptionsRenderer.swift */; };
 		78C81844E7B8B2EEA16321296D8D3497 /* AlamofireImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BB22AE5939252512ED61EC60C35A96F9 /* AlamofireImage-dummy.m */; };
 		7B48852C4D848FA2DA416A98F6425869 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15336EBB4828410FB080381877C1CBB9 /* ServerTrustPolicy.swift */; };
+		7C0C216570764A7C013DB4AB6DDC7E33 /* WistiaStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C2850447B052B0749E8C16AF22C8CC /* WistiaStatsManager.swift */; };
+		7FEF8BF5FE93448466C55E0509550321 /* ModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571684A8AEE0D1C07DC07E315FFFFD04 /* ModelBuilder.swift */; };
 		80CAA5CE880541B781DFC0A305FB8B01 /* ImageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417B248840CF4160944B057C5A58E185 /* ImageFilter.swift */; };
-		822880CD131CF4C0FAA4BBAF30A938F6 /* WistiaCaptionsRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6941EF2F7A3C10F3C3A140EF6F0CADEE /* WistiaCaptionsRenderer.swift */; };
+		825FC655E8733C9E78FF791F206BAC02 /* WistiaPlayerViewController_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55651B28CA40EFB9C7F588D0698EBD8B /* WistiaPlayerViewController_internal.swift */; };
 		828B3E5CC7BA6589282F69348E077D22 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA19C340E23F63D20A46573C707C3414 /* Foundation.framework */; };
-		8C6761053D38E95541672C467268A574 /* WistiaPlayerViewController_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C863B38C4353AF7442F44498158E81 /* WistiaPlayerViewController_internal.swift */; };
+		85C922022B2A78305398051B1F15742B /* WistiaMediaEmbedOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD4987B7BBDD3BB6E2B863631A3AC1F /* WistiaMediaEmbedOptions.swift */; };
+		88DAC5F0F55CBED25CC0904923A5E1C5 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB86C0B8A49C9FF33ED99B62FC977C /* UIColorExtensions.swift */; };
 		8EB11202167FCDDF1257AAAB1D1FB244 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D402C965854A55E24EDC621B87371CA4 /* Alamofire.swift */; };
-		909ECFBE7C512A9BE595E55AEB27E763 /* WistiaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8648E57E89959FEDAAF4E1B1ED76C9F8 /* WistiaAccount.swift */; };
 		91C09AC2A52ED69A27C8D923139A006F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA19C340E23F63D20A46573C707C3414 /* Foundation.framework */; };
 		91F023CB33CC22BA4CC841AE468163A9 /* AlamofireImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD1266FABDB60FB77700D23188219C0 /* AlamofireImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9212E43DBFBC4CE48886D8067B810219 /* WistiaCaptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF722C6A532A503CA0B34B5EB6CDEB /* WistiaCaptions.swift */; };
 		9469DF81ECB494E84675969B5E13374C /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A9159A8F978A7E38B31D2FB9C38A59AE /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A38C4A2217366202C476460E7003F889 /* WistiaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E713F35FBDB2332E3EDFB3560E1E93 /* WistiaAPI.swift */; };
+		A72E4D0F268B56E0989A38BBC707932E /* WistiaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E713F35FBDB2332E3EDFB3560E1E93 /* WistiaAPI.swift */; };
+		A88AF498AE5CD38067D2E0BD418029F3 /* WistiaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8648E57E89959FEDAAF4E1B1ED76C9F8 /* WistiaAccount.swift */; };
 		AA314156AC500125F4078EE968DB14C6 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA12CFBEFA8665E06FDC738B3A99B7C /* Result.swift */; };
-		AD81BCBA8DAC9AE97DF0201297F6E541 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B04384B30B64ABF0DDD08CACF41FB3 /* UIColorExtensions.swift */; };
+		AB7478EC23D8FBB8047B503C3B3C7D04 /* WistiaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD62E094787549052155AB8DAC80843 /* WistiaPlayer.swift */; };
 		ADF19C953CE2A7D0B72EC93A81FCCC26 /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A575D9E4EE4D989CA93A184B09FF1 /* Alamofire-dummy.m */; };
 		AE4CF87C02C042DF13ED5B21C4FDC1E0 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D61970B6BFA1B5006B0A5CEBB4EED0F /* Stream.swift */; };
 		AFB62E073F1070F28D0F0E966EC44E50 /* UIImageView+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5476B5FCAC222E57B10369808678FC /* UIImageView+AlamofireImage.swift */; };
 		B2F921BA8A6F66F35C8A2B77B8DF5B48 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0364FE690EBE64B8F544F945ED7F212 /* ImageDownloader.swift */; };
 		B3B5C9E288F3CB23AE7698C3EAABA83E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E482138DF80371192085A2EFB90EB64B /* CoreMotion.framework */; };
-		B5D0F7B05352ACD11CAED9564D58FDE7 /* WistiaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD62E094787549052155AB8DAC80843 /* WistiaPlayer.swift */; };
+		B4310F8E4E0BF51A4C823F2BE1821E73 /* WistiaKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 065B9F5459D4B1D85130851F3B8865A2 /* WistiaKit-dummy.m */; };
+		B94C9F1F788D71A4BE8CB4802B5FB7B4 /* WistiaProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F9A64BC941C0ED4B78C460B23274C /* WistiaProject.swift */; };
 		BC470EB04DF3413031D660349B2FF7BC /* Pods-WistiaKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 49DAB5A3EA3FC4027A4F5C2DA72F5023 /* Pods-WistiaKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE41196F6A3903E59C3306FE3F8B43FE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353D5E2DF197EE796415B70DD58DF845 /* Notifications.swift */; };
 		BEAAA1F21C074D12000C87F5E87C49FF /* WistiaKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3771B4E0F5FCDA99AD3408200C33B17F /* WistiaKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0DB70AB368765DC64BFB5FEA75E0696 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89DBE304DB2033CDF99CF9A23354D04 /* ParameterEncoding.swift */; };
 		C0E35536E3E52121DA24573C847B6AE5 /* Pods-WistiaKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 407F047EBEF9ACEC944A3A07C925E20C /* Pods-WistiaKit_Tests-dummy.m */; };
 		C7B6DD7C0456C50289A2C381DFE9FA3F /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B4F32C4D92F1ACC0215E05EBEC2B6 /* MultipartFormData.swift */; };
-		CC255976B7D4CABFA2D3294363241B86 /* UINavigationControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAF55544F5AF8498E791F1D25D05294 /* UINavigationControllerExtensions.swift */; };
-		D7EFA0ACBDA7FDA9294AC3929FA331E8 /* ModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D638BA3034F38A4A473A6F2EBA37BD /* ModelBuilder.swift */; };
-		E26E1AF2074EC62EB30731BE752CF8B2 /* WistiaMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE99304725DAEB790B1978A476B6F0F2 /* WistiaMedia.swift */; };
-		E54187728D56754DDD6114329C8E7148 /* WistiaMediaEventCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E737DB004D4108123069D8ADE1AB88CC /* WistiaMediaEventCollector.swift */; };
+		CDA5F4F105CFBCC69F46441826532F55 /* WistiaMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE99304725DAEB790B1978A476B6F0F2 /* WistiaMedia.swift */; };
+		CF829391970DA8E83AD03A419C69E6E4 /* WistiaFlatPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE632F369DFB99701DAA28BDF7CB4C52 /* WistiaFlatPlayerView.swift */; };
+		D857E81FD68EA75A7F22EF36CEA73F28 /* WistiaPlayerViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 45637FE14A99C4DED822FD0B97E186F9 /* WistiaPlayerViewController.xib */; };
+		E001FFF1F81B1DEB78D8E805072E0D2E /* Wistia360PlayerView+LookVectorTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5DF6C74E22959EF34E86583D55CAE3 /* Wistia360PlayerView+LookVectorTracking.swift */; };
+		E80BFC713AC55D684EB74852DDF05552 /* WistiaAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE22CC58952757FD84141DE145ED9FC /* WistiaAsset.swift */; };
 		EAF52C7D4FFFA47D2BB872204614842A /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679C054F4C1911A3CE62B1350412AB2F /* SceneKit.framework */; };
 		EB7D1260D31A6F49E3E273CE870AA3DD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9833A6F2889EEA6E2A252E753E167DB7 /* Alamofire.framework */; };
 		EF48B357A3158B57C78F8D28326748C9 /* UIButton+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F94C03FAD5C92CEFEAE876C6829F0D /* UIButton+AlamofireImage.swift */; };
 		EFE92E8D3813DD26E78E93EEAF6D7E7E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA2A923BC7631394FD3CEEBDE8D0B13 /* Request.swift */; };
-		F1334CE6F1781A653A034A5B583042A0 /* WistiaFlatPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB7BF4669FB0B4EA45E88A7F5925C /* WistiaFlatPlayerView.swift */; };
 		F47BC9C21C30DCA6E77E0948E7C38139 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA19C340E23F63D20A46573C707C3414 /* Foundation.framework */; };
 		F4F91D7744BC3674AF1663FD14187660 /* Pods-WistiaKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F253358F2CF5E56B33EC4A53BAFD35 /* Pods-WistiaKit_Example-dummy.m */; };
 		FAA1017FCE0F8B1C6E6BACCCD05B4A6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA19C340E23F63D20A46573C707C3414 /* Foundation.framework */; };
+		FE6C8A61426385C79DA9AA9CDF530E70 /* WistiaObjectStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E29F14A15D228472EA885C6DCE039 /* WistiaObjectStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,18 +157,16 @@
 		03E713F35FBDB2332E3EDFB3560E1E93 /* WistiaAPI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaAPI.swift; sourceTree = "<group>"; };
 		065B9F5459D4B1D85130851F3B8865A2 /* WistiaKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WistiaKit-dummy.m"; sourceTree = "<group>"; };
 		0675D841D8C298DC32B04D1565222FBA /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/SpriteKit.framework; sourceTree = DEVELOPER_DIR; };
-		0DB4A036DB99C170399BD42A0CBEDDA4 /* WistiaCaptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaCaptions.swift; sourceTree = "<group>"; };
 		1102B05F3882D0B7B0EEA23AA2EDDDBD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		11DCB7BF4669FB0B4EA45E88A7F5925C /* WistiaFlatPlayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaFlatPlayerView.swift; sourceTree = "<group>"; };
 		134FEA47AE968B7A8CB7A24D5E44852E /* Pods_WistiaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WistiaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		15336EBB4828410FB080381877C1CBB9 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		157689B5247A0B5E1ED5F4029627BBB8 /* Pods-WistiaKit_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Example-resources.sh"; sourceTree = "<group>"; };
 		16F5BC36BD86D2E6C1BFD17C67E48FDC /* AlamofireImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AlamofireImage-prefix.pch"; sourceTree = "<group>"; };
 		178377ADB996DB4290A6CF1550CD916D /* Pods-WistiaKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WistiaKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		18DCC387E990F21D0C033C16452E55A2 /* WistiaMediaStats.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaMediaStats.swift; sourceTree = "<group>"; };
-		19698C361DF2B5A7BB6EC61EF68004A1 /* WistiaStatsManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaStatsManager.swift; sourceTree = "<group>"; };
 		19BA30340E5CBC4882E85BD1F29E2D8E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BF73D4CA7FD9020885A907609C8D8F7 /* WistiaKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WistiaKit-prefix.pch"; sourceTree = "<group>"; };
+		1D454E2430A989033896253F78F72E6B /* CaptionsLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CaptionsLabel.swift; sourceTree = "<group>"; };
 		1E3B19DD6781BCC059E5EFCEDA925A14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		1F1A575D9E4EE4D989CA93A184B09FF1 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		207B6A1EED33AB5585A574103334B8CD /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
@@ -175,38 +174,41 @@
 		22833EA8BF539CB47F20DBA7266DFE69 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25DBB6650245E6EA626D9B0894CEDC76 /* WistiaKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WistiaKit.xcconfig; sourceTree = "<group>"; };
 		28F253358F2CF5E56B33EC4A53BAFD35 /* Pods-WistiaKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WistiaKit_Example-dummy.m"; sourceTree = "<group>"; };
-		2AA0588D2D8C15FE1B0043B32639C9C2 /* Wistia360PlayerView+LookVectorTracking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Wistia360PlayerView+LookVectorTracking.swift"; sourceTree = "<group>"; };
 		2E2B4F32C4D92F1ACC0215E05EBEC2B6 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
 		2E5476B5FCAC222E57B10369808678FC /* UIImageView+AlamofireImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImageView+AlamofireImage.swift"; path = "Source/UIImageView+AlamofireImage.swift"; sourceTree = "<group>"; };
 		2EFDE69441C3DCB515C7CD4545124C6F /* Upload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Upload.swift; path = Source/Upload.swift; sourceTree = "<group>"; };
 		3291230C4FFBED4021914428C63AD3C7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		3463BDE2A8DE33A9E77235A7C51370C6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		353D5E2DF197EE796415B70DD58DF845 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
-		354B10EA1D3339B4016BE7CB3C5BB8DC /* WistiaPlayer_internal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaPlayer_internal.swift; sourceTree = "<group>"; };
 		366B8065FE98F48548F8B50A715FFD48 /* Pods-WistiaKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		36BEE7460BDCDB9D08B36B345F8E297F /* UIImage+AlamofireImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImage+AlamofireImage.swift"; path = "Source/UIImage+AlamofireImage.swift"; sourceTree = "<group>"; };
 		3771B4E0F5FCDA99AD3408200C33B17F /* WistiaKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WistiaKit-umbrella.h"; sourceTree = "<group>"; };
+		3A841068042CC455742126154A3B99F6 /* WistiaMediaEventCollector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaMediaEventCollector.swift; sourceTree = "<group>"; };
 		3CE22CC58952757FD84141DE145ED9FC /* WistiaAsset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaAsset.swift; sourceTree = "<group>"; };
 		3D6A4529C51A194996B99BEF4B778F2E /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DAF722C6A532A503CA0B34B5EB6CDEB /* WistiaCaptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaCaptions.swift; sourceTree = "<group>"; };
 		3DD1266FABDB60FB77700D23188219C0 /* AlamofireImage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AlamofireImage-umbrella.h"; sourceTree = "<group>"; };
 		407F047EBEF9ACEC944A3A07C925E20C /* Pods-WistiaKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WistiaKit_Tests-dummy.m"; sourceTree = "<group>"; };
 		417B248840CF4160944B057C5A58E185 /* ImageFilter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageFilter.swift; path = Source/ImageFilter.swift; sourceTree = "<group>"; };
 		43087C8D315AA446F58DB0E7A7A82223 /* Pods-WistiaKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		43BA3067FB4C1D9ABB79D440E6AE35FC /* Pods-WistiaKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WistiaKit_Example-umbrella.h"; sourceTree = "<group>"; };
+		45637FE14A99C4DED822FD0B97E186F9 /* WistiaPlayerViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = WistiaPlayerViewController.xib; sourceTree = "<group>"; };
 		4725213121FEC12F519BF19475C52042 /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Source/Error.swift; sourceTree = "<group>"; };
 		49D7C24EB3225D4472BA9871B96FA195 /* Pods-WistiaKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		49DAB5A3EA3FC4027A4F5C2DA72F5023 /* Pods-WistiaKit_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WistiaKit_Tests-umbrella.h"; sourceTree = "<group>"; };
 		4FECFF69ADEAB2BD4A2A349E6121B31E /* WistiaPlayerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaPlayerViewController.swift; sourceTree = "<group>"; };
+		4FFB86C0B8A49C9FF33ED99B62FC977C /* UIColorExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		54D8F2298C2398D87688EAE097ECC4C9 /* Pods-WistiaKit_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		58C863B38C4353AF7442F44498158E81 /* WistiaPlayerViewController_internal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaPlayerViewController_internal.swift; sourceTree = "<group>"; };
+		55651B28CA40EFB9C7F588D0698EBD8B /* WistiaPlayerViewController_internal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaPlayerViewController_internal.swift; sourceTree = "<group>"; };
+		571684A8AEE0D1C07DC07E315FFFFD04 /* ModelBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
 		5EE395757CDFC797405D056EA15FE55B /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		638BFDCF44BB1898E7F3F6987FB09555 /* WistiaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WistiaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		64B04384B30B64ABF0DDD08CACF41FB3 /* UIColorExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		679C054F4C1911A3CE62B1350412AB2F /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/SceneKit.framework; sourceTree = DEVELOPER_DIR; };
 		6941EF2F7A3C10F3C3A140EF6F0CADEE /* WistiaCaptionsRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaCaptionsRenderer.swift; sourceTree = "<group>"; };
 		6D61970B6BFA1B5006B0A5CEBB4EED0F /* Stream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stream.swift; path = Source/Stream.swift; sourceTree = "<group>"; };
 		72F94C03FAD5C92CEFEAE876C6829F0D /* UIButton+AlamofireImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIButton+AlamofireImage.swift"; path = "Source/UIButton+AlamofireImage.swift"; sourceTree = "<group>"; };
-		77D638BA3034F38A4A473A6F2EBA37BD /* ModelBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
+		75E9E211A349E5F343355C4FE5F96030 /* Wistia360PlayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Wistia360PlayerView.swift; sourceTree = "<group>"; };
+		78C2850447B052B0749E8C16AF22C8CC /* WistiaStatsManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaStatsManager.swift; sourceTree = "<group>"; };
 		7A55AF822A1D049EB8FC54B82E51B5B5 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B2BAF2265A47E1C666B60B232E02E6F /* Pods-WistiaKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Example-frameworks.sh"; sourceTree = "<group>"; };
 		7D8FE52D183CE55F049BCCD05F0FD9C1 /* Pods-WistiaKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WistiaKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -214,18 +216,20 @@
 		7FD4987B7BBDD3BB6E2B863631A3AC1F /* WistiaMediaEmbedOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaMediaEmbedOptions.swift; sourceTree = "<group>"; };
 		8140C73B013A38DC4CFC00E027881E4C /* AlamofireImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = AlamofireImage.modulemap; sourceTree = "<group>"; };
 		8648E57E89959FEDAAF4E1B1ED76C9F8 /* WistiaAccount.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaAccount.swift; sourceTree = "<group>"; };
-		88FB08AAD2E180F207ACCB9585EEDD38 /* WistiaAPI_internal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaAPI_internal.swift; sourceTree = "<group>"; };
 		899440AA9BF862998C03276188A53676 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		8EB36E1485E2F88E6E7AB12935E0EBCF /* SCNVector3Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SCNVector3Extensions.swift; sourceTree = "<group>"; };
 		8FA12CFBEFA8665E06FDC738B3A99B7C /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
+		92A08758282F466A36C0C08161D81057 /* WistiaAPI_internal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaAPI_internal.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		954DFF83096B2C34928E142024B88DF9 /* Pods-WistiaKit_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Tests-resources.sh"; sourceTree = "<group>"; };
-		962767B00AE60552CE750FC0621A5EFE /* SCNVector3Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SCNVector3Extensions.swift; sourceTree = "<group>"; };
+		96E0AC81E0719A6250B3E917F5A1DC50 /* WistiaPlayer_internal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaPlayer_internal.swift; sourceTree = "<group>"; };
 		9833A6F2889EEA6E2A252E753E167DB7 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BEF004F964BB7DABD23CD37E5CA978D /* Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Source/Image.swift; sourceTree = "<group>"; };
 		A461F322348E831BD5ECAD2C80E9A95D /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		A9159A8F978A7E38B31D2FB9C38A59AE /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
 		AA0E29F14A15D228472EA885C6DCE039 /* WistiaObjectStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaObjectStatus.swift; sourceTree = "<group>"; };
 		ACD62E094787549052155AB8DAC80843 /* WistiaPlayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaPlayer.swift; sourceTree = "<group>"; };
+		AD5DF6C74E22959EF34E86583D55CAE3 /* Wistia360PlayerView+LookVectorTracking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Wistia360PlayerView+LookVectorTracking.swift"; sourceTree = "<group>"; };
 		AE99304725DAEB790B1978A476B6F0F2 /* WistiaMedia.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaMedia.swift; sourceTree = "<group>"; };
 		AEBBE1DBE80C8043D1AACFF35388DE8C /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
 		B271B854D60706772EE28F9F603B41FE /* Pods-WistiaKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WistiaKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -235,26 +239,24 @@
 		BB22AE5939252512ED61EC60C35A96F9 /* AlamofireImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AlamofireImage-dummy.m"; sourceTree = "<group>"; };
 		BD13F9498961CBAA32075869F79A1CEF /* ImageCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageCache.swift; path = Source/ImageCache.swift; sourceTree = "<group>"; };
 		BDA2A923BC7631394FD3CEEBDE8D0B13 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
+		BE632F369DFB99701DAA28BDF7CB4C52 /* WistiaFlatPlayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaFlatPlayerView.swift; sourceTree = "<group>"; };
 		C353EF8CECF13CB746532E7CCF3D354C /* Manager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Manager.swift; path = Source/Manager.swift; sourceTree = "<group>"; };
 		CBE541EC5ABD7084E6CB7E8F1F0884E2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2418D17D83D9056212FE2E8D64652FD /* WistiaPlayerViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = WistiaPlayerViewController.xib; sourceTree = "<group>"; };
 		D402C965854A55E24EDC621B87371CA4 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		D4117873CC55AACDC0405826C46ABC2D /* Pods-WistiaKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-WistiaKit_Tests.modulemap"; sourceTree = "<group>"; };
 		D89DBE304DB2033CDF99CF9A23354D04 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
 		DA19C340E23F63D20A46573C707C3414 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		DA3C52D55190993C0E7ACAD2BB188CDA /* WistiaKitAssetCatalog.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = WistiaKitAssetCatalog.xcassets; sourceTree = "<group>"; };
 		DAB21497F843DA83273C5AAA8ADAA81A /* Request+AlamofireImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Request+AlamofireImage.swift"; path = "Source/Request+AlamofireImage.swift"; sourceTree = "<group>"; };
-		DCAF55544F5AF8498E791F1D25D05294 /* UINavigationControllerExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtensions.swift; sourceTree = "<group>"; };
 		DDACAD1D8B293EDE9515FA531593649A /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
 		E0364FE690EBE64B8F544F945ED7F212 /* ImageDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = Source/ImageDownloader.swift; sourceTree = "<group>"; };
 		E482138DF80371192085A2EFB90EB64B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		E552F0515070FE3ADD1C30FAF7AE5CB1 /* Download.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Download.swift; path = Source/Download.swift; sourceTree = "<group>"; };
 		E62C64642925AB080E3E1391EFD2C179 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
-		E737DB004D4108123069D8ADE1AB88CC /* WistiaMediaEventCollector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaMediaEventCollector.swift; sourceTree = "<group>"; };
-		E7C289C3429FED2482A7BA4E9D2DCCC1 /* Wistia360PlayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Wistia360PlayerView.swift; sourceTree = "<group>"; };
 		EE09338B6AAA38DBDA12DE70E3FAF3EA /* Pods_WistiaKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WistiaKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12F90872EA732E2762D108D5F0D0CA9 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		F24F9A64BC941C0ED4B78C460B23274C /* WistiaProject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WistiaProject.swift; sourceTree = "<group>"; };
+		F6738CC5F70176049CD0EC7CA9FAFEF7 /* UINavigationControllerExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtensions.swift; sourceTree = "<group>"; };
 		F78BB899597323EAEAD83389F18AF86E /* Pods-WistiaKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WistiaKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		F800F015948C94CCC08A79FA0E876BC5 /* Pods-WistiaKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-WistiaKit_Example.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -313,25 +315,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		001E4740F970ECC3FF5BCFF8C0B566C4 /* stats */ = {
-			isa = PBXGroup;
-			children = (
-				E737DB004D4108123069D8ADE1AB88CC /* WistiaMediaEventCollector.swift */,
-				19698C361DF2B5A7BB6EC61EF68004A1 /* WistiaStatsManager.swift */,
-			);
-			path = stats;
-			sourceTree = "<group>";
-		};
-		06B5D06759F919F38784BAB4AAE00BE4 /* extension */ = {
-			isa = PBXGroup;
-			children = (
-				962767B00AE60552CE750FC0621A5EFE /* SCNVector3Extensions.swift */,
-				64B04384B30B64ABF0DDD08CACF41FB3 /* UIColorExtensions.swift */,
-				DCAF55544F5AF8498E791F1D25D05294 /* UINavigationControllerExtensions.swift */,
-			);
-			path = extension;
-			sourceTree = "<group>";
-		};
 		265935825F039287E3699C06AD01210A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,24 +340,6 @@
 				47F69552B308C020D05CA6E4AA563C08 /* AlamofireImage */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		321AB8D45077AB32D47626F40F8F0FF8 /* view controller */ = {
-			isa = PBXGroup;
-			children = (
-				D2418D17D83D9056212FE2E8D64652FD /* WistiaPlayerViewController.xib */,
-				58C863B38C4353AF7442F44498158E81 /* WistiaPlayerViewController_internal.swift */,
-			);
-			path = "view controller";
-			sourceTree = "<group>";
-		};
-		3C027982C50A626498E3E628C8B22945 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				77D638BA3034F38A4A473A6F2EBA37BD /* ModelBuilder.swift */,
-				0DB4A036DB99C170399BD42A0CBEDDA4 /* WistiaCaptions.swift */,
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		3F7ED4F0E29821E7E566E07D529508F9 /* Assets */ = {
@@ -423,20 +388,6 @@
 				77B6B5E1E011A0C04B85DDB3C6340B80 /* Pods-WistiaKit_Tests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		56A89B96467B0255445F9310A8D86FA4 /* internal */ = {
-			isa = PBXGroup;
-			children = (
-				88FB08AAD2E180F207ACCB9585EEDD38 /* WistiaAPI_internal.swift */,
-				354B10EA1D3339B4016BE7CB3C5BB8DC /* WistiaPlayer_internal.swift */,
-				06B5D06759F919F38784BAB4AAE00BE4 /* extension */,
-				3C027982C50A626498E3E628C8B22945 /* model */,
-				001E4740F970ECC3FF5BCFF8C0B566C4 /* stats */,
-				9424CACE23E11C56388972B334F10296 /* view */,
-				321AB8D45077AB32D47626F40F8F0FF8 /* view controller */,
-			);
-			path = internal;
 			sourceTree = "<group>";
 		};
 		57FCADDE171443D4D6040F05140D499D /* Development Pods */ = {
@@ -528,16 +479,6 @@
 			);
 			sourceTree = "<group>";
 		};
-		9424CACE23E11C56388972B334F10296 /* view */ = {
-			isa = PBXGroup;
-			children = (
-				E7C289C3429FED2482A7BA4E9D2DCCC1 /* Wistia360PlayerView.swift */,
-				2AA0588D2D8C15FE1B0043B32639C9C2 /* Wistia360PlayerView+LookVectorTracking.swift */,
-				11DCB7BF4669FB0B4EA45E88A7F5925C /* WistiaFlatPlayerView.swift */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
 		9639BE24A0786E41D96083916B6810D2 /* Pods-WistiaKit_Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +495,20 @@
 			);
 			name = "Pods-WistiaKit_Example";
 			path = "Target Support Files/Pods-WistiaKit_Example";
+			sourceTree = "<group>";
+		};
+		9CC9C6340D143B20F55241C73F0179AA /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				92A08758282F466A36C0C08161D81057 /* WistiaAPI_internal.swift */,
+				96E0AC81E0719A6250B3E917F5A1DC50 /* WistiaPlayer_internal.swift */,
+				F520DF196F3801443FF160E6FF6ADD0D /* extension */,
+				B9B27005091A4B8B4A6A1F9C35136824 /* model */,
+				D5AE05147E75448FF072DF39E11EA73D /* stats */,
+				B9F2E64E2B72E84E91EA87A892BA4514 /* view */,
+				AC52AE470452D1BFEF0B31161D84F3D1 /* view controller */,
+			);
+			path = internal;
 			sourceTree = "<group>";
 		};
 		A0FFC85DF3CBE0FA0E896567E7FC3566 /* Resources */ = {
@@ -574,6 +529,15 @@
 				DD95C721784BB56E22143CAF4958F48A /* model */,
 			);
 			path = public;
+			sourceTree = "<group>";
+		};
+		AC52AE470452D1BFEF0B31161D84F3D1 /* view controller */ = {
+			isa = PBXGroup;
+			children = (
+				45637FE14A99C4DED822FD0B97E186F9 /* WistiaPlayerViewController.xib */,
+				55651B28CA40EFB9C7F588D0698EBD8B /* WistiaPlayerViewController_internal.swift */,
+			);
+			path = "view controller";
 			sourceTree = "<group>";
 		};
 		B193C383F5894DF7457724C1601A31C1 /* WistiaKit */ = {
@@ -604,10 +568,39 @@
 		B890512F8DD675118F71733A910EAEF3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				56A89B96467B0255445F9310A8D86FA4 /* internal */,
+				9CC9C6340D143B20F55241C73F0179AA /* internal */,
 				AC1BD6A656D11DCA79A671D38414552D /* public */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		B9B27005091A4B8B4A6A1F9C35136824 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				571684A8AEE0D1C07DC07E315FFFFD04 /* ModelBuilder.swift */,
+				3DAF722C6A532A503CA0B34B5EB6CDEB /* WistiaCaptions.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		B9F2E64E2B72E84E91EA87A892BA4514 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				1D454E2430A989033896253F78F72E6B /* CaptionsLabel.swift */,
+				75E9E211A349E5F343355C4FE5F96030 /* Wistia360PlayerView.swift */,
+				AD5DF6C74E22959EF34E86583D55CAE3 /* Wistia360PlayerView+LookVectorTracking.swift */,
+				BE632F369DFB99701DAA28BDF7CB4C52 /* WistiaFlatPlayerView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		D5AE05147E75448FF072DF39E11EA73D /* stats */ = {
+			isa = PBXGroup;
+			children = (
+				3A841068042CC455742126154A3B99F6 /* WistiaMediaEventCollector.swift */,
+				78C2850447B052B0749E8C16AF22C8CC /* WistiaStatsManager.swift */,
+			);
+			path = stats;
 			sourceTree = "<group>";
 		};
 		DD95C721784BB56E22143CAF4958F48A /* model */ = {
@@ -636,6 +629,16 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/AlamofireImage";
+			sourceTree = "<group>";
+		};
+		F520DF196F3801443FF160E6FF6ADD0D /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				8EB36E1485E2F88E6E7AB12935E0EBCF /* SCNVector3Extensions.swift */,
+				4FFB86C0B8A49C9FF33ED99B62FC977C /* UIColorExtensions.swift */,
+				F6738CC5F70176049CD0EC7CA9FAFEF7 /* UINavigationControllerExtensions.swift */,
+			);
+			path = extension;
 			sourceTree = "<group>";
 		};
 		F5EC5FFDD8E174C83FD994197005FB86 /* Pod */ = {
@@ -734,7 +737,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14EFC54772932D40E2ED8115C123C247 /* Build configuration list for PBXNativeTarget "WistiaKit" */;
 			buildPhases = (
-				BE6B6DE7118A8DEDA13CB0B83DB7B4B2 /* Sources */,
+				FBAF8290A2B70B18C5E1B8484552C689 /* Sources */,
 				2B82FCB02FA277CA8EE36D53C572BA94 /* Frameworks */,
 				A53950A09FFAEFD9D659F7CE6216D0E7 /* Resources */,
 				0846C44295ADE66181BEFA6BCDE7671E /* Headers */,
@@ -878,44 +881,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BE6B6DE7118A8DEDA13CB0B83DB7B4B2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D7EFA0ACBDA7FDA9294AC3929FA331E8 /* ModelBuilder.swift in Sources */,
-				12F930A1DAB359E3B18D2D6D110D1E49 /* SCNVector3Extensions.swift in Sources */,
-				AD81BCBA8DAC9AE97DF0201297F6E541 /* UIColorExtensions.swift in Sources */,
-				CC255976B7D4CABFA2D3294363241B86 /* UINavigationControllerExtensions.swift in Sources */,
-				13043939B0CCDF4F98FD0164200881BA /* Wistia360PlayerView+LookVectorTracking.swift in Sources */,
-				207BFDD693A16DCE07F5D6D9E4D62512 /* Wistia360PlayerView.swift in Sources */,
-				909ECFBE7C512A9BE595E55AEB27E763 /* WistiaAccount.swift in Sources */,
-				A38C4A2217366202C476460E7003F889 /* WistiaAPI.swift in Sources */,
-				3C4F511FDBCD06BAC449F6C466E49C81 /* WistiaAPI_internal.swift in Sources */,
-				10377DC4C3E776A73D7EC8411422B59C /* WistiaAsset.swift in Sources */,
-				5A0308FA3F43B332A9E37E55CB28FA29 /* WistiaCaptions.swift in Sources */,
-				822880CD131CF4C0FAA4BBAF30A938F6 /* WistiaCaptionsRenderer.swift in Sources */,
-				F1334CE6F1781A653A034A5B583042A0 /* WistiaFlatPlayerView.swift in Sources */,
-				36C6D125CBE15C785083A2CE2B7DBFC2 /* WistiaKit-dummy.m in Sources */,
-				E26E1AF2074EC62EB30731BE752CF8B2 /* WistiaMedia.swift in Sources */,
-				75ABDB23353ABD9BE1C37C0D4CFA2A47 /* WistiaMediaEmbedOptions.swift in Sources */,
-				E54187728D56754DDD6114329C8E7148 /* WistiaMediaEventCollector.swift in Sources */,
-				4335F02662A31D62BF1667D512E63705 /* WistiaMediaStats.swift in Sources */,
-				6B6566014A1D01A59A085F4A8717902C /* WistiaObjectStatus.swift in Sources */,
-				B5D0F7B05352ACD11CAED9564D58FDE7 /* WistiaPlayer.swift in Sources */,
-				284F52EBBFEF44CEBE525AEED901BD7F /* WistiaPlayer_internal.swift in Sources */,
-				3123B5639F257FE9B11664DC496A4206 /* WistiaPlayerViewController.swift in Sources */,
-				4F25E20460570096C8521C27D898EEE6 /* WistiaPlayerViewController.xib in Sources */,
-				8C6761053D38E95541672C467268A574 /* WistiaPlayerViewController_internal.swift in Sources */,
-				28DADBFEEC2364E5057A9BA2236F7AF6 /* WistiaProject.swift in Sources */,
-				3DD156B3F2AEA44467BBD41AA06585A2 /* WistiaStatsManager.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F409EDC1FBF861828D3D8F8A3AA83347 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C0E35536E3E52121DA24573C847B6AE5 /* Pods-WistiaKit_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBAF8290A2B70B18C5E1B8484552C689 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BD35DDBED6ECCB01A54E16FABB975B4 /* CaptionsLabel.swift in Sources */,
+				7FEF8BF5FE93448466C55E0509550321 /* ModelBuilder.swift in Sources */,
+				4398EA6AAA4CF01B0E908DC2D2203469 /* SCNVector3Extensions.swift in Sources */,
+				88DAC5F0F55CBED25CC0904923A5E1C5 /* UIColorExtensions.swift in Sources */,
+				1F0CF85AEE3FE79C2C603F208E01CDC3 /* UINavigationControllerExtensions.swift in Sources */,
+				E001FFF1F81B1DEB78D8E805072E0D2E /* Wistia360PlayerView+LookVectorTracking.swift in Sources */,
+				2B495A6388584064D8129503A38380B7 /* Wistia360PlayerView.swift in Sources */,
+				A88AF498AE5CD38067D2E0BD418029F3 /* WistiaAccount.swift in Sources */,
+				A72E4D0F268B56E0989A38BBC707932E /* WistiaAPI.swift in Sources */,
+				2E3609475CE07FE2EA818D4D65B94927 /* WistiaAPI_internal.swift in Sources */,
+				E80BFC713AC55D684EB74852DDF05552 /* WistiaAsset.swift in Sources */,
+				9212E43DBFBC4CE48886D8067B810219 /* WistiaCaptions.swift in Sources */,
+				6E3A8CFB8FFE44AF2B01B17729961F1D /* WistiaCaptionsRenderer.swift in Sources */,
+				CF829391970DA8E83AD03A419C69E6E4 /* WistiaFlatPlayerView.swift in Sources */,
+				B4310F8E4E0BF51A4C823F2BE1821E73 /* WistiaKit-dummy.m in Sources */,
+				CDA5F4F105CFBCC69F46441826532F55 /* WistiaMedia.swift in Sources */,
+				85C922022B2A78305398051B1F15742B /* WistiaMediaEmbedOptions.swift in Sources */,
+				06E5D2039C1822002A46AAB457CB0D2A /* WistiaMediaEventCollector.swift in Sources */,
+				6086B10A8DE63283B3215945F2962CF2 /* WistiaMediaStats.swift in Sources */,
+				FE6C8A61426385C79DA9AA9CDF530E70 /* WistiaObjectStatus.swift in Sources */,
+				AB7478EC23D8FBB8047B503C3B3C7D04 /* WistiaPlayer.swift in Sources */,
+				2C6ADF931212ECA7830886DCF007BA25 /* WistiaPlayer_internal.swift in Sources */,
+				1D3D2817A9DFD32E003B6EBFD52348F0 /* WistiaPlayerViewController.swift in Sources */,
+				D857E81FD68EA75A7F22EF36CEA73F28 /* WistiaPlayerViewController.xib in Sources */,
+				825FC655E8733C9E78FF791F206BAC02 /* WistiaPlayerViewController_internal.swift in Sources */,
+				B94C9F1F788D71A4BE8CB4802B5FB7B4 /* WistiaProject.swift in Sources */,
+				7C0C216570764A7C013DB4AB6DDC7E33 /* WistiaStatsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

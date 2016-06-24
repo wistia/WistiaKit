@@ -1,6 +1,6 @@
 //
 //  WistiaCaptionsRenderer.swift
-//  Pods
+//  WistiaKit
 //
 //  Created by Daniel Spinosa on 6/23/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
@@ -9,6 +9,23 @@
 import UIKit
 import AVKit
 import AVFoundation
+
+/**
+ The delegate of a `WistiaCaptionsRenderer` must adopt the `WistiaCaptionsRendererDelegate `protocol.
+ */
+public protocol WistiaCaptionsRendererDelegate : class {
+
+    /**
+     Captions are loaded asynchronously after a media is loaded (initial or change) by a `WistiaPlayer`.
+
+     When captions are loaded, the list of languages available is dynamically updated based upon the
+     captions data received.  When this occurs, the delegate will be notified of the update through this callback.
+
+     - Parameter renderer: The `WistiaCaptionsRenderer` making this function call.
+     - Parameter captionsLanguagesAvailable: An updated list of language codes available for the currently loaded media.
+     */
+    func captionsRenderer(renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable:[String])
+}
 
 /**
  During playback of a `WistiaMedia`, renders captions into a given `UITextView`.
@@ -21,6 +38,21 @@ import AVFoundation
  - Note: If you are using `WistiaPlayerViewController`, captions handling is built in.  Get lost!  ;-]
  */
 public class WistiaCaptionsRenderer {
+
+    /**
+     The object that acts as the delegate of the `WistiaCaptionsRenderer`.  It must adopt the `WistiaCaptionsRendererDelegate` protocol.
+
+     The delegate is not retained.
+
+     - Note: Upon setting delegate, you will immediately receive a callback with current languages available.
+     */
+    public weak var delegate:WistiaCaptionsRendererDelegate? {
+        didSet {
+            if let d = delegate {
+                d.captionsRenderer(self, didUpdateCaptionsLanguagesAvailable: captionsLanguagesAvailable)
+            }
+        }
+    }
 
     /**
      Thew view that will be used to render captions.  Visual appearance properties of this view will not be
@@ -41,7 +73,13 @@ public class WistiaCaptionsRenderer {
     }
 
     /// Should captions be displayed
-    public var enabled: Bool = false
+    public var enabled: Bool = false {
+        didSet {
+            if !enabled {
+                removeDisplayedSegment()
+            }
+        }
+    }
 
     /** 
      Which captions should be displayed (when enabled)?  See `captionsLanguagesAvailable`
@@ -62,7 +100,11 @@ public class WistiaCaptionsRenderer {
      
      - Note: Captions are retrieved asynchronously, so this value may update any time after media changes.
      */
-    internal(set) public var captionsLanguagesAvailable: [String] = [String]()
+    internal(set) public var captionsLanguagesAvailable: [String] = [String]() {
+        didSet {
+            delegate?.captionsRenderer(self, didUpdateCaptionsLanguagesAvailable: captionsLanguagesAvailable)
+        }
+    }
 
     //MARK: - Internal
 

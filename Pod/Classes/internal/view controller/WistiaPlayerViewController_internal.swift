@@ -122,6 +122,11 @@ internal extension WistiaPlayerViewController {
         startOrResetChromeInteractionTimer()
     }
 
+    @IBAction func controlsCaptionsPressed(sender: AnyObject) {
+        //TODO: Display captions language chooser UI
+        wPlayer.captionsRenderer.enabled = !wPlayer.captionsRenderer.enabled
+    }
+
     @IBAction func controlsActionPressed(sender: UIButton) {
         self.storePlayerRateAndPause()
         if let media = wPlayer.media {
@@ -263,6 +268,15 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
 }
 #endif //os(iOS)
 
+//MARK: - Wistia Captions Renderer Delegate
+extension WistiaPlayerViewController: WistiaCaptionsRendererDelegate {
+
+    public func captionsRenderer(renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable: [String]) {
+        //TODO: Update captions language chooser UI
+    }
+
+}
+
 //MARK: - View Presentation
 internal extension WistiaPlayerViewController {
 //Until we support 360 on TV, just killing this entire thing
@@ -282,6 +296,7 @@ internal extension WistiaPlayerViewController {
         //playerColor
         controlsPlayPauseButton.backgroundColor = embedOptions.playerColor
         scrubberTrackContainerView.backgroundColor = embedOptions.playerColor
+        controlsCaptionsButton.backgroundColor = embedOptions.playerColor
         controlsActionButton.backgroundColor = embedOptions.playerColor
         controlsCloseButton.backgroundColor = embedOptions.playerColor
         posterPlayButton.backgroundColor = embedOptions.playerColor
@@ -300,8 +315,9 @@ internal extension WistiaPlayerViewController {
             posterStillImage.hidden = true
         }
 
-        //actionButton
+        //optional controls buttons
         controlsActionButton.hidden = !embedOptions.actionButton
+        controlsCaptionsButton.hidden = !embedOptions.captionsAvailable
 
         //The following are implemented dynamically:
         // * bigPlayButton (see presentForFirstPlayback())

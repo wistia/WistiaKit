@@ -243,11 +243,14 @@ internal class ModelBuilder {
                 }
             }
             
-            if let captionsHash = plugin["captions-v1"] as? [String:AnyObject],
-                captionsAvailable = captionsHash["on"] as? NSString {
-                mediaEmbedOptions.captionsAvailable = captionsAvailable.boolValue
+            if let captionsHash = plugin["captions-v1"] as? [String:AnyObject] {
+                // presence of this hash means captions are available unless stated otherwise
+                mediaEmbedOptions.captionsAvailable = true
+                if let captionsAvailable = captionsHash["on"] as? NSString {
+                    mediaEmbedOptions.captionsAvailable = captionsAvailable.boolValue
+                }
                 if let captionsOnByDefault = captionsHash["onByDefault"] as? NSString {
-                    mediaEmbedOptions.captionsOnByDefault = captionsAvailable.boolValue && captionsOnByDefault.boolValue
+                    mediaEmbedOptions.captionsOnByDefault = mediaEmbedOptions.captionsAvailable && captionsOnByDefault.boolValue
                 }
 
             }
