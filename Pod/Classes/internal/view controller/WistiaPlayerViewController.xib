@@ -143,7 +143,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqf-SN-EOA" userLabel="Toggle Play Pause Button">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="3BG-5A-yOW"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="60" identifier="play pause width" id="3BG-5A-yOW"/>
                                                             </constraints>
                                                             <state key="normal" image="smallPlay"/>
                                                             <connections>
@@ -188,7 +188,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZL-yc-o0z" userLabel="Captions Button">
                                                             <rect key="frame" x="420" y="0.0" width="60" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="poy-Mj-dfp"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="60" identifier="captions width" id="poy-Mj-dfp"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                                             <state key="normal" image="closedCaptions"/>
@@ -199,7 +199,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9Y-rG-pln" userLabel="Action Button">
                                                             <rect key="frame" x="480" y="0.0" width="60" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="ngd-Te-6OY"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="60" identifier="action width" id="ngd-Te-6OY"/>
                                                             </constraints>
                                                             <state key="normal" image="action"/>
                                                             <connections>
@@ -209,7 +209,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdA-x0-aCn" userLabel="Close Button">
                                                             <rect key="frame" x="540" y="0.0" width="60" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="tLK-I2-kZL"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="60" identifier="close width" id="tLK-I2-kZL"/>
                                                             </constraints>
                                                             <state key="normal" image="x-close"/>
                                                             <connections>
