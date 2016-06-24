@@ -87,6 +87,11 @@ public struct WistiaMedia {
             }
         }
     }
+    var captions: [WistiaCaptions]? = nil
+
+    mutating func addCaptions(_ captions: [WistiaCaptions]) {
+        self.captions = captions
+    }
 
 }
 

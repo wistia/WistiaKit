@@ -11,6 +11,32 @@ import Alamofire
 
 internal extension WistiaAPI {
 
+    internal static func _captionsForHash(hash:String, completionHandler: (captions:[WistiaCaptions])->() ) {
+        Alamofire.request(.GET, "https://fast.wistia.com/embed/captions/\(hash).json", parameters: nil)
+            .responseJSON { response in
+
+                switch response.result {
+                case .Success(let value):
+                    if let JSON = value as? [String: AnyObject],
+                        captionsJSONArray = JSON["captions"] as? [[String: AnyObject]]{
+
+                        var captions = [WistiaCaptions]()
+                        for captionsJSON in captionsJSONArray {
+                            if let c = ModelBuilder.wistiaCaptionsFrom(captionsJSON) {
+                                captions.append(c)
+                            }
+                        }
+                        completionHandler(captions: captions)
+                    }
+
+                case .Failure(let error):
+                    //TODO: Incorporate error handling from public API
+                    completionHandler(captions: [WistiaCaptions]())
+                }
+        }
+        
+    }
+
     internal static func mediaInfoForHash(hash:String, completionHandler: (media:WistiaMedia?)->() ) {
         Alamofire.request(.GET, "https://fast.wistia.net/embed/medias/\(hash).json", parameters: nil)
             .responseJSON { response in
