@@ -272,7 +272,10 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
 extension WistiaPlayerViewController: WistiaCaptionsRendererDelegate {
 
     public func captionsRenderer(renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable: [String]) {
+        //UIPicker not supported on TV.  Captions should be done natively, anyway.
+        #if os(iOS)
         captionsLanguagePickerView.reloadAllComponents()
+        #endif //os(iOS)
     }
 
 }
@@ -588,6 +591,8 @@ internal extension WistiaPlayerViewController {
 #endif //os(iOS)
 }
 
+//UIPicker not supported on TV.  Captions should be done natively, anyway.
+#if os(iOS)
 //MARK: - Captions Chooser
 extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -651,3 +656,4 @@ extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSou
 
 
 }
+#endif //os(iOS)
