@@ -123,8 +123,8 @@ internal extension WistiaPlayerViewController {
     }
 
     @IBAction func controlsCaptionsPressed(sender: AnyObject) {
-        //TODO: Display captions language chooser UI
-        wPlayer.captionsRenderer.enabled = !wPlayer.captionsRenderer.enabled
+        startOrResetChromeInteractionTimer()
+        toggleCaptionsChooserVisibility()
     }
 
     @IBAction func controlsActionPressed(sender: UIButton) {
@@ -272,7 +272,7 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
 extension WistiaPlayerViewController: WistiaCaptionsRendererDelegate {
 
     public func captionsRenderer(renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable: [String]) {
-        //TODO: Update captions language chooser UI
+        captionsLanguagePickerView.reloadAllComponents()
     }
 
 }
@@ -387,6 +387,7 @@ internal extension WistiaPlayerViewController {
             } else {
                 self.playbackControlsContainer.effect = nil
                 self.playbackControlsInnerContainer.effect = nil
+                self.hideCaptionsChooser()
             }
             }) { (finished) -> Void in
                 self.showStatusBar = showChrome
@@ -574,7 +575,6 @@ internal extension WistiaPlayerViewController {
         }
     }
 
-
     internal func seekToStartIfAtEnd(tolerance: CMTime = CMTime(seconds: 0.1, preferredTimescale: 10)) {
         let currentTime = wPlayer.currentTime()
         if let duration = wPlayer.currentItem?.duration {
@@ -586,4 +586,68 @@ internal extension WistiaPlayerViewController {
     }
 
 #endif //os(iOS)
+}
+
+//MARK: - Captions Chooser
+extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+
+    func showCaptionsChooser() {
+        captionsLanguagePickerView.hidden = false
+        cancelChromeInteractionTimer()
+    }
+
+    func hideCaptionsChooser() {
+        captionsLanguagePickerView.hidden = true
+        startOrResetChromeInteractionTimer()
+    }
+
+    func toggleCaptionsChooserVisibility() {
+        if captionsLanguagePickerView.hidden {
+            showCaptionsChooser()
+        } else {
+            hideCaptionsChooser()
+        }
+    }
+
+    public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 0 {
+            wPlayer.captionsRenderer.enabled = false
+        } else {
+            wPlayer.captionsRenderer.enabled = true
+            wPlayer.captionsRenderer.captionsLanguageCode = wPlayer.captionsRenderer.captionsLanguagesAvailable[row-1]
+        }
+        hideCaptionsChooser()
+    }
+
+    //delegate
+    public func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30
+    }
+
+    public func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return 100
+    }
+
+    public func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let title:String
+        if row == 0 {
+            title = "off"
+        } else {
+            title = wPlayer.captionsRenderer.captionsLanguagesAvailable[row-1]
+        }
+
+        return NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+    }
+
+    //data source
+
+    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return wPlayer.captionsRenderer.captionsLanguagesAvailable.count + 1
+    }
+
+
 }

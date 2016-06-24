@@ -308,7 +308,9 @@ public final class WistiaPlayerViewController: UIViewController {
 
     @IBOutlet weak internal var extraCloseButton: UIButton!
 
+    //MARK: IB Outlets: Captions
     @IBOutlet weak internal var captionsLabel: UILabel!
+    @IBOutlet weak internal var captionsLanguagePickerView: UIPickerView!
 
     //MARK: UIViewController Overrides
 

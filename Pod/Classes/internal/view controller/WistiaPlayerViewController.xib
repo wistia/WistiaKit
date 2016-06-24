@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WistiaPlayerViewController" customModule="WistiaKit" customModuleProvider="target">
             <connections>
                 <outlet property="captionsLabel" destination="Bg2-Fz-eJ0" id="VaM-hx-CB3"/>
+                <outlet property="captionsLanguagePickerView" destination="jpw-n2-nW7" id="qT1-cK-bVt"/>
                 <outlet property="controlsActionButton" destination="l9Y-rG-pln" id="dGE-of-0WN"/>
                 <outlet property="controlsCaptionsButton" destination="nZL-yc-o0z" id="ZFC-A0-EAn"/>
                 <outlet property="controlsCloseButton" destination="HdA-x0-aCn" id="dhJ-qu-us1"/>
@@ -309,6 +310,18 @@
                                 <action selector="controlsClosePressed:" destination="-1" eventType="touchUpInside" id="CLe-JT-IDo"/>
                             </connections>
                         </button>
+                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpw-n2-nW7">
+                            <rect key="frame" x="420" y="448" width="100" height="100"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="SJ5-HG-yP0"/>
+                                <constraint firstAttribute="width" constant="100" id="iYq-QD-zEY"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="cQr-vc-a1e"/>
+                                <outlet property="delegate" destination="-1" id="ZDi-ip-lPq"/>
+                            </connections>
+                        </pickerView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
@@ -321,8 +334,10 @@
                         <constraint firstAttribute="bottom" secondItem="WIg-R7-qh3" secondAttribute="bottom" id="Q40-Wh-zvj"/>
                         <constraint firstItem="1gl-Xk-GqW" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="RJE-7q-GTi"/>
                         <constraint firstItem="22B-T6-9B2" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="SD0-Lj-X9Q"/>
+                        <constraint firstItem="xLH-gl-vos" firstAttribute="top" secondItem="jpw-n2-nW7" secondAttribute="bottom" constant="8" symbolic="YES" id="TvT-uI-q4n"/>
                         <constraint firstItem="eLB-Ll-7u3" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="U95-d7-gE0"/>
                         <constraint firstItem="Bg2-Fz-eJ0" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="UmA-xd-gPh"/>
+                        <constraint firstItem="jpw-n2-nW7" firstAttribute="leading" secondItem="nZL-yc-o0z" secondAttribute="leading" id="VO4-0e-ReV"/>
                         <constraint firstItem="eLB-Ll-7u3" firstAttribute="centerX" secondItem="lBy-7d-odP" secondAttribute="centerX" id="Vjg-UH-5Ej"/>
                         <constraint firstAttribute="trailing" secondItem="xLH-gl-vos" secondAttribute="trailing" id="Xl0-xV-AjY"/>
                         <constraint firstItem="22B-T6-9B2" firstAttribute="centerY" secondItem="lBy-7d-odP" secondAttribute="centerY" id="wkZ-Cf-4Wl"/>
