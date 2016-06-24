@@ -172,10 +172,6 @@ internal extension WistiaPlayer {
             self.delegate?.wistiaPlayer(self, didChangePlaybackProgressTo: Float(time.seconds / duration.seconds), atCurrentTime: time, ofDuration: duration)
         }
 
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.captionsRenderer.onPlayerTimeUpdate(time)
-        }
-
         //reduced resolution and jitter implemented in the stats collector
         logEvent(.Update)
     }

@@ -32,7 +32,8 @@ public class WistiaAPI {
 
     private static let APIBaseURL = "https://api.wistia.com/v1"
 
-    private let apiToken:String
+    private let apiToken: String
+    private let debuggingLevel: DebuggingLevel
 
     //MARK: - Initialization
 
@@ -41,8 +42,9 @@ public class WistiaAPI {
 
      - Parameter apiToken: The API Token that will be used to access the [Wistia Data API](http://wistia.com/doc/data-api).
      */
-    public init(apiToken:String) {
+    public init(apiToken:String, debuggingLevel: DebuggingLevel = .None) {
         self.apiToken = apiToken
+        self.debuggingLevel = debuggingLevel
     }
 
     //MARK: - Sorting
@@ -105,11 +107,26 @@ extension WistiaAPI {
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/account.json", parameters: params)
             .responseJSON { response in
 
-                if let JSON = response.result.value as? [String: AnyObject],
-                    account = ModelBuilder.accountFromHash(JSON) {
-                    completionHander(account: account)
-                } else {
-                    completionHander(account: nil)
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let JSON = value as? [String: AnyObject],
+                            account = ModelBuilder.accountFromHash(JSON) {
+                            completionHander(account: account)
+                        }
+                    
+                    case .Failure(let error):
+                        
+                        // Let the user know there is an issue.
+                        printErrorForDebuggingLevel(
+                            debuggingLevel: self.debuggingLevel,
+                            message: WistiaAccount.Error.InvalidAPIPassword.description,
+                            error: error)
+                        
+                        completionHander(account: nil)
                 }
 
             }
@@ -139,19 +156,34 @@ extension WistiaAPI {
 
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/projects.json", parameters: params)
             .responseJSON { response in
-
-                if let JSON = response.result.value as? [[String: AnyObject]] {
-                    var projects = [WistiaProject]()
-                    for projectHash in JSON {
-                        if let p = ModelBuilder.projectFromHash(projectHash) {
-                            projects.append(p)
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let JSON = value as? [[String: AnyObject]] {
+                            
+                            // We map each JSON to WistiaProject objects, and filter out any nil values
+                            let projects = JSON.flatMap { ModelBuilder.projectFromHash($0) }
+                            
+                            // Let the user know if a project is empty.  This isnt a bug per se, but if the user is expecting something and there are no projects, it a good opportunity to inform.
+                            if projects.isEmpty {
+                                printErrorForDebuggingLevel(debuggingLevel: self.debuggingLevel, message: WistiaProject.Error.NoProjects.description)
+                            }
+                            
+                            // Hand over the array of parsed projects
+                            completionHandler(projects: projects)
+                            
                         }
+                        
+                    case .Failure(let error):
+                        
+                        printErrorForDebuggingLevel(debuggingLevel: self.debuggingLevel, message: WistiaProject.Error.HashedIdInvalid.description, error: error)
+                        
+                        completionHandler(projects: [])
                     }
-                    completionHandler(projects: projects)
-
-                } else {
-                    completionHandler(projects: [])
-                }
             }
     }
 
@@ -174,12 +206,21 @@ extension WistiaAPI {
 
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", parameters: params)
             .responseJSON { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    project = ModelBuilder.projectFromHash(JSON) {
-                    completionHandler(project: project)
-
-                } else {
-                    completionHandler(project: nil)
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let
+                            JSON = value as? [String: AnyObject],
+                            project = ModelBuilder.projectFromHash(JSON) {
+                            completionHandler(project: project)
+                        }
+                    
+                    case .Failure(let error):
+                        completionHandler(project: nil)
                 }
         }
     }
@@ -215,12 +256,19 @@ extension WistiaAPI {
 
         Alamofire.request(.POST, "\(WistiaAPI.APIBaseURL)/projects.json", parameters: params)
             .responseJSON { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    project = ModelBuilder.projectFromHash(JSON) {
-                    completionHandler(project: project)
-
-                } else {
-                    completionHandler(project: nil)
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        if let JSON = value as? [String: AnyObject],
+                            project = ModelBuilder.projectFromHash(JSON) {
+                            completionHandler(project: project)
+                            
+                        }
+                    case .Failure(let error):
+                        completionHandler(project: nil)
                 }
             }
     }
@@ -255,12 +303,23 @@ extension WistiaAPI {
 
         Alamofire.request(.PUT, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", parameters: params)
             .responseJSON(completionHandler: { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 200 {
-                    completionHandler(success: true, updatedProject: project)
-                } else {
-                    completionHandler(success: true, updatedProject: nil)
+                
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                // Success! Let's parse that JSON.
+                case .Success(let value):
+                    
+                    if let JSON = value as? [String: AnyObject],
+                        project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 200 {
+                        completionHandler(success: true, updatedProject: project)
+                    }
+                    
+                case .Failure(let error):
+                   completionHandler(success: true, updatedProject: nil)
                 }
+                
             })
     }
 
@@ -287,12 +346,23 @@ extension WistiaAPI {
 
         Alamofire.request(.DELETE, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", parameters: params)
             .responseJSON(completionHandler: { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 200 {
-                    completionHandler(success: true, deletedProject: project)
-                } else {
+                
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                // Success! Let's parse that JSON.
+                case .Success(let value):
+                    
+                    if let JSON = value as? [String: AnyObject],
+                        project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 200 {
+                        completionHandler(success: true, deletedProject: project)
+                    }
+                    
+                case .Failure(let error):
                     completionHandler(success: true, deletedProject: nil)
                 }
+                
             })
     }
 
@@ -325,12 +395,24 @@ extension WistiaAPI {
 
         Alamofire.request(.POST, "\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID)/copy.json", parameters: params)
             .responseJSON(completionHandler: { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 201 {
-                    completionHandler(success: true, newProject: project)
-                } else {
-                    completionHandler(success: true, newProject: nil)
+                
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let JSON = value as? [String: AnyObject],
+                            project = ModelBuilder.projectFromHash(JSON) where response.response?.statusCode == 201 {
+                            completionHandler(success: true, newProject: project)
+                        }
+                        
+                    // Failure, provide an empty result
+                    case .Failure(let error):
+                        completionHandler(success: true, newProject: nil)
                 }
+                
             })
     }
 
@@ -387,29 +469,38 @@ extension WistiaAPI {
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/medias.json", parameters: params)
             .responseJSON { response in
 
-                if let JSON = response.result.value as? [[String: AnyObject]] {
-                    var projectsByHashedID = [String: WistiaProject]()
-
-                    for mediaHash in JSON {
-                        //1) Make Media
-                        if let media = ModelBuilder.mediaFromHash(mediaHash) {
-
-                            //2) Find project it's in (or create it anew)
-                            if let projectHash = mediaHash["project"] as? [String: AnyObject], var project = ModelBuilder.projectFromHash(projectHash) {
-                                if projectsByHashedID.indexForKey(project.hashedID) == nil {
-                                    project.medias = [WistiaMedia]()
-                                    projectsByHashedID[project.hashedID] = project
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let JSON = value as? [[String: AnyObject]] {
+                            var projectsByHashedID = [String: WistiaProject]()
+                            
+                            for mediaHash in JSON {
+                                //1) Make Media
+                                if let media = ModelBuilder.mediaFromHash(mediaHash) {
+                                    
+                                    //2) Find project it's in (or create it anew)
+                                    if let projectHash = mediaHash["project"] as? [String: AnyObject], var project = ModelBuilder.projectFromHash(projectHash) {
+                                        if projectsByHashedID.indexForKey(project.hashedID) == nil {
+                                            project.medias = [WistiaMedia]()
+                                            projectsByHashedID[project.hashedID] = project
+                                        }
+                                        //3) add media to project it's in
+                                        projectsByHashedID[project.hashedID]!.medias!.append(media)
+                                    }
                                 }
-                                //3) add media to project it's in
-                                projectsByHashedID[project.hashedID]!.medias!.append(media)
+                                
                             }
+                            completionHandler(projects: Array(projectsByHashedID.values))
+                            
                         }
-
-                    }
-                    completionHandler(projects: Array(projectsByHashedID.values))
-
-                } else {
-                    completionHandler(projects: [])
+                    
+                    // Failure, provide an empty result
+                    case .Failure(let error):
+                        completionHandler(projects: [])
                 }
         }
     }
@@ -451,19 +542,25 @@ extension WistiaAPI {
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/medias.json", parameters: params)
             .responseJSON { response in
 
-                if let JSON = response.result.value as? [[String: AnyObject]] {
-                    var medias = [WistiaMedia]()
-
-                    for mediaHash in JSON {
-                        if let media = ModelBuilder.mediaFromHash(mediaHash) {
-                            medias.append(media)
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let JSON = value as? [[String: AnyObject]] {
+                            
+                            // Map JSON and toss out nil values
+                            let medias = JSON.flatMap { ModelBuilder.mediaFromHash($0) }
+                            completionHandler(medias: medias)
+                            
                         }
-                    }
-                    completionHandler(medias: medias)
-
-                } else {
-                    completionHandler(medias: [])
+                        
+                    // Failure, provide an empty result
+                    case .Failure(let error):
+                        completionHandler(medias: [])
                 }
+                
         }
     }
 
@@ -485,12 +582,20 @@ extension WistiaAPI {
 
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", parameters: params)
             .responseJSON { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    media = ModelBuilder.mediaFromHash(JSON) {
-                    completionHandler(media: media)
-
-                } else {
-                    completionHandler(media: nil)
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        if let
+                            JSON = value as? [String: AnyObject],
+                            media = ModelBuilder.mediaFromHash(JSON) {
+                            completionHandler(media: media)
+                        }
+                    // Failure, provide an empty result
+                    case .Failure(let error):
+                        completionHandler(media: nil)
                 }
         }
     }
@@ -526,12 +631,25 @@ extension WistiaAPI {
 
         Alamofire.request(.PUT, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", parameters: params)
             .responseJSON(completionHandler: { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 200 {
-                    completionHandler(success: true, updatedMedia: media)
-                } else {
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                // Success! Let's parse that JSON.
+                case .Success(let value):
+                    
+                    if let
+                        JSON = value as? [String: AnyObject],
+                        media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 200 {
+                        completionHandler(success: true, updatedMedia: media)
+                    }
+                    
+                // Failure, provide an empty result
+                case .Failure(let error):
                     completionHandler(success: true, updatedMedia: nil)
                 }
+                
+                
             })
     }
 
@@ -558,12 +676,24 @@ extension WistiaAPI {
 
         Alamofire.request(.DELETE, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", parameters: params)
             .responseJSON(completionHandler: { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 200 {
-                    completionHandler(success: true, deletedMedia: media)
-                } else {
-                    completionHandler(success: true, deletedMedia: nil)
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let
+                            JSON = value as? [String: AnyObject],
+                            media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 200 {
+                            completionHandler(success: true, deletedMedia: media)
+                        }
+                        
+                    // Failure, provide an empty result
+                    case .Failure(let error):
+                        completionHandler(success: true, deletedMedia: nil)
                 }
+                
             })
     }
 
@@ -600,12 +730,24 @@ extension WistiaAPI {
 
         Alamofire.request(.POST, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/copy.json", parameters: params)
             .responseJSON(completionHandler: { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 201 {
-                    completionHandler(success: true, copiedMedia: media)
-                } else {
-                    completionHandler(success: true, copiedMedia: nil)
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let
+                            JSON = value as? [String: AnyObject],
+                            media = ModelBuilder.mediaFromHash(JSON) where response.response?.statusCode == 201 {
+                            completionHandler(success: true, copiedMedia: media)
+                        }
+                        
+                    // Failure, provide an empty result
+                    case .Failure(let error):
+                        completionHandler(success: true, copiedMedia: nil)
                 }
+                
             })
     }
 
@@ -630,12 +772,23 @@ extension WistiaAPI {
 
         Alamofire.request(.GET, "\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/stats.json", parameters: params)
             .responseJSON { (response) in
-                if let JSON = response.result.value as? [String: AnyObject],
-                    media = ModelBuilder.mediaFromHash(JSON) {
-                    completionHandler(media: media)
-
-                } else {
-                    completionHandler(media: nil)
+                
+                // 'Swift-like' way to handle Alamofire responses
+                switch response.result {
+                    
+                    // Success! Let's parse that JSON.
+                    case .Success(let value):
+                        
+                        if let
+                            JSON = value as? [String: AnyObject],
+                            media = ModelBuilder.mediaFromHash(JSON) {
+                            completionHandler(media: media)
+                            
+                    }
+                        
+                    // Failure, provide an empty result
+                    case .Failure(let error):
+                        completionHandler(media: nil)
                 }
         }
     }

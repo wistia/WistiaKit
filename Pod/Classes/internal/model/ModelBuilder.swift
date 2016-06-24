@@ -136,7 +136,7 @@ internal class ModelBuilder {
         let statsHash = mediaHash["stats"] as? [String:AnyObject]
         let stats = ModelBuilder.wistiaMediaStatsFromHash(statsHash)
 
-        var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, created: created, updated: updated, assets: [WistiaAsset](), description: description, hashedID: hashedID, embedOptions: mediaEmbedOptions, stats: stats, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical, captions: nil)
+        var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, created: created, updated: updated, assets: [WistiaAsset](), description: description, hashedID: hashedID, embedOptions: mediaEmbedOptions, stats: stats, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical)
 
         // -- Assets (are optional) --
         if let assets = mediaHash["assets"] as? [[String:AnyObject]] {
@@ -243,14 +243,11 @@ internal class ModelBuilder {
                 }
             }
             
-            if let captionsHash = plugin["captions-v1"] as? [String:AnyObject] {
-                // presence of this hash means captions are available unless stated otherwise
-                mediaEmbedOptions.captionsAvailable = true
-                if let captionsAvailable = captionsHash["on"] as? NSString {
-                    mediaEmbedOptions.captionsAvailable = captionsAvailable.boolValue
-                }
+            if let captionsHash = plugin["captions-v1"] as? [String:AnyObject],
+                captionsAvailable = captionsHash["on"] as? NSString {
+                mediaEmbedOptions.captionsAvailable = captionsAvailable.boolValue
                 if let captionsOnByDefault = captionsHash["onByDefault"] as? NSString {
-                    mediaEmbedOptions.captionsOnByDefault = mediaEmbedOptions.captionsAvailable && captionsOnByDefault.boolValue
+                    mediaEmbedOptions.captionsOnByDefault = captionsAvailable.boolValue && captionsOnByDefault.boolValue
                 }
 
             }
@@ -269,37 +266,6 @@ internal class ModelBuilder {
 
             return WistiaMediaStats(pageLoads: pageLoads, visitors: visitors, percentOfVisitorsClickingPlay: percentOfVisitorsClickingPlay, plays: plays, averagePercentWatched: averagePercentWatched)
         }
-        return nil
-    }
-
-    internal static func wistiaCaptionsFrom(captionsHash:[String: AnyObject]?) -> WistiaCaptions? {
-        if let cHash = captionsHash,
-            cID = cHash["id"] as? Int,
-            language = cHash["language"] as? String,
-            englishName = cHash["english_name"] as? String,
-            nativeName = cHash["native_name"] as? String,
-            rightToLeft = cHash["right_to_left"] as? Bool,
-            linesHash = cHash["hash"] as? [String: AnyObject],
-            lines = linesHash["lines"] as? [[String:AnyObject]] {
-
-            var captionSegments = [WistiaCaptionSegment]()
-            for line in lines {
-                if let start = line["start"] as? Float,
-                    end = line["end"] as? Float,
-                    text = line["text"] as? [String] {
-                    let seg = WistiaCaptionSegment(startTime: start, endTime: end, text: text)
-                    captionSegments.append(seg)
-                }
-            }
-
-            //WistiaCaptionsRenderer assumes segments are in order
-            captionSegments.sortInPlace({ (segA, segB) -> Bool in
-                segA.startTime < segB.startTime
-            })
-
-            return WistiaCaptions(captionsID: cID, languageCode: language, englishName: englishName, nativeName: nativeName, rightToLeft: rightToLeft, captionSegments: captionSegments)
-        }
-
         return nil
     }
 
