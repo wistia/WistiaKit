@@ -228,7 +228,7 @@ public final class WistiaPlayer: NSObject {
 
     Changing the value has no immediate effect on the idle timer.
     */
-    var preventIdleTimerDuringPlayback = true
+    public var preventIdleTimerDuringPlayback = true
 
 
     /**
@@ -274,7 +274,7 @@ public final class WistiaPlayer: NSObject {
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
         _which does not guarantee success of the asynchronous video load_.
     */
-    func replaceCurrentVideoWithVideoForMedia(media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
+    public func replaceCurrentVideoWithVideoForMedia(media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
         guard media != self.media else { return false }
         pause()
 
@@ -317,7 +317,7 @@ public final class WistiaPlayer: NSObject {
     //MARK: - Controlling Playback
 
     /// Play the video.  This method is idempotent.
-    func play() {
+    public func play() {
         if avPlayer.rate == 0 {
             avPlayer.play()
             logEvent(.Play)
@@ -325,7 +325,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     /// Pause the video.  This method is idempotent.
-    func pause() {
+    public func pause() {
         if avPlayer.rate > 0 {
             avPlayer.pause()
             logEvent(.Pause)
@@ -333,7 +333,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     /// Play the video if it's currently paused.  Pause if it's currently playing.
-    func togglePlayPause() {
+    public func togglePlayPause() {
         if avPlayer.rate > 0 {
             avPlayer.pause()
             logEvent(.Pause)
@@ -355,7 +355,7 @@ public final class WistiaPlayer: NSObject {
         which indicates if the seek operation completed.  `False` indicates another seek request interrupted this one.
 
     */
-    func seekToTime(time:CMTime, tolerance: CMTime = CMTime(seconds: 1, preferredTimescale: 10), completionHandler: ((Bool) -> Void)?){
+    public func seekToTime(time:CMTime, tolerance: CMTime = CMTime(seconds: 1, preferredTimescale: 10), completionHandler: ((Bool) -> Void)?){
         self.avPlayer.seekToTime(time, toleranceBefore: tolerance, toleranceAfter: tolerance) { (finished) -> Void in
             if finished {
                 self.logEvent(.Seek)
@@ -369,7 +369,7 @@ public final class WistiaPlayer: NSObject {
     /**
      - Returns: The current time of the currently playing video.
     */
-    func currentTime() -> CMTime {
+    public func currentTime() -> CMTime {
         return avPlayer.currentTime()
     }
 
@@ -378,7 +378,7 @@ public final class WistiaPlayer: NSObject {
      
      See `AVPlayer.rate` for further information.
      */
-    var rate:Float {
+    public var rate:Float {
         get {
             return avPlayer.rate
         }
@@ -393,7 +393,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     /// - Returns: `True` if the video is currently playing at any rate.
-    func isPlaying() -> Bool {
+    public func isPlaying() -> Bool {
         return rate > 0.0
     }
 
@@ -448,7 +448,7 @@ public final class WistiaPlayer: NSObject {
 
      - Returns: A new `AVPlayerLayer` to which we can direct our visual output.
      */
-    func newPlayerLayer() -> AVPlayerLayer? {
+    public func newPlayerLayer() -> AVPlayerLayer? {
         return AVPlayerLayer(player: avPlayer)
     }
 
@@ -460,7 +460,7 @@ public final class WistiaPlayer: NSObject {
      - Warning: The performance and functionality of a `WistiaPlayer` instance is undefined if the underlying
      `AVPlayer` is manipulated directly outside of `AVPlayerViewController`.
     */
-    func configureWithUnderlyingPlayer(vc:AVPlayerViewController) {
+    public func configureWithUnderlyingPlayer(vc:AVPlayerViewController) {
         vc.player = self.avPlayer
     }
 
@@ -477,7 +477,7 @@ public final class WistiaPlayer: NSObject {
      No additional work is needed on your part, but the video must have captions and they must be enabled in the
      video's customizations.
     */
-    let captionsRenderer = WistiaCaptionsRenderer()
+    public let captionsRenderer = WistiaCaptionsRenderer()
 
     //MARK: - Internal
 
