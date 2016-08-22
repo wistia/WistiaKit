@@ -1,24 +1,26 @@
-// ImageFilter.swift
 //
-// Copyright (c) 2015-2016 Alamofire Software Foundation (http://alamofire.org/)
+//  ImageFilter.swift
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+//  Copyright (c) 2015-2016 Alamofire Software Foundation (http://alamofire.org/)
 //
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
 
 import Foundation
 
@@ -33,7 +35,7 @@ import Cocoa
 /// The `ImageFilter` protocol defines properties for filtering an image as well as identification of the filter.
 public protocol ImageFilter {
     /// A closure used to create an alternative representation of the given image.
-    var filter: Image -> Image { get }
+    var filter: (Image) -> Image { get }
 
     /// The string used to uniquely identify the filter operation.
     var identifier: String { get }
@@ -41,7 +43,7 @@ public protocol ImageFilter {
 
 extension ImageFilter {
     /// The unique identifier for any `ImageFilter` type.
-    public var identifier: String { return "\(self.dynamicType)" }
+    public var identifier: String { return "\(type(of: self))" }
 }
 
 // MARK: - Sizable
@@ -58,7 +60,7 @@ extension ImageFilter where Self: Sizable {
         let width = Int64(round(size.width))
         let height = Int64(round(size.height))
 
-        return "\(self.dynamicType)-size:(\(width)x\(height))"
+        return "\(type(of: self))-size:(\(width)x\(height))"
     }
 }
 
@@ -74,7 +76,7 @@ extension ImageFilter where Self: Roundable {
     /// The unique idenitifier for an `ImageFilter` conforming to the `Roundable` protocol.
     public var identifier: String {
         let radius = Int64(round(self.radius))
-        return "\(self.dynamicType)-radius:(\(radius))"
+        return "\(type(of: self))-radius:(\(radius))"
     }
 }
 
@@ -86,7 +88,7 @@ public struct DynamicImageFilter: ImageFilter {
     public let identifier: String
 
     /// A closure used to create an alternative representation of the given image.
-    public let filter: Image -> Image
+    public let filter: (Image) -> Image
 
     /**
         Initializes the `DynamicImageFilter` instance with the specified identifier and filter closure.
@@ -96,7 +98,7 @@ public struct DynamicImageFilter: ImageFilter {
 
         - returns: The new `DynamicImageFilter` instance.
     */
-    public init(_ identifier: String, filter: Image -> Image) {
+    public init(_ identifier: String, filter: @escaping (Image) -> Image) {
         self.identifier = identifier
         self.filter = filter
     }
@@ -113,11 +115,11 @@ public protocol CompositeImageFilter: ImageFilter {
 public extension CompositeImageFilter {
     /// The unique idenitifier for any `CompositeImageFilter` type.
     var identifier: String {
-        return filters.map { $0.identifier }.joinWithSeparator("_")
+        return filters.map { $0.identifier }.joined(separator: "_")
     }
 
     /// The filter closure for any `CompositeImageFilter` type.
-    var filter: Image -> Image {
+    var filter: (Image) -> Image {
         return { image in
             return self.filters.reduce(image) { $1.filter($0) }
         }
@@ -175,7 +177,7 @@ public struct ScaledToSizeFilter: ImageFilter, Sizable {
     }
 
     /// The filter closure used to create the modified representation of the given image.
-    public var filter: Image -> Image {
+    public var filter: (Image) -> Image {
         return { image in
             return image.af_imageScaledToSize(self.size)
         }
@@ -201,7 +203,7 @@ public struct AspectScaledToFitSizeFilter: ImageFilter, Sizable {
     }
 
     /// The filter closure used to create the modified representation of the given image.
-    public var filter: Image -> Image {
+    public var filter: (Image) -> Image {
         return { image in
             return image.af_imageAspectScaledToFitSize(self.size)
         }
@@ -228,7 +230,7 @@ public struct AspectScaledToFillSizeFilter: ImageFilter, Sizable {
     }
 
     /// The filter closure used to create the modified representation of the given image.
-    public var filter: Image -> Image {
+    public var filter: (Image) -> Image {
         return { image in
             return image.af_imageAspectScaledToFillSize(self.size)
         }
@@ -263,7 +265,7 @@ public struct RoundedCornersFilter: ImageFilter, Roundable {
     }
 
     /// The filter closure used to create the modified representation of the given image.
-    public var filter: Image -> Image {
+    public var filter: (Image) -> Image {
         return { image in
             return image.af_imageWithRoundedCornerRadius(
                 self.radius,
@@ -275,7 +277,7 @@ public struct RoundedCornersFilter: ImageFilter, Roundable {
     /// The unique idenitifier for an `ImageFilter` conforming to the `Roundable` protocol.
     public var identifier: String {
         let radius = Int64(round(self.radius))
-        return "\(self.dynamicType)-radius:(\(radius))-divided:(\(divideRadiusByImageScale))"
+        return "\(type(of: self))-radius:(\(radius))-divided:(\(divideRadiusByImageScale))"
     }
 }
 
@@ -291,7 +293,7 @@ public struct CircleFilter: ImageFilter {
     public init() {}
 
     /// The filter closure used to create the modified representation of the given image.
-    public var filter: Image -> Image {
+    public var filter: (Image) -> Image {
         return { image in
             return image.af_imageRoundedIntoCircle()
         }
@@ -319,10 +321,10 @@ public struct BlurFilter: ImageFilter {
     }
 
     /// The filter closure used to create the modified representation of the given image.
-    public var filter: Image -> Image {
+    public var filter: (Image) -> Image {
         return { image in
             let parameters = ["inputRadius": self.blurRadius]
-            return image.af_imageWithAppliedCoreImageFilter("CIGaussianBlur", filterParameters: parameters) ?? image
+            return image.af_imageWithAppliedCoreImageFilter("CIGaussianBlur", filterParameters: parameters as [String : AnyObject]?) ?? image
         }
     }
 }
@@ -359,7 +361,7 @@ public struct ScaledToSizeWithRoundedCornersFilter: CompositeImageFilter {
 
 // MARK: -
 
-/// Scales an image from the center while maintaining the aspect ratio to fit within a specified size, then rounds the 
+/// Scales an image from the center while maintaining the aspect ratio to fit within a specified size, then rounds the
 /// corners to the specified radius.
 public struct AspectScaledToFillSizeWithRoundedCornersFilter: CompositeImageFilter {
     /**

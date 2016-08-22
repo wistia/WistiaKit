@@ -29,7 +29,7 @@ public protocol WistiaPlayerDelegate : class {
      - Parameter player: The `WistiaPlayer` that has changed state.
      - Parameter newState: The new (and now-current) state of the player.
     */
-    func wistiaPlayer(player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State)
+    func wistiaPlayer(_ player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State)
 
     /**
      Informs the delegate the playback rate of the underlying `AVPlayer` has changed.  A rate of 0.0
@@ -38,7 +38,7 @@ public protocol WistiaPlayerDelegate : class {
      - Parameter player: The `WistiaPlayer` for which the playback rate changed.
      - Parameter newRate: The new playback rate of the current media.
      */
-    func wistiaPlayer(player:WistiaPlayer, didChangePlaybackRateTo newRate:Float)
+    func wistiaPlayer(_ player:WistiaPlayer, didChangePlaybackRateTo newRate:Float)
 
     /**
      Informs the delegate about the current progress of media playback.
@@ -58,7 +58,7 @@ public protocol WistiaPlayerDelegate : class {
      - Parameter currentTime: The current time in the video for which playback is occurring.
      - Parameter duration: The total length of the video (used, along with currentTime, to calculate progress).
     */
-    func wistiaPlayer(player:WistiaPlayer, didChangePlaybackProgressTo progress:Float, atCurrentTime currentTime:CMTime, ofDuration duration:CMTime)
+    func wistiaPlayer(_ player:WistiaPlayer, didChangePlaybackProgressTo progress:Float, atCurrentTime currentTime:CMTime, ofDuration duration:CMTime)
 
     /**
      Informs the delegate that playback has reached the end of the media.
@@ -71,7 +71,7 @@ public protocol WistiaPlayerDelegate : class {
      - Parameter player: The `WistiaPlayer` for which playback has reached the end.
 
     */
-    func wistiaPlayerDidPlayToEndTime(player:WistiaPlayer)
+    func didPlayToEndTime(of player:WistiaPlayer)
 
     /**
      Informs the delegate of the specific `WistiaAsset` that will be loaded for playback.
@@ -86,7 +86,7 @@ public protocol WistiaPlayerDelegate : class {
         (aka Manifest of Manifests). `asset` will be `nil`.
 
      */
-    func wistiaPlayer(player:WistiaPlayer, willLoadVideoForMedia media:WistiaMedia, usingAsset asset:WistiaAsset?, usingHLSMasterIndexManifest: Bool)
+    func wistiaPlayer(_ player:WistiaPlayer, willLoadVideoForMedia media:WistiaMedia, usingAsset asset:WistiaAsset?, usingHLSMasterIndexManifest: Bool)
 }
 
 
@@ -149,7 +149,7 @@ public final class WistiaPlayer: NSObject {
         self.avPlayer = AVPlayer()
         super.init()
 
-        addPlayerObservers(self.avPlayer)
+        addPlayerObservers(for: self.avPlayer)
     }
 
     /**
@@ -183,7 +183,7 @@ public final class WistiaPlayer: NSObject {
      */
     public convenience init(hashedID: String, referrer: String, requireHLS: Bool = true) {
         self.init(referrer:referrer, requireHLS:requireHLS)
-        self.replaceCurrentVideoWithVideoForHashedID(hashedID)
+        self.replaceCurrentVideoWithVideo(forHashedID: hashedID)
     }
 
     /**
@@ -215,7 +215,7 @@ public final class WistiaPlayer: NSObject {
      */
     public convenience init(media: WistiaMedia, referrer: String, requireHLS: Bool = true) {
         self.init(referrer:referrer, requireHLS:requireHLS)
-        self.replaceCurrentVideoWithVideoForMedia(media)
+        self.replaceCurrentVideoWithVideo(forMedia: media)
     }
 
     //MARK: - Instance Properties
@@ -274,12 +274,12 @@ public final class WistiaPlayer: NSObject {
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
         _which does not guarantee success of the asynchronous video load_.
     */
-    public func replaceCurrentVideoWithVideoForMedia(media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
+    public func replaceCurrentVideoWithVideo(forMedia media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
         guard media != self.media else { return false }
         pause()
 
         let slug:String? = (asset != nil ? asset!.slug : nil)
-        readyPlaybackForMedia(media, choosingAssetWithSlug: slug)
+        readyPlayback(for: media, choosingAssetWithSlug: slug)
         return true
     }
 
@@ -299,16 +299,16 @@ public final class WistiaPlayer: NSObject {
      - Returns: `False` if the current `WistiaMedia.hashedID` matches the parameter (resulting in a no-op).  `True` otherwise,
      _which does not guarantee success of the asynchronous video load_.
      */
-    public func replaceCurrentVideoWithVideoForHashedID(hashedID: String, assetWithSlug slug: String? = nil) -> Bool {
+    public func replaceCurrentVideoWithVideo(forHashedID hashedID: String, assetWithSlug slug: String? = nil) -> Bool {
         guard media?.hashedID != hashedID else { return false }
         avPlayer.pause()
 
-        WistiaAPI.mediaInfoForHash(hashedID) { (media) -> () in
+        WistiaAPI.mediaInfo(for: hashedID) { (media) -> () in
             if let m = media {
                 self.media = m
-                self.readyPlaybackForMedia(m, choosingAssetWithSlug: slug)
+                self.readyPlayback(for: m, choosingAssetWithSlug: slug)
             } else {
-                self.state = .MediaNotFoundError(badHashedID: hashedID)
+                self.state = .mediaNotFoundError(badHashedID: hashedID)
             }
         }
         return true
@@ -320,7 +320,7 @@ public final class WistiaPlayer: NSObject {
     public func play() {
         if avPlayer.rate == 0 {
             avPlayer.play()
-            logEvent(.Play)
+            log(.play)
         }
     }
 
@@ -328,7 +328,7 @@ public final class WistiaPlayer: NSObject {
     public func pause() {
         if avPlayer.rate > 0 {
             avPlayer.pause()
-            logEvent(.Pause)
+            log(.pause)
         }
     }
 
@@ -336,10 +336,10 @@ public final class WistiaPlayer: NSObject {
     public func togglePlayPause() {
         if avPlayer.rate > 0 {
             avPlayer.pause()
-            logEvent(.Pause)
+            log(.pause)
         } else {
             avPlayer.play()
-            logEvent(.Play)
+            log(.play)
         }
     }
 
@@ -355,10 +355,10 @@ public final class WistiaPlayer: NSObject {
         which indicates if the seek operation completed.  `False` indicates another seek request interrupted this one.
 
     */
-    public func seekToTime(time:CMTime, tolerance: CMTime = CMTime(seconds: 1, preferredTimescale: 10), completionHandler: ((Bool) -> Void)?){
-        self.avPlayer.seekToTime(time, toleranceBefore: tolerance, toleranceAfter: tolerance) { (finished) -> Void in
+    public func seek(to time:CMTime, withTolerance tolerance: CMTime = CMTime(seconds: 1, preferredTimescale: 10), completionHandler: ((Bool) -> Void)?){
+        self.avPlayer.seek(to: time, toleranceBefore: tolerance, toleranceAfter: tolerance) { (finished) -> Void in
             if finished {
-                self.logEvent(.Seek)
+                self.log(.seek)
             }
             completionHandler?(finished)
         }
@@ -385,9 +385,9 @@ public final class WistiaPlayer: NSObject {
         set(newRate) {
             avPlayer.rate = newRate
             if newRate == 1.0 {
-                logEvent(.Play)
+                log(.play)
             } else if rate == 0.0 {
-                logEvent(.Pause)
+                log(.pause)
             }
         }
     }
@@ -411,29 +411,29 @@ public final class WistiaPlayer: NSObject {
      */
     public enum State {
         /// `WistiaPlayer` instance created but has not yet started loading a video
-        case Initialized
+        case initialized
 
         /// About to examine a `WistiaMedia` and choose a `WistiaAsset` for playback
-        case VideoPreLoading
+        case videoPreLoading
 
         /// `WistiaAsset` has been chosen and underlying media file will start loading
-        case VideoLoading
+        case videoLoading
 
         /// A `WistiaMedia` could not be found for the given `hashedID`
-        case MediaNotFoundError(badHashedID: String)
+        case mediaNotFoundError(badHashedID: String)
 
         /// The `WistiaMedia` or `WistiaAsset` could not be loaded.
         /// This is possibly due to unsatisfiable HLS requirement.  
         /// See description for more information.
-        case VideoLoadingError(description:String, problemMedia: WistiaMedia?, problemAsset: WistiaAsset?)
+        case videoLoadingError(description:String, problemMedia: WistiaMedia?, problemAsset: WistiaAsset?)
 
         /// An error occurred during playback.  See description for more information.
-        case VideoPlaybackError(description:String)
+        case videoPlaybackError(description:String)
 
         /// The video file has completed initial loading and is ready for playback.
         /// This state is only entered once per video loaded.  Player remains in this state while the video
         /// is playing.  Use the delegate for playback state changes.
-        case VideoReadyForPlayback
+        case videoReadyForPlayback
     }
 
     //MARK: -
@@ -460,7 +460,7 @@ public final class WistiaPlayer: NSObject {
      - Warning: The performance and functionality of a `WistiaPlayer` instance is undefined if the underlying
      `AVPlayer` is manipulated directly outside of `AVPlayerViewController`.
     */
-    public func configureWithUnderlyingPlayer(vc:AVPlayerViewController) {
+    public func configure(with vc:AVPlayerViewController) {
         vc.player = self.avPlayer
     }
 
@@ -482,11 +482,11 @@ public final class WistiaPlayer: NSObject {
     //MARK: - Internal
 
     deinit {
-        removePlayerItemObservers(self.avPlayer.currentItem)
-        removePlayerObservers(self.avPlayer)
+        removePlayerItemObservers(for: self.avPlayer.currentItem)
+        removePlayerObservers(for: self.avPlayer)
     }
 
-    internal(set) var state:State = .Initialized {
+    internal(set) var state:State = .initialized {
         didSet {
             self.delegate?.wistiaPlayer(self, didChangeStateTo: state)
         }
@@ -515,11 +515,11 @@ public final class WistiaPlayer: NSObject {
     //Raw Observeration
     internal var playerItemContext = 1
     internal var playerContext = 2
-    internal var periodicTimeObserver:AnyObject?
+    internal var periodicTimeObserver: Any?
 
     /// Calls super if the posted KVO isn't handled.  Declared `final` becuase overriding would cause incorrect behavior.
-    override final public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        _wkObserveValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+    final public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        _wkObserveValue(forKeyPath: keyPath, ofObject: object as AnyObject?, change: change, context: context!)
     }
 }
 
@@ -532,13 +532,13 @@ public final class WistiaPlayer: NSObject {
  */
 public func == (a: WistiaPlayer.State, b: WistiaPlayer.State) -> Bool {
     switch(a, b){
-    case (.Initialized, .Initialized): return true
-    case (.VideoPreLoading, .VideoPreLoading): return true
-    case (.VideoLoading, .VideoLoading): return true
-    case (.MediaNotFoundError(_), .MediaNotFoundError(_)): return true
-    case (.VideoLoadingError(_, _, _), .VideoLoadingError(_, _, _)): return true
-    case (.VideoPlaybackError(_), .VideoPlaybackError(_)): return true
-    case (.VideoReadyForPlayback, .VideoReadyForPlayback): return true
+    case (.initialized, .initialized): return true
+    case (.videoPreLoading, .videoPreLoading): return true
+    case (.videoLoading, .videoLoading): return true
+    case (.mediaNotFoundError(_), .mediaNotFoundError(_)): return true
+    case (.videoLoadingError(_, _, _), .videoLoadingError(_, _, _)): return true
+    case (.videoPlaybackError(_), .videoPlaybackError(_)): return true
+    case (.videoReadyForPlayback, .videoReadyForPlayback): return true
     default:
         return false
     }

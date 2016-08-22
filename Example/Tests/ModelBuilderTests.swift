@@ -16,42 +16,42 @@ class ModelBuilderTests: XCTestCase {
     //MARK: - Project
 
     func testProjectBuildsMediasWhenIncluded() {
-        let expectation = expectationWithDescription("created project with media")
+        let expectation = self.expectation(description: "created project with media")
 
-        wAPI.showProject("8q6efplb9n") { (project) in
-            if let medias = project?.medias where medias.count > 0 {
+        wAPI.showProject(forHash: "8q6efplb9n") { (project) in
+            if let medias = project?.medias , medias.count > 0 {
                 expectation.fulfill()
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     //MARK: - Media
 
     func testDateFormat() {
-        let expectation = expectationWithDescription("media has non-nil dates")
+        let expectation = self.expectation(description: "media has non-nil dates")
 
-        wAPI.showMedia("aza8hcsnd8") { (media) in
+        wAPI.showMedia(forHash: "aza8hcsnd8") { (media) in
             if media?.created != nil && media?.updated != nil {
                 expectation.fulfill()
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     //MARK: - Captions
 
     func testValidCaptions() {
-        let expectation = expectationWithDescription("captions are parsed")
+        let expectation = self.expectation(description: "captions are parsed")
 
-        WistiaAPI._captionsForHash("8tjg8ftj2p") { (captions) in
+        WistiaAPI.captions(for: "8tjg8ftj2p") { (captions) in
             if captions.count > 0 && captions[0].captionSegments.count > 0 {
                 expectation.fulfill()
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 }

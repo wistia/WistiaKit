@@ -11,51 +11,56 @@ import Alamofire
 
 internal extension WistiaAPI {
 
-    internal static func _captionsForHash(hash:String, completionHandler: (captions:[WistiaCaptions])->() ) {
-        Alamofire.request(.GET, "https://fast.wistia.com/embed/captions/\(hash).json", parameters: nil)
+    internal static func captions(for hash:String, completionHandler: @escaping (_ captions:[WistiaCaptions])->() ) {
+        Alamofire.request("https://fast.wistia.com/embed/captions/\(hash).json", withMethod: .get)
             .responseJSON { response in
 
                 switch response.result {
-                case .Success(let value):
+                case .success(let value):
                     if let JSON = value as? [String: AnyObject],
-                        captionsJSONArray = JSON["captions"] as? [[String: AnyObject]]{
+                        let captionsJSONArray = JSON["captions"] as? [[String: AnyObject]]{
 
                         var captions = [WistiaCaptions]()
                         for captionsJSON in captionsJSONArray {
-                            if let c = ModelBuilder.wistiaCaptionsFrom(captionsJSON) {
+                            if let c = ModelBuilder.wistiaCaptions(from: captionsJSON) {
                                 captions.append(c)
                             }
                         }
-                        completionHandler(captions: captions)
+                        completionHandler(captions)
                     }
 
-                case .Failure:
-                    //TODO: Incorporate error handling from public API
-                    completionHandler(captions: [WistiaCaptions]())
+                case .failure:
+                    completionHandler([WistiaCaptions]())
                 }
         }
         
     }
 
-    internal static func mediaInfoForHash(hash:String, completionHandler: (media:WistiaMedia?)->() ) {
-        Alamofire.request(.GET, "https://fast.wistia.net/embed/medias/\(hash).json", parameters: nil)
+    internal static func mediaInfo(for hash:String, completionHandler: @escaping (_ media:WistiaMedia?)->() ) {
+        Alamofire.request("https://fast.wistia.net/embed/medias/\(hash).json", withMethod: .get)
             .responseJSON { response in
 
-                if let JSON = response.result.value as? [String:AnyObject],
-                    mediaHash = JSON["media"] as? [String:AnyObject] {
+                switch response.result {
+                case .success(let value):
+                    if let JSON = value as? [String:AnyObject],
+                        let mediaHash = JSON["media"] as? [String:AnyObject] {
 
-                    let wMedia = ModelBuilder.mediaFromHash(mediaHash)
-                    completionHandler(media: wMedia)
+                        let wMedia = ModelBuilder.wistiaMedia(from: mediaHash)
+                        completionHandler(wMedia)
 
-                } else {
-                    completionHandler(media: nil)
+                    } else {
+                        completionHandler(nil)
+                    }
+                case .failure:
+                    completionHandler(nil)
                 }
+
         }
     }
 
-    internal static func addSorting(sorting: (by: SortBy, direction: SortDirection)?, to params: [String: AnyObject]) -> [String: AnyObject] {
+    internal static func addSorting(_ sorting: (by: SortBy, direction: SortDirection)?, to params: [String: Any]) -> [String: Any] {
         var p = params
-        if let sortBy = sorting?.by, sortDirection = sorting?.direction {
+        if let sortBy = sorting?.by, let sortDirection = sorting?.direction {
             p["sort_by"] = sortBy.rawValue
             p["sort_direction"] = sortDirection.rawValue
         }

@@ -40,16 +40,16 @@ class CaptionsLabel: UILabel {
 
     // Return a drawing rectange that is `edgeInsets` larger than the bounds needed for the text alone.
     // We can then draw within that margin later.
-    override func textRectForBounds(bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+    override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
         var rect = UIEdgeInsetsInsetRect(bounds, edgeInsets)
-        rect = super.textRectForBounds(rect, limitedToNumberOfLines: numberOfLines)
+        rect = super.textRect(forBounds: rect, limitedToNumberOfLines: numberOfLines)
         let inverseEdgeInsets = UIEdgeInsetsMake(-edgeInsets.top, -edgeInsets.left, -edgeInsets.bottom, -edgeInsets.right)
         return UIEdgeInsetsInsetRect(rect, inverseEdgeInsets)
     }
 
     // The given `rect` is `edgeInsets` larger than needed.  Just draw `edgeInsets` within it and we have our margin!
-    override func drawTextInRect(rect: CGRect) {
-        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, edgeInsets))
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, edgeInsets))
     }
 
 }

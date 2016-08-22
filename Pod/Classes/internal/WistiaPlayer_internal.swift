@@ -25,44 +25,44 @@ internal extension WistiaPlayer {
 
     //MARK: - Private Helpers
 
-    internal func readyPlaybackForMedia(media: WistiaMedia, choosingAssetWithSlug slug: String?) {
+    internal func readyPlayback(for media: WistiaMedia, choosingAssetWithSlug slug: String?) {
         self.media = media
-        self.state = .VideoPreLoading
+        self.state = .videoPreLoading
 
-        guard media.status != .Failed else {
-            self.state = .VideoLoadingError(description: "Media \(media.hashedID) failed processing", problemMedia: media, problemAsset: nil)
+        guard media.status != .failed else {
+            self.state = .videoLoadingError(description: "Media \(media.hashedID) failed processing", problemMedia: media, problemAsset: nil)
             return
         }
 
-        guard media.status != .Queued else {
-            self.state = .VideoLoadingError(description: "Media \(media.hashedID) has not started processing", problemMedia: media, problemAsset: nil)
+        guard media.status != .queued else {
+            self.state = .videoLoadingError(description: "Media \(media.hashedID) has not started processing", problemMedia: media, problemAsset: nil)
             return
         }
 
         //assuming playback on local device, target asset width is the largest dimension of device
-        let targetAssetWidth = media.spherical ? SphericalTargetAssetWidth : Int64(max(UIScreen.mainScreen().nativeBounds.width, UIScreen.mainScreen().nativeBounds.height))
+        let targetAssetWidth = media.spherical ? SphericalTargetAssetWidth : Int64(max(UIScreen.main.nativeBounds.width, UIScreen.main.nativeBounds.height))
 
         do {
-            let url = try bestPlaybackURLForMedia(media, assetWithSlug: slug, requireHLS: self.requireHLS, targetWidth: targetAssetWidth)
+            let url = try bestPlaybackUrl(for: media, andAssetWithSlug: slug, requiringHLS: self.requireHLS, atTargetWidth: targetAssetWidth)
             //-- Out with the old (if applicable)
-            removePlayerItemObservers(avPlayer.currentItem)
+            removePlayerItemObservers(for: avPlayer.currentItem)
 
             //-- In with the new
-            self.state = .VideoLoading
-            statsCollector = WistiaStatsManager.sharedInstance.newEventCollectorForMedia(media, referrer: self.referrer)
+            self.state = .videoLoading
+            statsCollector = WistiaStatsManager.sharedInstance.newEventCollector(forMedia: media, withReferrer: self.referrer)
 
-            let avAsset = AVURLAsset(URL: url)
+            let avAsset = AVURLAsset(url: url)
             let avPlayerItem = AVPlayerItem(asset: avAsset)
-            addPlayerItemObservers(avPlayerItem)
-            avPlayer.replaceCurrentItemWithPlayerItem(avPlayerItem)
-        } catch URLDeterminationError.NoAsset {
-            self.state = .VideoLoadingError(description: "Media \(media.hashedID) has no assets compatible with this player's configuration.", problemMedia: media, problemAsset: nil)
-        } catch URLDeterminationError.NoHLSAsset {
-            self.state = .VideoLoadingError(description: "Media \(media.hashedID) has no HLS assets compatible with this WistiaPlayer, configured to require HLS for playback.", problemMedia: media, problemAsset: nil)
-        } catch URLDeterminationError.AssetNotReady(let asset) {
-            self.state = .VideoLoadingError(description: "Asset with slug \(asset.slug), for media \(media.hashedID), is not ready.", problemMedia: media, problemAsset: asset)
+            addPlayerItemObservers(for: avPlayerItem)
+            avPlayer.replaceCurrentItem(with: avPlayerItem)
+        } catch URLDeterminationError.noAsset {
+            self.state = .videoLoadingError(description: "Media \(media.hashedID) has no assets compatible with this player's configuration.", problemMedia: media, problemAsset: nil)
+        } catch URLDeterminationError.noHLSAsset {
+            self.state = .videoLoadingError(description: "Media \(media.hashedID) has no HLS assets compatible with this WistiaPlayer, configured to require HLS for playback.", problemMedia: media, problemAsset: nil)
+        } catch URLDeterminationError.assetNotReady(let asset) {
+            self.state = .videoLoadingError(description: "Asset with slug \(asset.slug), for media \(media.hashedID), is not ready.", problemMedia: media, problemAsset: asset)
         } catch {
-            self.state = .VideoLoadingError(description: "Something unexpected happened looking for an asset to play for media \(media.hashedID).", problemMedia: media, problemAsset: nil)
+            self.state = .videoLoadingError(description: "Something unexpected happened looking for an asset to play for media \(media.hashedID).", problemMedia: media, problemAsset: nil)
         }
     }
 
@@ -70,15 +70,15 @@ internal extension WistiaPlayer {
     //https://github.com/wistia/wistia/blob/master/app/assets/javascripts/external/E-v1/_judge_judy.coffee
     //
     //We just need HLS (if required), otherwise mp4.  If there are options, we pick the best sized.
-    internal func bestPlaybackURLForMedia(media:WistiaMedia, assetWithSlug assetSlug: String?, requireHLS: Bool, targetWidth: Int64) throws -> NSURL {
+    internal func bestPlaybackUrl(for media:WistiaMedia, andAssetWithSlug assetSlug: String?, requiringHLS requireHLS: Bool, atTargetWidth targetWidth: Int64) throws -> URL {
         //If a particular asset is requested using the slug, that overrides all other configuration
         if let slug = assetSlug {
             if let assetMatchingSlug = (media.assets.filter { $0.slug == slug }).first {
-                guard assetMatchingSlug.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: assetMatchingSlug) }
+                guard assetMatchingSlug.status == .ready else { throw URLDeterminationError.assetNotReady(asset: assetMatchingSlug) }
                 delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: assetMatchingSlug, usingHLSMasterIndexManifest: false)
                 return assetMatchingSlug.url
             } else {
-                throw URLDeterminationError.NoAsset
+                throw URLDeterminationError.noAsset
             }
         }
 
@@ -90,32 +90,32 @@ internal extension WistiaPlayer {
 
         //If HLS isn't required, still prefer playback of HLS assets, which come in m3u8 containers
         let preferredAssets = media.assets.filter { $0.container == "m3u8" }
-        if let asset = largestAssetIn(preferredAssets, withoutGoingUnder: targetWidth) {
-            guard asset.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: asset) }
+        if let asset = largestAsset(in: preferredAssets, withoutGoingUnder: targetWidth) {
+            guard asset.status == .ready else { throw URLDeterminationError.assetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: asset, usingHLSMasterIndexManifest: false)
             return asset.url
         }
 
         // We can also playback assets in the mp4 container.
         let playableAssets = media.assets.filter { $0.container == "mp4" }
-        if let asset = largestAssetIn(playableAssets, withoutGoingUnder: targetWidth) {
-            guard asset.status == .Ready else { throw URLDeterminationError.AssetNotReady(asset: asset) }
+        if let asset = largestAsset(in: playableAssets, withoutGoingUnder: targetWidth) {
+            guard asset.status == .ready else { throw URLDeterminationError.assetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: asset, usingHLSMasterIndexManifest: false)
             return asset.url
         } else {
-            throw URLDeterminationError.NoAsset
+            throw URLDeterminationError.noAsset
         }
     }
 
-    internal enum URLDeterminationError : ErrorType {
-        case NoAsset
-        case NoHLSAsset
-        case AssetNotReady(asset:WistiaAsset)
+    internal enum URLDeterminationError : Error {
+        case noAsset
+        case noHLSAsset
+        case assetNotReady(asset:WistiaAsset)
     }
 
     //NB: May go under in size if there are no assets at least as large as the targetWidth
-    internal func largestAssetIn(assets:[WistiaAsset], withoutGoingUnder targetWidth:Int64) -> WistiaAsset? {
-        let sortedAssets = assets.sort { $0.width > $1.width }
+    internal func largestAsset(in assets:[WistiaAsset], withoutGoingUnder targetWidth:Int64) -> WistiaAsset? {
+        let sortedAssets = assets.sorted { $0.width > $1.width }
         var largestWithoutGoingUnder:WistiaAsset? =  sortedAssets.first
 
         for asset in sortedAssets {
@@ -127,102 +127,102 @@ internal extension WistiaPlayer {
         return largestWithoutGoingUnder
     }
 
-    internal func logEvent(event:WistiaMediaEventCollector.EventType, value:String? = nil) {
+    internal func log(_ event:WistiaMediaEventCollector.EventType, withValue value:String? = nil) {
         if let val = value {
-            statsCollector?.logEvent(event, value: val)
+            statsCollector?.log(event, withValue: val)
         } else {
-            statsCollector?.logEvent(event, value: avPlayer.currentTime().seconds.description)
+            statsCollector?.log(event, withValue: avPlayer.currentTime().seconds.description)
         }
     }
 
     //MARK:- Value add observation
 
-    internal func playerItem(playerItem:AVPlayerItem, statusWas oldStatus:AVPlayerStatus?, changedTo newStatus:AVPlayerStatus){
+    internal func playerItem(_ playerItem:AVPlayerItem, statusWas oldStatus:AVPlayerStatus?, changedTo newStatus:AVPlayerStatus){
         switch newStatus {
-        case .Failed:
-            self.state = .VideoPlaybackError(description: "Player Item Failed")
-        case .Unknown:
+        case .failed:
+            self.state = .videoPlaybackError(description: "Player Item Failed")
+        case .unknown:
             break
-        case .ReadyToPlay:
+        case .readyToPlay:
             //Unkown means "hasn't tried to load media"
-            if oldStatus == .Unknown {
-                self.state = .VideoReadyForPlayback
-                logEvent(.Initialized)
+            if oldStatus == .unknown {
+                self.state = .videoReadyForPlayback
+                log(.initialized)
             }
         }
     }
 
-    internal func player(player:AVPlayer, rateChangedTo rate:Float){
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+    internal func player(_ player:AVPlayer, rateChangedTo rate:Float){
+        DispatchQueue.main.async { () -> Void in
             self.delegate?.wistiaPlayer(self, didChangePlaybackRateTo: rate)
         }
         if preventIdleTimerDuringPlayback {
-            UIApplication.sharedApplication().idleTimerDisabled = (rate > 0.0)
+            UIApplication.shared.isIdleTimerDisabled = (rate > 0.0)
         }
-        logEvent(.PlaybackRateChange, value: String(format:"%f", rate))
+        log(.playbackRateChange, withValue: String(format:"%f", rate))
     }
 
-    internal func onPlayerTimeUpdate(time:CMTime) {
+    internal func onPlayerTimeUpdate(of time:CMTime) {
         //time and duration must both be valid and definite
-        guard (time.flags.contains(.Valid)) else { return }
-        guard let duration = avPlayer.currentItem?.duration where duration.flags.contains(.Valid) else { return }
-        guard (!time.flags.contains(.Indefinite) && !duration.flags.contains(.Indefinite)) else { return }
+        guard (time.flags.contains(.valid)) else { return }
+        guard let duration = avPlayer.currentItem?.duration , duration.flags.contains(.valid) else { return }
+        guard (!time.flags.contains(.indefinite) && !duration.flags.contains(.indefinite)) else { return }
 
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             self.delegate?.wistiaPlayer(self, didChangePlaybackProgressTo: Float(time.seconds / duration.seconds), atCurrentTime: time, ofDuration: duration)
         }
 
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             self.captionsRenderer.onPlayerTimeUpdate(time)
         }
 
         //reduced resolution and jitter implemented in the stats collector
-        logEvent(.Update)
+        log(.update)
     }
 
-    internal func playerItemPlayedToEnd(notification:NSNotification) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.delegate?.wistiaPlayerDidPlayToEndTime(self)
+    internal func playerItemPlayedToEnd(_ notification:Notification) {
+        DispatchQueue.main.async {
+            self.delegate?.didPlayToEndTime(of: self)
         }
-        logEvent(.End)
+        log(.end)
     }
 
-    internal func playerItemFailedToPlayToEnd(notification:NSNotification) {
+    internal func playerItemFailedToPlayToEnd(_ notification:Notification) {
         //ignoring for now
     }
 
     //MARK: - Raw Observeration
 
-    internal func addPlayerItemObservers(playerItem:AVPlayerItem) {
-        playerItem.addObserver(self, forKeyPath: "status", options: [.Old, .New], context: &playerItemContext)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WistiaPlayer.playerItemPlayedToEnd(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WistiaPlayer.playerItemFailedToPlayToEnd(_:)), name: AVPlayerItemFailedToPlayToEndTimeNotification, object: playerItem)
+    internal func addPlayerItemObservers(for playerItem:AVPlayerItem) {
+        playerItem.addObserver(self, forKeyPath: "status", options: [.old, .new], context: &playerItemContext)
+        NotificationCenter.default.addObserver(self, selector: #selector(WistiaPlayer.playerItemPlayedToEnd(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(WistiaPlayer.playerItemFailedToPlayToEnd(_:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
     }
 
-    internal func removePlayerItemObservers(playerItem:AVPlayerItem?){
+    internal func removePlayerItemObservers(for playerItem:AVPlayerItem?){
         playerItem?.removeObserver(self, forKeyPath: "status", context: &playerItemContext)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemFailedToPlayToEndTimeNotification, object: playerItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
     }
 
-    internal func addPlayerObservers(player:AVPlayer) {
-        player.addObserver(self, forKeyPath: "rate", options: .New, context: &playerContext)
+    internal func addPlayerObservers(for player:AVPlayer) {
+        player.addObserver(self, forKeyPath: "rate", options: .new, context: &playerContext)
         //observe time updates every 0.1 seconds
-        periodicTimeObserver = player.addPeriodicTimeObserverForInterval(CMTime(seconds: 0.1, preferredTimescale: 10), queue: nil, usingBlock: onPlayerTimeUpdate)
+        periodicTimeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.1, preferredTimescale: 10), queue: nil, using: onPlayerTimeUpdate)
     }
 
-    internal func removePlayerObservers(player:AVPlayer?) {
+    internal func removePlayerObservers(for player:AVPlayer?) {
         if let player = player {
             player.removeObserver(self, forKeyPath: "rate", context: &playerContext)
             player.removeTimeObserver(periodicTimeObserver!)
         }
     }
 
-    internal func _wkObserveValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    internal func _wkObserveValue(forKeyPath keyPath: String?, ofObject object: AnyObject?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer) {
         if context == &playerItemContext {
-            if let newValue = change?[NSKeyValueChangeNewKey] as? Int, newStatus = AVPlayerStatus(rawValue: newValue), playerItem = object as? AVPlayerItem where keyPath == "status" {
+            if let newValue = change?[NSKeyValueChangeKey.newKey] as? Int, let newStatus = AVPlayerStatus(rawValue: newValue), let playerItem = object as? AVPlayerItem , keyPath == "status" {
                 let oldStatus:AVPlayerStatus?
-                if let oldValue = change?[NSKeyValueChangeOldKey] as? Int {
+                if let oldValue = change?[NSKeyValueChangeKey.oldKey] as? Int {
                     oldStatus = AVPlayerStatus(rawValue: oldValue)
                 } else {
                     oldStatus = nil
@@ -233,15 +233,15 @@ internal extension WistiaPlayer {
             }
 
         } else if context == &playerContext {
-            if let newRate = change?[NSKeyValueChangeNewKey] as? Float
-                where keyPath == "rate" {
+            if let newRate = change?[NSKeyValueChangeKey.newKey] as? Float
+                , keyPath == "rate" {
                 self.player(avPlayer, rateChangedTo:newRate)
             } else {
                 assertionFailure("Bad observation configuration on player")
             }
             
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 

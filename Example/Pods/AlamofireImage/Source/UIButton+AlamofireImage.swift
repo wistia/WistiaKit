@@ -1,24 +1,26 @@
-// UIButton+AlamofireImage.swift
 //
-// Copyright (c) 2015-2016 Alamofire Software Foundation (http://alamofire.org/)
+//  UIButton+AlamofireImage.swift
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+//  Copyright (c) 2015-2016 Alamofire Software Foundation (http://alamofire.org/)
 //
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
 
 import Alamofire
 import Foundation
@@ -114,21 +116,21 @@ extension UIButton {
         - parameter progress:         The closure to be executed periodically during the lifecycle of the request.
                                       Defaults to `nil`.
         - parameter progressQueue:    The dispatch queue to call the progress closure on. Defaults to the main queue.
-        - parameter completion:       A closure to be executed when the image request finishes. The closure takes a 
-                                      single response value containing either the image or the error that occurred. If 
-                                      the image was returned from the image cache, the response will be `nil`. Defaults 
+        - parameter completion:       A closure to be executed when the image request finishes. The closure takes a
+                                      single response value containing either the image or the error that occurred. If
+                                      the image was returned from the image cache, the response will be `nil`. Defaults
                                       to `nil`.
     */
     public func af_setImageForState(
-        state: UIControlState,
-        URL: NSURL,
+        _ state: UIControlState,
+        url: Foundation.URL,
         placeHolderImage: UIImage? = nil,
         progress: ImageDownloader.ProgressHandler? = nil,
-        progressQueue: dispatch_queue_t = dispatch_get_main_queue(),
-        completion: (Response<UIImage, NSError> -> Void)? = nil)
+        progressQueue: DispatchQueue = DispatchQueue.main,
+        completion: ((Response<UIImage, NSError>) -> Void)? = nil)
     {
         af_setImageForState(state,
-            URLRequest: URLRequestWithURL(URL),
+            urlRequest: URLRequestWithURL(url),
             placeholderImage: placeHolderImage,
             progress: progress,
             progressQueue: progressQueue,
@@ -145,7 +147,7 @@ extension UIButton {
         - parameter state:            The control state of the button to set the image on.
         - parameter URLRequest:       The URL request.
         - parameter placeholderImage: The image to be set initially until the image request finished. If `nil`, the
-                                      image will not change its image until the image request finishes. Defaults 
+                                      image will not change its image until the image request finishes. Defaults
                                       to `nil`.
         - parameter progress:         The closure to be executed periodically during the lifecycle of the request.
                                       Defaults to `nil`.
@@ -156,14 +158,14 @@ extension UIButton {
                                       to `nil`.
     */
     public func af_setImageForState(
-        state: UIControlState,
-        URLRequest: URLRequestConvertible,
+        _ state: UIControlState,
+        urlRequest: URLRequestConvertible,
         placeholderImage: UIImage? = nil,
         progress: ImageDownloader.ProgressHandler? = nil,
-        progressQueue: dispatch_queue_t = dispatch_get_main_queue(),
-        completion: (Response<UIImage, NSError> -> Void)? = nil)
+        progressQueue: DispatchQueue = DispatchQueue.main,
+        completion: ((Response<UIImage, NSError>) -> Void)? = nil)
     {
-        guard !isImageURLRequest(URLRequest, equalToActiveRequestURLForState: state) else { return }
+        guard !isImageURLRequest(urlRequest, equalToActiveRequestURLForState: state) else { return }
 
         af_cancelImageRequestForState(state)
 
@@ -171,29 +173,29 @@ extension UIButton {
         let imageCache = imageDownloader.imageCache
 
         // Use the image from the image cache if it exists
-        if let image = imageCache?.imageForRequest(URLRequest.URLRequest, withAdditionalIdentifier: nil) {
+        if let image = imageCache?.imageForRequest(urlRequest.urlRequest, withAdditionalIdentifier: nil) {
             let response = Response<UIImage, NSError>(
-                request: URLRequest.URLRequest,
+                request: urlRequest.urlRequest,
                 response: nil,
                 data: nil,
-                result: .Success(image)
+                result: .success(image)
             )
 
             completion?(response)
-            setImage(image, forState: state)
+            setImage(image, for: state)
 
             return
         }
 
         // Set the placeholder since we're going to have to download
-        if let placeholderImage = placeholderImage { self.setImage(placeholderImage, forState: state)  }
+        if let placeholderImage = placeholderImage { self.setImage(placeholderImage, for: state)  }
 
         // Generate a unique download id to check whether the active request has changed while downloading
-        let downloadID = NSUUID().UUIDString
+        let downloadID = UUID().uuidString
 
         // Download the image, then set the image for the control state
         let requestReceipt = imageDownloader.downloadImage(
-            URLRequest: URLRequest,
+            urlRequest: urlRequest,
             receiptID: downloadID,
             filter: nil,
             progress: progress,
@@ -211,7 +213,7 @@ extension UIButton {
                 }
 
                 if let image = response.result.value {
-                    strongSelf.setImage(image, forState: state)
+                    strongSelf.setImage(image, for: state)
                 }
 
                 strongSelf.setImageRequestReceipt(nil, forState: state)
@@ -224,7 +226,7 @@ extension UIButton {
     /**
         Cancels the active download request for the image, if one exists.
     */
-    public func af_cancelImageRequestForState(state: UIControlState) {
+    public func af_cancelImageRequestForState(_ state: UIControlState) {
         guard let receipt = imageRequestReceiptForState(state) else { return }
 
         let imageDownloader = af_imageDownloader ?? UIButton.af_sharedImageDownloader
@@ -255,15 +257,15 @@ extension UIButton {
                                       to `nil`.
     */
     public func af_setBackgroundImageForState(
-        state: UIControlState,
-        URL: NSURL,
+        _ state: UIControlState,
+        url: Foundation.URL,
         placeHolderImage: UIImage? = nil,
         progress: ImageDownloader.ProgressHandler? = nil,
-        progressQueue: dispatch_queue_t = dispatch_get_main_queue(),
-        completion: (Response<UIImage, NSError> -> Void)? = nil)
+        progressQueue: DispatchQueue = DispatchQueue.main,
+        completion: ((Response<UIImage, NSError>) -> Void)? = nil)
     {
         af_setBackgroundImageForState(state,
-            URLRequest: URLRequestWithURL(URL),
+            urlRequest: URLRequestWithURL(url),
             placeholderImage: placeHolderImage,
             completion: completion)
     }
@@ -288,14 +290,14 @@ extension UIButton {
                                       to `nil`.
     */
     public func af_setBackgroundImageForState(
-        state: UIControlState,
-        URLRequest: URLRequestConvertible,
+        _ state: UIControlState,
+        urlRequest: URLRequestConvertible,
         placeholderImage: UIImage? = nil,
         progress: ImageDownloader.ProgressHandler? = nil,
-        progressQueue: dispatch_queue_t = dispatch_get_main_queue(),
-        completion: (Response<UIImage, NSError> -> Void)? = nil)
+        progressQueue: DispatchQueue = DispatchQueue.main,
+        completion: ((Response<UIImage, NSError>) -> Void)? = nil)
     {
-        guard !isImageURLRequest(URLRequest, equalToActiveRequestURLForState: state) else { return }
+        guard !isImageURLRequest(urlRequest, equalToActiveRequestURLForState: state) else { return }
 
         af_cancelBackgroundImageRequestForState(state)
 
@@ -303,33 +305,33 @@ extension UIButton {
         let imageCache = imageDownloader.imageCache
 
         // Use the image from the image cache if it exists
-        if let image = imageCache?.imageForRequest(URLRequest.URLRequest, withAdditionalIdentifier: nil) {
+        if let image = imageCache?.imageForRequest(urlRequest.urlRequest, withAdditionalIdentifier: nil) {
             let response = Response<UIImage, NSError>(
-                request: URLRequest.URLRequest,
+                request: urlRequest.urlRequest,
                 response: nil,
                 data: nil,
-                result: .Success(image)
+                result: .success(image)
             )
 
             completion?(response)
-            setBackgroundImage(image, forState: state)
+            setBackgroundImage(image, for: state)
 
             return
         }
 
         // Set the placeholder since we're going to have to download
-        if let placeholderImage = placeholderImage { self.setBackgroundImage(placeholderImage, forState: state)  }
+        if let placeholderImage = placeholderImage { self.setBackgroundImage(placeholderImage, for: state)  }
 
         // Generate a unique download id to check whether the active request has changed while downloading
-        let downloadID = NSUUID().UUIDString
+        let downloadID = UUID().uuidString
 
         // Download the image, then set the image for the control state
         let requestReceipt = imageDownloader.downloadImage(
-            URLRequest: URLRequest,
+            urlRequest: urlRequest,
             receiptID: downloadID,
+            filter: nil,
             progress: progress,
             progressQueue: progressQueue,
-            filter: nil,
             completion: { [weak self] response in
                 guard let strongSelf = self else { return }
 
@@ -343,7 +345,7 @@ extension UIButton {
                 }
 
                 if let image = response.result.value {
-                    strongSelf.setBackgroundImage(image, forState: state)
+                    strongSelf.setBackgroundImage(image, for: state)
                 }
 
                 strongSelf.setBackgroundImageRequestReceipt(nil, forState: state)
@@ -356,7 +358,7 @@ extension UIButton {
     /**
         Cancels the active download request for the background image, if one exists.
     */
-    public func af_cancelBackgroundImageRequestForState(state: UIControlState) {
+    public func af_cancelBackgroundImageRequestForState(_ state: UIControlState) {
         guard let receipt = backgroundImageRequestReceiptForState(state) else { return }
 
         let imageDownloader = af_imageDownloader ?? UIButton.af_sharedImageDownloader
@@ -367,12 +369,12 @@ extension UIButton {
 
     // MARK: - Internal - Image Request Receipts
 
-    func imageRequestReceiptForState(state: UIControlState) -> RequestReceipt? {
+    func imageRequestReceiptForState(_ state: UIControlState) -> RequestReceipt? {
         guard let receipt = imageRequestReceipts[state.rawValue] else { return nil }
         return receipt
     }
 
-    func setImageRequestReceipt(receipt: RequestReceipt?, forState state: UIControlState) {
+    func setImageRequestReceipt(_ receipt: RequestReceipt?, forState state: UIControlState) {
         var receipts = imageRequestReceipts
         receipts[state.rawValue] = receipt
 
@@ -381,12 +383,12 @@ extension UIButton {
 
     // MARK: - Internal - Background Image Request Receipts
 
-    func backgroundImageRequestReceiptForState(state: UIControlState) -> RequestReceipt? {
+    func backgroundImageRequestReceiptForState(_ state: UIControlState) -> RequestReceipt? {
         guard let receipt = backgroundImageRequestReceipts[state.rawValue] else { return nil }
         return receipt
     }
 
-    func setBackgroundImageRequestReceipt(receipt: RequestReceipt?, forState state: UIControlState) {
+    func setBackgroundImageRequestReceipt(_ receipt: RequestReceipt?, forState state: UIControlState) {
         var receipts = backgroundImageRequestReceipts
         receipts[state.rawValue] = receipt
 
@@ -396,13 +398,13 @@ extension UIButton {
     // MARK: - Private - URL Request Helpers
 
     private func isImageURLRequest(
-        URLRequest: URLRequestConvertible?,
+        _ urlRequest: URLRequestConvertible?,
         equalToActiveRequestURLForState state: UIControlState)
         -> Bool
     {
-        if let
-            currentRequest = imageRequestReceiptForState(state)?.request.task.originalRequest
-            where currentRequest.URLString == URLRequest?.URLRequest.URLString
+        if
+            let currentRequest = imageRequestReceiptForState(state)?.request.task.originalRequest,
+            currentRequest.urlString == urlRequest?.urlRequest.urlString
         {
             return true
         }
@@ -411,13 +413,13 @@ extension UIButton {
     }
 
     private func isBackgroundImageURLRequest(
-        URLRequest: URLRequestConvertible?,
+        _ urlRequest: URLRequestConvertible?,
         equalToActiveRequestURLForState state: UIControlState)
         -> Bool
     {
-        if let
-            currentRequest = backgroundImageRequestReceiptForState(state)?.request.task.originalRequest
-            where currentRequest.URLString == URLRequest?.URLRequest.URLString
+        if
+            let currentRequest = backgroundImageRequestReceiptForState(state)?.request.task.originalRequest,
+            currentRequest.urlString == urlRequest?.urlRequest.urlString
         {
             return true
         }
@@ -425,13 +427,13 @@ extension UIButton {
         return false
     }
 
-    private func URLRequestWithURL(URL: NSURL) -> NSURLRequest {
-        let mutableURLRequest = NSMutableURLRequest(URL: URL)
+    private func URLRequestWithURL(_ url: Foundation.URL) -> URLRequest {
+        let mutableURLRequest = NSMutableURLRequest(url: url)
 
         for mimeType in Request.acceptableImageContentTypes {
             mutableURLRequest.addValue(mimeType, forHTTPHeaderField: "Accept")
         }
 
-        return mutableURLRequest
+        return mutableURLRequest as URLRequest
     }
 }

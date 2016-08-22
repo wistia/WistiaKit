@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "WistiaKit"
-  s.version          = "0.9.2"
+  s.version          = "0.10.1"
   s.summary          = "Access and playback all of your Wistia media"
 
   s.description      = <<-DESC
@@ -31,6 +31,7 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.requires_arc = true
 
   s.ios.source_files = 'Pod/Classes/**/*'
+  # TODO: s.tvos.exclude_files = [...] to remove the xibs instead of
   s.tvos.source_files = 'Pod/Classes/**/*.swift'
 
   # Although resource_bundles is the new recommended hotness, it doesn't play well with Asset Catalogs.
@@ -45,6 +46,6 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.ios.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'CoreMotion', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
   s.tvos.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
 
-  s.dependency 'Alamofire', '~> 3.3'
+  s.dependency 'Alamofire', '~> 4.0'
   s.dependency 'AlamofireImage', '~> 2.4'
 end

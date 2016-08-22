@@ -15,10 +15,10 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var hashedIDTextField: UITextField!
 
-    @IBAction func playTapped(sender: AnyObject) {
+    @IBAction func playTapped(_ sender: AnyObject) {
         if let hashedID = hashedIDTextField.text {
-            wistiaPlayerVC.replaceCurrentVideoWithVideoForHashedID(hashedID)
-            self.presentViewController(wistiaPlayerVC, animated: true, completion: nil)
+            let _ = wistiaPlayerVC.replaceCurrentVideoWithVideo(forHashedID: hashedID)
+            self.present(wistiaPlayerVC, animated: true, completion: nil)
         }
     }
 }

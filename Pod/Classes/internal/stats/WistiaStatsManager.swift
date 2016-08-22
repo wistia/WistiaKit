@@ -30,26 +30,26 @@ internal class WistiaStatsManager {
 
     //MARK: - Private Constants
 
-    private static let StatsSendInterval = NSTimeInterval(5)
-    private let EventTTL = 5
+    fileprivate static let StatsSendInterval = TimeInterval(5)
+    fileprivate let EventTTL = 5
 
     //MARK: - Internal State and Initializers
 
-    private var eventCollectors = [WistiaEventCollector]()
-    private var eventsPending = [StatsEvent]()
+    fileprivate var eventCollectors = [WistiaEventCollector]()
+    fileprivate var eventsPending = [StatsEvent]()
 
-    private var statsTimer:NSTimer?
+    fileprivate var statsTimer:Timer?
 
     //MARK: - Public API
 
     static let sharedInstance:WistiaStatsManager = {
         let mgr = WistiaStatsManager()
-        mgr.startTimer(StatsSendInterval)
+        mgr.startTimer(withInterval: StatsSendInterval)
         mgr.restoreEvents()
         return mgr
     }()
 
-    func newEventCollectorForMedia(media:WistiaMedia, referrer:String) -> WistiaMediaEventCollector? {
+    func newEventCollector(forMedia media:WistiaMedia, withReferrer referrer: String) -> WistiaMediaEventCollector? {
         guard let mediaCollector = WistiaMediaEventCollector(media: media, referrer: referrer) else { return nil }
 
         eventCollectors.append(mediaCollector)
@@ -61,29 +61,39 @@ internal class WistiaStatsManager {
 
     init() {
         //Resign/Become Active just stops/starts timers
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationWillResignActiveNotification, object: nil, queue: nil) { (note) -> Void in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillResignActive, object: nil, queue: nil) { (note) -> Void in
             self.collectAndSend()
             self.statsTimer?.invalidate()
             self.statsTimer = nil
         }
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification, object: nil, queue: nil) { (note) -> Void in
-            self.startTimer(self.dynamicType.StatsSendInterval)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { (note) -> Void in
+            self.startTimer(withInterval: type(of: self).StatsSendInterval)
         }
 
         //Background persists events; Foreground restores events
         //By capturing lifecycle this way, we can ignore termination event
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification, object: nil, queue: nil) { (note) -> Void in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { (note) -> Void in
             self.collectEventDetails()
             self.persistEvents()
         }
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationWillEnterForegroundNotification, object: nil, queue: nil) { (note) -> Void in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil, queue: nil) { (note) -> Void in
             self.restoreEvents()
         }
     }
 
-    private func startTimer(timeInterval:NSTimeInterval) {
+    fileprivate func startTimer(withInterval timeInterval:TimeInterval) {
         guard statsTimer == nil else { return }
-        statsTimer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: #selector(WistiaStatsManager.collectAndSend), userInfo: nil, repeats: true)
+
+        /*
+         //When we remove ios 9 support...
+        if #available(iOS 10.0, *) {
+            statsTimer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { _ in
+                self.collectEventDetails()
+                self.sendPendingEvents()
+            }
+        }
+         */
+        statsTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(WistiaStatsManager.collectAndSend), userInfo: nil, repeats: true)
     }
 
     @objc private func collectAndSend() {
@@ -91,7 +101,7 @@ internal class WistiaStatsManager {
         sendPendingEvents()
     }
 
-    private func collectEventDetails() {
+    fileprivate func collectEventDetails() {
         for collector in eventCollectors {
             let eventDetails = collector.removeEventDetails()
             if eventDetails.count > 0 {
@@ -102,17 +112,17 @@ internal class WistiaStatsManager {
         }
     }
 
-    private func sendPendingEvents() {
+    fileprivate func sendPendingEvents() {
         let eventsToSend = eventsPending
         eventsPending.removeAll()
         for event in eventsToSend {
             do {
-                let jsonData = try NSJSONSerialization.dataWithJSONObject(event.json, options: NSJSONWritingOptions(rawValue: 0))
+                let jsonData = try JSONSerialization.data(withJSONObject: event.json, options: JSONSerialization.WritingOptions(rawValue: 0))
 
-                Alamofire.request(.POST, event.url, parameters: event.json, encoding: .Custom({ (requestConvertable, params) -> (NSMutableURLRequest, NSError?) in
-                    let mutableRequest = requestConvertable.URLRequest.copy() as! NSMutableURLRequest
-                    mutableRequest.HTTPBody = jsonData.base64EncodedDataWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
-                    return (mutableRequest, nil)
+                Alamofire.request(event.url, withMethod: .post, parameters: event.json, encoding: .custom({ (requestConvertable, params) -> (URLRequest, NSError?) in
+                    var urlReq = requestConvertable.urlRequest
+                    urlReq.httpBody = jsonData.base64EncodedData()
+                    return (urlReq, nil)
                 }), headers: nil)
                     .response { request, response, data, error in
                         if error != nil {
@@ -132,18 +142,18 @@ internal class WistiaStatsManager {
 
     //MARK: Event Persistence
 
-    static let persistenceFilename = "\(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])/StatsManager.EventsPending"
+    static let persistenceFilename = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/StatsManager.EventsPending"
 
-    private func persistEvents() {
-        NSKeyedArchiver.archiveRootObject(eventsPending, toFile: self.dynamicType.persistenceFilename)
+    fileprivate func persistEvents() {
+        NSKeyedArchiver.archiveRootObject(eventsPending, toFile: type(of: self).persistenceFilename)
         eventsPending.removeAll()
     }
 
-    private func restoreEvents() {
-        if let events = NSKeyedUnarchiver.unarchiveObjectWithFile(self.dynamicType.persistenceFilename) as? [StatsEvent] {
+    fileprivate func restoreEvents() {
+        if let events = NSKeyedUnarchiver.unarchiveObject(withFile: type(of: self).persistenceFilename) as? [StatsEvent] {
             do {
-                try NSFileManager.defaultManager().removeItemAtPath(self.dynamicType.persistenceFilename)
-                self.eventsPending.appendContentsOf(events)
+                try FileManager.default.removeItem(atPath: type(of: self).persistenceFilename)
+                self.eventsPending.append(contentsOf: events)
             } catch {
                 //how could this happen? not a critical error
             }
@@ -153,17 +163,17 @@ internal class WistiaStatsManager {
 
 internal protocol WistiaEventCollector : class {
     //The manager that will process events held by this collector
-    weak var manager:WistiaStatsManager? { get set }
+    weak var manager: WistiaStatsManager? { get set }
 
     //Where all events are sent.  Should be constant for the life of a WistiaEventCollector.
-    var eventEndpoint:NSURL! { get }
+    var eventEndpoint: URL! { get }
 
     //Top level metadata sent with all event details.  Should not include "event_details" key.
-    var eventMetadata:[String: AnyObject] { get }
+    var eventMetadata: [String: Any] { get }
 
     //Array to populate event_details.  This array may be broken into multiple sub-arrays
     //and/or combined with other arrays from the same WistiaEventCollector before being sent.
-    func removeEventDetails() -> [[String: AnyObject]]
+    func removeEventDetails() -> [[String: Any]]
 }
 
 //I used to use a nice simple tuple.  But that can't be easily persisted.  So now we have this big ugly ass class.
@@ -172,12 +182,12 @@ internal protocol WistiaEventCollector : class {
 //
 // By making it an NSObject that conforms to NSCoding, it's easy to archive and unarchive.
 // Cant' wait until they update that sort of stuff for Swift.  but until then, we get bonus LOC...
-private class StatsEvent: NSObject, NSCoding {
-    let url:NSURL
-    let json:[String: AnyObject]
+fileprivate class StatsEvent: NSObject, NSCoding {
+    let url: URL
+    let json: [String: Any]
     let ttl: Int
 
-    @objc init(url:NSURL, json:[String: AnyObject], ttl:Int) {
+    @objc init(url: URL, json: [String: Any], ttl:Int) {
         self.url = url
         self.json = json
         self.ttl = ttl
@@ -186,17 +196,17 @@ private class StatsEvent: NSObject, NSCoding {
     // MARK: NSCoding
 
     @objc required convenience init?(coder decoder: NSCoder) {
-        guard let url = decoder.decodeObjectForKey("url") as? NSURL,
-            json = decoder.decodeObjectForKey("json") as? [String: AnyObject]
+        guard let url = decoder.decodeObject(forKey: "url") as? URL,
+            let json = decoder.decodeObject(forKey: "json") as? [String: AnyObject]
             else { return nil }
-        let ttl = decoder.decodeInt32ForKey("ttl")
+        let ttl = decoder.decodeInt32(forKey: "ttl")
         self.init(url:url, json:json, ttl:Int(ttl))
     }
 
-    @objc func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(self.url, forKey: "url")
-        coder.encodeObject(self.json, forKey: "json")
-        coder.encodeInt32(Int32(self.ttl), forKey: "ttl")
+    @objc func encode(with coder: NSCoder) {
+        coder.encode(self.url, forKey: "url")
+        coder.encode(self.json, forKey: "json")
+        coder.encode(Int32(self.ttl), forKey: "ttl")
     }
 
 }

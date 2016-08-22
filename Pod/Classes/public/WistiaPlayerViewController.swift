@@ -24,14 +24,14 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      
      - Parameter vc: The `WistiaPlayerViewController` requesting to be closed.
      */
-    func closeWistiaPlayerViewController(vc: WistiaPlayerViewController)
+    func close(wistiaPlayerViewController vc: WistiaPlayerViewController)
 
     /**
      Called during at the same time as the `UIKit` standard `ViewController.viewWillAppear()`.
      
      - Parameter vc: The `WistiaPlayerViewController` whose view is about to appear.
     */
-    func wistiaPlayerViewControllerViewWillAppear(vc: WistiaPlayerViewController)
+    func willAppear(wistiaPlayerViewController vc: WistiaPlayerViewController)
 
     /**
      The user has tapped the action button and the activity view will appear.  Called just before
@@ -40,7 +40,7 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      - Parameter vc: The `WistiaPlayerViewController` that is presenting the `UIActivityViewController`
      - Parameter media: The currently loaded media that is the object of the activity
     */
-    func wistiaPlayerViewController(vc: WistiaPlayerViewController, activityViewControllerWillAppearForMedia media:WistiaMedia)
+    func wistiaPlayerViewController(_ vc: WistiaPlayerViewController, activityViewControllerWillAppearForMedia media:WistiaMedia)
 
     /**
      The user has finished with the activity view.  An action may have been taken or the view could have been dismissed
@@ -55,7 +55,7 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      - Parameter completed: `True` if the service was performed or `False` if it was not. This parameter is also set to `False` when the user dismisses the view controller without selecting a service.
      - Parameter activityError: An error object if the activity failed to complete, or nil if the the activity completed normally.
      */
-    func wistiaPlayerViewController(vc: WistiaPlayerViewController, activityViewControllerDidCompleteForMedia media:WistiaMedia, withActivityType activityType: String?, completed: Bool, activityError: NSError?)
+    func wistiaPlayerViewController(_ vc: WistiaPlayerViewController, activityViewControllerDidCompleteForMedia media:WistiaMedia, withActivityType activityType: String?, completed: Bool, activityError: Error?)
 
 }
 
@@ -115,7 +115,7 @@ public final class WistiaPlayerViewController: UIViewController {
         self.referrer = referrer
         self.requireHLS = requireHLS
 
-        self.modalPresentationStyle = .FullScreen
+        self.modalPresentationStyle = .fullScreen
     }
 
     //MARK: - Instance Properties
@@ -160,9 +160,9 @@ public final class WistiaPlayerViewController: UIViewController {
      - Returns: `False` if the current `WistiaMedia.hashedID` matches the parameter (resulting in a no-op).  `True` otherwise,
      _which does not guarantee success of the asynchronous video load_.
      */
-    public func replaceCurrentVideoWithVideoForHashedID(hashedID:String) -> Bool {
+    public func replaceCurrentVideoWithVideo(forHashedID hashedID:String) -> Bool {
         self.loadViewIfNeeded()
-        return wPlayer.replaceCurrentVideoWithVideoForHashedID(hashedID)
+        return wPlayer.replaceCurrentVideoWithVideo(forHashedID: hashedID)
     }
 
     /**
@@ -186,10 +186,10 @@ public final class WistiaPlayerViewController: UIViewController {
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
      _which does not guarantee success of the asynchronous video load_.
      */
-    public func replaceCurrentVideoWithVideoForMedia(media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, autoplay: Bool = false) {
+    public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, autoplay: Bool = false) {
         autoplayVideoWhenReady = autoplay
         self.loadViewIfNeeded()
-        let didReplace = wPlayer.replaceCurrentVideoWithVideoForMedia(media, forcingAsset: asset)
+        let didReplace = wPlayer.replaceCurrentVideoWithVideo(forMedia: media, forcingAsset: asset)
         if !didReplace && autoplayVideoWhenReady {
             presentForPlaybackShowingChrome(true)
             play()
@@ -242,7 +242,7 @@ public final class WistiaPlayerViewController: UIViewController {
     //MARK: Player
     //Our single player that we will put into either the Flat or the 360 view
     lazy internal var wPlayer:WistiaPlayer = {
-        let wp = WistiaPlayer(referrer: self.referrer ?? "set_referrer_when_initializing_\(self.dynamicType)",
+        let wp = WistiaPlayer(referrer: self.referrer ?? "set_referrer_when_initializing_\(type(of: self))",
                               requireHLS: self.requireHLS)
         wp.delegate = self
         wp.captionsRenderer.delegate = self
@@ -254,7 +254,7 @@ public final class WistiaPlayerViewController: UIViewController {
     //we don't care about the media, but we do care what it says about customizing the UI
     internal var activeEmbedOptions = WistiaMediaEmbedOptions() {
         didSet {
-            customizeViewFor(activeEmbedOptions)
+            customizeView(for: activeEmbedOptions)
             autoplayVideoWhenReady = activeEmbedOptions.autoplay
         }
     }
@@ -267,7 +267,7 @@ public final class WistiaPlayerViewController: UIViewController {
     //MARK: Scrubbing
     internal var playerRateBeforeScrubbing:Float = 0.0
     internal var scrubbing:Bool = false
-    internal var scrubbingSeekLastRequestedAt = NSDate()
+    internal var scrubbingSeekLastRequestedAt = Date()
     @IBOutlet weak internal var scrubTrackTimeLabelCenterConstraint: NSLayoutConstraint!
 
     internal var autoplayVideoWhenReady = false
@@ -304,7 +304,7 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak internal var scrubberCurrentProgressView: UIView!
     @IBOutlet weak internal var scrubberCurrentProgressViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak internal var scrubberTrackCurrentTimeLabel: UILabel!
-    internal var chromeInteractionTimer:NSTimer?
+    internal var chromeInteractionTimer:Timer?
 
     @IBOutlet weak internal var extraCloseButton: UIButton!
 
@@ -322,34 +322,36 @@ public final class WistiaPlayerViewController: UIViewController {
     }
 
     /// Internal override.
-    override final public func prefersStatusBarHidden() -> Bool {
-        return !showStatusBar
+    public override var prefersStatusBarHidden: Bool {
+        get {
+            return !showStatusBar
+        }
     }
 
     /// Internal override.
     override final public func loadView() {
-        let nib = NSBundle(forClass: self.classForCoder).loadNibNamed("WistiaPlayerViewController", owner: self, options: nil)
-        self.view = nib.first as! UIView
+        let nib = Bundle(for: self.classForCoder).loadNibNamed("WistiaPlayerViewController", owner: self, options: nil)
+        self.view = nib?.first as! UIView
     }
 
     /// Internal override.
     override final public func viewDidLoad() {
         //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification, object: nil, queue: nil) { (note) -> Void in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { (_) -> Void in
             if !self.autoplayVideoWhenReady {
                 self.pause()
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification, object: nil, queue: nil) { (note) -> Void in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { (note) -> Void in
             self.autoplayVideoWhenReady = false
         }
         
-        overlayTapGestureRecognizer.requireGestureRecognizerToFail(overlayDoubleTapGestureRecognizer)
+        overlayTapGestureRecognizer.require(toFail: overlayDoubleTapGestureRecognizer)
     }
 
     /// Internal override.
-    override final public func viewWillDisappear(animated: Bool) {
+    override final public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         pause()

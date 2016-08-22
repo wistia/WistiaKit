@@ -19,16 +19,16 @@ import Foundation
  */
 public enum WistiaObjectStatus: Int {
     /// Processing failed; this media cannot be played.
-    case Failed = -1
+    case failed = -1
 
     /// Processing has not yet started.
-    case Queued = 0
+    case queued = 0
 
     /// Processing is underway but not yet complete.
-    case Processing = 1
+    case processing = 1
 
     /// Processing has completed successfuly.
-    case Ready = 2
+    case ready = 2
 }
 
 //Create initializer in extension so as to not lose default initializer
@@ -43,7 +43,7 @@ extension WistiaObjectStatus {
         if let s = WistiaObjectStatus(rawValue: raw) {
             self = s
         } else {
-            self = WistiaObjectStatus.Failed
+            self = WistiaObjectStatus.failed
         }
     }
 
@@ -57,15 +57,15 @@ extension WistiaObjectStatus {
     init(failsafeFromRawString rawString: String) {
         switch rawString {
         case "failed":
-            self = Failed
+            self = .failed
         case "queued":
-            self = Queued
+            self = .queued
         case "processing":
-            self = Processing
+            self = .processing
         case "ready":
-            self = Ready
+            self = .ready
         default:
-            self = Failed
+            self = .failed
         }
     }
 }

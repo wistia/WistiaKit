@@ -11,21 +11,21 @@ import Foundation
 
 internal class ModelBuilder {
 
-    internal static let RFC3339DateFormatter: NSDateFormatter = {
-        let df = NSDateFormatter()
-        df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    internal static let RFC3339DateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         return df
     }()
 
-    internal static func accountFromHash(accountHash:[String: AnyObject]) -> WistiaAccount? {
+    internal static func wistiaAccount(from accountHash:[String: Any]) -> WistiaAccount? {
 
-        if let
+        if
             //required
-            accountID = accountHash["id"] as? Int,
-            name = accountHash["name"] as? String,
-            accountURLString = accountHash["url"] as? String,
-            mediaCount = accountHash["mediaCount"] as? Int {
+            let accountID = accountHash["id"] as? Int,
+            let name = accountHash["name"] as? String,
+            let accountURLString = accountHash["url"] as? String,
+            let mediaCount = accountHash["mediaCount"] as? Int {
 
             return WistiaAccount(accountID: accountID, name: name, accountURLString: accountURLString, mediaCount: mediaCount)
         } else {
@@ -34,7 +34,7 @@ internal class ModelBuilder {
 
     }
 
-    internal static func projectFromHash(projectHash:[String: AnyObject]) -> WistiaProject? {
+    internal static func wistiaProject(from projectHash:[String: Any]) -> WistiaProject? {
         if let
             //required
             projectID = projectHash["id"] as? Int {
@@ -51,13 +51,13 @@ internal class ModelBuilder {
             let name = projectHash["name"] as? String
             let description = projectHash["description"] as? String
             let mediaCount = projectHash["mediaCount"] as? Int
-            var created: NSDate? = nil
+            var created: Date? = nil
             if let c = projectHash["created"] as? String {
-                created = RFC3339DateFormatter.dateFromString(c)
+                created = RFC3339DateFormatter.date(from: c)
             }
-            var updated: NSDate? = nil
+            var updated: Date? = nil
             if let u = projectHash["updated"] as? String {
-                updated = RFC3339DateFormatter.dateFromString(u)
+                updated = RFC3339DateFormatter.date(from: u)
             }
             let anonymousCanUpload = (projectHash["anonymousCanUpload"] as? Bool) ?? false
             let anonymousCanDownload = (projectHash["anonymousCanDownload"] as? Bool) ?? false
@@ -65,8 +65,8 @@ internal class ModelBuilder {
             let publicID = projectHash["publicID"] as? String
 
             var medias:[WistiaMedia]? = nil
-            if let mediasHashArray = projectHash["medias"] as? [[String:AnyObject]] {
-                medias = mediasFromHashArray(mediasHashArray)
+            if let mediasHashArray = projectHash["medias"] as? [[String: Any]] {
+                medias = wistiaMedias(from: mediasHashArray)
             }
 
             return WistiaProject(projectID: projectID, name: name, description: description, mediaCount: mediaCount, created: created, updated: updated, hashedID: hashedID, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic, publicID: publicID, medias: medias)
@@ -75,17 +75,17 @@ internal class ModelBuilder {
         return nil
     }
 
-    internal static func mediasFromHashArray(mediasHashArray:[[String:AnyObject]]) -> [WistiaMedia] {
+    internal static func wistiaMedias(from mediasHashArray:[[String: Any]]) -> [WistiaMedia] {
         var medias = [WistiaMedia]()
         for mediaHash in mediasHashArray {
-            if let media = mediaFromHash(mediaHash) {
+            if let media = wistiaMedia(from: mediaHash) {
                 medias.append(media)
             }
         }
         return medias
     }
 
-    internal static func mediaFromHash(mediaHash:[String: AnyObject]) -> WistiaMedia? {
+    internal static func wistiaMedia(from mediaHash:[String: Any]) -> WistiaMedia? {
         //required (except when returning stats)
         let duration = mediaHash["duration"] as? Float
         let status:WistiaObjectStatus
@@ -94,7 +94,7 @@ internal class ModelBuilder {
         } else if let statusInt = mediaHash["status"] as? Int {
             status = WistiaObjectStatus(failsafeFromRaw: statusInt)
         } else {
-            status = WistiaObjectStatus.Failed
+            status = WistiaObjectStatus.failed
         }
         //required (and annoying)
         let hashedID: String
@@ -109,20 +109,20 @@ internal class ModelBuilder {
         let mediaID = mediaHash["id"] as? Int
         let name = mediaHash["name"] as? String
         let description = mediaHash["description"] as? String
-        var created: NSDate? = nil
+        var created: Date? = nil
         if let c = mediaHash["created"] as? String {
-            created = RFC3339DateFormatter.dateFromString(c)
+            created = RFC3339DateFormatter.date(from: c)
         }
-        var updated: NSDate? = nil
+        var updated: Date? = nil
         if let u = mediaHash["updated"] as? String {
-            updated = RFC3339DateFormatter.dateFromString(u)
+            updated = RFC3339DateFormatter.date(from: u)
         }
         let spherical = (mediaHash["spherical"] as? Bool) ?? false
         let thumbnail:(String, Int, Int)?
-        if let thumbnailHash = mediaHash["thumbnail"] as? [String: AnyObject],
-            thumbnailURLString = thumbnailHash["url"] as? String,
-            thumbnailWidth = thumbnailHash["width"] as? Int,
-            thumbnailHeight = thumbnailHash["height"] as? Int {
+        if let thumbnailHash = mediaHash["thumbnail"] as? [String: Any],
+            let thumbnailURLString = thumbnailHash["url"] as? String,
+            let thumbnailWidth = thumbnailHash["width"] as? Int,
+            let thumbnailHeight = thumbnailHash["height"] as? Int {
 
             thumbnail = (url: thumbnailURLString, width: thumbnailWidth, height: thumbnailHeight)
         } else {
@@ -131,30 +131,30 @@ internal class ModelBuilder {
         let distilleryURLString = mediaHash["distilleryUrl"] as? String
         let accountKey = mediaHash["accountKey"] as? String
         let mediaKey = mediaHash["mediaKey"] as? String
-        let embedOptions = mediaHash["embed_options"] as? [String:AnyObject]
-        let mediaEmbedOptions = ModelBuilder.embedOptionsFromHash(embedOptions)
-        let statsHash = mediaHash["stats"] as? [String:AnyObject]
-        let stats = ModelBuilder.wistiaMediaStatsFromHash(statsHash)
+        let embedOptionsHash = mediaHash["embed_options"] as? [String: Any]
+        let mediaEmbedOptions = ModelBuilder.embedOptions(from: embedOptionsHash)
+        let statsHash = mediaHash["stats"] as? [String: Any]
+        let stats = ModelBuilder.wistiaMediaStats(from: statsHash)
 
         var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, created: created, updated: updated, assets: [WistiaAsset](), description: description, hashedID: hashedID, embedOptions: mediaEmbedOptions, stats: stats, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical, captions: nil)
 
         // -- Assets (are optional) --
-        if let assets = mediaHash["assets"] as? [[String:AnyObject]] {
-            wMedia.assets = wistiaAssetsFromHash(assets, forMedia:wMedia)
+        if let assets = mediaHash["assets"] as? [[String:Any]] {
+            wMedia.assets = wistiaAssets(from: assets, forMedia:wMedia)
         }
 
         return wMedia
     }
 
-    internal static func wistiaAssetsFromHash(assetsHashArray:[[String:AnyObject]], forMedia media:WistiaMedia) -> [WistiaAsset] {
+    internal static func wistiaAssets(from assetsHashArray:[[String:Any]], forMedia media:WistiaMedia) -> [WistiaAsset] {
         var wistiaAssets = [WistiaAsset]()
         for rawAsset in assetsHashArray {
-            if let
+            if
                 //requried
-                width = rawAsset["width"] as? Int,
-                height = rawAsset["height"] as? Int,
-                type = rawAsset["type"] as? String,
-                urlString = rawAsset["url"] as? String {
+                let width = rawAsset["width"] as? Int,
+                let height = rawAsset["height"] as? Int,
+                let type = rawAsset["type"] as? String,
+                let urlString = rawAsset["url"] as? String {
                 //required and annoying
                 var size:Int64? = nil
                 if let s = rawAsset["size"] as? Int {
@@ -185,7 +185,7 @@ internal class ModelBuilder {
         return wistiaAssets
     }
 
-    internal static func embedOptionsFromHash(mediaEmbedOptionsHash:[String:AnyObject]?) -> WistiaMediaEmbedOptions? {
+    internal static func embedOptions(from mediaEmbedOptionsHash:[String:Any]?) -> WistiaMediaEmbedOptions? {
         guard let embedOptionsHash = mediaEmbedOptionsHash else { return nil }
 
         //init with defaults
@@ -193,7 +193,7 @@ internal class ModelBuilder {
 
         //...override with custom attributes, if specified
         if let playerColor = embedOptionsHash["playerColor"] as? String {
-            mediaEmbedOptions.playerColor = UIColor.wk_fromHexString(playerColor)
+            mediaEmbedOptions.playerColor = UIColor.wk_from(hexString: playerColor)
         }
 
         if let bigPlayButton = embedOptionsHash["playButton"] as? NSString {
@@ -224,15 +224,15 @@ internal class ModelBuilder {
             mediaEmbedOptions.endVideoBehaviorString = endVideoBehavior
         }
 
-        if let stillURLString = embedOptionsHash["stillUrl"] as? String, stillURL = NSURL(string: stillURLString) {
+        if let stillURLString = embedOptionsHash["stillUrl"] as? String, let stillURL = URL(string: stillURLString) {
             mediaEmbedOptions.stillURL = stillURL
         }
 
-        if let plugin = embedOptionsHash["plugin"] as? [String:AnyObject] {
-            if let socialBarHash = plugin["socialbar-v1"] as? [String:AnyObject] {
+        if let plugin = embedOptionsHash["plugin"] as? [String: Any] {
+            if let socialBarHash = plugin["socialbar-v1"] as? [String: Any] {
                 // presence of this hash means sharing is on unless it's explcity set to off
                 mediaEmbedOptions.actionButton = true
-                if let socialBarOn = socialBarHash["on"] {
+                if let socialBarOn = socialBarHash["on"] as? NSString {
                     mediaEmbedOptions.actionButton = socialBarOn.boolValue
                 }
                 if let pageURL = socialBarHash["pageUrl"] as? String {
@@ -243,7 +243,7 @@ internal class ModelBuilder {
                 }
             }
             
-            if let captionsHash = plugin["captions-v1"] as? [String:AnyObject] {
+            if let captionsHash = plugin["captions-v1"] as? [String: Any] {
                 // presence of this hash means captions are available unless stated otherwise
                 mediaEmbedOptions.captionsAvailable = true
                 if let captionsAvailable = captionsHash["on"] as? NSString {
@@ -259,41 +259,41 @@ internal class ModelBuilder {
         return mediaEmbedOptions
     }
 
-    internal static func wistiaMediaStatsFromHash(statsHash:[String:AnyObject]?) -> WistiaMediaStats? {
+    internal static func wistiaMediaStats(from statsHash:[String: Any]?) -> WistiaMediaStats? {
         if let sHash = statsHash,
-            pageLoads = sHash["pageLoads"] as? Int,
-            visitors = sHash["visitors"] as? Int,
-            percentOfVisitorsClickingPlay = sHash["percentOfVisitorsClickingPlay"] as? Int,
-            plays = sHash["plays"] as? Int,
-            averagePercentWatched = sHash["averagePercentWatched"] as? Int {
+            let pageLoads = sHash["pageLoads"] as? Int,
+            let visitors = sHash["visitors"] as? Int,
+            let percentOfVisitorsClickingPlay = sHash["percentOfVisitorsClickingPlay"] as? Int,
+            let plays = sHash["plays"] as? Int,
+            let averagePercentWatched = sHash["averagePercentWatched"] as? Int {
 
             return WistiaMediaStats(pageLoads: pageLoads, visitors: visitors, percentOfVisitorsClickingPlay: percentOfVisitorsClickingPlay, plays: plays, averagePercentWatched: averagePercentWatched)
         }
         return nil
     }
 
-    internal static func wistiaCaptionsFrom(captionsHash:[String: AnyObject]?) -> WistiaCaptions? {
+    internal static func wistiaCaptions(from captionsHash:[String: Any]?) -> WistiaCaptions? {
         if let cHash = captionsHash,
-            cID = cHash["id"] as? Int,
-            language = cHash["language"] as? String,
-            englishName = cHash["english_name"] as? String,
-            nativeName = cHash["native_name"] as? String,
-            rightToLeft = cHash["right_to_left"] as? Bool,
-            linesHash = cHash["hash"] as? [String: AnyObject],
-            lines = linesHash["lines"] as? [[String:AnyObject]] {
+            let cID = cHash["id"] as? Int,
+            let language = cHash["language"] as? String,
+            let englishName = cHash["english_name"] as? String,
+            let nativeName = cHash["native_name"] as? String,
+            let rightToLeft = cHash["right_to_left"] as? Bool,
+            let linesHash = cHash["hash"] as? [String: Any],
+            let lines = linesHash["lines"] as? [[String:Any]] {
 
             var captionSegments = [WistiaCaptionSegment]()
             for line in lines {
                 if let start = line["start"] as? Float,
-                    end = line["end"] as? Float,
-                    text = line["text"] as? [String] {
+                    let end = line["end"] as? Float,
+                    let text = line["text"] as? [String] {
                     let seg = WistiaCaptionSegment(startTime: start, endTime: end, text: text)
                     captionSegments.append(seg)
                 }
             }
 
             //WistiaCaptionsRenderer assumes segments are in order
-            captionSegments.sortInPlace({ (segA, segB) -> Bool in
+            captionSegments.sort(by: { (segA, segB) -> Bool in
                 segA.startTime < segB.startTime
             })
 

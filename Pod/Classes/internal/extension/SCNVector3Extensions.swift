@@ -37,7 +37,7 @@ extension SCNVector3
     /**
      * Calculates the cross product between two SCNVector3.
      */
-    func wk_cross(vector: SCNVector3) -> SCNVector3 {
+    func wk_cross(_ vector: SCNVector3) -> SCNVector3 {
         return SCNVector3Make(y * vector.z - z * vector.y, z * vector.x - x * vector.z, x * vector.y - y * vector.x)
     }
 }

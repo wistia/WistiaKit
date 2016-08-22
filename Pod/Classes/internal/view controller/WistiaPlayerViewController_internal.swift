@@ -21,11 +21,11 @@ extension WistiaPlayerViewController {
 #if os(iOS)
 
     /// Internal override.
-    override final public func viewWillAppear(animated: Bool) {
+    override final public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         seekToStartIfAtEnd()
         needsManualLayoutFor360View = true
-        self.delegate?.wistiaPlayerViewControllerViewWillAppear(self)
+        self.delegate?.willAppear(wistiaPlayerViewController:  self)
     }
 
     /// Internal override.
@@ -37,18 +37,18 @@ extension WistiaPlayerViewController {
             let transform:CGAffineTransform
             let invertSize:Bool
 
-            switch UIApplication.sharedApplication().statusBarOrientation {
-            case .LandscapeLeft:
-                transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+            switch UIApplication.shared.statusBarOrientation {
+            case .landscapeLeft:
+                transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
                 invertSize = true
-            case .LandscapeRight:
-                transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+            case .landscapeRight:
+                transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
                 invertSize = true
-            case .PortraitUpsideDown:
-                transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+            case .portraitUpsideDown:
+                transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
                 invertSize = false
             default: //.Portrait
-                transform = CGAffineTransformIdentity
+                transform = CGAffineTransform.identity
                 invertSize = false
             }
 
@@ -59,11 +59,11 @@ extension WistiaPlayerViewController {
     }
 
     /// Internal override.
-    override final public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override final public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
         //update current progress for new size
-        coordinator.animateAlongsideTransition({ (context) -> Void in
+        coordinator.animate(alongsideTransition: { (context) -> Void in
             self.presentForCurrentProgress()
             }, completion: nil)
 
@@ -73,22 +73,22 @@ extension WistiaPlayerViewController {
             let invertSize = (self.player360View.bounds.size != size)
             var completionTransform:CGAffineTransform? = nil
 
-            coordinator.animateAlongsideTransition({ (context) -> Void in
+            coordinator.animate(alongsideTransition: { (context) -> Void in
 
                 let counterTransform:CGAffineTransform
-                if (context.targetTransform().a == -1 && context.targetTransform().d == -1) {
+                if (context.targetTransform.a == -1 && context.targetTransform.d == -1) {
                     //iOS will rotate the shortest distance to the end angle.  Rotating 180 (or -180), is always clockwise.
                     //To counter-rotate against 180, we first (1) under-counter-rotate by some small amount in the
                     //animation block then (2) finish the rotation after the animation block.  As long as we under-rotate
                     //by a small enough amount, it's imperceptible, and our views stay perfectly square afterward.
-                    counterTransform = CGAffineTransformMakeRotation(-1*(CGFloat(M_PI)-0.00001))
-                    completionTransform = CGAffineTransformMakeRotation(-0.00001)
+                    counterTransform = CGAffineTransform(rotationAngle: -1*(CGFloat(M_PI)-0.00001))
+                    completionTransform = CGAffineTransform(rotationAngle: -0.00001)
                 } else {
                     //just invert the 90 degree transforms
-                    counterTransform = CGAffineTransformInvert(context.targetTransform())
+                    counterTransform = context.targetTransform.inverted()
                 }
 
-                self.player360View.transform = CGAffineTransformConcat(self.player360View.transform, counterTransform)
+                self.player360View.transform = self.player360View.transform.concatenating(counterTransform)
 
                 //update size (stay same if 180 rotation, otherwise we're countering size change)
                 self.player360ViewWidthConstraint.constant = invertSize ? size.height : size.width
@@ -97,7 +97,7 @@ extension WistiaPlayerViewController {
 
                 }){ (context) -> Void in
                     if let t = completionTransform {
-                        self.player360View.transform = CGAffineTransformConcat(self.player360View.transform, t)
+                        self.player360View.transform = self.player360View.transform.concatenating(t)
                     }
             }
         }
@@ -111,23 +111,23 @@ internal extension WistiaPlayerViewController {
 //Until we support 360 on TV, just killing this entire thing
 #if os(iOS)
 
-    @IBAction func posterPlayPressed(sender: AnyObject) {
+    @IBAction func posterPlayPressed(_ sender: AnyObject) {
         play()
         presentForPlaybackShowingChrome(true)
     }
 
-    @IBAction func controlsPlayPausePressed(sender: AnyObject) {
+    @IBAction func controlsPlayPausePressed(_ sender: AnyObject) {
         togglePlayPause()
         presentForPlaybackShowingChrome(true)
         startOrResetChromeInteractionTimer()
     }
 
-    @IBAction func controlsCaptionsPressed(sender: AnyObject) {
+    @IBAction func controlsCaptionsPressed(_ sender: AnyObject) {
         startOrResetChromeInteractionTimer()
         toggleCaptionsChooserVisibility()
     }
 
-    @IBAction func controlsActionPressed(sender: UIButton) {
+    @IBAction func controlsActionPressed(_ sender: UIButton) {
         self.storePlayerRateAndPause()
         if let media = wPlayer.media {
             let videoTitle: String
@@ -144,33 +144,33 @@ internal extension WistiaPlayerViewController {
             let activityVC = UIActivityViewController(activityItems: [shareString], applicationActivities: nil)
             activityVC.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) -> Void in
                 self.restorePlayerRate()
-                self.delegate?.wistiaPlayerViewController(self, activityViewControllerDidCompleteForMedia: media, withActivityType: activityType, completed: completed, activityError: activityError)
+                self.delegate?.wistiaPlayerViewController(self, activityViewControllerDidCompleteForMedia: media, withActivityType: activityType?.rawValue, completed: completed, activityError: activityError)
             }
             self.delegate?.wistiaPlayerViewController(self, activityViewControllerWillAppearForMedia: media)
-            presentViewController(activityVC, animated: true, completion: nil)
+            present(activityVC, animated: true, completion: nil)
             
         } else {
             print("ERROR: could not find current media to share")
         }
     }
 
-    @IBAction func controlsClosePressed(sender: AnyObject) {
+    @IBAction func controlsClosePressed(_ sender: AnyObject) {
         pause()
 
         if let d = delegate {
-            d.closeWistiaPlayerViewController(self)
+            d.close(wistiaPlayerViewController: self)
         } else {
-            self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
         }
     }
     
-    @IBAction func playerContainerTapped(tapRecognizer: UITapGestureRecognizer) {
-        if wPlayer.state == WistiaPlayer.State.VideoReadyForPlayback {
+    @IBAction func playerContainerTapped(_ tapRecognizer: UITapGestureRecognizer) {
+        if wPlayer.state == WistiaPlayer.State.videoReadyForPlayback {
             presentForPlaybackToggleChrome()
         }
     }
 
-    @IBAction func playerContainerDoubleTapped(sender: UITapGestureRecognizer) {
+    @IBAction func playerContainerDoubleTapped(_ sender: UITapGestureRecognizer) {
         togglePlayPause()
     }
 
@@ -183,16 +183,16 @@ internal extension WistiaPlayerViewController {
 extension WistiaPlayerViewController: WistiaPlayerDelegate {
 
     /// Internal.
-    public final func wistiaPlayer(player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State) {
+    public final func wistiaPlayer(_ player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State) {
         switch newState {
-        case .Initialized: fallthrough
-        case .VideoPreLoading:
+        case .initialized: fallthrough
+        case .videoPreLoading:
             presentForPreLoading()
 
-        case .VideoLoading:
+        case .videoLoading:
             presentForLoading()
 
-        case .VideoReadyForPlayback:
+        case .videoReadyForPlayback:
             if autoplayVideoWhenReady {
                 presentForPlaybackShowingChrome(true)
                 play()
@@ -200,65 +200,65 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
                 presentForFirstPlayback()
             }
 
-        case .MediaNotFoundError(_):
+        case .mediaNotFoundError(_):
             fallthrough
-        case .VideoLoadingError(_, _, _):
+        case .videoLoadingError(_, _, _):
             fallthrough
-        case .VideoPlaybackError(_):
+        case .videoPlaybackError(_):
             //IMPROVE ME: Show more useful errors to users depending on root cause
             presentForError()
         }
     }
 
     /// Internal.
-    public final func wistiaPlayer(player:WistiaPlayer, didChangePlaybackRateTo newRate:Float) {
+    public final func wistiaPlayer(_ player:WistiaPlayer, didChangePlaybackRateTo newRate:Float) {
 
         let playing = newRate > 0.0
         if playing {
             presentForPlaybackShowingChrome(true)
         }
-        presentPlayPauseButtonForPlaying(playing)
+        presentPlayPauseButton(forPlaying: playing)
     }
 
     /// Internal.
-    public final func wistiaPlayer(player: WistiaPlayer, didChangePlaybackProgressTo progress: Float, atCurrentTime currentTime: CMTime, ofDuration: CMTime) {
+    public final func wistiaPlayer(_ player: WistiaPlayer, didChangePlaybackProgressTo progress: Float, atCurrentTime currentTime: CMTime, ofDuration: CMTime) {
         //playhead tracks user's finger when scrubbing
         if !scrubbing {
-            presentForProgress(progress, currentTime: currentTime)
+            present(forProgress: progress, currentTime: currentTime)
         }
     }
 
     /// Internal.
-    public final func wistiaPlayerDidPlayToEndTime(player: WistiaPlayer) {
+    public final func didPlayToEndTime(of player: WistiaPlayer) {
         switch (activeEmbedOptions.endVideoBehavior) {
-        case .LoopVideo:
-            self.wPlayer.seekToTime(CMTime(seconds: 0, preferredTimescale: 10), completionHandler: { (didSeek) in
+        case .loopVideo:
+            self.wPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 10), completionHandler: { (didSeek) in
                 self.play()
             })
-        case .PauseOnLastFrame:
+        case .pauseOnLastFrame:
             //NB: SKVideoNode and/or SceneKit bug: video rapidly toggles between paused/playing upon reaching end unless explicitly paused
             self.pause()
-        case .ResetToTimeZero:
+        case .resetToTimeZero:
             self.pause()
-            self.wPlayer.seekToTime(CMTime(seconds: 0, preferredTimescale: 10), completionHandler: { (didSeek) in
-                self.presentPlayPauseButtonForPlaying(false)
+            self.wPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 10), completionHandler: { (didSeek) in
+                self.presentPlayPauseButton(forPlaying: false)
             })
         }
     }
 
     /// Internal.
-    public final func wistiaPlayer(player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
+    public final func wistiaPlayer(_ player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
         if media.spherical {
             playing360 = true
-            player360View.hidden = false
+            player360View.isHidden = false
             player360View.wPlayer = wPlayer
-            playerFlatView.hidden = true
+            playerFlatView.isHidden = true
             playerFlatView.playerLayer = nil
         } else {
             playing360 = false
-            player360View.hidden = true
+            player360View.isHidden = true
             player360View.wPlayer = nil
-            playerFlatView.hidden = false
+            playerFlatView.isHidden = false
             playerFlatView.playerLayer = wPlayer.newPlayerLayer()
         }
 
@@ -271,7 +271,7 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
 //MARK: - Wistia Captions Renderer Delegate
 extension WistiaPlayerViewController: WistiaCaptionsRendererDelegate {
 
-    public func captionsRenderer(renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable: [String]) {
+    public func captionsRenderer(_ renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable: [String]) {
         //UIPicker not supported on TV.  Captions should be done natively, anyway.
         #if os(iOS)
         captionsLanguagePickerView.reloadAllComponents()
@@ -295,7 +295,7 @@ internal extension WistiaPlayerViewController {
         }
     }
 
-    internal func customizeViewFor(embedOptions:WistiaMediaEmbedOptions) {
+    internal func customizeView(for embedOptions:WistiaMediaEmbedOptions) {
         //playerColor
         controlsPlayPauseButton.backgroundColor = embedOptions.playerColor
         scrubberTrackContainerView.backgroundColor = embedOptions.playerColor
@@ -305,22 +305,22 @@ internal extension WistiaPlayerViewController {
         posterPlayButton.backgroundColor = embedOptions.playerColor
 
         //smallPlayButton
-        controlsPlayPauseButton.hidden = !embedOptions.smallPlayButton
+        controlsPlayPauseButton.isHidden = !embedOptions.smallPlayButton
 
         //playbar (aka scrubber)
         scrubberTrackContainerView.alpha = (embedOptions.playbar ? 1.0 : 0.0)
 
         //stillURL
         if let stillURL = embedOptions.stillURL {
-            posterStillImage.hidden = false
+            posterStillImage.isHidden = false
             posterStillImage.af_setImageWithURL(stillURL)
         } else {
-            posterStillImage.hidden = true
+            posterStillImage.isHidden = true
         }
 
         //optional controls buttons
-        controlsActionButton.hidden = !embedOptions.actionButton
-        controlsCaptionsButton.hidden = !embedOptions.captionsAvailable
+        controlsActionButton.isHidden = !embedOptions.actionButton
+        controlsCaptionsButton.isHidden = !embedOptions.captionsAvailable
 
         //The following are implemented dynamically:
         // * bigPlayButton (see presentForFirstPlayback())
@@ -330,63 +330,63 @@ internal extension WistiaPlayerViewController {
 
     internal func presentForPreLoading() {
         cancelChromeInteractionTimer()
-        playerContainer.hidden = true
+        playerContainer.isHidden = true
         posterLoadingIndicator.stopAnimating()
-        posterErrorIndicator.hidden = true
-        posterPlayButtonContainer.hidden = true
-        posterStillImageContainer.hidden = true
+        posterErrorIndicator.isHidden = true
+        posterPlayButtonContainer.isHidden = true
+        posterStillImageContainer.isHidden = true
         showPlaybackControls(false, extraClose: false)
-        presentForProgress(0, currentTime: nil)
+        present(forProgress: 0, currentTime: nil)
     }
 
     internal func presentForLoading() {
         cancelChromeInteractionTimer()
-        playerContainer.hidden = false
+        playerContainer.isHidden = false
         posterLoadingIndicator.startAnimating()
-        posterErrorIndicator.hidden = true
-        posterPlayButtonContainer.hidden = true
-        posterStillImageContainer.hidden = true
+        posterErrorIndicator.isHidden = true
+        posterPlayButtonContainer.isHidden = true
+        posterStillImageContainer.isHidden = true
         showPlaybackControls(false, extraClose: true)
-        presentForProgress(0, currentTime: nil)
+        present(forProgress: 0, currentTime: nil)
     }
 
     internal func presentForError() {
         cancelChromeInteractionTimer()
-        playerContainer.hidden = true
+        playerContainer.isHidden = true
         posterLoadingIndicator.stopAnimating()
-        posterErrorIndicator.hidden = false
-        posterPlayButtonContainer.hidden = true
-        posterStillImageContainer.hidden = true
+        posterErrorIndicator.isHidden = false
+        posterPlayButtonContainer.isHidden = true
+        posterStillImageContainer.isHidden = true
         showPlaybackControls(false, extraClose: true)
-        presentForProgress(0, currentTime: nil)
+        present(forProgress: 0, currentTime: nil)
     }
 
     internal func presentForFirstPlayback() {
         cancelChromeInteractionTimer()
-        playerContainer.hidden = false
+        playerContainer.isHidden = false
         posterLoadingIndicator.stopAnimating()
-        posterErrorIndicator.hidden = true
-        posterPlayButtonContainer.hidden = !activeEmbedOptions.bigPlayButton
-        posterStillImageContainer.hidden = false
+        posterErrorIndicator.isHidden = true
+        posterPlayButtonContainer.isHidden = !activeEmbedOptions.bigPlayButton
+        posterStillImageContainer.isHidden = false
         showPlaybackControls(activeEmbedOptions.controlsVisibleOnLoad, extraClose: false)
-        presentForProgress(0, currentTime: nil)
+        present(forProgress: 0, currentTime: nil)
     }
 
-    internal func presentForPlaybackShowingChrome(showChrome:Bool){
-        playerContainer.hidden = false
+    internal func presentForPlaybackShowingChrome(_ showChrome:Bool){
+        playerContainer.isHidden = false
         posterLoadingIndicator.stopAnimating()
-        posterErrorIndicator.hidden = true
-        posterPlayButtonContainer.hidden = true
-        posterStillImageContainer.hidden = true
+        posterErrorIndicator.isHidden = true
+        posterPlayButtonContainer.isHidden = true
+        posterStillImageContainer.isHidden = true
 
-        UIView.animateWithDuration(NSTimeInterval(0.5), animations: { () -> Void in
+        UIView.animate(withDuration: TimeInterval(0.5), animations: { () -> Void in
             //Don't change alpha of UIVisualEffectView.  
             //It's undocumented, but you can animate removal or setting of effect to affect a similar effect as alpha
             if showChrome {
-                self.playbackControlsContainer.effect = UIBlurEffect(style: .Light)
+                self.playbackControlsContainer.effect = UIBlurEffect(style: .light)
                 //You are *supposed* to use a vibrancy effect matching the underlying blur effect
                 //But vibrancy for dark blur turns template icons white, which is what we want (and it looks good!)
-                self.playbackControlsInnerContainer.effect = UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Dark))
+                self.playbackControlsInnerContainer.effect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: .dark))
             } else {
                 self.playbackControlsContainer.effect = nil
                 self.playbackControlsInnerContainer.effect = nil
@@ -403,26 +403,26 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentForPlaybackToggleChrome() {
-        if self.playbackControlsContainer.hidden {
+        if self.playbackControlsContainer.isHidden {
             presentForPlaybackShowingChrome(true)
         } else {
             presentForPlaybackShowingChrome(false)
         }
     }
 
-    internal func presentPlayPauseButtonForPlaying(playing:Bool){
-        let podBundle = NSBundle(forClass: self.classForCoder)
+    internal func presentPlayPauseButton(forPlaying playing:Bool){
+        let podBundle = Bundle(for: self.classForCoder)
         if playing {
-            controlsPlayPauseButton.setImage(UIImage(named: "smallPause", inBundle: podBundle, compatibleWithTraitCollection: nil), forState: .Normal)
+            controlsPlayPauseButton.setImage(UIImage(named: "smallPause", in: podBundle, compatibleWith: nil), for: UIControlState())
         } else {
-            controlsPlayPauseButton.setImage(UIImage(named: "smallPlay", inBundle: podBundle, compatibleWithTraitCollection: nil), forState: .Normal)
+            controlsPlayPauseButton.setImage(UIImage(named: "smallPlay", in: podBundle, compatibleWith: nil), for: UIControlState())
         }
     }
 
-    internal func presentForProgress(progress:Float, currentTime:CMTime?){
+    internal func present(forProgress progress:Float, currentTime:CMTime?){
         scrubberCurrentProgressViewWidthConstraint.constant = scrubberTrackContainerView.bounds.width * min(max(CGFloat(progress), 0.0), 1.0)
         if !scrubbing {
-            UIView.animateWithDuration(NSTimeInterval(0.1)) { () -> Void in
+            UIView.animate(withDuration: TimeInterval(0.1)) { () -> Void in
                 self.view.layoutIfNeeded()
             }
         }
@@ -445,14 +445,14 @@ internal extension WistiaPlayerViewController {
 
     internal func presentForCurrentProgress(){
         if let duration = wPlayer.currentItem?.duration {
-            presentForProgress(Float(wPlayer.currentTime().seconds / duration.seconds), currentTime: wPlayer.currentTime())
+            present(forProgress: Float(wPlayer.currentTime().seconds / duration.seconds), currentTime: wPlayer.currentTime())
         }
     }
 
     internal func startOrResetChromeInteractionTimer(){
         chromeInteractionTimer?.invalidate()
-        chromeInteractionTimer = NSTimer(timeInterval: NSTimeInterval(5), target: self, selector: #selector(WistiaPlayerViewController.noChromeInteraction), userInfo: nil, repeats: false)
-        NSRunLoop.mainRunLoop().addTimer(chromeInteractionTimer!, forMode: NSDefaultRunLoopMode)
+        chromeInteractionTimer = Timer(timeInterval: TimeInterval(5), target: self, selector: #selector(WistiaPlayerViewController.noChromeInteraction), userInfo: nil, repeats: false)
+        RunLoop.main.add(chromeInteractionTimer!, forMode: RunLoopMode.defaultRunLoopMode)
     }
 
     internal func cancelChromeInteractionTimer(){
@@ -463,9 +463,9 @@ internal extension WistiaPlayerViewController {
         presentForPlaybackShowingChrome(false)
     }
 
-    internal func showPlaybackControls(showControls: Bool, extraClose showExtraClose: Bool) {
-        playbackControlsContainer.hidden = !showControls
-        extraCloseButton.hidden = !showExtraClose
+    internal func showPlaybackControls(_ showControls: Bool, extraClose showExtraClose: Bool) {
+        playbackControlsContainer.isHidden = !showControls
+        extraCloseButton.isHidden = !showExtraClose
     }
 
 #endif //os(iOS)
@@ -476,29 +476,29 @@ internal extension WistiaPlayerViewController {
 //Until we support 360 on TV, just killing this entire thing
 #if os(iOS)
 
-    @IBAction internal func handleScrubberTap(sender: UITapGestureRecognizer) {
-        if let seekTo = seekTimeForScrubberTrackContainerLocation(sender.locationInView(scrubberTrackContainerView)) {
-            wPlayer.seekToTime(seekTo, completionHandler: nil)
+    @IBAction internal func handleScrubberTap(_ sender: UITapGestureRecognizer) {
+        if let seekTo = seekTimeForScrubberTrackContainerLocation(sender.location(in: scrubberTrackContainerView)) {
+            wPlayer.seek(to: seekTo, completionHandler: nil)
         }
         startOrResetChromeInteractionTimer()
     }
     
-    @IBAction internal func handleScrubbing(sender: UIPanGestureRecognizer) {
+    @IBAction internal func handleScrubbing(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
-        case .Possible:
+        case .possible:
             //Do Nothing
             break
-        case .Began:
+        case .began:
             startScrubbing()
-            userScrubbedTo(sender.locationInView(scrubberTrackContainerView))
-        case .Changed:
-            userScrubbedTo(sender.locationInView(scrubberTrackContainerView))
-        case .Cancelled:
+            userScrubbed(to: sender.location(in: scrubberTrackContainerView))
+        case .changed:
+            userScrubbed(to: sender.location(in: scrubberTrackContainerView))
+        case .cancelled:
             endScrubbing(nil)
-        case .Ended:
-            userScrubbedTo(sender.locationInView(scrubberTrackContainerView))
-            endScrubbing(sender.locationInView(scrubberTrackContainerView))
-        case .Failed:
+        case .ended:
+            userScrubbed(to: sender.location(in: scrubberTrackContainerView))
+            endScrubbing(sender.location(in: scrubberTrackContainerView))
+        case .failed:
             endScrubbing(nil)
         }
     }
@@ -510,26 +510,26 @@ internal extension WistiaPlayerViewController {
         cancelChromeInteractionTimer()
     }
 
-    internal func userScrubbedTo(location:CGPoint){
+    internal func userScrubbed(to location:CGPoint){
         let secondsSinceLastSeek = scrubbingSeekLastRequestedAt.timeIntervalSinceNow
         if let seekTo = seekTimeForScrubberTrackContainerLocation(location) {
             //An unfinished seek request will be cancelled when another is sent
             //Still, don't fire seek requests too close together, to keep performance high
             if secondsSinceLastSeek < -0.1 {
-                scrubbingSeekLastRequestedAt = NSDate()
-                wPlayer.seekToTime(seekTo, completionHandler: nil)
+                scrubbingSeekLastRequestedAt = Date()
+                wPlayer.seek(to: seekTo, completionHandler: nil)
             }
 
             //Update the playhead based on this location (player reported times are ignored during scrubbing)
             if let duration = wPlayer.currentItem?.duration {
-                presentForProgress(Float(seekTo.seconds / duration.seconds), currentTime: seekTo)
+                present(forProgress: Float(seekTo.seconds / duration.seconds), currentTime: seekTo)
             }
         }
     }
 
-    internal func endScrubbing(location:CGPoint?){
+    internal func endScrubbing(_ location:CGPoint?){
         if let seekTo = seekTimeForScrubberTrackContainerLocation(location) {
-            wPlayer.seekToTime(seekTo, completionHandler: { (finished) -> Void in
+            wPlayer.seek(to: seekTo, completionHandler: { (finished) -> Void in
                 self.restorePlayerRate()
             })
         } else {
@@ -540,8 +540,8 @@ internal extension WistiaPlayerViewController {
         startOrResetChromeInteractionTimer()
     }
 
-    internal func seekTimeForScrubberTrackContainerLocation(location:CGPoint?) -> CMTime? {
-        if let x = location?.x, duration = wPlayer.currentItem?.duration {
+    internal func seekTimeForScrubberTrackContainerLocation(_ location:CGPoint?) -> CMTime? {
+        if let x = location?.x, let duration = wPlayer.currentItem?.duration {
             let pct = min(max(0,x / scrubberTrackContainerView.bounds.width),1)
             return CMTimeMultiplyByFloat64(duration, Float64(pct))
         } else {
@@ -567,22 +567,22 @@ internal extension WistiaPlayerViewController {
         }
     }
 
-    internal func moveScrubTrackTimeLabelAwayFromFinger(moveAway: Bool) {
+    internal func moveScrubTrackTimeLabelAwayFromFinger(_ moveAway: Bool) {
         if moveAway {
             scrubTrackTimeLabelCenterConstraint.constant = -40
         } else {
             scrubTrackTimeLabelCenterConstraint.constant = 0
         }
-        UIView.animateWithDuration(NSTimeInterval(0.25)) { () -> Void in
+        UIView.animate(withDuration: TimeInterval(0.25)) { () -> Void in
             self.view.layoutIfNeeded()
         }
     }
 
-    internal func seekToStartIfAtEnd(tolerance: CMTime = CMTime(seconds: 0.1, preferredTimescale: 10)) {
+    internal func seekToStartIfAtEnd(withTolerance tolerance: CMTime = CMTime(seconds: 0.1, preferredTimescale: 10)) {
         let currentTime = wPlayer.currentTime()
         if let duration = wPlayer.currentItem?.duration {
             if currentTime > duration || (duration - currentTime) < tolerance {
-                wPlayer.seekToTime(CMTime(seconds: 0, preferredTimescale: 10), completionHandler: nil)
+                wPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 10), completionHandler: nil)
             }
         }
 
@@ -597,24 +597,24 @@ internal extension WistiaPlayerViewController {
 extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSource {
 
     func showCaptionsChooser() {
-        captionsLanguagePickerView.hidden = false
+        captionsLanguagePickerView.isHidden = false
         cancelChromeInteractionTimer()
     }
 
     func hideCaptionsChooser() {
-        captionsLanguagePickerView.hidden = true
+        captionsLanguagePickerView.isHidden = true
         startOrResetChromeInteractionTimer()
     }
 
     func toggleCaptionsChooserVisibility() {
-        if captionsLanguagePickerView.hidden {
+        if captionsLanguagePickerView.isHidden {
             showCaptionsChooser()
         } else {
             hideCaptionsChooser()
         }
     }
 
-    public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row == 0 {
             wPlayer.captionsRenderer.enabled = false
         } else {
@@ -625,15 +625,15 @@ extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSou
     }
 
     //delegate
-    public func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    public func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 30
     }
 
-    public func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         return 100
     }
 
-    public func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    public func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let title:String
         if row == 0 {
             title = "off"
@@ -641,16 +641,16 @@ extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSou
             title = wPlayer.captionsRenderer.captionsLanguagesAvailable[row-1]
         }
 
-        return NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        return NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.white])
     }
 
     //data source
 
-    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
-    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return wPlayer.captionsRenderer.captionsLanguagesAvailable.count + 1
     }
 

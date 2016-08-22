@@ -53,10 +53,10 @@ public struct WistiaMediaEmbedOptions {
     }
     
     /// What do do when the video ends (default: PauseOnLastFrame) as a String
-    public var endVideoBehavior: WistiaEndVideoBehavior = .PauseOnLastFrame
+    public var endVideoBehavior: WistiaEndVideoBehavior = .pauseOnLastFrame
 
     /// Image to show for poster before playback (default: nil - the first frame of video is shown)
-    public var stillURL: NSURL? = nil
+    public var stillURL: URL? = nil
 
     /// Show the standard iOS action button (similar to Wistia Social Bar on web) (default: false)
     public var actionButton: Bool = false
@@ -81,26 +81,26 @@ public struct WistiaMediaEmbedOptions {
     */
     public enum WistiaEndVideoBehavior {
         /// Continue to diplay the last frame, remain paused (deafult).
-        case PauseOnLastFrame
+        case pauseOnLastFrame
 
         /// Return to the start of the video, remain paused.
-        case ResetToTimeZero
+        case resetToTimeZero
 
         /// Return to the start of the video and resume playback there.
-        case LoopVideo
+        case loopVideo
 
-        static func fromString(behavior:String) -> WistiaEndVideoBehavior {
+        static func fromString(_ behavior:String) -> WistiaEndVideoBehavior {
             switch behavior {
             case "default":
                 fallthrough
             case "pause":
-                return .PauseOnLastFrame
+                return .pauseOnLastFrame
             case "reset":
-                return .ResetToTimeZero
+                return .resetToTimeZero
             case "loop":
-                return .LoopVideo
+                return .loopVideo
             default:
-                return .PauseOnLastFrame
+                return .pauseOnLastFrame
             }
         }
     }

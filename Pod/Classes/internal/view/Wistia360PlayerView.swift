@@ -45,22 +45,22 @@ internal class Wistia360PlayerView: UIView {
 
     //SceneKit - 3D stuff
     @IBOutlet internal var sceneView: SCNView!
-    private let scene = SCNScene()
-    private let camera = SCNCamera()
-    private let cameraNode = SCNNode()
-    private let cameraHolderNode = SCNNode()
+    fileprivate let scene = SCNScene()
+    fileprivate let camera = SCNCamera()
+    fileprivate let cameraNode = SCNNode()
+    fileprivate let cameraHolderNode = SCNNode()
     internal let SphereRadius = CGFloat(30.0)
-    private var sphereNode = SCNNode()
+    fileprivate var sphereNode = SCNNode()
 
-    private let defaultCameraFov = 60.0 //degrees
-    private let cameraFovBounds = (min:10.0, max:90.0)
+    fileprivate let defaultCameraFov = 60.0 //degrees
+    fileprivate let cameraFovBounds = (min:10.0, max:90.0)
 
-    private var pinchStartScale:Double = 1.0
-    private var initialCameraXFov:Double = 0.0
+    fileprivate var pinchStartScale: Double = 1.0
+    fileprivate var initialCameraXFov: Double = 0.0
 
     //SpriteKit - 2D stuff
-    private var videoScene:SKScene?
-    private var videoNode:SKVideoNode?
+    fileprivate var videoScene: SKScene?
+    fileprivate var videoNode: SKVideoNode?
 
     //Video
     internal var wPlayer:WistiaPlayer? {
@@ -81,20 +81,20 @@ internal class Wistia360PlayerView: UIView {
     }
 
     //Motion
-    private let motionManager = CMMotionManager()
-    private var lastMotion:CMDeviceMotion?
+    fileprivate let motionManager = CMMotionManager()
+    fileprivate var lastMotion: CMDeviceMotion?
 
-    private var animatingPitch = false
-    private var manualEuler = SCNVector3Make(0, 0, 0)
-    private let ManualPitchCapUp = Float(85.0*M_PI/180.0)
-    private let ManualPitchCapDown = Float(60.0*M_PI/180.0)
+    fileprivate var animatingPitch = false
+    fileprivate var manualEuler = SCNVector3Make(0, 0, 0)
+    fileprivate let ManualPitchCapUp = Float(85.0*M_PI/180.0)
+    fileprivate let ManualPitchCapDown = Float(60.0*M_PI/180.0)
 
     //Look Vector (aka Camera Position) Tracking
     //mostly in the extension, but can't (easily) add stored variables in extensions
-    internal let LookVectorUnchangedTemporalRequirement = NSTimeInterval(0.2)
+    internal let LookVectorUnchangedTemporalRequirement = TimeInterval(0.2)
     internal let LookVectorUnchangedSpatialRequirement = HeadingPitch(heading: 10, pitch: 5)
     internal var lastLookVector = HeadingPitch(heading: 0, pitch: 0)
-    internal var lookVectorStatsTimer: NSTimer?
+    internal var lookVectorStatsTimer: Timer?
     internal var lookVectorIsSettled = false
 
     //MARK:- View Lifecycle
@@ -107,21 +107,21 @@ internal class Wistia360PlayerView: UIView {
 
     internal func play() {
         videoNode?.play()
-        wPlayer?.logEvent(.Play)
+        wPlayer?.log(.play)
     }
 
     internal func pause() {
         videoNode?.pause()
-        wPlayer?.logEvent(.Pause)
+        wPlayer?.log(.pause)
     }
 
     //MARK:- Gesture Recognizers
 
-    @IBAction func handleLongPress(sender: AnyObject) {
+    @IBAction func handleLongPress(_ sender: AnyObject) {
         //reset e'rything
 
         SCNTransaction.begin()
-        SCNTransaction.setAnimationDuration(CFTimeInterval(0.25))
+        SCNTransaction.animationDuration = CFTimeInterval(0.25)
 
         //FoV to default
         camera.xFov = min(max(defaultCameraFov, cameraFovBounds.0), cameraFovBounds.1)
@@ -130,63 +130,63 @@ internal class Wistia360PlayerView: UIView {
         manualEuler = SCNVector3Make(0, 0, 0)
         updateCamera()
         animatingPitch = true
-        SCNTransaction.setCompletionBlock({ () -> Void in
+        SCNTransaction.completionBlock = { () -> Void in
             self.animatingPitch = false
-        })
+        }
 
         SCNTransaction.commit()
 
     }
 
-    @IBAction func handleTwoTouchSingleTap(sender: AnyObject) {
+    @IBAction func handleTwoTouchSingleTap(_ sender: AnyObject) {
         //zoom out FoV
         scaleCameraXFovBy(1.5)
     }
 
-    @IBAction func handleOneTouchDoubleTap(sender: AnyObject) {
+    @IBAction func handleOneTouchDoubleTap(_ sender: AnyObject) {
         //zoom in FoV
         scaleCameraXFovBy(1/1.5)
     }
 
-    @IBAction func handlePinch(sender: UIPinchGestureRecognizer) {
+    @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
         let currentScale = Double(sender.scale)
 
         switch sender.state {
-        case .Possible:
+        case .possible:
             break
 
-        case .Began:
+        case .began:
             pinchStartScale = currentScale
             initialCameraXFov = camera.xFov
 
-        case .Changed:
+        case .changed:
             camera.xFov = min(max(initialCameraXFov / currentScale, cameraFovBounds.min), cameraFovBounds.max)
 
-        case .Cancelled:
+        case .cancelled:
             camera.xFov = initialCameraXFov
 
-        case .Ended:
+        case .ended:
             //was already set in changed, not doing anything with velocity
             break
 
-        case .Failed:
+        case .failed:
             break
         }
     }
 
-    @IBAction func handlePan(sender: UIPanGestureRecognizer) {
+    @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
 
         switch sender.state {
-        case .Possible:
+        case .possible:
             break
 
-        case .Began:
+        case .began:
             break
 
-        case .Changed:
-            let currentLocation = sender.locationInView(self.sceneView)
-            let lastTranslation = sender.translationInView(self.sceneView)
-            sender.setTranslation(CGPointZero, inView: self.sceneView)
+        case .changed:
+            let currentLocation = sender.location(in: self.sceneView)
+            let lastTranslation = sender.translation(in: self.sceneView)
+            sender.setTranslation(CGPoint.zero, in: self.sceneView)
 
             //roll -  Nobody wants roll when panning with a _single_ finger...
             let (pitchRadsMoved, yawRadsMoved) = pitchAndYawFor(lastTranslation, endingAt: currentLocation)
@@ -201,14 +201,14 @@ internal class Wistia360PlayerView: UIView {
                 updateCamera()
             }
 
-        case .Cancelled:
+        case .cancelled:
             break
 
-        case .Ended:
+        case .ended:
             //translation was applied in last .Changed branch
             //figure out where velocity should land us, get the pitch/yaw that would accomplish it, apply in animation block
-            let currentLocation = sender.locationInView(self.sceneView)
-            let endVelocity = sender.velocityInView(sceneView) //points per second
+            let currentLocation = sender.location(in: self.sceneView)
+            let endVelocity = sender.velocity(in: sceneView) //points per second
             let seconds:CGFloat = 1/4.0
             let s_2 = seconds * seconds
             let translationForVelocity = CGPoint(x: endVelocity.x * s_2, y: endVelocity.y * s_2)
@@ -218,16 +218,16 @@ internal class Wistia360PlayerView: UIView {
             let pitchRads = min(max(manualEuler.x + pitchVRads, -ManualPitchCapDown), ManualPitchCapUp)
 
             SCNTransaction.begin()
-            SCNTransaction.setAnimationDuration(CFTimeInterval(seconds))
+            SCNTransaction.animationDuration = CFTimeInterval(seconds)
             manualEuler = SCNVector3Make(pitchRads, 0, yawRads)
             updateCamera()
             animatingPitch = true
-            SCNTransaction.setCompletionBlock({ () -> Void in
+            SCNTransaction.completionBlock = { () -> Void in
                 self.animatingPitch = false
-            })
+            }
             SCNTransaction.commit()
 
-        case .Failed:
+        case .failed:
             break
         }
 
@@ -235,14 +235,14 @@ internal class Wistia360PlayerView: UIView {
 
     //MARK:- Scene Kit / Camera
 
-    private func scaleCameraXFovBy(scaleFactor:Double) {
+    fileprivate func scaleCameraXFovBy(_ scaleFactor:Double) {
         SCNTransaction.begin()
-        SCNTransaction.setAnimationDuration(CFTimeInterval(0.25))
+        SCNTransaction.animationDuration = CFTimeInterval(0.25)
         camera.xFov = min(max(camera.xFov * scaleFactor, cameraFovBounds.0), cameraFovBounds.1)
         SCNTransaction.commit()
     }
 
-    private func updateCamera(){
+    fileprivate func updateCamera(){
         // 0) For manual yaw: apply liberally to sphere
         sphereNode.eulerAngles.z = manualEuler.z
 
@@ -283,7 +283,7 @@ internal class Wistia360PlayerView: UIView {
         cameraNode.transform = pitchRotation
     }
 
-    private func destroyScene(){
+    fileprivate func destroyScene(){
         videoScene?.removeAllChildren()
         videoNode = nil
         for node in scene.rootNode.childNodes {
@@ -291,7 +291,7 @@ internal class Wistia360PlayerView: UIView {
         }
     }
 
-    private func buildScene(videoSize videoSize:CGSize, sphereRadius:CGFloat) {
+    fileprivate func buildScene(videoSize:CGSize, sphereRadius:CGFloat) {
         guard wPlayer != nil else { return }
         // Make sure scene is empty
         // Optimization: in the future we could resuse the scene and just update videoNode when player is set
@@ -301,7 +301,7 @@ internal class Wistia360PlayerView: UIView {
         // 2) Have video frames rendered into GPU using SceneKit
         let videoSceneSize = videoSize
         videoScene = SKScene(size: videoSceneSize)
-        videoNode = SKVideoNode(AVPlayer: wPlayer!.avPlayer)
+        videoNode = SKVideoNode(avPlayer: wPlayer!.avPlayer)
         videoNode!.size = videoSceneSize
         videoNode!.anchorPoint = CGPoint(x: 0, y: 0)
         videoNode!.pause()
@@ -325,9 +325,9 @@ internal class Wistia360PlayerView: UIView {
         let material = SCNMaterial()
         material.diffuse.contents = videoScene
         // Render that texture on front and back of sphere's polygons
-        material.doubleSided = true
+        material.isDoubleSided = true
         // But don't render the front (ie. outside of sphere) for performance
-        material.cullMode = SCNCullMode.Front
+        material.cullMode = SCNCullMode.front
         sphere.firstMaterial = material
         // Add to the scene
         sphereNode = SCNNode(geometry: sphere)
@@ -340,17 +340,17 @@ internal class Wistia360PlayerView: UIView {
 
     //MARK:- Device Motion
 
-    private func stopDeviceMotion() {
+    fileprivate func stopDeviceMotion() {
         motionManager.stopDeviceMotionUpdates()
     }
 
-    private func startDeviceMotion() {
+    fileprivate func startDeviceMotion() {
         //Putting this on main queue b/c I'm not doing heavy math in my handler
         motionManager.deviceMotionUpdateInterval = 1/90.0
-        motionManager.startDeviceMotionUpdatesUsingReferenceFrame(.XArbitraryCorrectedZVertical, toQueue: NSOperationQueue.mainQueue(), withHandler: self.absoluteDeviceMotionHandler)
+        motionManager.startDeviceMotionUpdates(using: .xArbitraryCorrectedZVertical, to: OperationQueue.main, withHandler: self.absoluteDeviceMotionHandler as! CMDeviceMotionHandler)
     }
 
-    private func absoluteDeviceMotionHandler(deviceMotion:CMDeviceMotion?, error:NSError?) {
+    fileprivate func absoluteDeviceMotionHandler(_ deviceMotion:CMDeviceMotion?, error:NSError?) {
         if let motion = deviceMotion {
             self.lastMotion = motion
             updateCamera()
@@ -359,12 +359,12 @@ internal class Wistia360PlayerView: UIView {
 
     //MARK:- Helpers
 
-    private func pitchAndYawFor(translation:CGPoint, endingAt currentLocation:CGPoint) -> (Float, Float) {
+    fileprivate func pitchAndYawFor(_ translation:CGPoint, endingAt currentLocation:CGPoint) -> (Float, Float) {
         //don't need to care about device attitude by using localCoordinates
         let startLocation = CGPoint(x: currentLocation.x - translation.x, y: currentLocation.y - translation.y)
 
-        if let startHit = sceneView.hitTest(startLocation, options: [SCNHitTestFirstFoundOnlyKey: NSNumber(bool: true), SCNHitTestBackFaceCullingKey: NSNumber(bool: true)]).first,
-            endHit = sceneView.hitTest(currentLocation, options: [SCNHitTestFirstFoundOnlyKey: NSNumber(bool: true), SCNHitTestBackFaceCullingKey: NSNumber(bool: true)]).first {
+        if let startHit = sceneView.hitTest(startLocation, options: [SCNHitTestOption.firstFoundOnly: NSNumber(value: true), SCNHitTestOption.backFaceCulling: NSNumber(value: true)]).first,
+            let endHit = sceneView.hitTest(currentLocation, options: [SCNHitTestOption.firstFoundOnly: NSNumber(value: true), SCNHitTestOption.backFaceCulling: NSNumber(value: true)]).first {
 
                 //longitude = yaw = atan2(x, z)
                 //latitude = pitch = arcsin(y / r)

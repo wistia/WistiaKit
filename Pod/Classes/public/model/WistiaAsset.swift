@@ -25,9 +25,9 @@ public struct WistiaAsset {
     public var urlString: String
 
     /// A direct-access URL to the content of the asset.
-    public var url:NSURL {
+    public var url: URL {
         get {
-            return NSURL(string: self.urlString)!
+            return URL(string: self.urlString)!
         }
     }
 

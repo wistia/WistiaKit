@@ -29,10 +29,10 @@ public struct WistiaProject {
     public var mediaCount: Int?
 
     /// The date that the project was originally created.
-    public var created: NSDate?
+    public var created: Date?
 
     /// The date that the project was last updated.
-    public var updated: NSDate?
+    public var updated: Date?
 
     /// A private hashed id, uniquely identifying the project within the system.
     public let hashedID: String

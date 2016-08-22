@@ -30,7 +30,7 @@ internal extension Wistia360PlayerView {
 
     internal func startLookVectorTracking() {
         if lookVectorStatsTimer == nil {
-            lookVectorStatsTimer = NSTimer.scheduledTimerWithTimeInterval(LookVectorUnchangedTemporalRequirement, target: self, selector: #selector(Wistia360PlayerView.checkLookVector), userInfo: nil, repeats: true)
+            lookVectorStatsTimer = Timer.scheduledTimer(timeInterval: LookVectorUnchangedTemporalRequirement, target: self, selector: #selector(Wistia360PlayerView.checkLookVector), userInfo: nil, repeats: true)
         }
     }
 
@@ -52,16 +52,16 @@ internal extension Wistia360PlayerView {
         let lookStayedWithinGrid = (headingDelta <= LookVectorUnchangedSpatialRequirement.heading && pitchDelta <= LookVectorUnchangedSpatialRequirement.pitch)
 
         if lookStayedWithinGrid {
-            if !lookVectorIsSettled && /*isPlaying*/ wPlayer?.rate > 0.0 {
+            if !lookVectorIsSettled && wPlayer != nil && /*isPlaying*/ wPlayer!.rate > 0.0 {
                 //The look has settled (ie. entered a grid square) for a sufficient period of time
-                wPlayer?.logEvent(.LookVector, value: timeHeadingPitchString)
+                wPlayer?.log(.lookVector, withValue: timeHeadingPitchString)
                 lookVectorIsSettled = true
             } else {
                 //we're only logging the enter/exit, not if look stayed within grid after it initially settled
             }
         } else if lookVectorIsSettled {
             //The look has exited a grid square it was previously settled in
-            wPlayer?.logEvent(.LookVector, value: timeHeadingPitchString)
+            wPlayer?.log(.lookVector, withValue: timeHeadingPitchString)
             lookVectorIsSettled = false
         }
 
@@ -69,21 +69,21 @@ internal extension Wistia360PlayerView {
     }
 
     //the Look Vector extends from the middle of the view out into 3D space.  Return where that vector intersects the sphere.
-    private func lookVectorIntersectionWithSphereNode() -> SCNVector3 {
-        let middle = CGPointMake(sceneView.bounds.size.width/2.0, sceneView.bounds.size.height/2.0)
-        let hits = sceneView.hitTest(middle, options: [SCNHitTestFirstFoundOnlyKey: NSNumber(bool: true), SCNHitTestBackFaceCullingKey: NSNumber(bool: true)])
+    fileprivate func lookVectorIntersectionWithSphereNode() -> SCNVector3 {
+        let middle = CGPoint(x: sceneView.bounds.size.width/2.0, y: sceneView.bounds.size.height/2.0)
+        let hits = sceneView.hitTest(middle, options: [SCNHitTestOption.firstFoundOnly: NSNumber(value: true), SCNHitTestOption.backFaceCulling: NSNumber(value: true)])
         return hits.first!.localCoordinates
     }
 
     //Convert from x,y,z coordinates of sphere to latitude and longitude
-    private func latitudeLongitudeOfPoint(point:SCNVector3, onSphereWithRadius radius:Float) -> LatitudeLongitude {
+    fileprivate func latitudeLongitudeOfPoint(_ point:SCNVector3, onSphereWithRadius radius:Float) -> LatitudeLongitude {
         let latitude = acos(Float(point.y) / radius)
         let longitude = atan2(Float(point.x), Float(point.z))
         return (latitude, longitude)
     }
 
     //Convert from latitude and longitude to the heading and pitch wanted for back end analytics
-    private func correctedHeadingPitchFrom(latlon: LatitudeLongitude) -> HeadingPitch {
+    fileprivate func correctedHeadingPitchFrom(_ latlon: LatitudeLongitude) -> HeadingPitch {
         let heading = latlon.longitude * 90.0 / Float(M_PI_2)
         let pitch = (latlon.latitude * 180.0 / Float(M_PI_2)) - 180.0
         return (heading, pitch)

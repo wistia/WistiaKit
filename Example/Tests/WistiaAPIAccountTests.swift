@@ -15,20 +15,20 @@ class WistiaAPIAccountTests: XCTestCase {
 
     //MARK: - Show
     func testShowAccount() {
-        let expectation = expectationWithDescription("show account")
+        let expectation = self.expectation(description: "show account")
 
         wAPI.showAccount { (account) in
             if let a = account {
                 if a.accountID == 445830 &&
                     a.name == "WistiaKitAutomatedTests" &&
                     a.accountURLString == "http://wistiakitautomatedtests.wistia.com" &&
-                    a.accountURL == NSURL(string:"http://wistiakitautomatedtests.wistia.com") {
+                    a.accountURL == URL(string:"http://wistiakitautomatedtests.wistia.com") {
                     expectation.fulfill()
                 }
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
 }

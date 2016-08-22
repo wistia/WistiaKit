@@ -20,7 +20,7 @@ class WistiaAPIProjectTests: XCTestCase {
     //MARK: Basic
 
     func testListProjects() {
-        let expectation = expectationWithDescription("listed projects")
+        let expectation = self.expectation(description: "listed projects")
 
         wAPI.listProjects { (projects) in
             if projects.count > 0 {
@@ -28,22 +28,23 @@ class WistiaAPIProjectTests: XCTestCase {
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     //MARK: Sorting
 
     func testSortByCreatedAscending() {
-        let expectation = expectationWithDescription("sorted properly")
+        let expectation = self.expectation(description: "sorted properly")
 
-        wAPI.listProjects(page: 1, perPage: 100, sorting: (by: WistiaAPI.SortBy.Created, direction: WistiaAPI.SortDirection.Ascending)) { (projects) in
-            let sortedProjects = projects.sort({ (pa, pb) -> Bool in
-                return pa.created!.compare(pb.created!) == NSComparisonResult.OrderedAscending
+        wAPI.listProjects(page: 1, perPage: 100, sorting: (by: .created, direction: .ascending)) { (projects) in
+
+            let sortedProjects = projects.sorted(by: { (pa, pb) -> Bool in
+                return pa.created!.compare(pb.created!) == ComparisonResult.orderedAscending
             })
 
             if projects.count == sortedProjects.count {
                 var allGood = true
-                for (i, _) in projects.enumerate() {
+                for (i, _) in projects.enumerated() {
                     if projects[i] != sortedProjects[i] {
                         allGood = false
                     }
@@ -54,20 +55,21 @@ class WistiaAPIProjectTests: XCTestCase {
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     func testSortByCreatedDescending() {
-        let expectation = expectationWithDescription("sorted properly")
+        let expectation = self.expectation(description: "sorted properly")
 
-        wAPI.listProjects(page: 1, perPage: 100, sorting: (by: WistiaAPI.SortBy.Created, direction: WistiaAPI.SortDirection.Descending)) { (projects) in
-            let sortedProjects = projects.sort({ (pa, pb) -> Bool in
-                return pa.created!.compare(pb.created!) == NSComparisonResult.OrderedDescending
+        wAPI.listProjects(page: 1, perPage: 100, sorting: (by: .created, direction: .descending)) { (projects) in
+
+            let sortedProjects = projects.sorted(by: { (pa, pb) -> Bool in
+                return pa.created!.compare(pb.created!) == ComparisonResult.orderedDescending
             })
 
             if projects.count == sortedProjects.count {
                 var allGood = true
-                for (i, _) in projects.enumerate() {
+                for (i, _) in projects.enumerated() {
                     if projects[i] != sortedProjects[i] {
                         allGood = false
                     }
@@ -78,17 +80,17 @@ class WistiaAPIProjectTests: XCTestCase {
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     //MARK: Paging
 
     func testPageTwo() {
-        let expectation = expectationWithDescription("pulled second page")
+        let expectation = self.expectation(description: "pulled second page")
 
-        wAPI.listProjects(page: 1, perPage: 1, sorting: (by: WistiaAPI.SortBy.Created, direction: WistiaAPI.SortDirection.Ascending)) { (projectsP1) in
+        wAPI.listProjects(page: 1, perPage: 1, sorting: (by: .created, direction: .ascending)) { (projectsP1) in
             if projectsP1.count == 1 {
-                self.wAPI.listProjects(page: 2, perPage: 1, sorting: (by: WistiaAPI.SortBy.Created, direction: WistiaAPI.SortDirection.Ascending), completionHandler: { (projectsP2) in
+                self.wAPI.listProjects(page: 2, perPage: 1, sorting: (by: .created, direction: .ascending), completionHandler: { (projectsP2) in
                     if projectsP2.count == 1 && projectsP1.first?.hashedID != projectsP2.first?.hashedID {
                         expectation.fulfill()
                     }
@@ -96,91 +98,71 @@ class WistiaAPIProjectTests: XCTestCase {
             }
         }
 
-        waitForExpectationsWithTimeout(6, handler: nil)
+        waitForExpectations(timeout: 6, handler: nil)
     }
 
     //MARK: - Show
 
     func testShowProject() {
-        let expectation = expectationWithDescription("created project with media")
+        let expectation = self.expectation(description: "created project with media")
 
-        wAPI.showProject("8q6efplb9n") { (project) in
+        wAPI.showProject(forHash: "8q6efplb9n") { (project) in
             if project != nil {
                 expectation.fulfill()
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
-    //MARK: - Create
+    //MARK: - Create & Update
 
-    static var tempProjectHashedID: String? = nil
+    func testCreateProject() {
+        let createExpectation = self.expectation(description: "created a project")
+        let updateExpectation = self.expectation(description: "updated the project")
 
-    func testACreateProject() {
-        let expectation = expectationWithDescription("created a project")
+        wAPI.createProject(named: "TestProject@\(Date())", adminEmail: nil, anonymousCanUpload: false, anonymousCanDownload: false, isPublic: false) { (project) in
+            if let createdProject = project {
+                createExpectation.fulfill()
 
-        wAPI.createProject("TestProject@\(NSDate())", adminEmail: nil, anonymousCanUpload: false, anonymousCanDownload: false, isPublic: false) { (project) in
-            if let p = project {
-                WistiaAPIProjectTests.tempProjectHashedID = p.hashedID
-                expectation.fulfill()
+                self.wAPI.updateProject(forHash: createdProject.hashedID, withName: nil, anonymousCanUpload: true, anonymousCanDownload: true, isPublic: false) { (success, project) in
+                    if let copiedProject = project , success && copiedProject.anonymousCanDownload && !copiedProject.isPublic {
+                        updateExpectation.fulfill()
+
+                        //delete them both
+                        self.wAPI.deleteProject(forHash: createdProject.hashedID, completionHandler: {_,_ in })
+                        self.wAPI.deleteProject(forHash: copiedProject.hashedID, completionHandler: {_,_ in })
+                    }
+                }
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 6, handler: nil)
     }
 
-    //MARK: - Update
+    //MARK: - Copy & Delete
 
-    func testBUpdateProject() {
-        guard let hashedID = WistiaAPIProjectTests.tempProjectHashedID else { XCTFail("prerequisite fail: no project"); return }
+    func testCopyProject() {
+        let hashToCopy = "8q6efplb9n"
+        let copyExpectation = self.expectation(description: "copied the project")
+        let deleteExpectation = self.expectation(description: "deleted the project")
 
-        let expectation = expectationWithDescription("updated the project")
-        
-        wAPI.updateProject(hashedID, name: nil, anonymousCanUpload: true, anonymousCanDownload: true, isPublic: false) { (success, project) in
-            if let p = project where success && p.anonymousCanDownload && !p.isPublic {
-                expectation.fulfill()
+        wAPI.copyProject(forHash: hashToCopy, withUpdatedAdminEmail: nil) { (success, copiedProject) in
+            if let copied = copiedProject , success && copied.hashedID != hashToCopy {
+                copyExpectation.fulfill()
+
+                self.wAPI.deleteProject(forHash: copied.hashedID) { (success, deletedProject) in
+                    if let del = deletedProject , success && del.hashedID == copied.hashedID {
+
+                        deleteExpectation.fulfill()
+                    }
+                }
+
             }
         }
 
-        waitForExpectationsWithTimeout(3, handler: nil)
+        waitForExpectations(timeout: 6, handler: nil)
     }
 
-    //MARK: - Copy
 
-    func testCCopyProject() {
-        guard let hashedID = WistiaAPIProjectTests.tempProjectHashedID else { XCTFail("prerequisite fail: no project"); return }
-
-        let expectation = expectationWithDescription("copied the project")
-
-        wAPI.copyProject(hashedID, adminEmail: nil) { (success, copiedProject) in
-            if let p = copiedProject where success && p.hashedID != hashedID {
-                expectation.fulfill()
-
-                self.wAPI.deleteProject(p.hashedID, completionHandler: { (success, deletedProject) in
-                    //ignore
-                })
-            }
-        }
-
-        waitForExpectationsWithTimeout(3, handler: nil)
-    }
-
-    //MARK: - Delete
-
-    func testDDeleteProject() {
-        guard let hashedID = WistiaAPIProjectTests.tempProjectHashedID else { XCTFail("prerequisite fail: no project"); return }
-
-        let expectation = expectationWithDescription("deleted the project")
-
-        wAPI.deleteProject(hashedID) { (success, deletedProject) in
-            if let p = deletedProject where success && p.hashedID == hashedID {
-                WistiaAPIProjectTests.tempProjectHashedID = nil
-                expectation.fulfill()
-            }
-        }
-
-        waitForExpectationsWithTimeout(3, handler: nil)
-    }
-    
 }

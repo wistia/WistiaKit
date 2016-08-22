@@ -1,23 +1,39 @@
 PODS:
-  - Alamofire (3.4.0)
-  - AlamofireImage (2.4.0):
-    - Alamofire (~> 3.3)
-  - WistiaKit (0.9.2):
-    - Alamofire (~> 3.3)
+  - Alamofire (4.0.0)
+  - AlamofireImage (2.4.1):
+    - Alamofire (~> 4.0)
+  - WistiaKit (0.10.1):
+    - Alamofire (~> 4.0)
     - AlamofireImage (~> 2.4)
 
 DEPENDENCIES:
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `swift3`)
+  - AlamofireImage (from `https://github.com/dersvenhesse/AlamofireImage.git`, commit `1d80c13da00973482c7161c75b329f7762592988`)
   - WistiaKit (from `../`)
 
 EXTERNAL SOURCES:
+  Alamofire:
+    :branch: swift3
+    :git: https://github.com/Alamofire/Alamofire.git
+  AlamofireImage:
+    :commit: 1d80c13da00973482c7161c75b329f7762592988
+    :git: https://github.com/dersvenhesse/AlamofireImage.git
   WistiaKit:
     :path: "../"
 
-SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
-  WistiaKit: 8e6e2dc5d9b19c8def82625d760a59c53a5e8705
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: 1dc3992a3854ca369368c8997ea3c45054070e67
+    :git: https://github.com/Alamofire/Alamofire.git
+  AlamofireImage:
+    :commit: 1d80c13da00973482c7161c75b329f7762592988
+    :git: https://github.com/dersvenhesse/AlamofireImage.git
 
-PODFILE CHECKSUM: 39f4e05824aa046cc4e791747aa25b4d2ab920db
+SPEC CHECKSUMS:
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  AlamofireImage: a9d41abab7a16db8d53d6fdff5b4cca8cc9dc894
+  WistiaKit: f14dd43d516fe4301b4cfbb8bd101865a9718945
+
+PODFILE CHECKSUM: faffe9643f42d21e57a4a399fcc8293b28d56068
 
 COCOAPODS: 1.0.1

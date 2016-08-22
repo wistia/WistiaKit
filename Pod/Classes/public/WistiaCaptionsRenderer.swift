@@ -24,7 +24,7 @@ public protocol WistiaCaptionsRendererDelegate : class {
      - Parameter renderer: The `WistiaCaptionsRenderer` making this function call.
      - Parameter captionsLanguagesAvailable: An updated list of language codes available for the currently loaded media.
      */
-    func captionsRenderer(renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable:[String])
+    func captionsRenderer(_ renderer: WistiaCaptionsRenderer, didUpdateCaptionsLanguagesAvailable captionsLanguagesAvailable:[String])
 }
 
 /**
@@ -67,7 +67,7 @@ public class WistiaCaptionsRenderer {
         didSet {
             if let v = captionsView {
                 v.numberOfLines = 0
-                v.userInteractionEnabled = false
+                v.isUserInteractionEnabled = false
             }
         }
     }
@@ -111,20 +111,20 @@ public class WistiaCaptionsRenderer {
     /// - Warning: We assume `WistiaCaptionSegment`s are properly ordered.  Should be guaranteed by ModelBuilder.
     internal var media: WistiaMedia? = nil {
         didSet(lastMedia) {
-            if let m = media where m != lastMedia {
+            if let m = media, m != lastMedia {
                 removeDisplayedSegment()
                 prepareCaptions()
             }
         }
     }
 
-    private var currentlySelectedCaptions: WistiaCaptions?
-    private var currentCaptionSegment: WistiaCaptionSegment?
+    fileprivate var currentlySelectedCaptions: WistiaCaptions?
+    fileprivate var currentCaptionSegment: WistiaCaptionSegment?
 
-    private func prepareCaptions() {
+    fileprivate func prepareCaptions() {
         if let _ = media?.embedOptions?.captionsAvailable {
-            WistiaAPI._captionsForHash(media!.hashedID, completionHandler: { (captions) in
-                self.media?.addCaptions(captions)
+            WistiaAPI.captions(for: media!.hashedID, completionHandler: { (captions) in
+                self.media?.add(captions: captions)
                 self.captionsLanguagesAvailable = [String]()
                 for caption in captions {
                     self.captionsLanguagesAvailable.append(caption.languageCode)
@@ -134,11 +134,11 @@ public class WistiaCaptionsRenderer {
         }
     }
 
-    internal func onPlayerTimeUpdate(time:CMTime) {
+    internal func onPlayerTimeUpdate(_ time:CMTime) {
         guard enabled && captionsView != nil else { return }
         guard let caps = currentlySelectedCaptions else { return }
 
-        if let seg = currentCaptionSegment where seg.endTime <= Float(time.seconds) {
+        if let seg = currentCaptionSegment, seg.endTime <= Float(time.seconds) {
             removeDisplayedSegment()
         }
 
@@ -149,13 +149,13 @@ public class WistiaCaptionsRenderer {
 
     //MARK: - Display
 
-    private func removeDisplayedSegment() {
+    fileprivate func removeDisplayedSegment() {
         currentCaptionSegment = nil
-        captionsView?.hidden = true
+        captionsView?.isHidden = true
         //no need to set text to nil
     }
 
-    private func displaySegmentOf(captions: WistiaCaptions, forTime time:CMTime) {
+    fileprivate func displaySegmentOf(_ captions: WistiaCaptions, forTime time:CMTime) {
         //Since the user may seek around the video, the current implemention is not optimized
         let t = Float(time.seconds)
 
@@ -175,14 +175,14 @@ public class WistiaCaptionsRenderer {
 
         if let seg = activeSegment {
             currentCaptionSegment = activeSegment
-            captionsView?.text = seg.text.joinWithSeparator("\n")
-            captionsView?.hidden = false
+            captionsView?.text = seg.text.joined(separator: "\n")
+            captionsView?.isHidden = false
         }
     }
 
     //MARK: - Helpers
 
-    private func chooseCurrentCaptions() {
+    fileprivate func chooseCurrentCaptions() {
         let captionsMatchingCode = media?.captions?.filter({ (cap) -> Bool in
             cap.languageCode == captionsLanguageCode
         })

@@ -35,10 +35,10 @@ public struct WistiaMedia {
     public var duration: Float?
 
     /// The date when the media was originally uploaded.
-    public var created: NSDate?
+    public var created: Date?
 
     /// The date when the media was last changed.
-    public var updated: NSDate?
+    public var updated: Date?
 
     /// An array of the assets available for this media.
     public var assets: [WistiaAsset]
@@ -67,9 +67,9 @@ public struct WistiaMedia {
      
      - Note: Not all `WistiaMedia` has HLS derivatives available yet.
      */
-    public var hlsMasterIndexManifestURL: NSURL {
+    public var hlsMasterIndexManifestURL: URL {
         get {
-            return NSURL(string: "https://fast.wistia.net/embed/medias/\(self.hashedID).m3u8")!
+            return URL(string: "https://fast.wistia.net/embed/medias/\(self.hashedID).m3u8")!
         }
     }
 
@@ -78,9 +78,9 @@ public struct WistiaMedia {
     var accountKey: String?
     var mediaKey: String?
     var spherical: Bool
-    var distilleryURL: NSURL? {
+    var distilleryURL: URL? {
         get {
-            if let urlString = self.distilleryURLString, url = NSURL(string: urlString) {
+            if let urlString = self.distilleryURLString, let url = URL(string: urlString) {
                 return url
             } else {
                 return nil
@@ -89,7 +89,7 @@ public struct WistiaMedia {
     }
     var captions: [WistiaCaptions]? = nil
 
-    mutating func addCaptions(captions: [WistiaCaptions]) {
+    mutating func add(captions: [WistiaCaptions]) {
         self.captions = captions
     }
 
