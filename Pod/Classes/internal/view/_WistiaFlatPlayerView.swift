@@ -1,6 +1,6 @@
 //
-//  WistiaFlatPlayerView.swift
-//  WistiaKit
+//  _WistiaFlatPlayerView.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 11/15/15.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

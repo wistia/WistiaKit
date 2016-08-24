@@ -1,6 +1,6 @@
 //
-//  WistiaEventCollector.swift
-//  WistiaKit
+//  _WistiaEventCollector.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 12/31/15.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

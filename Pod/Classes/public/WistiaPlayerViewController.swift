@@ -330,7 +330,7 @@ public final class WistiaPlayerViewController: UIViewController {
 
     /// Internal override.
     override final public func loadView() {
-        let nib = Bundle(for: self.classForCoder).loadNibNamed("WistiaPlayerViewController", owner: self, options: nil)
+        let nib = Bundle(for: self.classForCoder).loadNibNamed("_WistiaPlayerViewController", owner: self, options: nil)
         self.view = nib?.first as! UIView
     }
 

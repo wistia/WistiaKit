@@ -1,6 +1,6 @@
 //
-//  ModelBuilder.swift
-//  WistiaKit
+//  _ModelBuilder.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 5/4/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

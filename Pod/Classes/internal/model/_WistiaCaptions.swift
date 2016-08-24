@@ -1,6 +1,6 @@
 //
-//  WistiaCaptions.swift
-//  Pods
+//  _WistiaCaptions.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 6/23/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

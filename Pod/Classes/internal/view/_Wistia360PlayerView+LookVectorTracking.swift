@@ -1,6 +1,6 @@
 //
-//  Wistia360PlayerView+LookVectorTracking.swift
-//  WistiaKit
+//  _Wistia360PlayerView+LookVectorTracking.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 1/15/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

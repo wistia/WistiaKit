@@ -1,6 +1,6 @@
 //
-//  SCNVector3Extensions.swift
-//  WistiaKit
+//  _SCNVector3Extensions.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 2/24/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

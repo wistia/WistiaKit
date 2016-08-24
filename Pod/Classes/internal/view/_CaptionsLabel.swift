@@ -1,6 +1,6 @@
 //
-//  CaptionsLabel.swift
-//  WistiaKit
+//  _CaptionsLabel.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 6/24/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  UIColorExtensions.swift
-//  WistiaKit
+//  _UIColorExtensions.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 4/13/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.

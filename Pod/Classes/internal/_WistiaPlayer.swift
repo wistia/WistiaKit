@@ -1,6 +1,6 @@
 //
-//  WistiaPlayer_internal.swift
-//  WistiaKit
+//  _WistiaPlayer.swift
+//  WistiaKit internal
 //
 //  Created by Daniel Spinosa on 1/7/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
