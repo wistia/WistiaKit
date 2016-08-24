@@ -309,7 +309,7 @@ internal extension WistiaPlayerViewController {
         //stillURL
         if let stillURL = embedOptions.stillURL {
             posterStillImage.isHidden = false
-            posterStillImage.af_setImageWithURL(stillURL)
+            posterStillImage.af_setImage(withURL: stillURL)
         } else {
             posterStillImage.isHidden = true
         }

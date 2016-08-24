@@ -46,6 +46,6 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.ios.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'CoreMotion', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
   s.tvos.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
 
-  s.dependency 'Alamofire', '~> 4.0'
-  s.dependency 'AlamofireImage', '~> 2.4'
+  s.dependency 'Alamofire', '~> 4.0.0-beta.1'
+  s.dependency 'AlamofireImage', '~> 3.0.-beta.1'
 end

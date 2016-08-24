@@ -2,9 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift3'
-#XXX: This is a PR that simply changes the Alamofire dependency
-#TODO: Change this back to the regular repo and branch 'swift3'
-pod 'AlamofireImage', :git => 'https://github.com/dersvenhesse/AlamofireImage.git', :commit => '1d80c13da00973482c7161c75b329f7762592988'
+pod 'AlamofireImage', :git => 'https://github.com/Alamofire/AlamofireImage.git', :branch => 'swift3'
 
 target 'WistiaKit_Example' do
   pod 'WistiaKit', :path => '../'

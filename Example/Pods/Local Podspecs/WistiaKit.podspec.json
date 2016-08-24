@@ -46,10 +46,10 @@
   "resources": "Pod/Assets/**/*.xcassets",
   "dependencies": {
     "Alamofire": [
-      "~> 4.0"
+      "~> 4.0.0-beta.1"
     ],
     "AlamofireImage": [
-      "~> 2.4"
+      "~> 3.0.-beta.1"
     ]
   }
 }
