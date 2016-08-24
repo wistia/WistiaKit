@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -47,9 +46,6 @@
                     <subviews>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RK7-ta-7jO" customClass="WistiaFlatPlayerView" customModule="WistiaKit" customModuleProvider="target">
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="RK7-ta-7jO" secondAttribute="height" multiplier="16:9" id="voz-6h-ij5"/>
-                            </constraints>
                         </view>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoK-e2-L2L" userLabel="Wistia 360 Player View" customClass="Wistia360PlayerView" customModule="WistiaKit" customModuleProvider="target">
                             <subviews>
@@ -90,10 +86,14 @@
                         <constraint firstAttribute="trailing" secondItem="RK7-ta-7jO" secondAttribute="trailing" id="8LZ-kV-ypV"/>
                         <constraint firstItem="vEk-Kj-i2O" firstAttribute="leading" secondItem="RK7-ta-7jO" secondAttribute="leading" id="Cms-gB-Swo"/>
                         <constraint firstItem="vEk-Kj-i2O" firstAttribute="bottom" secondItem="RK7-ta-7jO" secondAttribute="bottom" id="Js1-uC-lXG"/>
+                        <constraint firstItem="RK7-ta-7jO" firstAttribute="leading" secondItem="BwG-ri-99v" secondAttribute="leading" id="Nrm-Z8-4bw"/>
+                        <constraint firstItem="RK7-ta-7jO" firstAttribute="top" secondItem="BwG-ri-99v" secondAttribute="top" id="Pql-wW-vph"/>
                         <constraint firstItem="FoK-e2-L2L" firstAttribute="centerX" secondItem="BwG-ri-99v" secondAttribute="centerX" id="T2J-f5-UcC"/>
                         <constraint firstItem="vEk-Kj-i2O" firstAttribute="top" secondItem="RK7-ta-7jO" secondAttribute="top" id="b7v-cf-vL4"/>
+                        <constraint firstAttribute="bottom" secondItem="RK7-ta-7jO" secondAttribute="bottom" id="iHY-pE-iKW"/>
                         <constraint firstItem="RK7-ta-7jO" firstAttribute="leading" secondItem="BwG-ri-99v" secondAttribute="leading" id="mXp-ho-CKL"/>
                         <constraint firstItem="FoK-e2-L2L" firstAttribute="centerY" secondItem="BwG-ri-99v" secondAttribute="centerY" id="wVO-vN-4dP"/>
+                        <constraint firstAttribute="trailing" secondItem="RK7-ta-7jO" secondAttribute="trailing" id="ygA-2L-6nc"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBy-7d-odP" userLabel="Overlay Container">
