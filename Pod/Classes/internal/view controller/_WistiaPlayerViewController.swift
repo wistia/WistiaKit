@@ -297,12 +297,8 @@ internal extension WistiaPlayerViewController {
 
     internal func customizeView(for embedOptions:WistiaMediaEmbedOptions) {
         //playerColor
-        controlsPlayPauseButton.backgroundColor = embedOptions.playerColor
-        scrubberTrackContainerView.backgroundColor = embedOptions.playerColor
-        controlsCaptionsButton.backgroundColor = embedOptions.playerColor
-        controlsActionButton.backgroundColor = embedOptions.playerColor
-        controlsCloseButton.backgroundColor = embedOptions.playerColor
-        posterPlayButton.backgroundColor = embedOptions.playerColor
+        playbackControlsContainer.backgroundColor = embedOptions.playerColor.withAlphaComponent(0.4)
+        posterPlayButton.backgroundColor = playbackControlsContainer.backgroundColor
 
         //smallPlayButton
         controlsPlayPauseButton.isHidden = !embedOptions.smallPlayButton
@@ -384,9 +380,7 @@ internal extension WistiaPlayerViewController {
             //It's undocumented, but you can animate removal or setting of effect to affect a similar effect as alpha
             if showChrome {
                 self.playbackControlsContainer.effect = UIBlurEffect(style: .light)
-                //You are *supposed* to use a vibrancy effect matching the underlying blur effect
-                //But vibrancy for dark blur turns template icons white, which is what we want (and it looks good!)
-                self.playbackControlsInnerContainer.effect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: .dark))
+                //Not using vibrancy
             } else {
                 self.playbackControlsContainer.effect = nil
                 self.playbackControlsInnerContainer.effect = nil

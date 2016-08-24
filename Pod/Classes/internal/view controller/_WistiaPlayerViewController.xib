@@ -134,6 +134,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" priority="999" constant="60" identifier="play pause width" id="3BG-5A-yOW"/>
                                                             </constraints>
+                                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <state key="normal" image="smallPlay"/>
                                                             <connections>
                                                                 <action selector="controlsPlayPausePressed:" destination="-1" eventType="touchUpInside" id="41Y-g5-ewG"/>
@@ -145,11 +146,11 @@
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uR2-Mn-8aW">
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.14873383618275868" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <gestureRecognizers/>
                                                                     <constraints>
                                                                         <constraint firstItem="uR2-Mn-8aW" firstAttribute="centerY" secondItem="MhK-r1-66L" secondAttribute="centerY" id="LCo-vR-8WK"/>
@@ -175,6 +176,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" priority="999" constant="60" identifier="captions width" id="poy-Mj-dfp"/>
                                                             </constraints>
+                                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                                             <state key="normal" image="closedCaptions"/>
                                                             <connections>
@@ -185,6 +187,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" priority="999" constant="60" identifier="action width" id="ngd-Te-6OY"/>
                                                             </constraints>
+                                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <state key="normal" image="action"/>
                                                             <connections>
                                                                 <action selector="controlsActionPressed:" destination="-1" eventType="touchUpInside" id="nbd-NX-04o"/>
@@ -194,6 +197,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" priority="999" constant="60" identifier="close width" id="tLK-I2-kZL"/>
                                                             </constraints>
+                                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <state key="normal" image="x-close"/>
                                                             <connections>
                                                                 <action selector="controlsClosePressed:" destination="-1" eventType="touchUpInside" id="pIe-XI-Ud9"/>
@@ -209,9 +213,7 @@
                                                 <constraint firstItem="VHT-K1-I6Z" firstAttribute="top" secondItem="dWr-ea-TeB" secondAttribute="top" id="Z07-aL-wrN"/>
                                             </constraints>
                                         </view>
-                                        <vibrancyEffect>
-                                            <blurEffect style="dark"/>
-                                        </vibrancyEffect>
+                                        <blurEffect style="light"/>
                                     </visualEffectView>
                                 </subviews>
                                 <constraints>
@@ -221,6 +223,7 @@
                                     <constraint firstItem="3DG-iO-w5X" firstAttribute="leading" secondItem="gdY-in-cWT" secondAttribute="leading" id="lMq-s6-GW7"/>
                                 </constraints>
                             </view>
+                            <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="I6j-uV-eGi"/>
                             </constraints>
@@ -237,6 +240,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aY4-5G-flB" userLabel="Poster Play Button">
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" image="largePlay"/>
                                                     <connections>
                                                         <action selector="posterPlayPressed:" destination="-1" eventType="touchUpInside" id="bWs-tx-rap"/>
@@ -250,9 +254,7 @@
                                                 <constraint firstItem="aY4-5G-flB" firstAttribute="top" secondItem="eTV-xB-Ed3" secondAttribute="top" id="mgT-Mx-1tS"/>
                                             </constraints>
                                         </view>
-                                        <vibrancyEffect>
-                                            <blurEffect style="dark"/>
-                                        </vibrancyEffect>
+                                        <blurEffect style="light"/>
                                     </visualEffectView>
                                 </subviews>
                                 <constraints>
@@ -262,6 +264,7 @@
                                     <constraint firstAttribute="trailing" secondItem="sHV-Sn-NoT" secondAttribute="trailing" id="Yei-sE-CEY"/>
                                 </constraints>
                             </view>
+                            <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="104" id="BYA-At-cX0"/>
                                 <constraint firstAttribute="width" constant="168" id="ecz-4A-tbO"/>
