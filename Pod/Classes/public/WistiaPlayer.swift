@@ -13,7 +13,7 @@ import AVFoundation
 
 /**
  The delegate of a `WistiaPlayer` must adopt the `WistiaPlayerDelegate `protocol.  It will receive
- state related information through the delegaet methods.
+ state related information through the delegate methods.
  
  Information provided includes high-level state about the `WistiaPlayer` as well as state of the
  underlying `AVPlayer`, normally obtained through Key-Value Observation (KVO).
@@ -442,9 +442,12 @@ public final class WistiaPlayer: NSObject {
 
     /**
      Create a new `AVPlayerLayer` configured for this instance of `WistiaPlayer`.  This will remove
-     the player form any previously feteched `AVPlayerLayer`s.
+     the player form any previously fetched `AVPlayerLayer`s.
      
      See `AVPlayerLayer(player:)` for further information.
+     
+     - Important: `AVPlayerLayer`s are created with size `CGSizeZero`.  You will want to change that
+     if you wish to see the video.
 
      - Returns: A new `AVPlayerLayer` to which we can direct our visual output.
      */

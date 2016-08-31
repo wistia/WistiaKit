@@ -150,7 +150,10 @@ class IntroductionViewController: UIViewController, WistiaPlayerDelegate {
   
   override public func viewDidLoad() {
     wistiaPlayer.delegate = self
-    playerContainer.layer.addSublayer(wistiaPlayer.newPlayerLayer())
+    if let playerLayer = wistiaPlayer.newPlayerLayer() {
+        playerLayer.frame = playerContainer.layer.bounds
+        playerContainer.layer.addSublayer(playerLayer)
+    }
     wistiaPlayer.replaceCurrentVideoWithVideoForHashedID(IntroVideoHashedID)
   }
   
