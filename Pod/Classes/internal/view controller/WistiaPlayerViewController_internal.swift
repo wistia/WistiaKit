@@ -253,13 +253,13 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
             player360View.hidden = false
             player360View.wPlayer = wPlayer
             playerFlatView.hidden = true
-            playerFlatView.playerLayer = nil
+            playerFlatView.wistiaPlayer = nil
         } else {
             playing360 = false
             player360View.hidden = true
             player360View.wPlayer = nil
             playerFlatView.hidden = false
-            playerFlatView.playerLayer = wPlayer.newPlayerLayer()
+            playerFlatView.wistiaPlayer = wPlayer
         }
 
         currentMediaEmbedOptions = media.embedOptions

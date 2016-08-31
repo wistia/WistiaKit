@@ -37,7 +37,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmP-4t-i0z">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmP-4t-i0z" customClass="WistiaFlatPlayerView" customModule="WistiaKit">
                                 <rect key="frame" x="28" y="260" width="544" height="332"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>

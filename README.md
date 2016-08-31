@@ -138,6 +138,10 @@ This will load the video, but it is up to the user to play and otherwise interac
 
 If we want our intro video to behave a little differently, we might use a `WistiaPlayer`.  In the following example, we play an intro video without giving the user any way to control the video.  They have to sit there and watch it! `<evil>`bwaa ha ha ha!`</evil>`  When video playback completes, we automatically progress to the next intro screen.
 
+Below, we display the video with a `WistiaFlatPlayerView`, which is a plain UIView backed by an `AVPlayerLayer`.  This layer is configured to display video content when you set the view's `wistiaPlayer` property to an instance of `WistiaPlayer`.  While it behaves like any other `UIView`, allowing you to use common and familiar lifecycle and layout mechanisms, you may clamor for more power.
+
+A standalone `AVPlayerLayer` is avaiable through an `WistiaPlayer`s `newPlayerLayer()` method.  Upon requesting this layer, any previously configured layers or view's will cease to render the content for that player.  A newly initialized `AVPlayerLayer` - like any `CALayer` - should have its frame set before being added as a sublayer.  You are also responsible for maintaining layout at the layer level, either manually, with `CAConstraint`s, or an other layer-based mechanism.
+
 
 ```swift
 import WistiaKit
@@ -146,14 +150,14 @@ class IntroductionViewController: UIViewController, WistiaPlayerDelegate {
 
   let wistiaPlayer = WistiaPlayer(referrer: "https://wistia.tv/intro")
   
-  @IBOutlet weak var playerContainer: UIView!
+  // In Interface Builder we set the view's class to WistiaFlatPlayerView.  
+  // If we had a compelling reason, we could instead use an AVPlayerLayer directly via `newPlayerLayer()`.
+  // But a UIView is more familiar without sacrificing much flexibility.
+  @IBOutlet weak var playerContainer: WistiaFlatPlayerView!
   
   override public func viewDidLoad() {
     wistiaPlayer.delegate = self
-    if let playerLayer = wistiaPlayer.newPlayerLayer() {
-        playerLayer.frame = playerContainer.layer.bounds
-        playerContainer.layer.addSublayer(playerLayer)
-    }
+    playerContainer.wistiaPlayer = wistiaPlayer
     wistiaPlayer.replaceCurrentVideoWithVideoForHashedID(IntroVideoHashedID)
   }
   

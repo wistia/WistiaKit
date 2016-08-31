@@ -51,21 +51,10 @@ class ViewController: UIViewController {
     //MARK: - WistiaPlayer Specific
 
     let wistiaPlayer = WistiaPlayer(referrer: "WistiaKitDemo", requireHLS: false)
-    var playerLayer:CALayer? //specifically, an AVPlayerLayer; but there's no need to import AVFoundation
-    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var playerView: WistiaFlatPlayerView!
 
     override func viewDidLoad() {
-        playerLayer = wistiaPlayer.newPlayerLayer()
-        if playerLayer != nil {
-            // AVPlayerLayer isn't configured out of the box
-            playerLayer!.frame = playerView.layer.bounds
-            playerView.layer.addSublayer(playerLayer!)
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        // Could use Core Animation Constraints instead
-        playerLayer?.frame = playerView.layer.bounds
+        playerView.wistiaPlayer = wistiaPlayer
     }
 
 }

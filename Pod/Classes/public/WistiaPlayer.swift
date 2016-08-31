@@ -442,14 +442,16 @@ public final class WistiaPlayer: NSObject {
 
     /**
      Create a new `AVPlayerLayer` configured for this instance of `WistiaPlayer`.  This will remove
-     the player form any previously fetched `AVPlayerLayer`s.
+     the player form any previously fetched `AVPlayerLayer`s
      
-     See `AVPlayerLayer(player:)` for further information.
+     - Note: Unless you need a standalone layer, we recommend using a `WistiaFlatPlayerView` and setting
+     it's `wistiaPlayer` property to this instance.  It is a regular `UIView` and often more familiar
+     than using layers without sacrificing much flexibility.
      
      - Important: `AVPlayerLayer`s are created with size `CGSizeZero`.  You will want to change that
-     if you wish to see the video.
+     if you wish to see the video.  See `AVPlayerLayer(player:)` for further information.
 
-     - Returns: A new `AVPlayerLayer` to which we can direct our visual output.
+     - Returns: A new `AVPlayerLayer` to which we direct our visual output.
      */
     public func newPlayerLayer() -> AVPlayerLayer? {
         return AVPlayerLayer(player: avPlayer)
