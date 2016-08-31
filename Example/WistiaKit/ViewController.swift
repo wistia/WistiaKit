@@ -11,15 +11,62 @@ import WistiaKit
 
 class ViewController: UIViewController {
 
-    let wistiaPlayerVC = WistiaPlayerViewController(referrer: "WistiaKitDemo", requireHLS: false)
+    //MARK: - Common code 
+
+    // The playerChooser can switch between playback using a presented WistiaPlayerViewController
+    // or, at a lower level, using a WistiaPlayer displayed through a sublayer in a child view.
+    @IBOutlet weak var playerChooser: UISegmentedControl!
 
     @IBOutlet weak var hashedIDTextField: UITextField!
 
+    // Based on the playerChooser's state, first pause/dismiss the other player, then configure and 
+    // play using the selected one.
     @IBAction func playTapped(sender: AnyObject) {
         if let hashedID = hashedIDTextField.text {
-            wistiaPlayerVC.replaceCurrentVideoWithVideoForHashedID(hashedID)
-            self.presentViewController(wistiaPlayerVC, animated: true, completion: nil)
+            switch playerChooser.selectedSegmentIndex {
+            case 0:
+                wistiaPlayer.pause()
+
+                //Play using WistiaPlayerViewController
+                wistiaPlayerVC.replaceCurrentVideoWithVideoForHashedID(hashedID)
+                self.presentViewController(wistiaPlayerVC, animated: true, completion: nil)
+
+            case 1:
+                self.dismissViewControllerAnimated(true, completion: nil)
+
+                //Play using WistiaPlayer
+                wistiaPlayer.replaceCurrentVideoWithVideoForHashedID(hashedID)
+                wistiaPlayer.play()
+
+            default:
+                break
+            }
         }
     }
+
+    //MARK: - WistiaPlayerViewController Specific
+
+    let wistiaPlayerVC = WistiaPlayerViewController(referrer: "WistiaKitDemo", requireHLS: false)
+
+    //MARK: - WistiaPlayer Specific
+
+    let wistiaPlayer = WistiaPlayer(referrer: "WistiaKitDemo", requireHLS: false)
+    var playerLayer:CALayer? //specifically, an AVPlayerLayer; but there's no need to import AVFoundation
+    @IBOutlet weak var playerView: UIView!
+
+    override func viewDidLoad() {
+        playerLayer = wistiaPlayer.newPlayerLayer()
+        if playerLayer != nil {
+            // AVPlayerLayer isn't configured out of the box
+            playerLayer!.frame = playerView.layer.bounds
+            playerView.layer.addSublayer(playerLayer!)
+        }
+    }
+
+    override func viewDidLayoutSubviews() {
+        // Could use Core Animation Constraints instead
+        playerLayer?.frame = playerView.layer.bounds
+    }
+
 }
 
