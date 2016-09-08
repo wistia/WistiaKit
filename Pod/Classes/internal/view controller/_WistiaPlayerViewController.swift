@@ -196,8 +196,11 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
             if autoplayVideoWhenReady {
                 presentForPlaybackShowingChrome(true)
                 play()
-            } else {
+            } else if player.rate == 0.0 {
                 presentForFirstPlayback()
+            } else {
+                //AVPlayer is already in play mode; will autoplay video now that it's ready
+                presentForPlaybackShowingChrome(true)
             }
 
         case .mediaNotFoundError(_):
@@ -325,6 +328,7 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentForPreLoading() {
+        loadViewIfNeeded()
         cancelChromeInteractionTimer()
         playerContainer.isHidden = true
         posterLoadingIndicator.stopAnimating()
@@ -336,6 +340,7 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentForLoading() {
+        loadViewIfNeeded()
         cancelChromeInteractionTimer()
         playerContainer.isHidden = false
         posterLoadingIndicator.startAnimating()
@@ -347,6 +352,7 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentForError() {
+        loadViewIfNeeded()
         cancelChromeInteractionTimer()
         playerContainer.isHidden = true
         posterLoadingIndicator.stopAnimating()
@@ -358,6 +364,7 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentForFirstPlayback() {
+        loadViewIfNeeded()
         cancelChromeInteractionTimer()
         playerContainer.isHidden = false
         posterLoadingIndicator.stopAnimating()
@@ -369,6 +376,7 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentForPlaybackShowingChrome(_ showChrome:Bool){
+        loadViewIfNeeded()
         playerContainer.isHidden = false
         posterLoadingIndicator.stopAnimating()
         posterErrorIndicator.isHidden = true
@@ -397,6 +405,7 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentForPlaybackToggleChrome() {
+        loadViewIfNeeded()
         if self.playbackControlsContainer.isHidden {
             presentForPlaybackShowingChrome(true)
         } else {
@@ -405,6 +414,7 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentPlayPauseButton(forPlaying playing:Bool){
+        loadViewIfNeeded()
         let podBundle = Bundle(for: self.classForCoder)
         if playing {
             controlsPlayPauseButton.setImage(UIImage(named: "smallPause", in: podBundle, compatibleWith: nil), for: UIControlState())
