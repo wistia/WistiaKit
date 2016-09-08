@@ -116,27 +116,17 @@ internal class WistiaStatsManager {
         let eventsToSend = eventsPending
         eventsPending.removeAll()
         for event in eventsToSend {
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: event.json, options: JSONSerialization.WritingOptions(rawValue: 0))
-
-                Alamofire.request(event.url, withMethod: .post, parameters: event.json, encoding: .custom({ (requestConvertable, params) -> (URLRequest, NSError?) in
-                    var urlReq = requestConvertable.urlRequest
-                    urlReq.httpBody = jsonData.base64EncodedData()
-                    return (urlReq, nil)
-                }), headers: nil)
-                    .response { request, response, data, error in
-                        if error != nil {
-                            print("ERROR sending stats: \(error)")
-                            if event.ttl > 0 {
-                                self.eventsPending.append(StatsEvent(url: event.url, json: event.json, ttl: event.ttl-1))
-                            } else {
-                                print("TTL=0, dropping event: \(event)")
-                            }
+            Alamofire.request(event.url, method: .post, parameters: event.json, encoding: JsonToBase64InBodyEncoder(json: event.json), headers: nil)
+                .response(completionHandler: { (dataResponse) in
+                    if dataResponse.error != nil {
+                        print("ERROR sending stats: \(dataResponse.error)")
+                        if event.ttl > 0 {
+                            self.eventsPending.append(StatsEvent(url: event.url, json: event.json, ttl: event.ttl-1))
+                        } else {
+                            print("TTL=0, dropping event: \(event)")
                         }
-                }
-            } catch {
-                print("ERROR: \(error)")
-            }
+                    }
+                })
         }
     }
 
@@ -209,4 +199,22 @@ fileprivate class StatsEvent: NSObject, NSCoding {
         coder.encode(Int32(self.ttl), forKey: "ttl")
     }
 
+}
+
+// Stats endpoint expects payload in body, base64 encoded
+private class JsonToBase64InBodyEncoder : ParameterEncoding {
+
+    let json: [String: Any]
+
+    init(json: [String: Any]) {
+        self.json = json
+    }
+
+    func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+        var urlReq = urlRequest.urlRequest
+        let jsonData = try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions(rawValue: 0))
+        urlReq.httpBody = jsonData.base64EncodedData()
+        return urlReq
+    }
+    
 }

@@ -12,7 +12,7 @@ import Alamofire
 internal extension WistiaAPI {
 
     internal static func captions(for hash:String, completionHandler: @escaping (_ captions:[WistiaCaptions])->() ) {
-        Alamofire.request("https://fast.wistia.com/embed/captions/\(hash).json", withMethod: .get)
+        Alamofire.request("https://fast.wistia.com/embed/captions/\(hash).json", method: .get)
             .responseJSON { response in
 
                 switch response.result {
@@ -37,7 +37,7 @@ internal extension WistiaAPI {
     }
 
     internal static func mediaInfo(for hash:String, completionHandler: @escaping (_ media:WistiaMedia?)->() ) {
-        Alamofire.request("https://fast.wistia.net/embed/medias/\(hash).json", withMethod: .get)
+        Alamofire.request("https://fast.wistia.net/embed/medias/\(hash).json", method: .get)
             .responseJSON { response in
 
                 switch response.result {

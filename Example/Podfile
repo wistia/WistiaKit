@@ -1,8 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift3', :commit => '3cc5b4e8453bec9fd6b973d60e6b0605a38e4cf4'
-pod 'AlamofireImage', :git => 'https://github.com/Alamofire/AlamofireImage.git', :branch => 'swift3'
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :commit => 'ee4d6ce6b4297c8554d441be3d7f53054e89fd7b'
+#Ugh, AlamofireImage lags Alamofire by way too much.
+#Since it was out there already, temporarily using this fork that updated the Alamofire dependency
+#TODO: Move back to main repo
+pod 'AlamofireImage', :git => 'https://github.com/whitebull/AlamofireImage.git', :commit => '30fd7873362a57767731beb861dfbf4845edac10'
 
 target 'WistiaKit_Example' do
   pod 'WistiaKit', :path => '../'

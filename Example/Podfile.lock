@@ -1,41 +1,39 @@
 PODS:
-  - Alamofire (4.0.0-beta.1)
+  - Alamofire (4.0.0-beta.2)
   - AlamofireImage (3.0.0-beta.1):
-    - Alamofire (= 4.0.0-beta.1)
+    - Alamofire (= 4.0.0-beta.2)
   - WistiaKit (0.10.2):
-    - Alamofire (~> 4.0.0-beta.1)
+    - Alamofire (~> 4.0.0-beta.2)
     - AlamofireImage (~> 3.0.0-beta.1)
 
 DEPENDENCIES:
-  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, commit `3cc5b4e8453bec9fd6b973d60e6b0605a38e4cf4`, branch `swift3`)
-  - AlamofireImage (from `https://github.com/Alamofire/AlamofireImage.git`, branch `swift3`)
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, commit `ee4d6ce6b4297c8554d441be3d7f53054e89fd7b`)
+  - AlamofireImage (from `https://github.com/whitebull/AlamofireImage.git`, commit `30fd7873362a57767731beb861dfbf4845edac10`)
   - WistiaKit (from `../`)
 
 EXTERNAL SOURCES:
   Alamofire:
-    :branch: swift3
-    :commit: 3cc5b4e8453bec9fd6b973d60e6b0605a38e4cf4
+    :commit: ee4d6ce6b4297c8554d441be3d7f53054e89fd7b
     :git: https://github.com/Alamofire/Alamofire.git
   AlamofireImage:
-    :branch: swift3
-    :git: https://github.com/Alamofire/AlamofireImage.git
+    :commit: 30fd7873362a57767731beb861dfbf4845edac10
+    :git: https://github.com/whitebull/AlamofireImage.git
   WistiaKit:
     :path: "../"
 
 CHECKOUT OPTIONS:
   Alamofire:
-    :branch: swift3
-    :commit: 3cc5b4e8453bec9fd6b973d60e6b0605a38e4cf4
+    :commit: ee4d6ce6b4297c8554d441be3d7f53054e89fd7b
     :git: https://github.com/Alamofire/Alamofire.git
   AlamofireImage:
-    :commit: b02916e89cb7158994df04bf282b3170964e1eaa
-    :git: https://github.com/Alamofire/AlamofireImage.git
+    :commit: 30fd7873362a57767731beb861dfbf4845edac10
+    :git: https://github.com/whitebull/AlamofireImage.git
 
 SPEC CHECKSUMS:
-  Alamofire: 698bf56c9e48d3248168e4a3a90588ac2e23836a
-  AlamofireImage: 1204674be7d67ea8efb61f38b2683a5ca0066452
-  WistiaKit: 37f1a40b949a59820aebb1d68e1102327e127698
+  Alamofire: 7f837be535fe424db2b87d9117f13836939719ca
+  AlamofireImage: 03465b292f61ec86323727289086bca36a14a2f5
+  WistiaKit: 60ac7fdeaf03038a467470c70b228373c2081439
 
-PODFILE CHECKSUM: 8dc6903c3c2213c033fb1924d10deb9e1eab9665
+PODFILE CHECKSUM: 73c9150f03b3981c9ffe19558d25ffb8214d12b0
 
 COCOAPODS: 1.0.1

@@ -56,10 +56,10 @@ public class RequestReceipt {
 /// handlers for a single request.
 public class ImageDownloader {
     /// The completion handler closure used when an image download completes.
-    public typealias CompletionHandler = (Response<Image, NSError>) -> Void
+    public typealias CompletionHandler = (DataResponse<Image>) -> Void
 
     /// The progress handler closure called periodically during an image download.
-    public typealias ProgressHandler = (_ bytesRead: Int64, _ totalBytesRead: Int64, _ totalExpectedBytesToRead: Int64) -> Void
+    public typealias ProgressHandler = DataRequest.ProgressHandler
 
     /// Defines the order prioritization of incoming download requests being inserted into the queue.
     ///
@@ -70,14 +70,22 @@ public class ImageDownloader {
     }
 
     class ResponseHandler {
-        let identifier: String
-        let request: Request
-        var operations: [(id: String, filter: ImageFilter?, completion: CompletionHandler?)]
+        let urlID: String
+        let handlerID: String
+        let request: DataRequest
+        var operations: [(receiptID: String, filter: ImageFilter?, completion: CompletionHandler?)]
 
-        init(request: Request, id: String, filter: ImageFilter?, completion: CompletionHandler?) {
+        init(
+            request: DataRequest,
+            handlerID: String,
+            receiptID: String,
+            filter: ImageFilter?,
+            completion: CompletionHandler?)
+        {
             self.request = request
-            self.identifier = ImageDownloader.identifier(for: request.request!)
-            self.operations = [(id: id, filter: filter, completion: completion)]
+            self.urlID = ImageDownloader.urlIdentifier(for: request.request!)
+            self.handlerID = handlerID
+            self.operations = [(receiptID: receiptID, filter: filter, completion: completion)]
         }
     }
 
@@ -253,14 +261,14 @@ public class ImageDownloader {
         completion: CompletionHandler?)
         -> RequestReceipt?
     {
-        var request: Request!
+        var request: DataRequest!
 
         synchronizationQueue.sync {
             // 1) Append the filter and completion handler to a pre-existing request if it already exists
-            let identifier = ImageDownloader.identifier(for: urlRequest)
+            let urlID = ImageDownloader.urlIdentifier(for: urlRequest)
 
-            if let responseHandler = self.responseHandlers[identifier] {
-                responseHandler.operations.append(id: receiptID, filter: filter, completion: completion)
+            if let responseHandler = self.responseHandlers[urlID] {
+                responseHandler.operations.append(receiptID: receiptID, filter: filter, completion: completion)
                 request = responseHandler.request
                 return
             }
@@ -270,7 +278,7 @@ public class ImageDownloader {
             case .useProtocolCachePolicy, .returnCacheDataElseLoad, .returnCacheDataDontLoad:
                 if let image = self.imageCache?.image(for: urlRequest.urlRequest, withIdentifier: filter?.identifier) {
                     DispatchQueue.main.async {
-                        let response = Response<Image, NSError>(
+                        let response = DataResponse<Image>(
                             request: urlRequest.urlRequest,
                             response: nil,
                             data: nil,
@@ -287,7 +295,7 @@ public class ImageDownloader {
             }
 
             // 3) Create the request and set up authentication, validation and response serialization
-            request = self.sessionManager.request(urlRequest)
+            request = self.sessionManager.request(resource: urlRequest)
 
             if let credential = self.credential {
                 request.authenticate(usingCredential: credential)
@@ -296,18 +304,30 @@ public class ImageDownloader {
             request.validate()
 
             if let progress = progress {
-                request.progress { bytesRead, totalBytesRead, totalExpectedBytesToRead in
-                    progressQueue.async { progress(bytesRead, totalBytesRead, totalExpectedBytesToRead) }
-                }
+                request.downloadProgress(queue: progressQueue, closure: progress)
             }
+
+            // Generate a unique handler id to check whether the active request has changed while downloading
+            let handlerID = UUID().uuidString
 
             request.response(
                 queue: self.responseQueue,
-                responseSerializer: Request.imageResponseSerializer(),
+                responseSerializer: DataRequest.imageResponseSerializer(),
                 completionHandler: { [weak self] response in
                     guard let strongSelf = self, let request = response.request else { return }
 
-                    let responseHandler = strongSelf.safelyRemoveResponseHandler(withIdentifier: identifier)
+                    defer {
+                        strongSelf.safelyDecrementActiveRequestCount()
+                        strongSelf.safelyStartNextRequestIfNecessary()
+                    }
+
+                    // Early out if the request has changed out from under us
+                    let handler = strongSelf.safelyFetchResponseHandler(withURLIdentifier: urlID)
+                    guard handler?.handlerID == handlerID else { return }
+
+                    guard let responseHandler = strongSelf.safelyRemoveResponseHandler(withURLIdentifier: urlID) else {
+                        return
+                    }
 
                     switch response.result {
                     case .success(let image):
@@ -330,7 +350,7 @@ public class ImageDownloader {
                             strongSelf.imageCache?.add(filteredImage, for: request, withIdentifier: filter?.identifier)
 
                             DispatchQueue.main.async {
-                                let response = Response<Image, NSError>(
+                                let response = DataResponse<Image>(
                                     request: response.request,
                                     response: response.response,
                                     data: response.data,
@@ -346,21 +366,19 @@ public class ImageDownloader {
                             DispatchQueue.main.async { completion?(response) }
                         }
                     }
-
-                    strongSelf.safelyDecrementActiveRequestCount()
-                    strongSelf.safelyStartNextRequestIfNecessary()
                 }
             )
 
             // 4) Store the response handler for use when the request completes
             let responseHandler = ResponseHandler(
                 request: request,
-                id: receiptID,
+                handlerID: handlerID,
+                receiptID: receiptID,
                 filter: filter,
                 completion: completion
             )
 
-            self.responseHandlers[identifier] = responseHandler
+            self.responseHandlers[urlID] = responseHandler
 
             // 5) Either start the request or enqueue it depending on the current active request count
             if self.isActiveRequestCountBelowMaximumLimit() {
@@ -423,21 +441,17 @@ public class ImageDownloader {
     /// - parameter requestReceipt: The request receipt to cancel.
     public func cancelRequest(with requestReceipt: RequestReceipt) {
         synchronizationQueue.sync {
-            let identifier = ImageDownloader.identifier(for: requestReceipt.request.request!)
-            guard let responseHandler = self.responseHandlers[identifier] else { return }
+            let urlID = ImageDownloader.urlIdentifier(for: requestReceipt.request.request!)
+            guard let responseHandler = self.responseHandlers[urlID] else { return }
 
-            if let index = responseHandler.operations.index(where: { $0.id == requestReceipt.receiptID }) {
+            if let index = responseHandler.operations.index(where: { $0.receiptID == requestReceipt.receiptID }) {
                 let operation = responseHandler.operations.remove(at: index)
 
-                let response: Response<Image, NSError> = {
+                let response: DataResponse<Image> = {
                     let urlRequest = requestReceipt.request.request!
-                    let error: NSError = {
-                        let failureReason = "ImageDownloader cancelled URL request: \(urlRequest.urlString)"
-                        let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                        return NSError(domain: ErrorDomain, code: NSURLErrorCancelled, userInfo: userInfo)
-                    }()
+                    let error = AFIError.requestCancelled
 
-                    return Response(request: urlRequest, response: nil, data: nil, result: .failure(error))
+                    return DataResponse(request: urlRequest, response: nil, data: nil, result: .failure(error))
                 }()
 
                 DispatchQueue.main.async { operation.completion?(response) }
@@ -445,14 +459,25 @@ public class ImageDownloader {
 
             if responseHandler.operations.isEmpty && requestReceipt.request.task.state == .suspended {
                 requestReceipt.request.cancel()
+                self.responseHandlers.removeValue(forKey: urlID)
             }
         }
     }
 
     // MARK: - Internal - Thread-Safe Request Methods
 
-    func safelyRemoveResponseHandler(withIdentifier identifier: String) -> ResponseHandler {
-        var responseHandler: ResponseHandler!
+    func safelyFetchResponseHandler(withURLIdentifier urlIdentifier: String) -> ResponseHandler? {
+        var responseHandler: ResponseHandler?
+
+        synchronizationQueue.sync {
+            responseHandler = self.responseHandlers[urlIdentifier]
+        }
+
+        return responseHandler
+    }
+
+    func safelyRemoveResponseHandler(withURLIdentifier identifier: String) -> ResponseHandler? {
+        var responseHandler: ResponseHandler?
 
         synchronizationQueue.sync {
             responseHandler = self.responseHandlers.removeValue(forKey: identifier)
@@ -513,7 +538,7 @@ public class ImageDownloader {
         return activeRequestCount < maximumActiveDownloads
     }
 
-    static func identifier(for urlRequest: URLRequestConvertible) -> String {
+    static func urlIdentifier(for urlRequest: URLRequestConvertible) -> String {
         return urlRequest.urlRequest.urlString
     }
 }

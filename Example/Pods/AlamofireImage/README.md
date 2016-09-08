@@ -23,8 +23,10 @@ AlamofireImage is an image component library for Alamofire.
 
 ## Requirements
 
+<<<<<<< HEAD
 - iOS 9.0+ / Mac OS X 10.11+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 8.0 beta 6+
+- Xcode 8.0+
+- Swift 3.0+
 
 ## Migration Guides
 
@@ -32,7 +34,7 @@ AlamofireImage is an image component library for Alamofire.
 
 ## Dependencies
 
-- [Alamofire swift3 Branch](https://github.com/Alamofire/Alamofire)
+- [Alamofire 4.0+](https://github.com/Alamofire/Alamofire)
 
 ## Communication
 
@@ -52,16 +54,16 @@ AlamofireImage is an image component library for Alamofire.
 $ gem install cocoapods
 ```
 
-> CocoaPods 0.39.0+ is required.
+> CocoaPods 1.0.0+ is required.
 
 To integrate AlamofireImage into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '10.0'
 use_frameworks!
 
-pod 'AlamofireImage', '~> 2.0'
+pod 'AlamofireImage', '~> 2.5'
 ```
 
 Then, run the following command:
@@ -84,7 +86,7 @@ $ brew install carthage
 To integrate AlamofireImage into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "Alamofire/AlamofireImage" ~> 2.0
+github "Alamofire/AlamofireImage" ~> 2.5
 ```
 
 ---

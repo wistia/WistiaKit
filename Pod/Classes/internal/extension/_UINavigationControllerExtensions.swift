@@ -10,14 +10,14 @@ import UIKit
 
 extension UINavigationController {
 
-    func wk_pushViewController(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)) {
+    func wk_pushViewController(_ viewController: UIViewController, animated: Bool, completion: @escaping (() -> Void)) {
             CATransaction.begin()
             CATransaction.setCompletionBlock(completion)
             pushViewController(viewController, animated: animated)
             CATransaction.commit()
     }
 
-    func wk_popViewController(animated: Bool, completion: (() -> Void)) {
+    func wk_popViewController(animated: Bool, completion: @escaping (() -> Void)) {
             CATransaction.begin()
             CATransaction.setCompletionBlock(completion)
             popViewController(animated: animated)

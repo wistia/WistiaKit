@@ -137,10 +137,10 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, af_isOpaque, 0.0)
         draw(in: CGRect(origin: CGPoint.zero, size: size))
 
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
         UIGraphicsEndImageContext()
 
-        return scaledImage!
+        return scaledImage
     }
 
     /// Returns a new version of the image scaled from the center while maintaining the aspect ratio to fit within
@@ -172,10 +172,10 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         draw(in: CGRect(origin: origin, size: scaledSize))
 
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
         UIGraphicsEndImageContext()
 
-        return scaledImage!
+        return scaledImage
     }
 
     /// Returns a new version of the image scaled from the center while maintaining the aspect ratio to fill a
@@ -202,10 +202,10 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, af_isOpaque, 0.0)
         draw(in: CGRect(origin: origin, size: scaledSize))
 
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
         UIGraphicsEndImageContext()
 
-        return scaledImage!
+        return scaledImage
     }
 }
 
@@ -232,10 +232,10 @@ extension UIImage {
 
         draw(in: CGRect(origin: CGPoint.zero, size: size))
 
-        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
         UIGraphicsEndImageContext()
 
-        return roundedImage!
+        return roundedImage
     }
 
     /// Returns a new version of the image rounded into a circle.
@@ -262,10 +262,10 @@ extension UIImage {
 
         squareImage.draw(in: CGRect(origin: CGPoint.zero, size: squareImage.size))
 
-        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContextUnwrapped()
         UIGraphicsEndImageContext()
 
-        return roundedImage!
+        return roundedImage
     }
 }
 
@@ -304,3 +304,13 @@ extension UIImage {
 }
 
 #endif
+
+// MARK: - Private - Graphics Context Helpers
+
+private func UIGraphicsGetImageFromCurrentImageContextUnwrapped() -> UIImage {
+    #if swift(>=2.3)
+        return UIGraphicsGetImageFromCurrentImageContext()!
+    #else
+        return UIGraphicsGetImageFromCurrentImageContext()
+    #endif
+}

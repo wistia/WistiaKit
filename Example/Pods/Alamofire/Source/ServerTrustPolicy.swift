@@ -60,7 +60,7 @@ open class ServerTrustPolicyManager {
 
 extension URLSession {
     private struct AssociatedKeys {
-        static var ManagerKey = "NSURLSession.ServerTrustPolicyManager"
+        static var ManagerKey = "URLSession.ServerTrustPolicyManager"
     }
 
     var serverTrustPolicyManager: ServerTrustPolicyManager? {
@@ -234,6 +234,7 @@ public enum ServerTrustPolicy {
         if status == errSecSuccess {
             let unspecified = SecTrustResultType.unspecified
             let proceed = SecTrustResultType.proceed
+
 
             isValid = result == unspecified || result == proceed
         }
