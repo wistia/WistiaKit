@@ -160,7 +160,7 @@ public final class WistiaPlayerViewController: UIViewController {
      - Returns: `False` if the current `WistiaMedia.hashedID` matches the parameter (resulting in a no-op).  `True` otherwise,
      _which does not guarantee success of the asynchronous video load_.
      */
-    public func replaceCurrentVideoWithVideo(forHashedID hashedID:String) -> Bool {
+    @discardableResult public func replaceCurrentVideoWithVideo(forHashedID hashedID:String) -> Bool {
         self.loadViewIfNeeded()
         return wPlayer.replaceCurrentVideoWithVideo(forHashedID: hashedID)
     }

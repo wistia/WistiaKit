@@ -274,7 +274,7 @@ public final class WistiaPlayer: NSObject {
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
         _which does not guarantee success of the asynchronous video load_.
     */
-    public func replaceCurrentVideoWithVideo(forMedia media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
+    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
         guard media != self.media else { return false }
         pause()
 
@@ -299,7 +299,7 @@ public final class WistiaPlayer: NSObject {
      - Returns: `False` if the current `WistiaMedia.hashedID` matches the parameter (resulting in a no-op).  `True` otherwise,
      _which does not guarantee success of the asynchronous video load_.
      */
-    public func replaceCurrentVideoWithVideo(forHashedID hashedID: String, assetWithSlug slug: String? = nil) -> Bool {
+    @discardableResult public func replaceCurrentVideoWithVideo(forHashedID hashedID: String, assetWithSlug slug: String? = nil) -> Bool {
         guard media?.hashedID != hashedID else { return false }
         avPlayer.pause()
 
