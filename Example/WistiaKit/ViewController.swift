@@ -28,14 +28,14 @@ class ViewController: UIViewController {
                 wistiaPlayer.pause()
 
                 //Play using WistiaPlayerViewController
-                let _ = wistiaPlayerVC.replaceCurrentVideoWithVideo(forHashedID: hashedID)
+                wistiaPlayerVC.replaceCurrentVideoWithVideo(forHashedID: hashedID)
                 self.present(wistiaPlayerVC, animated: true, completion: nil)
 
             case 1:
                 self.dismiss(animated: true, completion: nil)
 
                 //Play using WistiaPlayer
-                let _ = wistiaPlayer.replaceCurrentVideoWithVideo(forHashedID: hashedID)
+                wistiaPlayer.replaceCurrentVideoWithVideo(forHashedID: hashedID)
                 wistiaPlayer.play()
 
             default:
