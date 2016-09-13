@@ -211,7 +211,7 @@ private class JsonToBase64InBodyEncoder : ParameterEncoding {
     }
 
     func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
-        var urlReq = urlRequest.urlRequest
+        var urlReq = try urlRequest.asURLRequest()
         let jsonData = try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions(rawValue: 0))
         urlReq.httpBody = jsonData.base64EncodedData()
         return urlReq
