@@ -8,8 +8,8 @@ osx_image: xcode8
 # podfile: Example/Podfile
 before_install:
 - gem install cocoapods --pre # We need cocoapods 1.1 which is still prerelease
+- pod repo update
 # - pod install --project-directory=Example
 script:
 - set -o pipefail && xcodebuild test -workspace Example/WistiaKit.xcworkspace -scheme WistiaKit-Example -sdk iphonesimulator -destination 'name=iPhone 6' ONLY_ACTIVE_ARCH=NO | xcpretty
-- pod repo update
 - pod lib lint
