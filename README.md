@@ -15,8 +15,7 @@ Disclaimer 2: You need to have [RubyGems installed](https://rubygems.org/pages/d
 
 Ok, got that out of the way.  Now for the fun and fairly easy part!
 
-1.  Install [Cocoapods](https://cocoapods.org) if you haven't already: `gem install cocoapods`
-    > Until Cocoapods 1.1.0 is released, install the prerelease with `gem install cocoapods --pre`
+1.  Install [Cocoapods](https://cocoapods.org) if you haven't already: ~~`gem install cocoapods`~~ Until Cocoapods 1.1.0 is released, install the prerelease with `gem install cocoapods --pre`
 2.  `pod try WistiaKit` will pull this Pod down and open it in Xcode
 3.  Choose the "WistiaKit-Example" project next to the play icon and press play!
 
@@ -43,7 +42,7 @@ You need a [Wistia](http://wistia.com) account on the Platform plan.  You'll als
 
 WistiaKit is available through [CocoaPods](http://cocoapods.org).
 
-> CocoaPods 1.1.0+ is required to build WistiKiot 0.12+.
+> CocoaPods 1.1.0+ is required to build WistiaKit 0.12+.
 
 To install, simply add the following line to your Podfile:
 
