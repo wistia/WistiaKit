@@ -10,7 +10,7 @@ The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swi
 
 ## Your Video on iOS in 5 minutes!
 
-Disclaimer 1: You need to have [Xcode 7.3 installed](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) (which will take > 5 minutes if you don't already have it updated)
+Disclaimer 1: You need to have [Xcode 8 GM Seed installed](https://developer.apple.com/xcode/) (which will take > 5 minutes if you don't already have it updated)
 Disclaimer 2: You need to have [RubyGems installed](https://rubygems.org/pages/download) (which may also take a little while)
 
 Ok, got that out of the way.  Now for the fun and fairly easy part!
@@ -51,7 +51,7 @@ pod "WistiaKit"
 
 WistiaKit is conceptually divided into two tranches; **playback** and **data**.  Depending on your application, you may use both components -- which work seamlessly together -- or either of them independently.  Let's briefly get to know them before diving into the details.
 
-**Playback** is akin to a web embed.  You can present a `WistiaPlayerViewController` and play any of your videos using nothing but its `hashedID`.  Customizations are applied to the player and statistics are tracked like normal; you need do nothing extra.  Run the example project in this pod to see it in action (`pod try WistiaKit` then hit ▶ in Xcode >= 7.3).
+**Playback** is akin to a web embed.  You can present a `WistiaPlayerViewController` and play any of your videos using nothing but its `hashedID`.  Customizations are applied to the player and statistics are tracked like normal; you need do nothing extra.  Run the example project in this pod to see it in action (`pod try WistiaKit` then hit ▶ in Xcode >= 8.0).
 
 If you don't want all the chrome (ie. player controls, scrubber, time, initial poster, etc.) you can get a little lower level with `WistiaPlayer`.  You still need just a `hashedID`, but all you get is an `AVPlayerLayer` which you can present and gussy up however you wish.  All your Wistia statistics ~~are belong to us~~ are tracked like normal.  Psst: the `WistiaPlayerViewController` uses the `WistiaPlayer` under the hood.
 
