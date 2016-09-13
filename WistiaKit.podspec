@@ -24,7 +24,7 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.license          = 'MIT'
   s.author           = { "spinosa" => "spinosa@gmail.com" }
   s.source           = { :git => "https://github.com/wistia/WistiaKit.git", :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/wistia'
+  s.social_media_url = 'http://twitter.com/wistia'
 
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
