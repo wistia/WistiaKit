@@ -12,7 +12,7 @@
     "git": "https://github.com/wistia/WistiaKit.git",
     "tag": "0.12.2"
   },
-  "social_media_url": "https://twitter.com/wistia",
+  "social_media_url": "http://twitter.com/wistia",
   "platforms": {
     "ios": "9.0",
     "tvos": "9.0"
