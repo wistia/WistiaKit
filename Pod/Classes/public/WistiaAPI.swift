@@ -320,12 +320,14 @@ extension WistiaAPI {
 
                 switch response.result {
                 case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let project = WistiaProject(from: JSON), response.response?.statusCode == 200 {
-                        completionHandler(true, project)
-                    } else {
-                        completionHandler(true, nil)
+                    if response.response?.statusCode == 200 {
+                        if let JSON = value as? [String: Any],
+                            let project = WistiaProject(from: JSON) {
+                            completionHandler(true, project)
+                            return
+                        }
                     }
+                    completionHandler(true, nil)
                 case .failure(_):
                     completionHandler(false, nil)
                 }
