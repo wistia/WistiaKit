@@ -54,3 +54,36 @@ public struct WistiaAsset {
     internal var ext: String?
     internal var bitrate: Int64?
 }
+
+extension WistiaAsset {
+
+    init?(from dictionary: [String: Any], forMedia media:WistiaMedia) {
+        let parser = Parser(dictionary: dictionary)
+        do {
+            self.media = media
+
+            urlString = try parser.fetch("url")
+            width = try parser.fetch("width", transformation: { (w:Int) in Int64(w) })
+            height = try parser.fetch("height", transformation: { (h:Int) in Int64(h) })
+            type = try parser.fetch("type")
+
+            size = try parser.fetchOptional("size", transformation: { (s:Int) in Int64(s) })
+            if size == nil {
+                size = try parser.fetchOptional("filesize", transformation: { (s:Int) in Int64(s) })
+            }
+
+            displayName = try parser.fetchOptional("display_name")
+            container = try parser.fetchOptional("container")
+            codec = try parser.fetchOptional("codec")
+            ext = try parser.fetchOptional("ext")
+            bitrate = try parser.fetchOptional("bitrate", transformation: { (b:Int) in Int64(b) })
+            status = try parser.fetchOptional("status") { WistiaObjectStatus(failsafeFromRaw: $0) }
+            slug = try parser.fetchOptional("slug")
+
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+    
+}

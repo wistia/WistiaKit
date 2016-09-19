@@ -137,8 +137,8 @@ extension WistiaMedia {
             duration = try parser.fetchOptional("duration")
             name = try parser.fetchOptional("name")
             description = try parser.fetchOptional("description")
-            created = try parser.fetchOptional("created") { RFC3339DateFormatter.date(from: $0) }
-            updated = try parser.fetchOptional("updated") { RFC3339DateFormatter.date(from: $0) }
+            created = try parser.fetchOptional("created") { Parser.RFC3339DateFormatter.date(from: $0) }
+            updated = try parser.fetchOptional("updated") { Parser.RFC3339DateFormatter.date(from: $0) }
             spherical = try parser.fetchOptional("spherical", default: false)
             thumbnail = try parser.fetchOptional("thumbnail") { WistiaMedia.Thumbnail(from: $0) }
             distilleryURLString = try parser.fetchOptional("distilleryUrl")

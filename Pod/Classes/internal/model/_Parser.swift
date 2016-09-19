@@ -75,16 +75,15 @@ struct Parser {
             return nil
         }
     }
+
+    static let RFC3339DateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        return df
+    }()
 }
 
 struct ParserError: Error {
     let message: String
 }
-
-//TODO: Move inside Parser
-internal let RFC3339DateFormatter: DateFormatter = {
-    let df = DateFormatter()
-    df.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
-    df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-    return df
-}()

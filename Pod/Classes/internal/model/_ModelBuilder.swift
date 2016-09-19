@@ -28,7 +28,6 @@ internal class ModelBuilder {
         return medias
     }
 
-
     //TODO: Move this inside WistiaMedia as a factory method
     internal static func wistiaMedia(from mediaHash:[String: Any]) -> WistiaMedia? {
 
@@ -43,39 +42,11 @@ internal class ModelBuilder {
         }
     }
 
+    //TODO: Move this inside WistiaMedia as a factory method
     internal static func wistiaAssets(from assetsHashArray:[[String:Any]], forMedia media:WistiaMedia) -> [WistiaAsset] {
         var wistiaAssets = [WistiaAsset]()
         for rawAsset in assetsHashArray {
-            if
-                //requried
-                let width = rawAsset["width"] as? Int,
-                let height = rawAsset["height"] as? Int,
-                let type = rawAsset["type"] as? String,
-                let urlString = rawAsset["url"] as? String {
-                //required and annoying
-                var size:Int64? = nil
-                if let s = rawAsset["size"] as? Int {
-                    size = Int64(s)
-                } else if let s = rawAsset["filesize"] as? Int {
-                    size = Int64(s)
-                }
-                //optional attribrutes
-                let displayName = rawAsset["display_name"] as? String
-                let container = rawAsset["container"] as? String
-                let codec = rawAsset["codec"] as? String
-                let ext = rawAsset["ext"] as? String
-                var bitrate: Int64? = nil
-                if let b = rawAsset["bitrate"] as? Int {
-                    bitrate = Int64(b)
-                }
-                var status:WistiaObjectStatus? = nil
-                if let assetStatus = rawAsset["status"] as? Int {
-                    status = WistiaObjectStatus(failsafeFromRaw: assetStatus)
-                }
-                let slug = rawAsset["slug"] as? String
-
-                let wistiaAsset = WistiaAsset(media: media, urlString: urlString, width: Int64(width), height: Int64(height), size: size, type: type, status: status, slug: slug, displayName: displayName, container: container, codec: codec, ext: ext, bitrate: bitrate)
-
+            if let wistiaAsset = WistiaAsset(from: rawAsset, forMedia: media) {
                 wistiaAssets.append(wistiaAsset)
             }
         }

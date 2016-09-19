@@ -69,8 +69,8 @@ extension WistiaProject {
             name = try parser.fetchOptional("name")
             description = try parser.fetchOptional("description")
             mediaCount = try parser.fetchOptional("mediaCount")
-            created = try parser.fetchOptional("created") { RFC3339DateFormatter.date(from: $0) }
-            updated = try parser.fetchOptional("updated") { RFC3339DateFormatter.date(from: $0) }
+            created = try parser.fetchOptional("created") { Parser.RFC3339DateFormatter.date(from: $0) }
+            updated = try parser.fetchOptional("updated") { Parser.RFC3339DateFormatter.date(from: $0) }
             anonymousCanUpload = try parser.fetchOptional("anonymousCanUpload", default: false)
             anonymousCanDownload = try parser.fetchOptional("anonymousCanDownload", default: false)
             isPublic = try parser.fetchOptional("public", default: false)
