@@ -121,16 +121,16 @@ extension WistiaMediaEmbedOptions {
         do {
 
             playerColor = parser.fetchOptional("playerColor", default: UIColor(red: 0.482, green: 0.475, blue: 0.4157, alpha: 1)) { UIColor.wk_from(hexString: $0) }
-            bigPlayButton = try parser.fetchOptional("playButton", default: true) { (s: NSString) -> Bool in s.boolValue }
-            smallPlayButton = try parser.fetchOptional("smallPlayButton", default: true) { (s: NSString) -> Bool in s.boolValue }
-            playbar = try parser.fetchOptional("playbar", default: true) { (s: NSString) -> Bool in s.boolValue }
-            fullscreenButton = try parser.fetchOptional("fullscreenButton", default: true) { (s: NSString) -> Bool in s.boolValue }
-            controlsVisibleOnLoad = try parser.fetchOptional("controlsVisibleOnLoad", default: true) { (s: NSString) -> Bool in s.boolValue }
-            autoplay = try parser.fetchOptional("autoPlay", default: false) { (s: NSString) -> Bool in s.boolValue }
+            bigPlayButton = parser.fetchOptional("playButton", default: true) { (s: NSString) -> Bool in s.boolValue }
+            smallPlayButton = parser.fetchOptional("smallPlayButton", default: true) { (s: NSString) -> Bool in s.boolValue }
+            playbar = parser.fetchOptional("playbar", default: true) { (s: NSString) -> Bool in s.boolValue }
+            fullscreenButton = parser.fetchOptional("fullscreenButton", default: true) { (s: NSString) -> Bool in s.boolValue }
+            controlsVisibleOnLoad = parser.fetchOptional("controlsVisibleOnLoad", default: true) { (s: NSString) -> Bool in s.boolValue }
+            autoplay = parser.fetchOptional("autoPlay", default: false) { (s: NSString) -> Bool in s.boolValue }
             endVideoBehaviorString = try parser.fetchOptional("endVideoBehavior", default: "pause")
-            stillURL = try parser.fetchOptional("stillUrl") { URL(string: $0) }
+            stillURL = parser.fetchOptional("stillUrl") { URL(string: $0) }
 
-            if let pluginParser = try parser.fetchOptional("plugin", transformation: { (dict: [String: Any]) -> Parser? in
+            if let pluginParser = parser.fetchOptional("plugin", transformation: { (dict: [String: Any]) -> Parser? in
                 Parser(dictionary: dict)
             }) {
                 // share is the new stuff, preferred over socialbar-v1
@@ -138,7 +138,7 @@ extension WistiaMediaEmbedOptions {
                     Parser(dictionary: dict)
                 }) {
                     // presence of this hash means sharing is on unless it's explcity set to off
-                    actionButton = try shareParser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
+                    actionButton = shareParser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
                     actionShareURLString = try shareParser.fetchOptional("pageUrl")
                     actionShareTitle = try shareParser.fetchOptional("pageTitle")
 
@@ -146,7 +146,7 @@ extension WistiaMediaEmbedOptions {
                     Parser(dictionary: dict)
                 }) {
                     // presence of this hash means sharing is on unless it's explcity set to off
-                    actionButton = try socialBarV1Parser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
+                    actionButton = socialBarV1Parser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
                     actionShareURLString = try socialBarV1Parser.fetchOptional("pageUrl")
                     actionShareTitle = try socialBarV1Parser.fetchOptional("pageTitle")
                 }
@@ -155,8 +155,8 @@ extension WistiaMediaEmbedOptions {
                     Parser(dictionary: dict)
                 }) {
                     // presence of this hash means captions are available unless stated otherwise
-                    captionsAvailable = try captionsParser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
-                    captionsOnByDefault = try captionsAvailable && captionsParser.fetchOptional("onByDefault", default: false) { (s: NSString) -> Bool in s.boolValue }
+                    captionsAvailable = captionsParser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
+                    captionsOnByDefault = captionsAvailable && captionsParser.fetchOptional("onByDefault", default: false) { (s: NSString) -> Bool in s.boolValue }
                 }
 
             }
