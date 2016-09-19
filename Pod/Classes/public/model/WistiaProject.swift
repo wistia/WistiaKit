@@ -57,6 +57,13 @@ public struct WistiaProject {
 
 extension WistiaProject {
 
+    /// Initialize a WistiaProject from the provided JSON hash.
+    ///
+    /// - Note: Prints error message to console on parsing issue.
+    ///
+    /// - parameter dictionary: JSON hash representing the WistiaProject.
+    ///
+    /// - returns: Initialized WistiaProject if parsing is successful.
     init?(from dictionary: [String: Any]) {
         let parser = Parser(dictionary: dictionary)
         do {

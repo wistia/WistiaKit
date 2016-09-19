@@ -57,6 +57,18 @@ public struct WistiaAsset {
 
 extension WistiaAsset {
 
+    /// Initialize a WistiaAsset from the provided JSON hash.  It is unlikely you would use this
+    /// method directly as assets are generally returned inside of their parent WistiaMedia.  Instead,
+    /// see WistiaMedia.create(from:).
+    ///
+    /// - seealso: WistiaMedia.create(from:)
+    ///
+    /// - Note: Prints error message to console on parsing issue.
+    ///
+    /// - parameter dictionary: JSON hash representing the WistiaAsset.
+    /// - parameter media: The owning WistiaMedia to which this asset belongs.
+    ///
+    /// - returns: Initialized WistiaAsset if parsing is successful.
     init?(from dictionary: [String: Any], forMedia media:WistiaMedia) {
         let parser = Parser(dictionary: dictionary)
         do {

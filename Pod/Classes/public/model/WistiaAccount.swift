@@ -38,6 +38,13 @@ public struct WistiaAccount {
 
 extension WistiaAccount {
 
+    /// Initialize a WistiaAccount from the provided JSON hash.
+    ///
+    /// - Note: Prints error message to console on parsing issue.
+    ///
+    /// - parameter dictionary: JSON hash representing the WistiaAccount.
+    ///
+    /// - returns: Initialized WistiaAccount if parsing is successful.
     init?(from dictionary: [String: Any]) {
         let parser = Parser(dictionary: dictionary)
         do {
