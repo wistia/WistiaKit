@@ -168,12 +168,12 @@ extension WistiaMedia {
             description = try parser.fetchOptional("description")
             created = parser.fetchOptional("created") { Parser.RFC3339DateFormatter.date(from: $0) }
             updated = parser.fetchOptional("updated") { Parser.RFC3339DateFormatter.date(from: $0) }
-            spherical = try parser.fetchOptional("spherical", default: false)
+            spherical = try parser.fetchOptional("spherical", default: false) { (s: NSString) -> Bool in s.boolValue }
             thumbnail = parser.fetchOptional("thumbnail") { WistiaMedia.Thumbnail(from: $0) }
             distilleryURLString = try parser.fetchOptional("distilleryUrl")
             accountKey = try parser.fetchOptional("accountKey")
             mediaKey = try parser.fetchOptional("mediaKey")
-            embedOptions = parser.fetchOptional("embed_options") { ModelBuilder.embedOptions(from: $0) }
+            embedOptions = parser.fetchOptional("embed_options") { WistiaMediaEmbedOptions(from: $0) }
             stats = parser.fetchOptional("stats") { WistiaMediaStats(from: $0) }
             assets = [WistiaAsset]()
             

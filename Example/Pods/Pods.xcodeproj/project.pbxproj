@@ -58,7 +58,6 @@
 		A8180683333E4906D944A1645E68A3B7 /* _WistiaPlayerViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 08831432BD04EA0A1FAE1662DE48A5DE /* _WistiaPlayerViewController.xib */; };
 		AC7B59395E72FCBF0354AD036177A869 /* _WistiaCaptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAE3EECD8769B633915B292B457115E /* _WistiaCaptions.swift */; };
 		AF158CAAF4DD319009AFC855DC995D90 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E36A061568443C4892C00390B9395C /* ParameterEncoding.swift */; };
-		B08E5CB31848546484302FE384533FE7 /* _ModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B38275B81F181E1A2BF0E4B458A48BD /* _ModelBuilder.swift */; };
 		B198F87E2DBF56FFCD7ABF2BE84DFD5C /* AlamofireImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B91CDE9C60D5C92C6A2EE8754EB1042 /* AlamofireImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3B5C9E288F3CB23AE7698C3EAABA83E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E482138DF80371192085A2EFB90EB64B /* CoreMotion.framework */; };
 		B4603179C5647B9C3DDBA138B8934644 /* WistiaMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FC73EEF2981E9661864AB9DF2CE21 /* WistiaMedia.swift */; };
@@ -164,7 +163,6 @@
 		0675D841D8C298DC32B04D1565222FBA /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/SpriteKit.framework; sourceTree = DEVELOPER_DIR; };
 		074A78CA3DFE0E76991BBB07A466C54F /* _CaptionsLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = _CaptionsLabel.swift; sourceTree = "<group>"; };
 		08831432BD04EA0A1FAE1662DE48A5DE /* _WistiaPlayerViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = _WistiaPlayerViewController.xib; sourceTree = "<group>"; };
-		0B38275B81F181E1A2BF0E4B458A48BD /* _ModelBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = _ModelBuilder.swift; sourceTree = "<group>"; };
 		1102B05F3882D0B7B0EEA23AA2EDDDBD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		134FEA47AE968B7A8CB7A24D5E44852E /* Pods_WistiaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WistiaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		157689B5247A0B5E1ED5F4029627BBB8 /* Pods-WistiaKit_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Example-resources.sh"; sourceTree = "<group>"; };
@@ -479,7 +477,6 @@
 		7B70580443EE2AB7937BD4A2D53F1B1C /* model */ = {
 			isa = PBXGroup;
 			children = (
-				0B38275B81F181E1A2BF0E4B458A48BD /* _ModelBuilder.swift */,
 				8FAE3EECD8769B633915B292B457115E /* _WistiaCaptions.swift */,
 				911F87721D8C4E5300724340 /* _Parser.swift */,
 			);
@@ -869,7 +866,6 @@
 			files = (
 				911F87731D8C4E5300724340 /* _Parser.swift in Sources */,
 				A1D279922A422D5FC1F8FC8AEDF6FED6 /* _CaptionsLabel.swift in Sources */,
-				B08E5CB31848546484302FE384533FE7 /* _ModelBuilder.swift in Sources */,
 				425635B745A40AD8BF00F413AC25559A /* _SCNVector3Extensions.swift in Sources */,
 				0AFAD2F9C8A79E84F144E2D65D6946C4 /* _UIColorExtensions.swift in Sources */,
 				8D6DECB75AD2DD93BA336CDB9F745E78 /* _UINavigationControllerExtensions.swift in Sources */,

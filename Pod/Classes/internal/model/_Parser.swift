@@ -61,6 +61,10 @@ struct Parser {
         return (dictionary?[key] as? T).flatMap(transformation)
     }
 
+    func fetchOptional<T, U>(_ key: String, default defaultValue: U, transformation: (T) -> U?) -> U {
+        return fetchOptional(key, transformation: transformation) ?? defaultValue
+    }
+
     //MARK: - fetchArray
 
     func fetchArray<T, U>(_ key: String, transformation: (T) -> U?) throws -> [U] {

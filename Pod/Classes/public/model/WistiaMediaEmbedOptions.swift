@@ -25,7 +25,7 @@ import Foundation
 public struct WistiaMediaEmbedOptions {
 
     /// Tint for controls (default: #7b796a)
-    public var playerColor: UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+    public var playerColor: UIColor = UIColor(red: 0.482, green: 0.475, blue: 0.4157, alpha: 1)
 
     /// Overlay large play button on poster view before playback has started (default: true)
     public var bigPlayButton: Bool = true
@@ -104,4 +104,67 @@ public struct WistiaMediaEmbedOptions {
             }
         }
     }
+}
+
+extension WistiaMediaEmbedOptions {
+
+    /// Initialize a WistiaMediaEmbedOptions from the provided JSON hash.
+    ///
+    /// - Note: Prints error message to console on parsing issue.
+    ///
+    /// - parameter dictionary: JSON hash representing the WistiaMediaEmbedOptions.
+    ///
+    /// - returns: Initialized WistiaMediaEmbedOptions if parsing is successful.
+    init?(from dictionary: [String: Any]?) {
+        guard dictionary != nil else { return nil }
+        let parser = Parser(dictionary: dictionary)
+        do {
+
+            playerColor = parser.fetchOptional("playerColor", default: UIColor(red: 0.482, green: 0.475, blue: 0.4157, alpha: 1)) { UIColor.wk_from(hexString: $0) }
+            bigPlayButton = try parser.fetchOptional("playButton", default: true) { (s: NSString) -> Bool in s.boolValue }
+            smallPlayButton = try parser.fetchOptional("smallPlayButton", default: true) { (s: NSString) -> Bool in s.boolValue }
+            playbar = try parser.fetchOptional("playbar", default: true) { (s: NSString) -> Bool in s.boolValue }
+            fullscreenButton = try parser.fetchOptional("fullscreenButton", default: true) { (s: NSString) -> Bool in s.boolValue }
+            controlsVisibleOnLoad = try parser.fetchOptional("controlsVisibleOnLoad", default: true) { (s: NSString) -> Bool in s.boolValue }
+            autoplay = try parser.fetchOptional("autoPlay", default: false) { (s: NSString) -> Bool in s.boolValue }
+            endVideoBehaviorString = try parser.fetchOptional("endVideoBehavior", default: "pause")
+            stillURL = try parser.fetchOptional("stillUrl") { URL(string: $0) }
+
+            if let pluginParser = try parser.fetchOptional("plugin", transformation: { (dict: [String: Any]) -> Parser? in
+                Parser(dictionary: dict)
+            }) {
+                // share is the new stuff, preferred over socialbar-v1
+                if let shareParser = pluginParser.fetchOptional("share", transformation: { (dict: [String: Any]) -> Parser? in
+                    Parser(dictionary: dict)
+                }) {
+                    // presence of this hash means sharing is on unless it's explcity set to off
+                    actionButton = try shareParser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
+                    actionShareURLString = try shareParser.fetchOptional("pageUrl")
+                    actionShareTitle = try shareParser.fetchOptional("pageTitle")
+
+                } else if let socialBarV1Parser = pluginParser.fetchOptional("share", transformation: { (dict: [String: Any]) -> Parser? in
+                    Parser(dictionary: dict)
+                }) {
+                    // presence of this hash means sharing is on unless it's explcity set to off
+                    actionButton = try socialBarV1Parser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
+                    actionShareURLString = try socialBarV1Parser.fetchOptional("pageUrl")
+                    actionShareTitle = try socialBarV1Parser.fetchOptional("pageTitle")
+                }
+
+                if let captionsParser = pluginParser.fetchOptional("captions-v1", transformation: { (dict: [String: Any]) -> Parser? in
+                    Parser(dictionary: dict)
+                }) {
+                    // presence of this hash means captions are available unless stated otherwise
+                    captionsAvailable = try captionsParser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
+                    captionsOnByDefault = try captionsAvailable && captionsParser.fetchOptional("onByDefault", default: false) { (s: NSString) -> Bool in s.boolValue }
+                }
+
+            }
+
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+    
 }
