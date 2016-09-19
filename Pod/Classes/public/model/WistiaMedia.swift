@@ -173,8 +173,8 @@ extension WistiaMedia {
             distilleryURLString = try parser.fetchOptional("distilleryUrl")
             accountKey = try parser.fetchOptional("accountKey")
             mediaKey = try parser.fetchOptional("mediaKey")
-            embedOptions = try parser.fetchOptional("embed_options") { ModelBuilder.embedOptions(from: $0) }
-            stats = try parser.fetchOptional("stats") { ModelBuilder.wistiaMediaStats(from: $0) }
+            embedOptions = parser.fetchOptional("embed_options") { ModelBuilder.embedOptions(from: $0) }
+            stats = parser.fetchOptional("stats") { WistiaMediaStats(from: $0) }
             assets = [WistiaAsset]()
             
         } catch let error {

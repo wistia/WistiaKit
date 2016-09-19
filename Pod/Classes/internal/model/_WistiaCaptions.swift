@@ -37,6 +37,51 @@ internal struct WistiaCaptions {
     let captionSegments:[WistiaCaptionSegment]
 }
 
+internal extension WistiaCaptions {
+
+    /// Initialize a WistiaCaptions from the provided JSON hash.
+    ///
+    /// - Note: Prints error message to console on parsing issue.
+    ///
+    /// - parameter dictionary: JSON hash representing the WistiaCaptions.
+    ///
+    /// - returns: Initialized WistiaCaptions if parsing is successful.
+    init?(from dictionary: [String: Any]?) {
+        guard dictionary != nil else { return nil }
+        let parser = Parser(dictionary: dictionary)
+        do {
+
+            captionsID = try parser.fetch("id")
+            languageCode = try parser.fetch("language")
+            englishName = try parser.fetch("english_name")
+            nativeName = try parser.fetch("native_name")
+            rightToLeft = try parser.fetch("right_to_left")
+
+            let linesDictionary:[String: Any] = try parser.fetch("hash")
+            let lines:[[String:Any]] = try Parser(dictionary:linesDictionary).fetch("lines")
+
+            var segments = [WistiaCaptionSegment]()
+            for line in lines {
+                if let seg = WistiaCaptionSegment(from: line) {
+                    segments.append(seg)
+                }
+            }
+
+            //WistiaCaptionsRenderer assumes segments are in order
+            segments.sort(by: { (segA, segB) -> Bool in
+                segA.startTime < segB.startTime
+            })
+
+            self.captionSegments = segments
+
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+    
+}
+
 /**
  A set of text to be displayed over the video.  Each segment is only used once and 
  specifies the time to begin and end showing it.
@@ -51,4 +96,27 @@ internal struct WistiaCaptionSegment {
 
     /// (Ordered) Array of lines of text to show on screen together
     let text:[String]
+}
+
+internal extension WistiaCaptionSegment {
+
+    /// Initialize a WistiaCaptionSegment from the provided JSON hash.
+    ///
+    /// - Note: Prints error message to console on parsing issue.
+    ///
+    /// - parameter dictionary: JSON hash representing the WistiaCaptionSegment.
+    ///
+    /// - returns: Initialized WistiaCaptionSegment if parsing is successful.
+    init?(from dictionary: [String: Any]) {
+        let parser = Parser(dictionary: dictionary)
+        do {
+            startTime = try parser.fetch("start")
+            endTime = try parser.fetch("end")
+            text = try parser.fetchArray("text") { $0 }
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+    
 }

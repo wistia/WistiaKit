@@ -33,3 +33,29 @@ public struct WistiaMediaStats {
     public var averagePercentWatched: Int
 
 }
+
+extension WistiaMediaStats {
+
+    /// Initialize a WistiaMediaStats from the provided JSON hash.
+    ///
+    /// - Note: Prints error message to console on parsing issue.
+    ///
+    /// - parameter dictionary: JSON hash representing the WistiaMediaStats.
+    ///
+    /// - returns: Initialized WistiaMediaStats if parsing is successful.
+    init?(from dictionary: [String: Any]?) {
+        guard dictionary != nil else { return nil }
+        let parser = Parser(dictionary: dictionary)
+        do {
+            pageLoads = try parser.fetch("pageLoads")
+            visitors = try parser.fetch("visitors")
+            percentOfVisitorsClickingPlay = try parser.fetch("percentOfVisitorsClickingPlay")
+            plays = try parser.fetch("plays")
+            averagePercentWatched = try parser.fetch("averagePercentWatched")
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+    
+}

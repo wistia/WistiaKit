@@ -22,7 +22,7 @@ internal extension WistiaAPI {
 
                         var captions = [WistiaCaptions]()
                         for captionsJSON in captionsJSONArray {
-                            if let c = ModelBuilder.wistiaCaptions(from: captionsJSON) {
+                            if let c = WistiaCaptions(from: captionsJSON) {
                                 captions.append(c)
                             }
                         }

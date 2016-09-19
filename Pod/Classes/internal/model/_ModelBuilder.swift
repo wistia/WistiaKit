@@ -99,48 +99,4 @@ internal class ModelBuilder {
         return mediaEmbedOptions
     }
 
-    internal static func wistiaMediaStats(from statsHash:[String: Any]?) -> WistiaMediaStats? {
-        if let sHash = statsHash,
-            let pageLoads = sHash["pageLoads"] as? Int,
-            let visitors = sHash["visitors"] as? Int,
-            let percentOfVisitorsClickingPlay = sHash["percentOfVisitorsClickingPlay"] as? Int,
-            let plays = sHash["plays"] as? Int,
-            let averagePercentWatched = sHash["averagePercentWatched"] as? Int {
-
-            return WistiaMediaStats(pageLoads: pageLoads, visitors: visitors, percentOfVisitorsClickingPlay: percentOfVisitorsClickingPlay, plays: plays, averagePercentWatched: averagePercentWatched)
-        }
-        return nil
-    }
-
-    internal static func wistiaCaptions(from captionsHash:[String: Any]?) -> WistiaCaptions? {
-        if let cHash = captionsHash,
-            let cID = cHash["id"] as? Int,
-            let language = cHash["language"] as? String,
-            let englishName = cHash["english_name"] as? String,
-            let nativeName = cHash["native_name"] as? String,
-            let rightToLeft = cHash["right_to_left"] as? Bool,
-            let linesHash = cHash["hash"] as? [String: Any],
-            let lines = linesHash["lines"] as? [[String:Any]] {
-
-            var captionSegments = [WistiaCaptionSegment]()
-            for line in lines {
-                if let start = line["start"] as? Float,
-                    let end = line["end"] as? Float,
-                    let text = line["text"] as? [String] {
-                    let seg = WistiaCaptionSegment(startTime: start, endTime: end, text: text)
-                    captionSegments.append(seg)
-                }
-            }
-
-            //WistiaCaptionsRenderer assumes segments are in order
-            captionSegments.sort(by: { (segA, segB) -> Bool in
-                segA.startTime < segB.startTime
-            })
-
-            return WistiaCaptions(captionsID: cID, languageCode: language, englishName: englishName, nativeName: nativeName, rightToLeft: rightToLeft, captionSegments: captionSegments)
-        }
-
-        return nil
-    }
-
 }
