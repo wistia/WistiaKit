@@ -108,7 +108,7 @@ extension WistiaAPI {
                 switch(response.result) {
                 case.success(let value):
                     if let JSON = value as? [String: Any],
-                        let account = ModelBuilder.wistiaAccount(from: JSON) {
+                        let account = WistiaAccount(from: JSON) {
                         completionHander(account)
                     } else {
                         completionHander(nil)
@@ -150,7 +150,7 @@ extension WistiaAPI {
                     if let JSON = value as? [[String: Any]] {
                         var projects = [WistiaProject]()
                         for projectHash in JSON {
-                            if let p = ModelBuilder.wistiaProject(from: projectHash) {
+                            if let p = WistiaProject(from: projectHash) {
                                 projects.append(p)
                             }
                         }
@@ -189,7 +189,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let project = ModelBuilder.wistiaProject(from: JSON) {
+                        let project = WistiaProject(from: JSON) {
                         completionHandler(project)
 
                     } else {
@@ -236,7 +236,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let project = ModelBuilder.wistiaProject(from: JSON) {
+                        let project = WistiaProject(from: JSON) {
                         completionHandler(project)
 
                     } else {
@@ -282,7 +282,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let project = ModelBuilder.wistiaProject(from: JSON), response.response?.statusCode == 200 {
+                        let project = WistiaProject(from: JSON), response.response?.statusCode == 200 {
                         completionHandler(true, project)
                     } else {
                         completionHandler(true, nil)
@@ -321,7 +321,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let project = ModelBuilder.wistiaProject(from: JSON), response.response?.statusCode == 200 {
+                        let project = WistiaProject(from: JSON), response.response?.statusCode == 200 {
                         completionHandler(true, project)
                     } else {
                         completionHandler(true, nil)
@@ -366,7 +366,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let project = ModelBuilder.wistiaProject(from: JSON), response.response?.statusCode == 201 {
+                        let project = WistiaProject(from: JSON), response.response?.statusCode == 201 {
                         completionHandler(true, project)
                     } else {
                         completionHandler(true, nil)
@@ -441,7 +441,7 @@ extension WistiaAPI {
                             if let media = ModelBuilder.wistiaMedia(from: mediaHash) {
 
                                 //2) Find project it's in (or create it anew)
-                                if let projectHash = mediaHash["project"] as? [String: AnyObject], var project = ModelBuilder.wistiaProject(from: projectHash) {
+                                if let projectHash = mediaHash["project"] as? [String: AnyObject], var project = WistiaProject(from: projectHash) {
                                     if projectsByHashedID.index(forKey: project.hashedID) == nil {
                                         project.medias = [WistiaMedia]()
                                         projectsByHashedID[project.hashedID] = project

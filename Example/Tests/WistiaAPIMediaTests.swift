@@ -23,9 +23,7 @@ class WistiaAPIMediaTests: XCTestCase {
         wAPI.listMediasGroupedByProject { (projects) in
             if projects.count > 0 {
                 if let medias = projects.first?.medias, let media = medias.first {
-                    if media.status == .ready &&
-                        media.hashedID == "2egno8swf1" &&
-                        media.name == "Hey there, welcome to Wistia!" {
+                    if media.status == .ready {
                             expectation.fulfill()
                     }
                 }

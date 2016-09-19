@@ -19,17 +19,33 @@ import Foundation
  */
 public struct WistiaMedia {
 
-    /// A unique numeric identifier for the media within the system.
-    public var mediaID: Int?
-
     /// The display name of the media.
     public var name: String?
 
     /// Post upload processing status. There are four statuses: queued, processing, ready, and failed.
     public var status: WistiaObjectStatus
 
-    /// An object representing the thumbnail for this media. The attributes are URL, width, and height.
-    public var thumbnail: (url: String, width: Int, height: Int)?
+    /// An object representing the thumbnail for this media.
+    public var thumbnail: Thumbnail?
+
+    /// A struct holding the attributes of a thumbnail; URL, width, and height.
+    public struct Thumbnail {
+        public var url: String
+        public var width: Int
+        public var height: Int
+
+        init?(from dictionary: [String: Any]) {
+            let parser = Parser(dictionary: dictionary)
+            do {
+                url = try parser.fetch("url")
+                width = try parser.fetch("width")
+                height = try parser.fetch("height")
+            } catch let error {
+                print(error)
+                return nil
+            }
+        }
+    }
 
     /// Specifies the length (in seconds) for audio and video files. Specifies number of pages in the document. Omitted for other types of media.
     public var duration: Float?
@@ -93,6 +109,51 @@ public struct WistiaMedia {
         self.captions = captions
     }
 
+}
+
+extension WistiaMedia {
+
+    init?(from dictionary: [String: Any]) {
+        let parser = Parser(dictionary: dictionary)
+        do {
+            if let s = try parser.fetchOptional("status", transformation: { str in
+                return WistiaObjectStatus(failsafeFromRawString: str)
+            }) {
+                status = s
+            } else if let s = try parser.fetchOptional("status", transformation: { integer in
+                return WistiaObjectStatus(failsafeFromRaw: integer)
+            }) {
+                status = s
+            } else {
+                status = .failed
+            }
+
+            if let hid: String = try parser.fetchOptional("hashed_id") {
+                hashedID = hid
+            } else {
+                hashedID = try parser.fetch("hashedId")
+            }
+
+            duration = try parser.fetchOptional("duration")
+            name = try parser.fetchOptional("name")
+            description = try parser.fetchOptional("description")
+            created = try parser.fetchOptional("created") { RFC3339DateFormatter.date(from: $0) }
+            updated = try parser.fetchOptional("updated") { RFC3339DateFormatter.date(from: $0) }
+            spherical = try parser.fetchOptional("spherical", default: false)
+            thumbnail = try parser.fetchOptional("thumbnail") { WistiaMedia.Thumbnail(from: $0) }
+            distilleryURLString = try parser.fetchOptional("distilleryUrl")
+            accountKey = try parser.fetchOptional("accountKey")
+            mediaKey = try parser.fetchOptional("mediaKey")
+            embedOptions = try parser.fetchOptional("embed_options") { ModelBuilder.embedOptions(from: $0) }
+            stats = try parser.fetchOptional("stats") { ModelBuilder.wistiaMediaStats(from: $0) }
+            assets = [WistiaAsset]()
+            
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+    
 }
 
 //MARK: - WistiaMedia Equality

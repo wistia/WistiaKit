@@ -18,63 +18,6 @@ internal class ModelBuilder {
         return df
     }()
 
-    internal static func wistiaAccount(from accountHash:[String: Any]) -> WistiaAccount? {
-
-        if
-            //required
-            let accountID = accountHash["id"] as? Int,
-            let name = accountHash["name"] as? String,
-            let accountURLString = accountHash["url"] as? String,
-            let mediaCount = accountHash["mediaCount"] as? Int {
-
-            return WistiaAccount(accountID: accountID, name: name, accountURLString: accountURLString, mediaCount: mediaCount)
-        } else {
-            return nil
-        }
-
-    }
-
-    internal static func wistiaProject(from projectHash:[String: Any]) -> WistiaProject? {
-        if let
-            //required
-            projectID = projectHash["id"] as? Int {
-            //required and annoying
-            let hashedID: String
-            if let hid = projectHash["hashed_id"] as? String {
-                hashedID = hid
-            } else if let hid = projectHash["hashedId"] as? String {
-                hashedID = hid
-            } else {
-                return nil
-            }
-            //optional
-            let name = projectHash["name"] as? String
-            let description = projectHash["description"] as? String
-            let mediaCount = projectHash["mediaCount"] as? Int
-            var created: Date? = nil
-            if let c = projectHash["created"] as? String {
-                created = RFC3339DateFormatter.date(from: c)
-            }
-            var updated: Date? = nil
-            if let u = projectHash["updated"] as? String {
-                updated = RFC3339DateFormatter.date(from: u)
-            }
-            let anonymousCanUpload = (projectHash["anonymousCanUpload"] as? Bool) ?? false
-            let anonymousCanDownload = (projectHash["anonymousCanDownload"] as? Bool) ?? false
-            let isPublic = (projectHash["public"] as? Bool) ?? false
-            let publicID = projectHash["publicID"] as? String
-
-            var medias:[WistiaMedia]? = nil
-            if let mediasHashArray = projectHash["medias"] as? [[String: Any]] {
-                medias = wistiaMedias(from: mediasHashArray)
-            }
-
-            return WistiaProject(projectID: projectID, name: name, description: description, mediaCount: mediaCount, created: created, updated: updated, hashedID: hashedID, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic, publicID: publicID, medias: medias)
-        }
-
-        return nil
-    }
-
     internal static func wistiaMedias(from mediasHashArray:[[String: Any]]) -> [WistiaMedia] {
         var medias = [WistiaMedia]()
         for mediaHash in mediasHashArray {
@@ -85,65 +28,19 @@ internal class ModelBuilder {
         return medias
     }
 
+
+    //TODO: Move this inside WistiaMedia as a factory method
     internal static func wistiaMedia(from mediaHash:[String: Any]) -> WistiaMedia? {
-        //required (except when returning stats)
-        let duration = mediaHash["duration"] as? Float
-        let status:WistiaObjectStatus
-        if let statusString = mediaHash["status"] as? String {
-            status = WistiaObjectStatus(failsafeFromRawString: statusString)
-        } else if let statusInt = mediaHash["status"] as? Int {
-            status = WistiaObjectStatus(failsafeFromRaw: statusInt)
-        } else {
-            status = WistiaObjectStatus.failed
-        }
-        //required (and annoying)
-        let hashedID: String
-        if let hid = mediaHash["hashedId"] as? String {
-            hashedID = hid
-        } else if let hid = mediaHash["hashed_id"] as? String {
-            hashedID = hid
+
+        if var wMedia = WistiaMedia(from: mediaHash) {
+            // -- Assets (are optional) --
+            if let assets = mediaHash["assets"] as? [[String:Any]] {
+                wMedia.assets = wistiaAssets(from: assets, forMedia:wMedia)
+            }
+            return wMedia
         } else {
             return nil
         }
-        //optional
-        let mediaID = mediaHash["id"] as? Int
-        let name = mediaHash["name"] as? String
-        let description = mediaHash["description"] as? String
-        var created: Date? = nil
-        if let c = mediaHash["created"] as? String {
-            created = RFC3339DateFormatter.date(from: c)
-        }
-        var updated: Date? = nil
-        if let u = mediaHash["updated"] as? String {
-            updated = RFC3339DateFormatter.date(from: u)
-        }
-        let spherical = (mediaHash["spherical"] as? Bool) ?? false
-        let thumbnail:(String, Int, Int)?
-        if let thumbnailHash = mediaHash["thumbnail"] as? [String: Any],
-            let thumbnailURLString = thumbnailHash["url"] as? String,
-            let thumbnailWidth = thumbnailHash["width"] as? Int,
-            let thumbnailHeight = thumbnailHash["height"] as? Int {
-
-            thumbnail = (url: thumbnailURLString, width: thumbnailWidth, height: thumbnailHeight)
-        } else {
-            thumbnail = nil
-        }
-        let distilleryURLString = mediaHash["distilleryUrl"] as? String
-        let accountKey = mediaHash["accountKey"] as? String
-        let mediaKey = mediaHash["mediaKey"] as? String
-        let embedOptionsHash = mediaHash["embed_options"] as? [String: Any]
-        let mediaEmbedOptions = ModelBuilder.embedOptions(from: embedOptionsHash)
-        let statsHash = mediaHash["stats"] as? [String: Any]
-        let stats = ModelBuilder.wistiaMediaStats(from: statsHash)
-
-        var wMedia = WistiaMedia(mediaID: mediaID, name: name, status: status, thumbnail: thumbnail, duration: duration, created: created, updated: updated, assets: [WistiaAsset](), description: description, hashedID: hashedID, embedOptions: mediaEmbedOptions, stats: stats, distilleryURLString: distilleryURLString, accountKey: accountKey, mediaKey: mediaKey, spherical: spherical, captions: nil)
-
-        // -- Assets (are optional) --
-        if let assets = mediaHash["assets"] as? [[String:Any]] {
-            wMedia.assets = wistiaAssets(from: assets, forMedia:wMedia)
-        }
-
-        return wMedia
     }
 
     internal static func wistiaAssets(from assetsHashArray:[[String:Any]], forMedia media:WistiaMedia) -> [WistiaAsset] {

@@ -33,4 +33,22 @@ public struct WistiaAccount {
 
     /// The total number of medias in this account
     public let mediaCount:Int
+
+}
+
+extension WistiaAccount {
+
+    init?(from dictionary: [String: Any]) {
+        let parser = Parser(dictionary: dictionary)
+        do {
+            accountID = try parser.fetch("id")
+            name = try parser.fetch("name")
+            accountURLString = try parser.fetch("url")
+            mediaCount = try parser.fetch("mediaCount")
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+
 }
