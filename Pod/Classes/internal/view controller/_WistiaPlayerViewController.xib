@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -274,8 +274,8 @@
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="eLB-Ll-7u3" userLabel="Poster Loading Activity Indicator"/>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skullNBones" translatesAutoresizingMaskIntoConstraints="NO" id="1gl-Xk-GqW" userLabel="Poster Error Indicator">
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="OAu-rg-ENp"/>
-                                <constraint firstAttribute="height" constant="32" id="U09-34-oC9"/>
+                                <constraint firstAttribute="width" constant="32" id="OAu-rg-ENp"/>
+                                <constraint firstAttribute="height" constant="30" id="U09-34-oC9"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLH-gl-vos" userLabel="Extra Close Button">
@@ -392,10 +392,10 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="action" width="25" height="25"/>
-        <image name="closedCaptions" width="181" height="144"/>
+        <image name="action" width="32" height="30"/>
+        <image name="closedCaptions" width="32" height="30"/>
         <image name="largePlay" width="36" height="51"/>
-        <image name="skullNBones" width="30" height="32"/>
+        <image name="skullNBones" width="32" height="30"/>
         <image name="smallPlay" width="15" height="21"/>
         <image name="x-close" width="22" height="22"/>
     </resources>

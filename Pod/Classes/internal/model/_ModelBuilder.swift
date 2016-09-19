@@ -126,7 +126,21 @@ internal class ModelBuilder {
         }
 
         if let plugin = embedOptionsHash["plugin"] as? [String: Any] {
-            if let socialBarHash = plugin["socialbar-v1"] as? [String: Any] {
+            if let shareHash = plugin["share"] as? [String: Any] {
+                // share is the new stuff, preferred over socialbar-v1
+                // presence of this hash means sharing is on unless it's explcity set to off
+                mediaEmbedOptions.actionButton = true
+                if let socialBarOn = shareHash["on"] as? NSString {
+                    mediaEmbedOptions.actionButton = socialBarOn.boolValue
+                }
+                if let pageURL = shareHash["pageUrl"] as? String {
+                    mediaEmbedOptions.actionShareURLString = pageURL
+                }
+                if let pageTitle = shareHash["pageTitle"] as? String {
+                    mediaEmbedOptions.actionShareTitle = pageTitle
+                }
+
+            } else if let socialBarHash = plugin["socialbar-v1"] as? [String: Any] {
                 // presence of this hash means sharing is on unless it's explcity set to off
                 mediaEmbedOptions.actionButton = true
                 if let socialBarOn = socialBarHash["on"] as? NSString {

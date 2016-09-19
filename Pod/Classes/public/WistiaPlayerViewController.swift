@@ -348,6 +348,12 @@ public final class WistiaPlayerViewController: UIViewController {
         }
         
         overlayTapGestureRecognizer.require(toFail: overlayDoubleTapGestureRecognizer)
+
+        // Playback Controls button images: aspect fit.  (can't do this in IB)  
+        controlsCaptionsButton.imageView?.contentMode = .scaleAspectFit
+        controlsActionButton.imageView?.contentMode = .scaleAspectFit
+        controlsCloseButton.imageView?.contentMode = .scaleAspectFit
+        controlsPlayPauseButton.imageView?.contentMode = .scaleAspectFit
     }
 
     /// Internal override.
