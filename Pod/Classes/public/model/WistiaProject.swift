@@ -17,6 +17,7 @@ import Foundation
 public struct WistiaProject {
 
     /// A unique numeric identifier for the project within the system.
+    /// - Deprecated: to be replaced with hashedID in API V2
     public let projectID: Int
 
     /// The project's display name.
@@ -67,17 +68,18 @@ extension WistiaProject {
     init?(from dictionary: [String: Any]) {
         let parser = Parser(dictionary: dictionary)
         do {
-            projectID = try parser.fetch("id")
             if let hid: String = try parser.fetchOptional("hashed_id") {
                 hashedID = hid
             } else {
                 hashedID = try parser.fetch("hashedId")
             }
+            //projectID is going away, to be replaced with hashedID in API V2
+            projectID = try parser.fetchOptional("id", default: -1)
             name = try parser.fetchOptional("name")
             description = try parser.fetchOptional("description")
             mediaCount = try parser.fetchOptional("mediaCount")
-            created = try parser.fetchOptional("created") { Parser.RFC3339DateFormatter.date(from: $0) }
-            updated = try parser.fetchOptional("updated") { Parser.RFC3339DateFormatter.date(from: $0) }
+            created = parser.fetchOptional("created") { Parser.RFC3339DateFormatter.date(from: $0) }
+            updated = parser.fetchOptional("updated") { Parser.RFC3339DateFormatter.date(from: $0) }
             anonymousCanUpload = try parser.fetchOptional("anonymousCanUpload", default: false)
             anonymousCanDownload = try parser.fetchOptional("anonymousCanDownload", default: false)
             isPublic = try parser.fetchOptional("public", default: false)

@@ -145,11 +145,11 @@ extension WistiaMedia {
     fileprivate init?(from dictionary: [String: Any]) {
         let parser = Parser(dictionary: dictionary)
         do {
-            if let s = try parser.fetchOptional("status", transformation: { str in
+            if let s = parser.fetchOptional("status", transformation: { str in
                 return WistiaObjectStatus(failsafeFromRawString: str)
             }) {
                 status = s
-            } else if let s = try parser.fetchOptional("status", transformation: { integer in
+            } else if let s = parser.fetchOptional("status", transformation: { integer in
                 return WistiaObjectStatus(failsafeFromRaw: integer)
             }) {
                 status = s
@@ -166,10 +166,10 @@ extension WistiaMedia {
             duration = try parser.fetchOptional("duration")
             name = try parser.fetchOptional("name")
             description = try parser.fetchOptional("description")
-            created = try parser.fetchOptional("created") { Parser.RFC3339DateFormatter.date(from: $0) }
-            updated = try parser.fetchOptional("updated") { Parser.RFC3339DateFormatter.date(from: $0) }
+            created = parser.fetchOptional("created") { Parser.RFC3339DateFormatter.date(from: $0) }
+            updated = parser.fetchOptional("updated") { Parser.RFC3339DateFormatter.date(from: $0) }
             spherical = try parser.fetchOptional("spherical", default: false)
-            thumbnail = try parser.fetchOptional("thumbnail") { WistiaMedia.Thumbnail(from: $0) }
+            thumbnail = parser.fetchOptional("thumbnail") { WistiaMedia.Thumbnail(from: $0) }
             distilleryURLString = try parser.fetchOptional("distilleryUrl")
             accountKey = try parser.fetchOptional("accountKey")
             mediaKey = try parser.fetchOptional("mediaKey")
