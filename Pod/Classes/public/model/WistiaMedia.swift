@@ -113,7 +113,36 @@ public struct WistiaMedia {
 
 extension WistiaMedia {
 
-    init?(from dictionary: [String: Any]) {
+
+    /// Initialize a WistiaMedia and populate the assets hash from the provided JSON.
+    ///
+    /// - parameter dictionary: JSON hash representing the WistiaMedia.  May optionally include
+    ///   a child hash of WistiaAssets.
+    ///
+    /// - returns: A newly initialized WistiaMedia if parsing is successful.
+    static func create(from dictionary:[String: Any]) -> WistiaMedia? {
+
+        if var wMedia = WistiaMedia(from: dictionary) {
+            // -- Assets (are optional) --
+            if let assetsDictionary = dictionary["assets"] as? [[String:Any]] {
+                var wistiaAssets = [WistiaAsset]()
+                for assetDictionary in assetsDictionary {
+                    if let wistiaAsset = WistiaAsset(from: assetDictionary, forMedia: wMedia) {
+                        wistiaAssets.append(wistiaAsset)
+                    }
+                }
+                wMedia.assets = wistiaAssets
+            }
+            return wMedia
+        } else {
+            return nil
+        }
+    }
+
+    /// Not public API.  Use WistiaMedia.create(from:).
+    ///
+    /// - Warning: Does not parse and attach child assets.
+    fileprivate init?(from dictionary: [String: Any]) {
         let parser = Parser(dictionary: dictionary)
         do {
             if let s = try parser.fetchOptional("status", transformation: { str in

@@ -45,7 +45,7 @@ internal extension WistiaAPI {
                     if let JSON = value as? [String:AnyObject],
                         let mediaHash = JSON["media"] as? [String:AnyObject] {
 
-                        let wMedia = ModelBuilder.wistiaMedia(from: mediaHash)
+                        let wMedia = WistiaMedia.create(from: mediaHash)
                         completionHandler(wMedia)
 
                     } else {

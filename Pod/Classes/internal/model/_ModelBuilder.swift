@@ -11,48 +11,6 @@ import Foundation
 
 internal class ModelBuilder {
 
-    internal static let RFC3339DateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
-        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        return df
-    }()
-
-    internal static func wistiaMedias(from mediasHashArray:[[String: Any]]) -> [WistiaMedia] {
-        var medias = [WistiaMedia]()
-        for mediaHash in mediasHashArray {
-            if let media = wistiaMedia(from: mediaHash) {
-                medias.append(media)
-            }
-        }
-        return medias
-    }
-
-    //TODO: Move this inside WistiaMedia as a factory method
-    internal static func wistiaMedia(from mediaHash:[String: Any]) -> WistiaMedia? {
-
-        if var wMedia = WistiaMedia(from: mediaHash) {
-            // -- Assets (are optional) --
-            if let assets = mediaHash["assets"] as? [[String:Any]] {
-                wMedia.assets = wistiaAssets(from: assets, forMedia:wMedia)
-            }
-            return wMedia
-        } else {
-            return nil
-        }
-    }
-
-    //TODO: Move this inside WistiaMedia as a factory method
-    internal static func wistiaAssets(from assetsHashArray:[[String:Any]], forMedia media:WistiaMedia) -> [WistiaAsset] {
-        var wistiaAssets = [WistiaAsset]()
-        for rawAsset in assetsHashArray {
-            if let wistiaAsset = WistiaAsset(from: rawAsset, forMedia: media) {
-                wistiaAssets.append(wistiaAsset)
-            }
-        }
-        return wistiaAssets
-    }
-
     internal static func embedOptions(from mediaEmbedOptionsHash:[String:Any]?) -> WistiaMediaEmbedOptions? {
         guard let embedOptionsHash = mediaEmbedOptionsHash else { return nil }
 

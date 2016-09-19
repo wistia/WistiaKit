@@ -75,7 +75,7 @@ extension WistiaProject {
             anonymousCanDownload = try parser.fetchOptional("anonymousCanDownload", default: false)
             isPublic = try parser.fetchOptional("public", default: false)
             publicID = try parser.fetchOptional("publicID")
-            medias = try parser.fetchArrayOptional("medias") { ModelBuilder.wistiaMedia(from: $0) }
+            medias = try parser.fetchArrayOptional("medias") { WistiaMedia.create(from: $0) }
 
         } catch let error {
             print(error)

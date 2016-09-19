@@ -438,7 +438,7 @@ extension WistiaAPI {
 
                         for mediaHash in JSON {
                             //1) Make Media
-                            if let media = ModelBuilder.wistiaMedia(from: mediaHash) {
+                            if let media = WistiaMedia.create(from: mediaHash) {
 
                                 //2) Find project it's in (or create it anew)
                                 if let projectHash = mediaHash["project"] as? [String: AnyObject], var project = WistiaProject(from: projectHash) {
@@ -507,7 +507,7 @@ extension WistiaAPI {
                         var medias = [WistiaMedia]()
 
                         for mediaHash in JSON {
-                            if let media = ModelBuilder.wistiaMedia(from: mediaHash) {
+                            if let media = WistiaMedia.create(from: mediaHash) {
                                 medias.append(media)
                             }
                         }
@@ -545,7 +545,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let media = ModelBuilder.wistiaMedia(from: JSON) {
+                        let media = WistiaMedia.create(from: JSON) {
                         completionHandler(media)
 
                     } else {
@@ -593,7 +593,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let media = ModelBuilder.wistiaMedia(from: JSON), response.response?.statusCode == 200 {
+                        let media = WistiaMedia.create(from: JSON), response.response?.statusCode == 200 {
                         completionHandler(true, media)
                     } else {
                         completionHandler(true, nil)
@@ -632,7 +632,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let media = ModelBuilder.wistiaMedia(from: JSON), response.response?.statusCode == 200 {
+                        let media = WistiaMedia.create(from: JSON), response.response?.statusCode == 200 {
                         completionHandler(true, media)
                     } else {
                         completionHandler(true, nil)
@@ -681,7 +681,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let media = ModelBuilder.wistiaMedia(from: JSON), response.response?.statusCode == 201 {
+                        let media = WistiaMedia.create(from: JSON), response.response?.statusCode == 201 {
                         completionHandler(true, media)
                     } else {
                         completionHandler(true, nil)
@@ -718,7 +718,7 @@ extension WistiaAPI {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any],
-                        let media = ModelBuilder.wistiaMedia(from: JSON) {
+                        let media = WistiaMedia.create(from: JSON) {
                         completionHandler(media)
 
                     } else {
