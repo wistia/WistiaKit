@@ -308,6 +308,7 @@ public final class WistiaPlayer: NSObject {
                 self.media = m
                 self.readyPlayback(for: m, choosingAssetWithSlug: slug)
             } else {
+                self.media = nil
                 self.state = .mediaNotFoundError(badHashedID: hashedID)
             }
         }
