@@ -1,6 +1,6 @@
 {
   "name": "WistiaKit",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "summary": "Access and playback all of your Wistia media",
   "description": "Wistia is a great web video host.  But why shackle ourselves to the world wide web?\n\nWith WistiaKit you can easily access and play back all of your Wistia hosted content natively on iOS and tvOS.\n\nWe've built for you a beautiful high level view controller (like AVPlayerViewController) sitting atop a powerful lower level player (like AVPlayer) providing all of the power of Wistia on iOS and tvOS.",
   "homepage": "https://github.com/wistia/WistiaKit",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/wistia/WistiaKit.git",
-    "tag": "0.13.0"
+    "tag": "0.14.0"
   },
   "social_media_url": "http://twitter.com/wistia",
   "platforms": {
