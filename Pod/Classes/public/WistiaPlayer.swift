@@ -122,6 +122,9 @@ public final class WistiaPlayer: NSObject {
      Use the state updates of the delegate or the `state` variable to determine if and when this 
      `WistiaPlayer` has been initialized for playback
      
+     - Important: If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions), 
+        referrer must match your whitelist or video will not load.
+     
      - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
             \
             We recommend using a universal link to the video.
@@ -157,6 +160,9 @@ public final class WistiaPlayer: NSObject {
 
      Use the state updates of the delegate or the `state` variable to determine if and when this
      `WistiaPlayer` has been initialized for playback
+     
+     - Important: If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions),
+     referrer must match your whitelist or video will not load.
 
      - Parameter hashedID: The ID of the media you wish to load asynchronously.
 
@@ -191,6 +197,9 @@ public final class WistiaPlayer: NSObject {
 
      Use the state updates of the delegate or the `state` variable to determine if and when this
      `WistiaPlayer` has been initialized for playback
+     
+     - Important: If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions),
+     referrer must match your whitelist or video will not load.
 
      - Parameter media: The `WistiaMedia` you wish to load asynchronously.
 
@@ -303,7 +312,7 @@ public final class WistiaPlayer: NSObject {
         guard media?.hashedID != hashedID else { return false }
         avPlayer.pause()
 
-        WistiaAPI.mediaInfo(for: hashedID) { (media) -> () in
+        WistiaAPI.mediaInfo(for: hashedID, referer: referrer) { media in
             if let m = media {
                 self.media = m
                 self.readyPlayback(for: m, choosingAssetWithSlug: slug)

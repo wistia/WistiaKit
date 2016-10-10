@@ -36,8 +36,14 @@ internal extension WistiaAPI {
         
     }
 
-    internal static func mediaInfo(for hash:String, completionHandler: @escaping (_ media:WistiaMedia?)->() ) {
-        Alamofire.request("https://fast.wistia.net/embed/medias/\(hash).json", method: .get)
+    /// Domain Restrictions enforces HTTP Referer on this route
+    internal static func mediaInfo(for hash:String, referer:String? = nil, completionHandler: @escaping (_ media:WistiaMedia?)->() ) {
+        var headers = [String: String]()
+        if let ref = referer {
+            headers["Referer"] = ref
+        }
+        
+        Alamofire.request("https://fast.wistia.net/embed/medias/\(hash).json", method: .get, headers: headers)
             .responseJSON { response in
 
                 switch response.result {

@@ -88,6 +88,9 @@ public final class WistiaPlayerViewController: UIViewController {
 
     /**
      Initialize a new `WistiaPlayerViewController` without an initial video for playback.
+     
+     - Important: If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions),
+     referrer must match your whitelist or video will not load.
 
      - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
         \
