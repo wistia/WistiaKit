@@ -53,6 +53,8 @@ extension WistiaMediaStats {
             plays = try parser.fetch("plays")
             averagePercentWatched = try parser.fetch("averagePercentWatched")
         } catch let error {
+            // NB: The stats returned by the private media info route do not match this object.
+            // They will trigger this error branch but are not cause for concern.
             print(error)
             return nil
         }
