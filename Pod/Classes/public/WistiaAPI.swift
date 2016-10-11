@@ -734,3 +734,45 @@ extension WistiaAPI {
     }
 
 }
+
+//MARK: - Customizations
+extension WistiaAPI {
+
+    /// Show the customizations configured for a particular `WistiaMedia` in your account.  These
+    /// customizations are also known as "embed options" (a legacy misnomer from the days when these
+    /// appearance and behavioral tweaks only applied as to a web embedded video).
+    ///
+    /// See [Wistia Data API: Customizations](https://wistia.com/doc/data-api#customizations_show)
+    ///
+    /// - Note: The **options returned are a subset** of the full customizations available.  The options returned,
+    ///     and those available in `WistiaMediaEmbedOtions`, are only those that apply to WistiaKit.
+    ///     **If you would like to see the full set handled, please create a GitHub issue.**
+    ///
+    /// - Parameters:
+    ///   - mediaHashedID: The unique `hashedID` of the media for which you want to see customizations.
+    ///   - completionHandler: The block to invoke when the API call completes.
+    ///         The block takes on argument: \
+    ///         `embedOptions` \
+    ///         The `WistiaMediaEmbedOptions` for the requested media.  `nil` if there was no match.
+    public func showCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ embedOptions: WistiaMediaEmbedOptions?)->() ) {
+        let params:[String: Any] = ["api_password" : apiToken]
+
+        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .get, parameters: params)
+            .responseJSON { response in
+
+                switch response.result {
+                case .success(let value):
+                    if let JSON = value as? [String: Any],
+                        let embedOptions = WistiaMediaEmbedOptions(from: JSON) {
+                        completionHandler(embedOptions)
+                    } else {
+                        completionHandler(nil)
+                    }
+                case .failure(_):
+                    completionHandler(nil)
+                }
+        }
+
+    }
+
+}
