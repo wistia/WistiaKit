@@ -103,6 +103,17 @@ public struct WistiaMediaEmbedOptions {
                 return .pauseOnLastFrame
             }
         }
+
+        func description() -> String {
+            switch self {
+            case .pauseOnLastFrame:
+                return "pause"
+            case .loopVideo:
+                return "loop"
+            case .resetToTimeZero:
+                return "reset"
+            }
+        }
     }
 }
 
@@ -165,6 +176,33 @@ extension WistiaMediaEmbedOptions {
             print(error)
             return nil
         }
+    }
+
+    internal func toJson() -> [String: Any] {
+        var json = [String: Any]()
+
+        json["playerColor"] = playerColor.wk_toHexString()
+        json["playButton"] = bigPlayButton
+        json["smallPlayButton"] = smallPlayButton
+        json["playbar"] = playbar
+        json["fullscreenButton"] = fullscreenButton
+        json["controlsVisibleOnLoad"] = controlsVisibleOnLoad
+        json["autoPlay"] = autoplay
+        json["endVideoBehavior"] = endVideoBehavior.description()
+        json["stillUrl"] = stillURL?.description
+
+        var share = [String: Any]()
+        share["on"] = actionButton
+        share["pageUrl"] = actionShareURLString
+        share["pageTitle"] = actionShareTitle
+        json["share"] = share
+
+        var captions = [String: Any]()
+        captions["on"] = captionsAvailable
+        captions["onByDefault"] = captionsOnByDefault
+        json["captions-v1"] = captions
+
+        return json
     }
     
 }

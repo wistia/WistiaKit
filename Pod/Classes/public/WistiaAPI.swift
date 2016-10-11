@@ -742,7 +742,7 @@ extension WistiaAPI {
     /// customizations are also known as "embed options" (a legacy misnomer from the days when these
     /// appearance and behavioral tweaks only applied as to a web embedded video).
     ///
-    /// See [Wistia Data API: Customizations](https://wistia.com/doc/data-api#customizations_show)
+    /// See [Wistia Data API - Customizations: Show](https://wistia.com/doc/data-api#customizations_show)
     ///
     /// - Note: The **options returned are a subset** of the full customizations available.  The options returned,
     ///     and those available in `WistiaMediaEmbedOtions`, are only those that apply to WistiaKit.
@@ -751,11 +751,9 @@ extension WistiaAPI {
     /// - Parameters:
     ///   - mediaHashedID: The unique `hashedID` of the media for which you want to see customizations.
     ///   - completionHandler: The block to invoke when the API call completes.
-    ///         The block takes on argument: \
-    ///         `embedOptions` \
-    ///         The `WistiaMediaEmbedOptions` for the requested media.  `nil` if there was no match.
+    ///    - embedOptions: The `WistiaMediaEmbedOptions` for the requested media.  `nil` if there was no match.
     public func showCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ embedOptions: WistiaMediaEmbedOptions?)->() ) {
-        let params:[String: Any] = ["api_password" : apiToken]
+        let params: [String: Any] = ["api_password" : apiToken]
 
         Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .get, parameters: params)
             .responseJSON { response in
@@ -773,6 +771,59 @@ extension WistiaAPI {
                 }
         }
 
+    }
+
+    /// Replace the customization options for a given media.
+    ///
+    /// **This is the only way to update customizations (aka embed options).**  WistiaKit does
+    /// not support the customizations/update route due to the necessary added complexity in the
+    /// current design and similar support being available using customizations/show+create.
+    ///
+    ///
+    /// See [Wistia Data API - Customizations: Create](https://wistia.com/doc/data-api#customizations_create)
+    ///
+    /// - Parameters:
+    ///   - embedOptions: The new customization options
+    ///   - mediaHashedID: The `hashedID` of the media for which you want to replace customizations.
+    ///   - completionHandler: The block to invoke when the API call completes.
+    ///    - createdEmbedOptions: The newly created `WistiaMediaEmbedOptions` for the specified media.  `nil` if there was an error.
+    public func createCustomizations(_ embedOptions: WistiaMediaEmbedOptions, forHash mediaHashedID: String, completionHandler: @escaping (_ createdEmbedOptions: WistiaMediaEmbedOptions?)->() ) {
+        var params: [String: Any] = embedOptions.toJson()
+        params["api_password"] = apiToken
+
+        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON { response in
+
+                switch response.result {
+                case .success(let value):
+                    if let JSON = value as? [String: Any],
+                        let embedOptions = WistiaMediaEmbedOptions(from: JSON),
+                        JSON["error"] == nil {
+                        completionHandler(embedOptions)
+                    } else {
+                        completionHandler(nil)
+                    }
+                case .failure(_):
+                    completionHandler(nil)
+                }
+        }
+
+    }
+
+    public func deleteCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ success: Bool)->() ) {
+        let params: [String: Any] = ["api_password" : apiToken]
+
+        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .delete, parameters: params)
+            .response { response in
+
+                if response.response?.statusCode == 200 {
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+
+        }
+        
     }
 
 }
