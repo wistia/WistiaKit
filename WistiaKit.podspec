@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "WistiaKit"
-  s.version          = "0.15.0"
+  s.version          = "0.15.1"
   s.summary          = "Access and playback all of your Wistia media"
 
   s.description      = <<-DESC
@@ -46,6 +46,6 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.ios.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'CoreMotion', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
   s.tvos.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
 
-  s.dependency 'Alamofire', '~> 4.0.0'
-  s.dependency 'AlamofireImage', '~> 3.0.0'
+  s.dependency 'Alamofire', '~> 4.0'
+  s.dependency 'AlamofireImage', '~> 3.0'
 end
