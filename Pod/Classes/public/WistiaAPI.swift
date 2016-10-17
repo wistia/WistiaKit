@@ -31,6 +31,7 @@ import Alamofire
 public class WistiaAPI {
 
     fileprivate static let APIBaseURL = "https://api.wistia.com/v1"
+    fileprivate static let APIUploadURL = "https://upload.wistia.com"
 
     fileprivate let apiToken:String
 
@@ -824,6 +825,88 @@ extension WistiaAPI {
 
         }
         
+    }
+
+}
+
+//MARK: - Uploading
+extension WistiaAPI {
+
+    //TODO: 2x convenience methods with WistiaProject
+
+    public func upload(fileURL: URL, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+
+        upload(data: nil, fileURL: fileURL, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
+    }
+
+    public func upload(data:Data, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+
+        upload(data: data, fileURL: nil, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
+    }
+
+    fileprivate func upload(data: Data?, fileURL: URL?, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+
+        guard (data != nil && fileURL == nil) || (data == nil && fileURL != nil)
+            else { return assertionFailure("Must pass exactly one data or file, not both") }
+
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                if let d = data {
+                    multipartFormData.append(d, withName: "ignored")
+                }
+                if let f = fileURL {
+                    multipartFormData.append(f, withName: "ignored")
+                }
+                multipartFormData.append(self.apiToken.data(using: .utf8)!, withName: "api_password")
+                if let pID = projectHashedID,
+                    let data = pID.data(using: .utf8) {
+                    multipartFormData.append(data, withName: "project_id")
+                }
+                if let n = name,
+                    let data = n.data(using: .utf8) {
+                    multipartFormData.append(data, withName: "name")
+                }
+                if let d = description,
+                    let data = d.data(using: .utf8) {
+                    multipartFormData.append(data, withName: "description")
+                }
+                if let cID = contactID,
+                    let data = "\(cID)".data(using: .utf8) {
+                    multipartFormData.append(data, withName: "contact_id")
+                }
+            },
+
+            usingThreshold: 10_000_000, //files over 10MB will be streamed from disk instead of converted in memory
+
+            to: WistiaAPI.APIUploadURL,
+
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+
+                case .success(let upload, _, _):
+                    if let prog = progressHandler {
+                        upload.uploadProgress(closure: prog)
+                    }
+
+                    upload.responseJSON { response in
+                        switch response.result {
+                        case .success(let value):
+                            if let JSON = value as? [String: Any],
+                                let media = WistiaMedia.create(from: JSON), response.response?.statusCode == 200 {
+                                completionHandler(media)
+                            } else {
+                                completionHandler(nil)
+                            }
+                        case .failure(_):
+                            completionHandler(nil)
+                        }
+                    }
+
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+            })
+
     }
 
 }
