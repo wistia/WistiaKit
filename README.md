@@ -62,6 +62,8 @@ If you don't want all the chrome (ie. player controls, scrubber, time, initial p
 
 Bring them both together: create a `WistiaAPI` to browse your `WistiaProject`s, choose a `WistiaMedia`, use that `WistiaMedia` object to initialize a `WistiaPlayerViewController`, and then `self.presentViewController(_:animated:completion:)`!  It's so easy, I bet you could build a pretty nice Apple TV app in a hackathon...
 
+**Video upload** is where it all begins!  Technically part of the `WistiaAPI` but cool enough to get it's own section.  Simply create a `URL` pointing to a movie on the device, or a `Data` of the movie itself, and upload into your account with just one line.
+
 ### Data
 
 I guess there's not much to say here.  Mostly just refer to the [Data API](http://wistia.com/doc/data-api) docs.  And of course, you should use an instance of `WistiaAPI` to intrect with the API.  For example:
@@ -101,6 +103,28 @@ Caveat: WistiaKit is not yet [Data API](http://wistia.com/doc/data-api) complete
 >We think this makes `WistiaKit` less error prone and makes it easier to reason about your code.
 >
 >If you want to spend some guru meditation time on this, you could do worse than starting with the [Swift Blog](https://developer.apple.com/swift/blog/?id=10) and a [WWDC 2015 talk](https://developer.apple.com/videos/play/wwdc2015/414/).
+
+### Upload
+
+Whether you take a video with the camera, download it from the web, or pull it from iCloud, it's just one line to upload to Wistia.  The hardest part should be locating the file `URL` or `Data`.  And that's pretty easy ;-]
+
+```swift
+import WistiaKit
+
+let api = WistiaAPI(apiToken: "C4NTB3L13V3TH1S1SARAND0MT0K3N")
+
+let fileURL = Bundle.main.url(forResource: "hello", withExtension: "mov")
+
+api.upload(fileURL: fileURL!, into: "ProjectHashedID", name: "Hello, World!", 
+  progressHandler: { progress in
+    print("reticulating splines... \(progress)")
+  }, 
+  completionHandler: { media in
+    print("You've got media! \(media)")
+  })
+```
+
+Shouldn't need it, but it's nice to know the [Wistia Upload API](https://wistia.com/doc/upload-api) documentation is also available.
 
 ### Playback
 
