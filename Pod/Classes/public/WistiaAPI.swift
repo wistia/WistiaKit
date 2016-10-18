@@ -832,11 +832,19 @@ extension WistiaAPI {
 //MARK: - Uploading
 extension WistiaAPI {
 
-    //TODO: 2x convenience methods with WistiaProject
+    public func upload(fileURL: URL, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+
+        upload(data: nil, fileURL: fileURL, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
+    }
 
     public func upload(fileURL: URL, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
 
         upload(data: nil, fileURL: fileURL, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
+    }
+
+    public func upload(data:Data, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+
+        upload(data: data, fileURL: nil, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
     public func upload(data:Data, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
