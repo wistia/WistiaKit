@@ -832,22 +832,94 @@ extension WistiaAPI {
 //MARK: - Uploading
 extension WistiaAPI {
 
-    public func upload(fileURL: URL, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+    /// Upload media to your Wistia account.
+    ///
+    /// Uploaded media will be visible immediately in your account, but may require processing (as is the case for uploads in general).
+    /// Indeed, the `WistiaMedia` returned to your completion handler will generally have no `WistiaAsset`s; some processing time is
+    /// required to generate the assets.
+    ///
+    /// - Parameters:
+    ///   - fileURL: The device-local `URL` of the video to upload to your account.
+    ///   - project: The `WistiaProject` to upload media into. If omitted, a new project will be created and uploaded to.
+    ///      The naming convention used for such projects is Uploads_YYYY-MM-DD.
+    ///   - name: A display name to use for the media in Wistia. If omitted, the filename will be used instead.
+    ///   - description: A description to use for the media in Wistia. You can use basic HTML here,
+    ///      but note that both HTML and CSS will be sanitized.
+    ///   - contactID: A Wistia contact id. If omitted, it will default to the contact_id of the account's owner.
+    ///   - progressHandler: A block that will be called periodically during the upload.
+    ///    - progress: An object reporting the progress of data being read by the server.
+    ///   - completionHandler: The block to invoke when the upload call completes.
+    ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
+    public func upload(fileURL: URL, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?) -> Void) {
 
         upload(data: nil, fileURL: fileURL, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
-    public func upload(fileURL: URL, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+    /// Upload media to your Wistia account.
+    ///
+    /// Uploaded media will be visible immediately in your account, but may require processing (as is the case for uploads in general).
+    /// Indeed, the `WistiaMedia` returned to your completion handler will generally have no `WistiaAsset`s; some processing time is
+    /// required to generate the assets.
+    ///
+    /// - Parameters:
+    ///   - fileURL: The device-local `URL` of the video to upload to your account.
+    ///   - projectHashedID: The hashed id of the project to upload media into. If omitted, a new project will be created and uploaded to.
+    ///      The naming convention used for such projects is Uploads_YYYY-MM-DD.
+    ///   - name: A display name to use for the media in Wistia. If omitted, the filename will be used instead.
+    ///   - description: A description to use for the media in Wistia. You can use basic HTML here,
+    ///      but note that both HTML and CSS will be sanitized.
+    ///   - contactID: A Wistia contact id. If omitted, it will default to the contact_id of the account's owner.
+    ///   - progressHandler: A block that will be called periodically during the upload.
+    ///    - progress: An object reporting the progress of data being read by the server.
+    ///   - completionHandler: The block to invoke when the upload call completes.
+    ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
+    public func upload(fileURL: URL, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?) -> Void) {
 
         upload(data: nil, fileURL: fileURL, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
-    public func upload(data:Data, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+    /// Upload media to your Wistia account.
+    ///
+    /// Uploaded media will be visible immediately in your account, but may require processing (as is the case for uploads in general).
+    /// Indeed, the `WistiaMedia` returned to your completion handler will generally have no `WistiaAsset`s; some processing time is
+    /// required to generate the assets.
+    ///
+    /// - Parameters:
+    ///   - data: The video to upload to your account.
+    ///   - project: The `WistiaProject` to upload media into. If omitted, a new project will be created and uploaded to.
+    ///      The naming convention used for such projects is Uploads_YYYY-MM-DD.
+    ///   - name: A display name to use for the media in Wistia. If omitted, the filename will be used instead.
+    ///   - description: A description to use for the media in Wistia. You can use basic HTML here,
+    ///      but note that both HTML and CSS will be sanitized.
+    ///   - contactID: A Wistia contact id. If omitted, it will default to the contact_id of the account's owner.
+    ///   - progressHandler: A block that will be called periodically during the upload.
+    ///    - progress: An object reporting the progress of data being read by the server.
+    ///   - completionHandler: The block to invoke when the upload call completes.
+    ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
+    public func upload(data:Data, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?) -> Void) {
 
         upload(data: data, fileURL: nil, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
-    public func upload(data:Data, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+    /// Upload media to your Wistia account.
+    ///
+    /// Uploaded media will be visible immediately in your account, but may require processing (as is the case for uploads in general).
+    /// Indeed, the `WistiaMedia` returned to your completion handler will generally have no `WistiaAsset`s; some processing time is
+    /// required to generate the assets.
+    ///
+    /// - Parameters:
+    ///   - data: The video to upload to your account.
+    ///   - projectHashedID: The hashed id of the project to upload media into. If omitted, a new project will be created and uploaded to. 
+    ///      The naming convention used for such projects is Uploads_YYYY-MM-DD.
+    ///   - name: A display name to use for the media in Wistia. If omitted, the filename will be used instead.
+    ///   - description: A description to use for the media in Wistia. You can use basic HTML here,
+    ///      but note that both HTML and CSS will be sanitized.
+    ///   - contactID: A Wistia contact id. If omitted, it will default to the contact_id of the account's owner.
+    ///   - progressHandler: A block that will be called periodically during the upload.
+    ///    - progress: An object reporting the progress of data being read by the server.
+    ///   - completionHandler: The block to invoke when the upload call completes.
+    ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
+    public func upload(data:Data, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?) -> Void) {
 
         upload(data: data, fileURL: nil, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
