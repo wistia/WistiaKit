@@ -53,7 +53,11 @@ public struct WistiaMediaEmbedOptions {
     }
     
     /// What do do when the video ends (default: PauseOnLastFrame) as a String
-    public var endVideoBehavior: WistiaEndVideoBehavior = .pauseOnLastFrame
+    public var endVideoBehavior: WistiaEndVideoBehavior = .pauseOnLastFrame {
+        didSet {
+            self.endVideoBehaviorString = endVideoBehavior.description()
+        }
+    }
 
     /// Image to show for poster before playback (default: nil - the first frame of video is shown)
     public var stillURL: URL? = nil
@@ -114,6 +118,51 @@ public struct WistiaMediaEmbedOptions {
                 return "reset"
             }
         }
+    }
+}
+
+// As of Swift 3.0, the default member-wise initializer for Structs is private if any properties of the struct 
+// private, internal if they are all public.  There is no way to make this initilizer public.  So we must
+// explicitly create one.  
+// See https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AccessControl.html#//apple_ref/doc/uid/TP40014097-CH41-ID3
+public extension WistiaMediaEmbedOptions {
+
+    /// Initializes a WistiaMediaEmbedOptions, used to customize the look and behavior of your
+    /// video across all platforms (web, WistiaKit, etc).
+    ///
+    /// Any parameter left nil will use the default.
+    ///
+    /// - Parameters:
+    ///   - playerColor: Tint for controls (default: #7b796a)
+    ///   - bigPlayButton: Overlay large play button on poster view before playback has started (default: true)
+    ///   - smallPlayButton: Show play/pause button on playbar (default: true)
+    ///   - playbar: Show the scrubber (default: true)
+    ///   - fullscreenButton: Show the fullscreen button on playbar (default: true)
+    ///   - controlsVisibleOnLoad: Show the playbar on poster view before playback has started (default: true)
+    ///   - autoplay: Automatically play the video once it has loaded (default: false)
+    ///   - endVideoBehavior: What do do when the video ends (default: PauseOnLastFrame) as a String
+    ///   - stillURL: Image to show for poster before playback (default: nil - the first frame of video is shown)
+    ///   - actionButton: Show the standard iOS action button (similar to Wistia Social Bar on web) (default: false)
+    ///   - actionShareURLString: The link to use when sharing
+    ///   - actionShareTitle: The copy to use when sharing
+    ///   - captionsAvailable: Are captions available and enabled for this video (default: false)
+    ///   - captionsOnByDefault: Show captions by default (default: false)
+    public init(playerColor: UIColor?, bigPlayButton: Bool?, smallPlayButton: Bool?, playbar: Bool?, fullscreenButton: Bool?, controlsVisibleOnLoad: Bool?, autoplay: Bool?, endVideoBehavior: WistiaMediaEmbedOptions.WistiaEndVideoBehavior?, stillURL: URL?, actionButton: Bool?, actionShareURLString: String?, actionShareTitle: String?, captionsAvailable: Bool?, captionsOnByDefault: Bool?) {
+
+        if let pc = playerColor { self.playerColor = pc }
+        if let bpb = bigPlayButton { self.bigPlayButton = bpb }
+        if let spb = smallPlayButton { self.smallPlayButton = spb }
+        if let pb = playbar { self.playbar = pb }
+        if let fsb = fullscreenButton { self.fullscreenButton = fsb }
+        if let cv = controlsVisibleOnLoad { self.controlsVisibleOnLoad = cv }
+        if let ap = autoplay { self.autoplay = ap }
+        if let ev = endVideoBehavior { self.endVideoBehavior = ev }
+        if let su = stillURL { self.stillURL = su }
+        if let ab = actionButton { self.actionButton = ab }
+        if let asu = actionShareURLString { self.actionShareURLString = asu }
+        if let ast = actionShareTitle { self.actionShareTitle = ast }
+        if let ca = captionsAvailable { self.captionsAvailable = ca }
+        if let co = captionsOnByDefault { self.captionsOnByDefault = co }
     }
 }
 
