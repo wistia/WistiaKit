@@ -33,7 +33,8 @@ public class WistiaAPI {
     fileprivate static let APIBaseURL = "https://api.wistia.com/v1"
     fileprivate static let APIUploadURL = "https://upload.wistia.com"
 
-    fileprivate let apiToken:String
+    fileprivate let apiToken: String
+    public let sessionManager: SessionManager
 
     //MARK: - Initialization
 
@@ -42,8 +43,17 @@ public class WistiaAPI {
 
      - Parameter apiToken: The API Token that will be used to access the [Wistia Data API](http://wistia.com/doc/data-api).
      */
-    public init(apiToken:String) {
+    convenience public init(apiToken: String) {
+        self.init(apiToken: apiToken, configuration: nil)
+    }
+
+    public init(apiToken: String, configuration: URLSessionConfiguration?) {
         self.apiToken = apiToken
+        if let config = configuration {
+            sessionManager = Alamofire.SessionManager(configuration: config)
+        } else {
+            sessionManager = Alamofire.SessionManager.default
+        }
     }
 
     //MARK: - Sorting
@@ -103,7 +113,7 @@ extension WistiaAPI {
     public func showAccount(_ completionHander: @escaping (_ account: WistiaAccount?) -> () ){
         let params: [String : Any] = ["api_password" : apiToken]
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/account.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/account.json", method: .get, parameters: params)
             .responseJSON { response in
 
                 switch(response.result) {
@@ -143,7 +153,7 @@ extension WistiaAPI {
     public func listProjects(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, completionHandler: @escaping (_ projects:[WistiaProject])->() ) {
         let params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/projects.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects.json", method: .get, parameters: params)
             .responseJSON { response in
 
                 switch (response.result) {
@@ -184,7 +194,7 @@ extension WistiaAPI {
     public func showProject(forHash projectHashedID: String, completionHandler: @escaping (_ project: WistiaProject?)->() ) {
         let params:[String: Any] = ["api_password" : apiToken]
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .get, parameters: params)
             .responseJSON { (response) in
 
                 switch response.result {
@@ -232,7 +242,7 @@ extension WistiaAPI {
         updateParamsWith(&params, name: name, adminEmail: adminEmail, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic)
 
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/projects.json", method: .post, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects.json", method: .post, parameters: params)
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -278,7 +288,7 @@ extension WistiaAPI {
         var params:[String: Any] = ["api_password" : apiToken]
         updateParamsWith(&params, name: name, adminEmail: nil, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic)
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .put, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .put, parameters: params)
             .responseJSON(completionHandler: { (response) in
                 switch response.result {
                 case .success(let value):
@@ -316,7 +326,7 @@ extension WistiaAPI {
     public func deleteProject(forHash projectHashedID: String, completionHandler: @escaping (_ success: Bool, _ deletedProject: WistiaProject?)->() ) {
         let params:[String: Any] = ["api_password" : apiToken]
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .delete, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .delete, parameters: params)
             .responseJSON(completionHandler: { (response) in
 
                 switch response.result {
@@ -363,7 +373,7 @@ extension WistiaAPI {
         var params:[String: Any] = ["api_password" : apiToken]
         updateParamsWith(&params, name: nil, adminEmail: adminEmail, anonymousCanUpload: nil, anonymousCanDownload: nil, isPublic: nil)
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID)/copy.json", method: .post, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID)/copy.json", method: .post, parameters: params)
             .responseJSON(completionHandler: { (response) in
 
                 switch response.result {
@@ -431,7 +441,7 @@ extension WistiaAPI {
             params["project_id"] = proj.projectID
         }
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias.json", method: .get, parameters: params)
             .responseJSON { response in
 
                 switch response.result {
@@ -501,7 +511,7 @@ extension WistiaAPI {
             params["hashed_id"] = hid
         }
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias.json", method: .get, parameters: params)
             .responseJSON { response in
 
                 switch response.result {
@@ -542,7 +552,7 @@ extension WistiaAPI {
     public func showMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ media: WistiaMedia?)->() ) {
         let params:[String: Any] = ["api_password" : apiToken]
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .get, parameters: params)
             .responseJSON { (response) in
 
                 switch response.result {
@@ -590,7 +600,7 @@ extension WistiaAPI {
             params["description"] = d
         }
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .put, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .put, parameters: params)
             .responseJSON(completionHandler: { (response) in
 
                 switch response.result {
@@ -629,7 +639,7 @@ extension WistiaAPI {
     public func deleteMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ success: Bool, _ deletedMedia: WistiaMedia?)->() ) {
         let params:[String: Any] = ["api_password" : apiToken]
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .delete, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .delete, parameters: params)
             .responseJSON(completionHandler: { (response) in
 
                 switch response.result {
@@ -678,7 +688,7 @@ extension WistiaAPI {
             params["owner"] = o
         }
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/copy.json", method: .post, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/copy.json", method: .post, parameters: params)
             .responseJSON(completionHandler: { (response) in
 
                 switch response.result {
@@ -715,7 +725,7 @@ extension WistiaAPI {
     public func statsForMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ media: WistiaMedia?)->() ) {
         let params:[String: Any] = ["api_password" : apiToken]
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/stats.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/stats.json", method: .get, parameters: params)
             .responseJSON { (response) in
 
                 switch response.result {
@@ -756,7 +766,7 @@ extension WistiaAPI {
     public func showCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ embedOptions: WistiaMediaEmbedOptions?)->() ) {
         let params: [String: Any] = ["api_password" : apiToken]
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .get, parameters: params)
             .responseJSON { response in
 
                 switch response.result {
@@ -792,7 +802,7 @@ extension WistiaAPI {
         var params: [String: Any] = embedOptions.toJson()
         params["api_password"] = apiToken
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .post, parameters: params, encoding: JSONEncoding.default)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in
 
                 switch response.result {
@@ -814,7 +824,7 @@ extension WistiaAPI {
     public func deleteCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ success: Bool)->() ) {
         let params: [String: Any] = ["api_password" : apiToken]
 
-        Alamofire.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .delete, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .delete, parameters: params)
             .response { response in
 
                 if response.response?.statusCode == 200 {
@@ -929,7 +939,7 @@ extension WistiaAPI {
         guard (data != nil && fileURL == nil) || (data == nil && fileURL != nil)
             else { return assertionFailure("Must pass exactly one data or file, not both") }
 
-        Alamofire.upload(
+        sessionManager.upload(
             multipartFormData: { multipartFormData in
                 if let d = data {
                     multipartFormData.append(d, withName: "ignored")
