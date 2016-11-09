@@ -5,6 +5,8 @@
 //  Created by spinosa on 04/05/2016.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
+//  Non-HLS example video hashedID: 8tjg8ftj2p
+//  HLS example video hashedID: 8q4pv4kofw
 
 import UIKit
 import WistiaKit
