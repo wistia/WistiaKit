@@ -33,22 +33,41 @@ public class WistiaAPI {
     fileprivate static let APIBaseURL = "https://api.wistia.com/v1"
     fileprivate static let APIUploadURL = "https://upload.wistia.com"
 
-    fileprivate let apiToken: String
+    fileprivate let apiToken: String?
     public let sessionManager: SessionManager
 
     //MARK: - Initialization
 
-    /**
-     Initialize the `WistiaAPI` with the access permissions as granted by the given `apiToken`.
-
-     - Parameter apiToken: The API Token that will be used to access the [Wistia Data API](http://wistia.com/doc/data-api).
-     */
-    convenience public init(apiToken: String) {
-        self.init(apiToken: apiToken, configuration: nil)
+    ///  Initialize the `WistiaAPI` with the access permissions as granted by the given `apiToken`.
+    ///  Optionally pass a configuration to, for example, use a background or ephemeral configuration
+    ///  (instead of the default URLSessionConfiguration).
+    ///
+    /// - Parameters:
+    ///   - apiToken: The API Token that will be used to access the [Wistia Data API](http://wistia.com/doc/data-api).
+    ///   - configuration: A URLSessionConfiguration to be used for all requests made to the API.
+    public convenience init(apiToken: String, configuration: URLSessionConfiguration? = nil) {
+        self.init(token: apiToken, configuration: configuration)
     }
 
-    public init(apiToken: String, configuration: URLSessionConfiguration?) {
-        self.apiToken = apiToken
+    /// Initialize the `WistiaAPI` *without* an API Token for access permission.
+    ///
+    /// - Important: If you make requests that require permissions, you must configure an authorization
+    ///  mechanism external to WistiaAPI.  For example, you could set a RequestAdapter on the SessionManager
+    ///  and sign requests with an OAuth token before they are sent.
+    ///
+    /// - Parameters:
+    ///   - withoutApiToken: Must be true to declare you are handling auth external to WistiaAPI
+    ///   - configuration: A URLSessionConfiguration to be used for all requests made to the API.
+    public convenience init(withoutApiToken: Bool, configuration: URLSessionConfiguration? = nil) {
+        guard withoutApiToken else {
+            print("You must init with an API Token or positively declare that you will otherwise handle authentication")
+            abort()
+        }
+        self.init(token: nil, configuration: configuration)
+    }
+
+    private init(token: String? = nil, configuration: URLSessionConfiguration? = nil) {
+        self.apiToken = token
         if let config = configuration {
             sessionManager = Alamofire.SessionManager(configuration: config)
         } else {
@@ -94,6 +113,13 @@ public class WistiaAPI {
         case ascending = 1
     }
 
+    internal func paramsWithToken() -> [String : Any] {
+        var params = [String : Any]()
+        if let token = apiToken {
+            params["api_password"] = token
+        }
+        return params
+    }
 }
 
 extension WistiaAPI {
@@ -111,9 +137,7 @@ extension WistiaAPI {
 
     */
     public func showAccount(_ completionHander: @escaping (_ account: WistiaAccount?) -> () ){
-        let params: [String : Any] = ["api_password" : apiToken]
-
-        sessionManager.request("\(WistiaAPI.APIBaseURL)/account.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/account.json", method: .get, parameters: paramsWithToken())
             .responseJSON { response in
 
                 switch(response.result) {
@@ -151,7 +175,10 @@ extension WistiaAPI {
 
      */
     public func listProjects(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, completionHandler: @escaping (_ projects:[WistiaProject])->() ) {
-        let params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
+        var params = paramsWithToken()
+        params["page"] = page
+        params["per_page"] = perPage
+        params = WistiaAPI.addSorting(sorting, to: params)
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects.json", method: .get, parameters: params)
             .responseJSON { response in
@@ -192,9 +219,7 @@ extension WistiaAPI {
 
      */
     public func showProject(forHash projectHashedID: String, completionHandler: @escaping (_ project: WistiaProject?)->() ) {
-        let params:[String: Any] = ["api_password" : apiToken]
-
-        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .get, parameters: paramsWithToken())
             .responseJSON { (response) in
 
                 switch response.result {
@@ -238,7 +263,7 @@ extension WistiaAPI {
 
      */
     public func createProject(named name: String, adminEmail: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?, completionHandler: @escaping (_ project: WistiaProject?)->() ) {
-        var params:[String: Any] = ["api_password" : apiToken]
+        var params = paramsWithToken()
         updateParamsWith(&params, name: name, adminEmail: adminEmail, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic)
 
 
@@ -285,7 +310,7 @@ extension WistiaAPI {
         The `WistiaProject` with updated attributes.
      */
     public func updateProject(forHash projectHashedID: String, withName name: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?, completionHandler: @escaping (_ success: Bool, _ updatedProject: WistiaProject?)->() ) {
-        var params:[String: Any] = ["api_password" : apiToken]
+        var params = paramsWithToken()
         updateParamsWith(&params, name: name, adminEmail: nil, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic)
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .put, parameters: params)
@@ -324,9 +349,7 @@ extension WistiaAPI {
 
      */
     public func deleteProject(forHash projectHashedID: String, completionHandler: @escaping (_ success: Bool, _ deletedProject: WistiaProject?)->() ) {
-        let params:[String: Any] = ["api_password" : apiToken]
-
-        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .delete, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .delete, parameters: paramsWithToken())
             .responseJSON(completionHandler: { (response) in
 
                 switch response.result {
@@ -370,7 +393,7 @@ extension WistiaAPI {
 
      */
     public func copyProject(forHash projectHashedID: String, withUpdatedAdminEmail adminEmail: String?, completionHandler: @escaping (_ success: Bool, _ newProject: WistiaProject?)->() ) {
-        var params:[String: Any] = ["api_password" : apiToken]
+        var params = paramsWithToken()
         updateParamsWith(&params, name: nil, adminEmail: adminEmail, anonymousCanUpload: nil, anonymousCanDownload: nil, isPublic: nil)
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID)/copy.json", method: .post, parameters: params)
@@ -436,7 +459,10 @@ extension WistiaAPI {
 
      */
     public func listMediasGroupedByProject(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, limitedToProject project: WistiaProject? = nil, completionHandler: @escaping (_ projects:[WistiaProject])->() ) {
-        var params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
+        var params = paramsWithToken()
+        params["page"] = page
+        params["per_page"] = perPage
+        params = WistiaAPI.addSorting(sorting, to: params)
         if let proj = project {
             params["project_id"] = proj.projectID
         }
@@ -497,7 +523,10 @@ extension WistiaAPI {
 
      */
     public func listMedias(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, filterByProject project: WistiaProject? = nil, filterByName name: String? = nil, filterByType type: String? = nil, filterByHashedID hashedID: String? = nil, completionHandler: @escaping (_ medias:[WistiaMedia])->() ) {
-        var params = WistiaAPI.addSorting(sorting, to: ["page" : page, "per_page" : perPage, "api_password" : apiToken])
+        var params = paramsWithToken()
+        params["page"] = page
+        params["per_page"] = perPage
+        params = WistiaAPI.addSorting(sorting, to: params)
         if let proj = project {
             params["project_id"] = proj.projectID
         }
@@ -550,9 +579,7 @@ extension WistiaAPI {
 
      */
     public func showMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ media: WistiaMedia?)->() ) {
-        let params:[String: Any] = ["api_password" : apiToken]
-
-        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .get, parameters: paramsWithToken())
             .responseJSON { (response) in
 
                 switch response.result {
@@ -589,7 +616,7 @@ extension WistiaAPI {
         The `WistiaMedia` with updated attributes.
      */
     public func updateMedia(forHash mediaHashedID: String, withName name: String?, newStillMediaId: String?, description: String?, completionHandler: @escaping (_ success: Bool, _ updatedMedia: WistiaMedia?)->() ) {
-        var params:[String: Any] = ["api_password" : apiToken]
+        var params = paramsWithToken()
         if let n = name {
             params["name"] = n
         }
@@ -637,9 +664,7 @@ extension WistiaAPI {
 
      */
     public func deleteMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ success: Bool, _ deletedMedia: WistiaMedia?)->() ) {
-        let params:[String: Any] = ["api_password" : apiToken]
-
-        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .delete, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .delete, parameters: paramsWithToken())
             .responseJSON(completionHandler: { (response) in
 
                 switch response.result {
@@ -680,7 +705,7 @@ extension WistiaAPI {
 
      */
     public func copyMedia(forHash mediaHashedID: String, toProject projectID: String?, withNewOwner owner: String?, completionHandler: @escaping (_ success: Bool, _ copiedMedia: WistiaMedia?)->() ) {
-        var params:[String: Any] = ["api_password" : apiToken]
+        var params = paramsWithToken()
         if let p = projectID {
             params["project_id"] = p
         }
@@ -723,9 +748,7 @@ extension WistiaAPI {
 
     */
     public func statsForMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ media: WistiaMedia?)->() ) {
-        let params:[String: Any] = ["api_password" : apiToken]
-
-        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/stats.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/stats.json", method: .get, parameters: paramsWithToken())
             .responseJSON { (response) in
 
                 switch response.result {
@@ -764,9 +787,7 @@ extension WistiaAPI {
     ///   - completionHandler: The block to invoke when the API call completes.
     ///    - embedOptions: The `WistiaMediaEmbedOptions` for the requested media.  `nil` if there was no match.
     public func showCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ embedOptions: WistiaMediaEmbedOptions?)->() ) {
-        let params: [String: Any] = ["api_password" : apiToken]
-
-        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .get, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .get, parameters: paramsWithToken())
             .responseJSON { response in
 
                 switch response.result {
@@ -800,7 +821,9 @@ extension WistiaAPI {
     ///    - createdEmbedOptions: The newly created `WistiaMediaEmbedOptions` for the specified media.  `nil` if there was an error.
     public func createCustomizations(_ embedOptions: WistiaMediaEmbedOptions, forHash mediaHashedID: String, completionHandler: @escaping (_ createdEmbedOptions: WistiaMediaEmbedOptions?)->() ) {
         var params: [String: Any] = embedOptions.toJson()
-        params["api_password"] = apiToken
+        if let token = apiToken {
+            params["api_password"] = token
+        }
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in
@@ -822,9 +845,7 @@ extension WistiaAPI {
     }
 
     public func deleteCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ success: Bool)->() ) {
-        let params: [String: Any] = ["api_password" : apiToken]
-
-        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .delete, parameters: params)
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .delete, parameters: paramsWithToken())
             .response { response in
 
                 if response.response?.statusCode == 200 {
@@ -947,7 +968,9 @@ extension WistiaAPI {
                 if let f = fileURL {
                     multipartFormData.append(f, withName: "ignored")
                 }
-                multipartFormData.append(self.apiToken.data(using: .utf8)!, withName: "api_password")
+                if let token = self.apiToken {
+                    multipartFormData.append(token.data(using: .utf8)!, withName: "api_password")
+                }
                 if let pID = projectHashedID,
                     let data = pID.data(using: .utf8) {
                     multipartFormData.append(data, withName: "project_id")
