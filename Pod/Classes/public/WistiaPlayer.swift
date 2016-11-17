@@ -312,7 +312,7 @@ public final class WistiaPlayer: NSObject {
         guard media?.hashedID != hashedID else { return false }
         avPlayer.pause()
 
-        WistiaAPI.mediaInfo(for: hashedID, referer: referrer) { media in
+        WistiaAPI.mediaInfo(for: hashedID, referer: referrer) { media, error in
             if let m = media {
                 self.media = m
                 self.readyPlayback(for: m, choosingAssetWithSlug: slug)

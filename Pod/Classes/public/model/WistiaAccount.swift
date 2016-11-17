@@ -36,7 +36,7 @@ public struct WistiaAccount {
 
 }
 
-extension WistiaAccount {
+extension WistiaAccount: WistiaJSONParsable {
 
     /// Initialize a WistiaAccount from the provided JSON hash.
     ///

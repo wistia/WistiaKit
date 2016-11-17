@@ -37,7 +37,7 @@ internal struct WistiaCaptions {
     let captionSegments:[WistiaCaptionSegment]
 }
 
-internal extension WistiaCaptions {
+extension WistiaCaptions: WistiaJSONParsable {
 
     /// Initialize a WistiaCaptions from the provided JSON hash.
     ///

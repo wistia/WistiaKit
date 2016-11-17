@@ -55,7 +55,7 @@ public struct WistiaAsset {
     internal var bitrate: Int64?
 }
 
-extension WistiaAsset {
+extension WistiaAsset: WistiaJSONParsable {
 
     /// Initialize a WistiaAsset from the provided JSON hash.  It is unlikely you would use this
     /// method directly as assets are generally returned inside of their parent WistiaMedia.  Instead,

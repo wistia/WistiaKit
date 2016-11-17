@@ -166,7 +166,7 @@ public extension WistiaMediaEmbedOptions {
     }
 }
 
-extension WistiaMediaEmbedOptions {
+extension WistiaMediaEmbedOptions: WistiaJSONParsable {
 
     /// Initialize a WistiaMediaEmbedOptions from the provided JSON hash.
     ///

@@ -9,6 +9,11 @@
 
 import Foundation
 
+/// An empty protocol to signal that an object (class, struct, enum) may be created
+/// by parsing JSON (typically a JSON reponse from the Wistia API).
+/// The parsing is often wrapped in an initializer, but need not be.
+public protocol WistiaJSONParsable {}
+
 struct Parser {
     let dictionary: [String: Any]?
 

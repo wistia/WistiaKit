@@ -34,7 +34,7 @@ public struct WistiaMediaStats {
 
 }
 
-extension WistiaMediaStats {
+extension WistiaMediaStats: WistiaJSONParsable {
 
     /// Initialize a WistiaMediaStats from the provided JSON hash.
     ///

@@ -20,7 +20,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testListMediasByProject() {
         let expectation = self.expectation(description: "listed medias by project")
 
-        wAPI.listMediasGroupedByProject { (projects) in
+        wAPI.listMediasGroupedByProject { projects, error in
             if projects.count > 0 {
                 if let medias = projects.first?.medias, let media = medias.first {
                     if media.status == .ready {
@@ -37,7 +37,7 @@ class WistiaAPIMediaTests: XCTestCase {
         let expectation = self.expectation(description: "listed media filtered by project")
 
         let p = WistiaProject(projectID: 2356285, name: nil, description: nil, mediaCount: nil, created: nil, updated: nil, hashedID: "ignored", anonymousCanUpload: false, anonymousCanDownload: false, isPublic: false, publicID: nil, medias: nil)
-        wAPI.listMedias(filterByProject: p) { (medias) in
+        wAPI.listMedias(filterByProject: p) { medias, error in
             if !medias.isEmpty {
                 expectation.fulfill()
             }
@@ -50,7 +50,7 @@ class WistiaAPIMediaTests: XCTestCase {
         let expectation = self.expectation(description: "listed media filtered by project")
 
         let p = WistiaProject(projectID: 0, name: nil, description: nil, mediaCount: nil, created: nil, updated: nil, hashedID: "ignored", anonymousCanUpload: false, anonymousCanDownload: false, isPublic: false, publicID: nil, medias: nil)
-        wAPI.listMedias(filterByProject: p) { (medias) in
+        wAPI.listMedias(filterByProject: p) { medias, error in
             if medias.isEmpty {
                 expectation.fulfill()
             }
@@ -62,7 +62,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testListMediasFilterByName() {
         let expectation = self.expectation(description: "listed media filtered by name")
 
-        wAPI.listMedias(filterByName: "do_not_change_this_name") { (medias) in
+        wAPI.listMedias(filterByName: "do_not_change_this_name") { medias, error in
             if !medias.isEmpty {
                 expectation.fulfill()
             }
@@ -74,7 +74,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testListMediasFilterByNameEmpty() {
         let expectation = self.expectation(description: "listed media filtered by name")
 
-        wAPI.listMedias(filterByName: "ThisIsNOTTHENAME") { (medias) in
+        wAPI.listMedias(filterByName: "ThisIsNOTTHENAME") { medias, error in
             if medias.isEmpty {
                 expectation.fulfill()
             }
@@ -86,7 +86,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testListMediasFilterByValidType() {
         let expectation = self.expectation(description: "listed media filtered by valid type")
 
-        wAPI.listMedias(filterByType: "Video") { (medias) in
+        wAPI.listMedias(filterByType: "Video") { medias, error in
             if !medias.isEmpty {
                 expectation.fulfill()
             }
@@ -98,7 +98,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testListMediasFilterByValidButEmptyType() {
         let expectation = self.expectation(description: "listed media filtered by valid type")
 
-        wAPI.listMedias(filterByType: "MicrosoftOfficeDocument") { (medias) in
+        wAPI.listMedias(filterByType: "MicrosoftOfficeDocument") { medias, error in
             if medias.isEmpty {
                 expectation.fulfill()
             }
@@ -110,7 +110,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testListMediasFilterByInvalidType() {
         let expectation = self.expectation(description: "listed media filtered by valid type")
 
-        wAPI.listMedias(filterByType: "Cromulent") { (medias) in
+        wAPI.listMedias(filterByType: "Cromulent") { medias, error in
             if medias.isEmpty {
                 expectation.fulfill()
             }
@@ -122,7 +122,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testListMediasFilterByValidHashedID() {
         let expectation = self.expectation(description: "listed media filtered by valid hashedID")
 
-        wAPI.listMedias(filterByHashedID: "2egno8swf1") { (medias) in
+        wAPI.listMedias(filterByHashedID: "2egno8swf1") { medias, error in
             if let m = medias.first, m.hashedID == "2egno8swf1" {
                 expectation.fulfill()
             }
@@ -134,7 +134,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testListMediasFilterByInvalidHashedID() {
         let expectation = self.expectation(description: "listed media filtered by invalid hashedID")
 
-        wAPI.listMedias(filterByHashedID: "BAD33ID33") { (medias) in
+        wAPI.listMedias(filterByHashedID: "BAD33ID33") { medias, error in
             if medias.isEmpty {
                 expectation.fulfill()
             }
@@ -149,7 +149,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testShowMedia() {
         let expectation = self.expectation(description: "showed media from hashedID")
 
-        wAPI.showMedia(forHash: "2egno8swf1") { (media) in
+        wAPI.showMedia(forHash: "2egno8swf1") { media, error in
             if let m = media, m.hashedID == "2egno8swf1" {
                 expectation.fulfill()
             }
@@ -164,8 +164,8 @@ class WistiaAPIMediaTests: XCTestCase {
         let expectation = self.expectation(description: "updated media via hashedID")
 
         let randDesc = "MediaDescriptionUpdate@\(Date())"
-        wAPI.updateMedia(forHash: "2egno8swf1", withName: nil, newStillMediaId: nil, description: randDesc) { (success, updatedMedia) in
-            if let m = updatedMedia, let d = m.description, success && d.contains(randDesc) {
+        wAPI.updateMedia(forHash: "2egno8swf1", withName: nil, newStillMediaId: nil, description: randDesc) { updatedMedia, error in
+            if let m = updatedMedia, let d = m.description, error == nil && d.contains(randDesc) {
                 expectation.fulfill()
             }
         }
@@ -180,12 +180,12 @@ class WistiaAPIMediaTests: XCTestCase {
         let copyExpectation = self.expectation(description: "copied the media")
         let deleteExpectation = self.expectation(description: "deleted the media")
 
-        wAPI.copyMedia(forHash: "2egno8swf1", toProject: nil, withNewOwner: nil) { (success, copiedMedia) in
-            if let m = copiedMedia, success && m.hashedID != "2egno8swf1" {
+        wAPI.copyMedia(forHash: "2egno8swf1", toProject: nil, withNewOwner: nil) { copiedMedia, error in
+            if let m = copiedMedia, error == nil && m.hashedID != "2egno8swf1" {
                 copyExpectation.fulfill()
 
-                self.wAPI.deleteMedia(forHash: m.hashedID) { (success, deletedMedia) in
-                    if let del = deletedMedia, success && del.hashedID == m.hashedID {
+                self.wAPI.deleteMedia(forHash: m.hashedID) { deletedMedia, error in
+                    if let del = deletedMedia, error == nil && del.hashedID == m.hashedID {
                         deleteExpectation.fulfill()
                     }
                 }
@@ -201,7 +201,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testStatsForMedia() {
         let expectation = self.expectation(description: "got stats for media via hashedID")
 
-        wAPI.statsForMedia(forHash: "2egno8swf1") { (media) in
+        wAPI.statsForMedia(forHash: "2egno8swf1") { media, error in
             if let m = media, m.stats != nil {
                 expectation.fulfill()
             }
@@ -215,7 +215,7 @@ class WistiaAPIMediaTests: XCTestCase {
     func testShowMediaIncludesAssets() {
         let expectation = self.expectation(description: "media had good looking assets")
 
-        wAPI.showMedia(forHash: "2egno8swf1") { (media) in
+        wAPI.showMedia(forHash: "2egno8swf1") { media, error in
             if let m = media , m.hashedID == "2egno8swf1" && m.assets.count > 0 {
                 expectation.fulfill()
             }

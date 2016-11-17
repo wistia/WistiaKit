@@ -56,7 +56,7 @@ public struct WistiaProject {
 
 }
 
-extension WistiaProject {
+extension WistiaProject: WistiaJSONParsable {
 
     /// Initialize a WistiaProject from the provided JSON hash.
     ///

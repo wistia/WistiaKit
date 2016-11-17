@@ -17,7 +17,7 @@ class WistiaAPICustomizationsTests: XCTestCase {
     func testShowCustomizations() {
         let expectation = self.expectation(description: "show customizations")
 
-        wAPI.showCustomizations(forHash: "2egno8swf1") { embedOptions in
+        wAPI.showCustomizations(forHash: "2egno8swf1") { embedOptions, error in
             if let _ = embedOptions {
                 expectation.fulfill()
             }
@@ -62,7 +62,8 @@ class WistiaAPICustomizationsTests: XCTestCase {
 
         let expectation = self.expectation(description: "create customizations")
 
-        wAPI.createCustomizations(e, forHash: "2egno8swf1") { embedOptions in
+        wAPI.createCustomizations(e, forHash: "2egno8swf1") { embedOptions, error in
+            XCTAssertNil(error)
             if let createdOptions = embedOptions,
                 createdOptions.bigPlayButton == e.bigPlayButton,
                 createdOptions.fullscreenButton == e.fullscreenButton,
@@ -83,7 +84,7 @@ class WistiaAPICustomizationsTests: XCTestCase {
     func testDeleteCustomizations() {
         let expectation = self.expectation(description: "delete customizations")
 
-        wAPI.deleteCustomizations(forHash: "2egno8swf1") { success in
+        wAPI.deleteCustomizations(forHash: "2egno8swf1") { success, error in
             if success {
                 expectation.fulfill()
             }

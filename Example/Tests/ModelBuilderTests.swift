@@ -18,7 +18,7 @@ class ModelBuilderTests: XCTestCase {
     func testProjectBuildsMediasWhenIncluded() {
         let expectation = self.expectation(description: "created project with media")
 
-        wAPI.showProject(forHash: "8q6efplb9n") { (project) in
+        wAPI.showProject(forHash: "8q6efplb9n") { project, error in
             if let medias = project?.medias , medias.count > 0 {
                 expectation.fulfill()
             }
@@ -32,7 +32,7 @@ class ModelBuilderTests: XCTestCase {
     func testDateFormat() {
         let expectation = self.expectation(description: "media has non-nil dates")
 
-        wAPI.showMedia(forHash: "aza8hcsnd8") { (media) in
+        wAPI.showMedia(forHash: "aza8hcsnd8") { media, error in
             if media?.created != nil && media?.updated != nil {
                 expectation.fulfill()
             }
@@ -46,7 +46,8 @@ class ModelBuilderTests: XCTestCase {
     func testValidCaptions() {
         let expectation = self.expectation(description: "captions are parsed")
 
-        WistiaAPI.captions(for: "8tjg8ftj2p") { (captions) in
+        WistiaAPI.captions(for: "8tjg8ftj2p") { captions, error in
+            XCTAssertNil(error)
             if captions.count > 0 && captions[0].captionSegments.count > 0 {
                 expectation.fulfill()
             }

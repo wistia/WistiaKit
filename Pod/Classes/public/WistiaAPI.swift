@@ -126,33 +126,33 @@ extension WistiaAPI {
     //MARK: - Account
 
     /**
-     Get account information.  
-     
-     See [Wistia Data API - Account](http://wistia.com/doc/data-api#account)
-     
-     - Parameter completionHandler: The block to invoke when the API call completes.
-         The block takes one argument: \
-        `account` \
-        The `WistiaAccount` object created from the API response.
+     Get account information.
 
-    */
-    public func showAccount(_ completionHander: @escaping (_ account: WistiaAccount?) -> () ){
+     See [Wistia Data API - Account](http://wistia.com/doc/data-api#account)
+
+     - Parameter completionHandler: The block to invoke when the API call completes.
+     The block takes one argument: \
+     `account` \
+     The `WistiaAccount` object created from the API response.
+
+     */
+    public func showAccount(_ completionHander: @escaping (_ account: WistiaAccount?, _ error: WistiaAPIError?) -> () ){
         sessionManager.request("\(WistiaAPI.APIBaseURL)/account.json", method: .get, parameters: paramsWithToken())
             .responseJSON { response in
 
-                switch(response.result) {
-                case.success(let value):
-                    if let JSON = value as? [String: Any],
-                        let account = WistiaAccount(from: JSON) {
-                        completionHander(account)
-                    } else {
-                        completionHander(nil)
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let account = WistiaAccount(from: JSON) {
+                        completionHander(account, nil)
                     }
-                case .failure(_):
-                    completionHander(nil)
+                    else {
+                        completionHander(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaAccount.self))
+                    }
                 }
-
-            }
+                else {
+                    completionHander(nil, WistiaAPIError.error(for: response))
+                }
+        }
     }
 
 }
@@ -174,7 +174,7 @@ extension WistiaAPI {
         An array of `WistiaProject` objects created from the API response.  May be empty.
 
      */
-    public func listProjects(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, completionHandler: @escaping (_ projects:[WistiaProject])->() ) {
+    public func listProjects(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, completionHandler: @escaping (_ projects:[WistiaProject], _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         params["page"] = page
         params["per_page"] = perPage
@@ -183,25 +183,24 @@ extension WistiaAPI {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects.json", method: .get, parameters: params)
             .responseJSON { response in
 
-                switch (response.result) {
-                case .success(let value):
-                    if let JSON = value as? [[String: Any]] {
-                        var projects = [WistiaProject]()
-                        for projectHash in JSON {
-                            if let p = WistiaProject(from: projectHash) {
-                                projects.append(p)
-                            }
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [[String: Any]] {
+                    var projects = [WistiaProject]()
+                    for projectHash in JSON {
+                        if let p = WistiaProject(from: projectHash) {
+                            projects.append(p)
                         }
-                        completionHandler(projects)
-
-                    } else {
-                        completionHandler([])
+                        else {
+                            return completionHandler([], WistiaAPIError.JSONDecodingFailure(projectHash, WistiaProject.self))
+                        }
                     }
-                case .failure(_):
-                    completionHandler([])
-                }
+                    completionHandler(projects, nil)
 
-            }
+                }
+                else {
+                    completionHandler([], WistiaAPIError.error(for: response))
+                }
+        }
     }
 
     /**
@@ -218,23 +217,22 @@ extension WistiaAPI {
         The `WistiaProject` specified. `nil` if there was no match.
 
      */
-    public func showProject(forHash projectHashedID: String, completionHandler: @escaping (_ project: WistiaProject?)->() ) {
+    public func showProject(forHash projectHashedID: String, completionHandler: @escaping (_ project: WistiaProject?, _ error: WistiaAPIError?)->() ) {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .get, parameters: paramsWithToken())
-            .responseJSON { (response) in
+            .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let project = WistiaProject(from: JSON) {
-                        completionHandler(project)
-
-                    } else {
-                        completionHandler(nil)
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let project = WistiaProject(from: JSON) {
+                        completionHandler(project, nil)
                     }
-                case .failure(_):
-                    completionHandler(nil)
-                }
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaProject.self))
+                    }
 
+                } else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
         }
     }
 
@@ -262,27 +260,25 @@ extension WistiaAPI {
         The newly created `WistiaProject` or nil if there was an error.
 
      */
-    public func createProject(named name: String, adminEmail: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?, completionHandler: @escaping (_ project: WistiaProject?)->() ) {
+    public func createProject(named name: String, adminEmail: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?, completionHandler: @escaping (_ project: WistiaProject?, _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         updateParamsWith(&params, name: name, adminEmail: adminEmail, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic)
 
-
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects.json", method: .post, parameters: params)
-            .responseJSON { (response) in
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let project = WistiaProject(from: JSON) {
-                        completionHandler(project)
+            .responseJSON { response in
 
+                if response.response?.statusCode == 201,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let project = WistiaProject(from: JSON) {
+                        completionHandler(project, nil)
                     } else {
-                        completionHandler(nil)
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaProject.self))
                     }
-                case .failure(_):
-                    completionHandler(nil)
-                }
 
-            }
+                } else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
     }
 
     // Update
@@ -309,25 +305,25 @@ extension WistiaAPI {
         `updatedProject` \
         The `WistiaProject` with updated attributes.
      */
-    public func updateProject(forHash projectHashedID: String, withName name: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?, completionHandler: @escaping (_ success: Bool, _ updatedProject: WistiaProject?)->() ) {
+    public func updateProject(forHash projectHashedID: String, withName name: String?, anonymousCanUpload: Bool?, anonymousCanDownload: Bool?, isPublic: Bool?, completionHandler: @escaping (_ updatedProject: WistiaProject?, _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         updateParamsWith(&params, name: name, adminEmail: nil, anonymousCanUpload: anonymousCanUpload, anonymousCanDownload: anonymousCanDownload, isPublic: isPublic)
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .put, parameters: params)
-            .responseJSON(completionHandler: { (response) in
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let project = WistiaProject(from: JSON), response.response?.statusCode == 200 {
-                        completionHandler(true, project)
-                    } else {
-                        completionHandler(true, nil)
-                    }
-                case .failure(_):
-                    completionHandler(false, nil)
-                }
+            .responseJSON { response in
 
-            })
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let project = WistiaProject(from: JSON) {
+                        completionHandler(project, nil)
+                    }
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaProject.self))
+                    }
+                } else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
     }
 
     // Delete
@@ -348,25 +344,23 @@ extension WistiaAPI {
         The `WistiaProject` that was deleted. `nil` if there was no match.
 
      */
-    public func deleteProject(forHash projectHashedID: String, completionHandler: @escaping (_ success: Bool, _ deletedProject: WistiaProject?)->() ) {
+    public func deleteProject(forHash projectHashedID: String, completionHandler: @escaping (_ deletedProject: WistiaProject?, _ error: WistiaAPIError?)->() ) {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID).json", method: .delete, parameters: paramsWithToken())
-            .responseJSON(completionHandler: { (response) in
+            .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if response.response?.statusCode == 200 {
-                        if let JSON = value as? [String: Any],
-                            let project = WistiaProject(from: JSON) {
-                            completionHandler(true, project)
-                            return
-                        }
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let project = WistiaProject(from: JSON) {
+                        completionHandler(project,nil)
                     }
-                    completionHandler(true, nil)
-                case .failure(_):
-                    completionHandler(false, nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaProject.self))
+                    }
                 }
-
-            })
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
     }
 
     // Copy
@@ -392,26 +386,25 @@ extension WistiaAPI {
         The newly created `WistiaProject`; a copy of the project specified by hashed ID.  `nil` if unsuccessful.
 
      */
-    public func copyProject(forHash projectHashedID: String, withUpdatedAdminEmail adminEmail: String?, completionHandler: @escaping (_ success: Bool, _ newProject: WistiaProject?)->() ) {
+    public func copyProject(forHash projectHashedID: String, withUpdatedAdminEmail adminEmail: String?, completionHandler: @escaping (_ newProject: WistiaProject?, _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         updateParamsWith(&params, name: nil, adminEmail: adminEmail, anonymousCanUpload: nil, anonymousCanDownload: nil, isPublic: nil)
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/projects/\(projectHashedID)/copy.json", method: .post, parameters: params)
-            .responseJSON(completionHandler: { (response) in
+            .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let project = WistiaProject(from: JSON), response.response?.statusCode == 201 {
-                        completionHandler(true, project)
-                    } else {
-                        completionHandler(true, nil)
+                if response.response?.statusCode == 201,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let project = WistiaProject(from: JSON) {
+                        completionHandler(project, nil)
                     }
-                case .failure(_):
-                    completionHandler(false, nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaProject.self))
+                    }
+                } else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
                 }
-
-            })
+        }
     }
 
 
@@ -458,7 +451,7 @@ extension WistiaAPI {
          Projects returned will not have all of the normal project details.
 
      */
-    public func listMediasGroupedByProject(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, limitedToProject project: WistiaProject? = nil, completionHandler: @escaping (_ projects:[WistiaProject])->() ) {
+    public func listMediasGroupedByProject(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, limitedToProject project: WistiaProject? = nil, completionHandler: @escaping (_ projects:[WistiaProject], _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         params["page"] = page
         params["per_page"] = perPage
@@ -470,36 +463,37 @@ extension WistiaAPI {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias.json", method: .get, parameters: params)
             .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [[String: Any]] {
-                        var projectsByHashedID = [String: WistiaProject]()
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [[String: Any]] {
+                    var projectsByHashedID = [String: WistiaProject]()
 
-                        for mediaHash in JSON {
-                            //1) Make Media
-                            if let media = WistiaMedia.create(from: mediaHash) {
-
-                                //2) Find project it's in (or create it anew)
-                                if let projectHash = mediaHash["project"] as? [String: AnyObject], var project = WistiaProject(from: projectHash) {
-                                    if projectsByHashedID.index(forKey: project.hashedID) == nil {
-                                        project.medias = [WistiaMedia]()
-                                        projectsByHashedID[project.hashedID] = project
-                                    }
-                                    //3) add media to project it's in
-                                    projectsByHashedID[project.hashedID]!.medias!.append(media)
-                                }
-                            }
-
+                    for mediaHash in JSON {
+                        //1) Make Media
+                        guard let media = WistiaMedia.create(from: mediaHash) else {
+                            return completionHandler([], WistiaAPIError.JSONDecodingFailure(mediaHash, WistiaMedia.self))
                         }
-                        completionHandler(Array(projectsByHashedID.values))
-                        
-                    } else {
-                        completionHandler([])
-                    }
-                case .failure(_):
-                    completionHandler([])
-                }
+                        //2) Find project it's in (or create it anew)
+                        guard let projectHash = mediaHash["project"] as? [String: Any] else {
+                            return completionHandler([], WistiaAPIError.JSONDecodingFailure(mediaHash, WistiaMedia.self))
+                        }
+                        guard var project = WistiaProject(from: projectHash) else {
+                            return completionHandler([], WistiaAPIError.JSONDecodingFailure(projectHash, WistiaProject.self))
+                        }
 
+                        if projectsByHashedID.index(forKey: project.hashedID) == nil {
+                            project.medias = [WistiaMedia]()
+                            projectsByHashedID[project.hashedID] = project
+                        }
+
+                        //3) add media to project it's in
+                        projectsByHashedID[project.hashedID]!.medias!.append(media)
+
+                    }
+                    completionHandler(Array(projectsByHashedID.values), nil)
+                }
+                else {
+                    completionHandler([], WistiaAPIError.error(for: response))
+                }
         }
     }
 
@@ -522,7 +516,7 @@ extension WistiaAPI {
          An array of `WistiaMedia` objects returned by the API call.  Will be empty when request page starts beyond the last item.
 
      */
-    public func listMedias(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, filterByProject project: WistiaProject? = nil, filterByName name: String? = nil, filterByType type: String? = nil, filterByHashedID hashedID: String? = nil, completionHandler: @escaping (_ medias:[WistiaMedia])->() ) {
+    public func listMedias(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, filterByProject project: WistiaProject? = nil, filterByName name: String? = nil, filterByType type: String? = nil, filterByHashedID hashedID: String? = nil, completionHandler: @escaping (_ medias:[WistiaMedia], _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         params["page"] = page
         params["per_page"] = perPage
@@ -543,25 +537,24 @@ extension WistiaAPI {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias.json", method: .get, parameters: params)
             .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [[String: Any]] {
-                        var medias = [WistiaMedia]()
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [[String: Any]] {
+                    var medias = [WistiaMedia]()
 
-                        for mediaHash in JSON {
-                            if let media = WistiaMedia.create(from: mediaHash) {
-                                medias.append(media)
-                            }
+                    for mediaHash in JSON {
+                        if let media = WistiaMedia.create(from: mediaHash) {
+                            medias.append(media)
                         }
-                        completionHandler(medias)
-
-                    } else {
-                        completionHandler([])
+                        else {
+                            return completionHandler([], WistiaAPIError.JSONDecodingFailure(mediaHash, WistiaMedia.self))
+                        }
                     }
-                case .failure(_):
-                    completionHandler([])
-                }
+                    completionHandler(medias, nil)
 
+                }
+                else {
+                    completionHandler([], WistiaAPIError.error(for: response))
+                }
         }
     }
 
@@ -578,23 +571,22 @@ extension WistiaAPI {
          The `WistiaMedia` specified. `nil` if there was no match.
 
      */
-    public func showMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ media: WistiaMedia?)->() ) {
+    public func showMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .get, parameters: paramsWithToken())
-            .responseJSON { (response) in
+            .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let media = WistiaMedia.create(from: JSON) {
-                        completionHandler(media)
-
-                    } else {
-                        completionHandler(nil)
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let media = WistiaMedia.create(from: JSON) {
+                        completionHandler(media, nil)
                     }
-                case .failure(_):
-                    completionHandler(nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaMedia.self))
+                    }
                 }
-
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
         }
     }
 
@@ -615,7 +607,7 @@ extension WistiaAPI {
         `updatedMedia` \
         The `WistiaMedia` with updated attributes.
      */
-    public func updateMedia(forHash mediaHashedID: String, withName name: String?, newStillMediaId: String?, description: String?, completionHandler: @escaping (_ success: Bool, _ updatedMedia: WistiaMedia?)->() ) {
+    public func updateMedia(forHash mediaHashedID: String, withName name: String?, newStillMediaId: String?, description: String?, completionHandler: @escaping (_ updatedMedia: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         if let n = name {
             params["name"] = n
@@ -628,21 +620,21 @@ extension WistiaAPI {
         }
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .put, parameters: params)
-            .responseJSON(completionHandler: { (response) in
+            .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let media = WistiaMedia.create(from: JSON), response.response?.statusCode == 200 {
-                        completionHandler(true, media)
-                    } else {
-                        completionHandler(true, nil)
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let media = WistiaMedia.create(from: JSON) {
+                        completionHandler(media, nil)
                     }
-                case .failure(_):
-                    completionHandler(false, nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaMedia.self))
+                    }
                 }
-
-            })
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
     }
 
     // Delete
@@ -663,23 +655,24 @@ extension WistiaAPI {
         The `WistiaMedia` that was deleted. `nil` if there was no match.
 
      */
-    public func deleteMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ success: Bool, _ deletedMedia: WistiaMedia?)->() ) {
+    public func deleteMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ deletedMedia: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID).json", method: .delete, parameters: paramsWithToken())
-            .responseJSON(completionHandler: { (response) in
+            .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let media = WistiaMedia.create(from: JSON), response.response?.statusCode == 200 {
-                        completionHandler(true, media)
-                    } else {
-                        completionHandler(true, nil)
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let media = WistiaMedia.create(from: JSON) {
+                        completionHandler(media, nil)
                     }
-                case .failure(_):
-                    completionHandler(false, nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaMedia.self))
+                    }
+                }
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
                 }
 
-            })
+        }
     }
 
     // Copy
@@ -704,7 +697,7 @@ extension WistiaAPI {
         The newly created `WistiaMedia`; a copy of the media specified by hashed ID.  `nil` if unsuccessful.
 
      */
-    public func copyMedia(forHash mediaHashedID: String, toProject projectID: String?, withNewOwner owner: String?, completionHandler: @escaping (_ success: Bool, _ copiedMedia: WistiaMedia?)->() ) {
+    public func copyMedia(forHash mediaHashedID: String, toProject projectID: String?, withNewOwner owner: String?, completionHandler: @escaping (_ copiedMedia: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         if let p = projectID {
             params["project_id"] = p
@@ -714,21 +707,21 @@ extension WistiaAPI {
         }
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/copy.json", method: .post, parameters: params)
-            .responseJSON(completionHandler: { (response) in
+            .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let media = WistiaMedia.create(from: JSON), response.response?.statusCode == 201 {
-                        completionHandler(true, media)
-                    } else {
-                        completionHandler(true, nil)
+                if response.response?.statusCode == 201,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let media = WistiaMedia.create(from: JSON) {
+                        completionHandler(media, nil)
                     }
-                case .failure(_):
-                    completionHandler(false, nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaMedia.self))
+                    }
                 }
-                
-            })
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
     }
 
     // Stats
@@ -747,23 +740,22 @@ extension WistiaAPI {
         The `WistiaMedia` for which stats were requested. `nil` if there was no match.
 
     */
-    public func statsForMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ media: WistiaMedia?)->() ) {
+    public func statsForMedia(forHash mediaHashedID: String, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/stats.json", method: .get, parameters: paramsWithToken())
-            .responseJSON { (response) in
+            .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let media = WistiaMedia.create(from: JSON) {
-                        completionHandler(media)
-
-                    } else {
-                        completionHandler(nil)
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let media = WistiaMedia.create(from: JSON) {
+                        completionHandler(media, nil)
                     }
-                case .failure(_):
-                    completionHandler(nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaMedia.self))
+                    }
                 }
-
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
         }
     }
 
@@ -786,20 +778,21 @@ extension WistiaAPI {
     ///   - mediaHashedID: The unique `hashedID` of the media for which you want to see customizations.
     ///   - completionHandler: The block to invoke when the API call completes.
     ///    - embedOptions: The `WistiaMediaEmbedOptions` for the requested media.  `nil` if there was no match.
-    public func showCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ embedOptions: WistiaMediaEmbedOptions?)->() ) {
+    public func showCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ embedOptions: WistiaMediaEmbedOptions?, _ error: WistiaAPIError?)->() ) {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .get, parameters: paramsWithToken())
             .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let embedOptions = WistiaMediaEmbedOptions(from: JSON) {
-                        completionHandler(embedOptions)
-                    } else {
-                        completionHandler(nil)
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let embedOptions = WistiaMediaEmbedOptions(from: JSON) {
+                        completionHandler(embedOptions, nil)
                     }
-                case .failure(_):
-                    completionHandler(nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaMediaEmbedOptions.self))
+                    }
+                }
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
                 }
         }
 
@@ -819,7 +812,7 @@ extension WistiaAPI {
     ///   - mediaHashedID: The `hashedID` of the media for which you want to replace customizations.
     ///   - completionHandler: The block to invoke when the API call completes.
     ///    - createdEmbedOptions: The newly created `WistiaMediaEmbedOptions` for the specified media.  `nil` if there was an error.
-    public func createCustomizations(_ embedOptions: WistiaMediaEmbedOptions, forHash mediaHashedID: String, completionHandler: @escaping (_ createdEmbedOptions: WistiaMediaEmbedOptions?)->() ) {
+    public func createCustomizations(_ embedOptions: WistiaMediaEmbedOptions, forHash mediaHashedID: String, completionHandler: @escaping (_ createdEmbedOptions: WistiaMediaEmbedOptions?, _ error: WistiaAPIError?)->() ) {
         var params: [String: Any] = embedOptions.toJson()
         if let token = apiToken {
             params["api_password"] = token
@@ -828,34 +821,33 @@ extension WistiaAPI {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in
 
-                switch response.result {
-                case .success(let value):
-                    if let JSON = value as? [String: Any],
-                        let embedOptions = WistiaMediaEmbedOptions(from: JSON),
-                        JSON["error"] == nil {
-                        completionHandler(embedOptions)
-                    } else {
-                        completionHandler(nil)
+                if response.response?.statusCode == 201,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let embedOptions = WistiaMediaEmbedOptions(from: JSON) {
+                        completionHandler(embedOptions, nil)
                     }
-                case .failure(_):
-                    completionHandler(nil)
+                    else {
+                        completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaMediaEmbedOptions.self))
+                    }
+                }
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
                 }
         }
 
     }
 
-    public func deleteCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ success: Bool)->() ) {
+    public func deleteCustomizations(forHash mediaHashedID: String, completionHandler: @escaping (_ success: Bool, _ error: WistiaAPIError?)->() ) {
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias/\(mediaHashedID)/customizations.json", method: .delete, parameters: paramsWithToken())
-            .response { response in
+            .responseJSON { response in
 
                 if response.response?.statusCode == 200 {
-                    completionHandler(true)
-                } else {
-                    completionHandler(false)
+                    completionHandler(true, nil)
                 }
-
+                else {
+                    return completionHandler(false, WistiaAPIError.error(for: response))
+                }
         }
-        
     }
 
 }
@@ -881,7 +873,7 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(fileURL: URL, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?) -> Void) {
+    public func upload(fileURL: URL, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         upload(data: nil, fileURL: fileURL, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
@@ -904,7 +896,7 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(fileURL: URL, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?) -> Void) {
+    public func upload(fileURL: URL, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         upload(data: nil, fileURL: fileURL, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
@@ -927,7 +919,7 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(data:Data, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?) -> Void) {
+    public func upload(data:Data, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         upload(data: data, fileURL: nil, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
@@ -950,12 +942,12 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(data:Data, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?) -> Void) {
+    public func upload(data:Data, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         upload(data: data, fileURL: nil, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
-    fileprivate func upload(data: Data?, fileURL: URL?, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (WistiaMedia?) -> Void) {
+    fileprivate func upload(data: Data?, fileURL: URL?, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         guard (data != nil && fileURL == nil) || (data == nil && fileURL != nil)
             else { return assertionFailure("Must pass exactly one data or file, not both") }
@@ -1002,24 +994,41 @@ extension WistiaAPI {
                     }
 
                     upload.responseJSON { response in
-                        switch response.result {
-                        case .success(let value):
-                            if let JSON = value as? [String: Any],
-                                let media = WistiaMedia.create(from: JSON), response.response?.statusCode == 200 {
-                                completionHandler(media)
-                            } else {
-                                completionHandler(nil)
+                        if response.response?.statusCode == 200,
+                            let JSON = response.result.value as? [String: Any] {
+                            if let media = WistiaMedia.create(from: JSON) {
+                                completionHandler(media, nil)
                             }
-                        case .failure(_):
-                            completionHandler(nil)
+                            else {
+                                completionHandler(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaMedia.self))
+                            }
+                        }
+                        else {
+                            completionHandler(nil, WistiaAPIError.error(for: response))
                         }
                     }
 
                 case .failure(let encodingError):
-                    print(encodingError)
+                    completionHandler(nil, WistiaAPIError.UploadEncodingError(encodingError))
                 }
             })
 
     }
 
+}
+
+//MARK: - Errors
+
+public enum WistiaAPIError: Error {
+    case Unknown(Error?)
+
+    //possible only when response is .success
+    case JSONDecodingFailure([String: Any], WistiaJSONParsable.Type)
+    case NonJsonResponse(Any)
+
+    //possible only when response is .failure
+
+
+    //possible before request is made
+    case UploadEncodingError(Error)
 }

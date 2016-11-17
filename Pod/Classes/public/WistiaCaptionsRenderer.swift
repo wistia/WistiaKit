@@ -123,7 +123,7 @@ public class WistiaCaptionsRenderer {
 
     fileprivate func prepareCaptions() {
         if let _ = media?.embedOptions?.captionsAvailable {
-            WistiaAPI.captions(for: media!.hashedID, completionHandler: { (captions) in
+            WistiaAPI.captions(for: media!.hashedID, completionHandler: { captions, error in
                 self.media?.add(captions: captions)
                 self.captionsLanguagesAvailable = [String]()
                 for caption in captions {

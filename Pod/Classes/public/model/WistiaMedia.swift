@@ -111,7 +111,7 @@ public struct WistiaMedia {
 
 }
 
-extension WistiaMedia {
+extension WistiaMedia: WistiaJSONParsable {
 
 
     /// Initialize a WistiaMedia and populate the assets hash from the provided JSON.

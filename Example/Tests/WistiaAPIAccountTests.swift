@@ -17,7 +17,7 @@ class WistiaAPIAccountTests: XCTestCase {
     func testShowAccount() {
         let expectation = self.expectation(description: "show account")
 
-        wAPI.showAccount { (account) in
+        wAPI.showAccount { account, error in
             if let a = account {
                 if a.accountID == 445830 &&
                     a.name == "WistiaKitAutomatedTests" &&

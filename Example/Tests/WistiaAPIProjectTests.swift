@@ -22,7 +22,7 @@ class WistiaAPIProjectTests: XCTestCase {
     func testListProjects() {
         let expectation = self.expectation(description: "listed projects")
 
-        wAPI.listProjects { (projects) in
+        wAPI.listProjects { projects, error in
             if projects.count > 0 {
                 expectation.fulfill()
             }
@@ -36,7 +36,7 @@ class WistiaAPIProjectTests: XCTestCase {
     func testSortByCreatedAscending() {
         let expectation = self.expectation(description: "sorted properly")
 
-        wAPI.listProjects(page: 1, perPage: 100, sorting: (by: .created, direction: .ascending)) { (projects) in
+        wAPI.listProjects(page: 1, perPage: 100, sorting: (by: .created, direction: .ascending)) { projects, error in
 
             let sortedProjects = projects.sorted(by: { (pa, pb) -> Bool in
                 return pa.created!.compare(pb.created!) == ComparisonResult.orderedAscending
@@ -61,7 +61,7 @@ class WistiaAPIProjectTests: XCTestCase {
     func testSortByCreatedDescending() {
         let expectation = self.expectation(description: "sorted properly")
 
-        wAPI.listProjects(page: 1, perPage: 100, sorting: (by: .created, direction: .descending)) { (projects) in
+        wAPI.listProjects(page: 1, perPage: 100, sorting: (by: .created, direction: .descending)) { projects, error in
 
             let sortedProjects = projects.sorted(by: { (pa, pb) -> Bool in
                 return pa.created!.compare(pb.created!) == ComparisonResult.orderedDescending
@@ -88,9 +88,9 @@ class WistiaAPIProjectTests: XCTestCase {
     func testPageTwo() {
         let expectation = self.expectation(description: "pulled second page")
 
-        wAPI.listProjects(page: 1, perPage: 1, sorting: (by: .created, direction: .ascending)) { (projectsP1) in
+        wAPI.listProjects(page: 1, perPage: 1, sorting: (by: .created, direction: .ascending)) { projectsP1, error in
             if projectsP1.count == 1 {
-                self.wAPI.listProjects(page: 2, perPage: 1, sorting: (by: .created, direction: .ascending), completionHandler: { (projectsP2) in
+                self.wAPI.listProjects(page: 2, perPage: 1, sorting: (by: .created, direction: .ascending), completionHandler: { projectsP2, error in
                     if projectsP2.count == 1 && projectsP1.first?.hashedID != projectsP2.first?.hashedID {
                         expectation.fulfill()
                     }
@@ -106,7 +106,7 @@ class WistiaAPIProjectTests: XCTestCase {
     func testShowProject() {
         let expectation = self.expectation(description: "created project with media")
 
-        wAPI.showProject(forHash: "8q6efplb9n") { (project) in
+        wAPI.showProject(forHash: "8q6efplb9n") { project, error in
             if project != nil {
                 expectation.fulfill()
             }
@@ -121,12 +121,14 @@ class WistiaAPIProjectTests: XCTestCase {
         let createExpectation = self.expectation(description: "created a project")
         let updateExpectation = self.expectation(description: "updated the project")
 
-        wAPI.createProject(named: "TestProject@\(Date())", adminEmail: nil, anonymousCanUpload: false, anonymousCanDownload: false, isPublic: false) { (project) in
+        wAPI.createProject(named: "TestProject@\(Date())", adminEmail: nil, anonymousCanUpload: false, anonymousCanDownload: false, isPublic: false) { project, error in
+            XCTAssertNil(error)
             if let createdProject = project {
                 createExpectation.fulfill()
 
-                self.wAPI.updateProject(forHash: createdProject.hashedID, withName: nil, anonymousCanUpload: true, anonymousCanDownload: true, isPublic: false) { (success, project) in
-                    if let copiedProject = project , success && copiedProject.anonymousCanDownload && !copiedProject.isPublic {
+                self.wAPI.updateProject(forHash: createdProject.hashedID, withName: nil, anonymousCanUpload: true, anonymousCanDownload: true, isPublic: false) { project, error in
+                    XCTAssertNil(error)
+                    if let copiedProject = project , error == nil && copiedProject.anonymousCanDownload && !copiedProject.isPublic {
                         updateExpectation.fulfill()
 
                         //delete them both
@@ -147,12 +149,12 @@ class WistiaAPIProjectTests: XCTestCase {
         let copyExpectation = self.expectation(description: "copied the project")
         let deleteExpectation = self.expectation(description: "deleted the project")
 
-        wAPI.copyProject(forHash: hashToCopy, withUpdatedAdminEmail: nil) { (success, copiedProject) in
-            if let copied = copiedProject , success && copied.hashedID != hashToCopy {
+        wAPI.copyProject(forHash: hashToCopy, withUpdatedAdminEmail: nil) { copiedProject, error in
+            if let copied = copiedProject , error == nil && copied.hashedID != hashToCopy {
                 copyExpectation.fulfill()
 
-                self.wAPI.deleteProject(forHash: copied.hashedID) { (success, deletedProject) in
-                    if let del = deletedProject , success && del.hashedID == copied.hashedID {
+                self.wAPI.deleteProject(forHash: copied.hashedID) { deletedProject, error in
+                    if let del = deletedProject , error == nil && del.hashedID == copied.hashedID {
 
                         deleteExpectation.fulfill()
                     }
