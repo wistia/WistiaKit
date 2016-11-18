@@ -14,6 +14,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		86FFCE0F35AD4493673B7BD3 /* Pods_WistiaKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1192399065E07A9C740C2E02 /* Pods_WistiaKit_Example.framework */; };
+		91042EE31DDF6A1400BEC039 /* WistiaAPIUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91042EE21DDF6A1400BEC039 /* WistiaAPIUploadTests.swift */; };
+		91042EEC1DDF739700BEC039 /* clipXS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 91042EEB1DDF739700BEC039 /* clipXS.m4v */; };
 		916DE06A1D0EF91F005E4EDD /* WistiaMediaEventCollectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DE0691D0EF91F005E4EDD /* WistiaMediaEventCollectorTests.swift */; };
 		918568F31DAD29E900D7CCE8 /* WistiaAPICustomizationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918568F21DAD29E900D7CCE8 /* WistiaAPICustomizationsTests.swift */; };
 		91D1AADF1CEDFB2000356871 /* WistiaAPIAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */; };
@@ -49,6 +51,8 @@
 		607FACE51AFB9204008FA782 /* WistiaKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WistiaKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AFBB3813F3C480958BA308D /* WistiaKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WistiaKit.podspec; path = ../WistiaKit.podspec; sourceTree = "<group>"; };
+		91042EE21DDF6A1400BEC039 /* WistiaAPIUploadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIUploadTests.swift; sourceTree = "<group>"; };
+		91042EEB1DDF739700BEC039 /* clipXS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = clipXS.m4v; sourceTree = "<group>"; };
 		916DE0691D0EF91F005E4EDD /* WistiaMediaEventCollectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaMediaEventCollectorTests.swift; sourceTree = "<group>"; };
 		918568F21DAD29E900D7CCE8 /* WistiaAPICustomizationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPICustomizationsTests.swift; sourceTree = "<group>"; };
 		91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIAccountTests.swift; sourceTree = "<group>"; };
@@ -145,7 +149,9 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				91042EEB1DDF739700BEC039 /* clipXS.m4v */,
 				91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */,
+				91042EE21DDF6A1400BEC039 /* WistiaAPIUploadTests.swift */,
 				918568F21DAD29E900D7CCE8 /* WistiaAPICustomizationsTests.swift */,
 				91D1AAE01CEDFE4A00356871 /* WistiaAPIProjectTests.swift */,
 				91D1AAE21CEDFE7900356871 /* WistiaAPIMediaTests.swift */,
@@ -273,6 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91042EEC1DDF739700BEC039 /* clipXS.m4v in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +395,7 @@
 				916DE06A1D0EF91F005E4EDD /* WistiaMediaEventCollectorTests.swift in Sources */,
 				918568F31DAD29E900D7CCE8 /* WistiaAPICustomizationsTests.swift in Sources */,
 				91D1AADF1CEDFB2000356871 /* WistiaAPIAccountTests.swift in Sources */,
+				91042EE31DDF6A1400BEC039 /* WistiaAPIUploadTests.swift in Sources */,
 				91D49C7A1CF789D300299798 /* ModelBuilderTests.swift in Sources */,
 				91D1AAE11CEDFE4A00356871 /* WistiaAPIProjectTests.swift in Sources */,
 				91D1AAE31CEDFE7900356871 /* WistiaAPIMediaTests.swift in Sources */,

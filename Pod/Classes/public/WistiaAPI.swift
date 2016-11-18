@@ -873,7 +873,7 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(fileURL: URL, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
+    public func upload(fileURL: URL, intoProject project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         upload(data: nil, fileURL: fileURL, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
@@ -896,7 +896,7 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(fileURL: URL, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
+    public func upload(fileURL: URL, intoProjectHashedID projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         upload(data: nil, fileURL: fileURL, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
@@ -919,7 +919,7 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(data:Data, into project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
+    public func upload(data:Data, intoProject project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         upload(data: data, fileURL: nil, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
@@ -942,7 +942,7 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(data:Data, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
+    public func upload(data:Data, intoProjectHashedID projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
         upload(data: data, fileURL: nil, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
@@ -1021,13 +1021,16 @@ extension WistiaAPI {
 
 public enum WistiaAPIError: Error {
     case Unknown(Error?)
+    case VideoLimit(String)
+    case ErrorWithExplanation(String)
 
     //possible only when response is .success
     case JSONDecodingFailure([String: Any], WistiaJSONParsable.Type)
-    case NonJsonResponse(Any)
+    case InvalidJSON(Any)
 
     //possible only when response is .failure
-
+    case RateLimit(retryAfterSeconds: Int?)
+    case UnexpectedDataResponse(Data)
 
     //possible before request is made
     case UploadEncodingError(Error)
