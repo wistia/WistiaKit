@@ -115,7 +115,7 @@ internal extension WistiaAPIError {
                 return WistiaAPIError.InvalidJSON(value)
             }
 
-        case .failure(let error):
+        case .failure(let _):
             if response.response?.statusCode == 503 {
                 // Rate Limit
                 var retryAfter: Int? = nil
