@@ -74,10 +74,10 @@ import WistiaKit
 let globalAPI = WistiaAPI(apiToken:"C4NTB3L13V3TH1S1SARAND0MT0K3N")
 
 func printMediasByProject(){
-    globalAPI.listProjects { (projects) in
+    globalAPI.listProjects { (projects, error) in
         for project in projects {
             print("\(project) medias:")
-            globalAPI.listMedias(limitedToProject: project, completionHandler: { (medias) in
+            globalAPI.listMedias(limitedToProject: project, completionHandler: { (medias, error) in
                 for media in medias {
                     print("  \(media)")
                 }
@@ -119,7 +119,7 @@ api.upload(fileURL: fileURL!, into: "ProjectHashedID", name: "Hello, World!",
   progressHandler: { progress in
     print("reticulating splines... \(progress)")
   }, 
-  completionHandler: { media in
+  completionHandler: { media, error in
     print("You've got media! \(media)")
   })
 ```
