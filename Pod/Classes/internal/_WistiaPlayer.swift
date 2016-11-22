@@ -40,7 +40,7 @@ internal extension WistiaPlayer {
         }
 
         //assuming playback on local device, target asset width is the largest dimension of device
-        let targetAssetWidth = media.spherical ? SphericalTargetAssetWidth : Int64(max(UIScreen.main.nativeBounds.width, UIScreen.main.nativeBounds.height))
+        let targetAssetWidth = media.isSpherical() ? SphericalTargetAssetWidth : Int64(max(UIScreen.main.nativeBounds.width, UIScreen.main.nativeBounds.height))
 
         do {
             let url = try bestPlaybackUrl(for: media, andAssetWithSlug: slug, requiringHLS: self.requireHLS, atTargetWidth: targetAssetWidth)

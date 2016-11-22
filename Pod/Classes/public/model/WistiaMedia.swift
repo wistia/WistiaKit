@@ -93,7 +93,10 @@ public struct WistiaMedia {
     var distilleryURLString: String?
     var accountKey: String?
     var mediaKey: String?
-    var spherical: Bool
+    var spherical: Bool?
+    func isSpherical() -> Bool {
+        return spherical ?? false
+    }
     var distilleryURL: URL? {
         get {
             if let urlString = self.distilleryURLString, let url = URL(string: urlString) {
@@ -168,7 +171,7 @@ extension WistiaMedia: WistiaJSONParsable {
             description = try parser.fetchOptional("description")
             created = parser.fetchOptional("created") { Parser.RFC3339DateFormatter.date(from: $0) }
             updated = parser.fetchOptional("updated") { Parser.RFC3339DateFormatter.date(from: $0) }
-            spherical = parser.fetchOptional("spherical", default: false) { (s: NSString) -> Bool in s.boolValue }
+            spherical = try parser.fetchOptional("spherical")
             thumbnail = parser.fetchOptional("thumbnail") { WistiaMedia.Thumbnail(from: $0) }
             distilleryURLString = try parser.fetchOptional("distilleryUrl")
             accountKey = try parser.fetchOptional("accountKey")

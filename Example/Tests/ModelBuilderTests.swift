@@ -41,6 +41,33 @@ class ModelBuilderTests: XCTestCase {
         waitForExpectations(timeout: 3, handler: nil)
     }
 
+    func testSphericalDecoding() {
+        let expectationA = self.expectation(description: "media is not known to be spherical")
+        let expectationB = self.expectation(description: "mediaInfo is spherical")
+
+        // Media from public API doesn't have spherical
+        wAPI.showMedia(forHash: "vd1mwopfjz") { media, error in
+            XCTAssert(error == nil)
+            if media!.spherical == nil {
+                expectationA.fulfill()
+            }
+        }
+
+        // Media from MediaInfo should have spherical attribute (required for playback)
+        WistiaAPI.mediaInfo(for: "vd1mwopfjz") { media, error in
+            XCTAssert(error == nil)
+
+            if media!.isSpherical() {
+                expectationB.fulfill()
+            }
+            else {
+                XCTAssert(media!.isSpherical(), "Media should be spherical")
+            }
+        }
+
+        waitForExpectations(timeout: 3, handler: nil)
+    }
+
     //MARK: - Captions
 
     func testValidCaptions() {

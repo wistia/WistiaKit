@@ -251,7 +251,7 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
 
     /// Internal.
     public final func wistiaPlayer(_ player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
-        if media.spherical {
+        if media.isSpherical() {
             playing360 = true
             player360View.isHidden = false
             player360View.wPlayer = wPlayer
