@@ -11,8 +11,8 @@ import WistiaKit
 
 class WistiaAPIUploadTests: XCTestCase {
 
-    let limitedAPI = WistiaAPI(apiToken:"1511ac67c0213610d9370ef12349c6ac828a18f6405154207b44f3a7e3a29e93")
-    let unlimitedAPI = WistiaAPI(apiToken: "dcb0e1179609d1da5cf1698797fdb205ff783d428414bab13ec042102e53e159")
+    let unlimitedAPI = WistiaAPI(apiToken:"1511ac67c0213610d9370ef12349c6ac828a18f6405154207b44f3a7e3a29e93")
+    let limitedAPI = WistiaAPI(apiToken: "dcb0e1179609d1da5cf1698797fdb205ff783d428414bab13ec042102e53e159")
 
     let fileURL = Bundle(for: WistiaAPIUploadTests.self).url(forResource: "clipXS", withExtension: "m4v")!
 
