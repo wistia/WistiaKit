@@ -341,13 +341,17 @@ internal class Wistia360PlayerView: UIView {
     //MARK:- Device Motion
 
     fileprivate func stopDeviceMotion() {
-        motionManager.stopDeviceMotionUpdates()
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.stopDeviceMotionUpdates()
+        }
     }
 
     fileprivate func startDeviceMotion() {
-        //Putting this on main queue b/c I'm not doing heavy math in my handler
-        motionManager.deviceMotionUpdateInterval = 1/90.0
-        motionManager.startDeviceMotionUpdates(using: .xArbitraryCorrectedZVertical, to: OperationQueue.main, withHandler: self.absoluteDeviceMotionHandler as! CMDeviceMotionHandler)
+        if motionManager.isDeviceMotionAvailable {
+            //Putting this on main queue b/c I'm not doing heavy math in my handler
+            motionManager.deviceMotionUpdateInterval = 1/90.0
+            motionManager.startDeviceMotionUpdates(using: .xArbitraryCorrectedZVertical, to: OperationQueue.main, withHandler: self.absoluteDeviceMotionHandler as! CMDeviceMotionHandler)
+        }
     }
 
     fileprivate func absoluteDeviceMotionHandler(_ deviceMotion:CMDeviceMotion?, error:NSError?) {
