@@ -124,6 +124,27 @@ public final class WistiaPlayerViewController: UIViewController {
     //MARK: - Instance Properties
 
     /**
+     The underlying `WistiaPlayer` object.  For lower level functionality not available on this
+     `WistiaPlayerViewController` object, the `WistiaPlayer` may provide it.
+
+     - Important: API functionality available on the `WistiaPlayerViewController` should be preferred
+     over the lower level `WistiaPlayer`.  For example, due to quirks of the rendering systems, `play` and `pause`
+     are handled differently for flat and 360 videos; using `WistiaPlayer.play/pause` may result in
+     unexpected behavior with 360 video.
+
+     - Warning: Do not change the `delegate` of this `WistiaPlayer` object.
+     */
+    lazy public var wPlayer:WistiaPlayer = {
+        //Our single player that we will put into either the Flat or the 360 view
+        let wp = WistiaPlayer(referrer: self.referrer ?? "set_referrer_when_initializing_\(type(of: self))",
+            requireHLS: self.requireHLS)
+        wp.delegate = self
+        wp.captionsRenderer.delegate = self
+        wp.captionsRenderer.captionsView = self.captionsLabel
+        return wp
+    }()
+
+    /**
      The object that acts as the delegate of the `WistiaPlayerViewController`.
      It must adopt the `WistiaPlayerViewControllerDelegate` protocol.
 
@@ -243,15 +264,7 @@ public final class WistiaPlayerViewController: UIViewController {
     //MARK: - -----------Internal-----------
 
     //MARK: Player
-    //Our single player that we will put into either the Flat or the 360 view
-    lazy internal var wPlayer:WistiaPlayer = {
-        let wp = WistiaPlayer(referrer: self.referrer ?? "set_referrer_when_initializing_\(type(of: self))",
-                              requireHLS: self.requireHLS)
-        wp.delegate = self
-        wp.captionsRenderer.delegate = self
-        wp.captionsRenderer.captionsView = self.captionsLabel
-        return wp
-    }()
+
     internal var referrer:String?
     internal var requireHLS = true
     //we don't care about the media, but we do care what it says about customizing the UI
