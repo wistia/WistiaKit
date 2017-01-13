@@ -861,8 +861,10 @@ extension WistiaAPI {
     /// Indeed, the `WistiaMedia` returned to your completion handler will generally have no `WistiaAsset`s; some processing time is
     /// required to generate the assets.
     ///
+    /// - Important: The extension of the filename in the fileURL will be used to infer file type.
+    ///
     /// - Parameters:
-    ///   - fileURL: The device-local `URL` of the video to upload to your account.
+    ///   - fileURL: The device-local `URL` of the video to upload to your account.  The extension is used to infer file type.
     ///   - project: The `WistiaProject` to upload media into. If omitted, a new project will be created and uploaded to.
     ///      The naming convention used for such projects is Uploads_YYYY-MM-DD.
     ///   - name: A display name to use for the media in Wistia. If omitted, the filename will be used instead.
@@ -875,7 +877,7 @@ extension WistiaAPI {
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
     public func upload(fileURL: URL, intoProject project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
-        upload(data: nil, fileURL: fileURL, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
+        upload(data: nil, filename: nil, fileURL: fileURL, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
     /// Upload media to your Wistia account.
@@ -884,8 +886,10 @@ extension WistiaAPI {
     /// Indeed, the `WistiaMedia` returned to your completion handler will generally have no `WistiaAsset`s; some processing time is
     /// required to generate the assets.
     ///
+    /// - Important: The extension of the filename in the fileURL will be used to infer file type.
+    ///
     /// - Parameters:
-    ///   - fileURL: The device-local `URL` of the video to upload to your account.
+    ///   - fileURL: The device-local `URL` of the video to upload to your account.  The extension is used to infer file type.
     ///   - projectHashedID: The hashed id of the project to upload media into. If omitted, a new project will be created and uploaded to.
     ///      The naming convention used for such projects is Uploads_YYYY-MM-DD.
     ///   - name: A display name to use for the media in Wistia. If omitted, the filename will be used instead.
@@ -898,7 +902,7 @@ extension WistiaAPI {
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
     public func upload(fileURL: URL, intoProjectHashedID projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
-        upload(data: nil, fileURL: fileURL, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
+        upload(data: nil, filename: nil, fileURL: fileURL, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
     /// Upload media to your Wistia account.
@@ -907,8 +911,11 @@ extension WistiaAPI {
     /// Indeed, the `WistiaMedia` returned to your completion handler will generally have no `WistiaAsset`s; some processing time is
     /// required to generate the assets.
     ///
+    /// - Important: The filename extension will be used to infer the file type.
+    ///
     /// - Parameters:
     ///   - data: The video to upload to your account.
+    ///   - filename: The filename of the media, the extension of which will be used to infer file type.
     ///   - project: The `WistiaProject` to upload media into. If omitted, a new project will be created and uploaded to.
     ///      The naming convention used for such projects is Uploads_YYYY-MM-DD.
     ///   - name: A display name to use for the media in Wistia. If omitted, the filename will be used instead.
@@ -919,9 +926,9 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(data:Data, intoProject project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
+    public func upload(data: Data, filename: String, intoProject project: WistiaProject? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
-        upload(data: data, fileURL: nil, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
+        upload(data: data, filename: filename, fileURL: nil, into: project?.hashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
     /// Upload media to your Wistia account.
@@ -930,8 +937,11 @@ extension WistiaAPI {
     /// Indeed, the `WistiaMedia` returned to your completion handler will generally have no `WistiaAsset`s; some processing time is
     /// required to generate the assets.
     ///
+    /// - Important: The filename extension will be used to infer the file type.
+    ///
     /// - Parameters:
     ///   - data: The video to upload to your account.
+    ///   - filename: The filename of the media, the extension of which will be used to infer file type.
     ///   - projectHashedID: The hashed id of the project to upload media into. If omitted, a new project will be created and uploaded to. 
     ///      The naming convention used for such projects is Uploads_YYYY-MM-DD.
     ///   - name: A display name to use for the media in Wistia. If omitted, the filename will be used instead.
@@ -942,23 +952,26 @@ extension WistiaAPI {
     ///    - progress: An object reporting the progress of data being read by the server.
     ///   - completionHandler: The block to invoke when the upload call completes.
     ///    - media: The newly created `WistiaMedia`, or `nil` if there was a problem uploading.
-    public func upload(data:Data, intoProjectHashedID projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
+    public func upload(data: Data, filename: String, intoProjectHashedID projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((_ progress: Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
-        upload(data: data, fileURL: nil, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
+        upload(data: data, filename: filename, fileURL: nil, into: projectHashedID, name: name, description: description, contactID: contactID, progressHandler: progressHandler, completionHandler: completionHandler)
     }
 
-    fileprivate func upload(data: Data?, fileURL: URL?, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
+    fileprivate func upload(data: Data?, filename: String?, fileURL: URL?, into projectHashedID: String? = nil, name: String? = nil, description: String? = nil, contactID: Int? = nil, progressHandler: ((Progress) -> Void)?, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?) -> Void) {
 
-        guard (data != nil && fileURL == nil) || (data == nil && fileURL != nil)
-            else { return assertionFailure("Must pass exactly one data or file, not both") }
+        assert(
+            (fileURL == nil && (data != nil && filename != nil)) ||
+            (fileURL != nil && (data == nil && filename == nil)),
+               "Must provide fileUrl, or data and filename. mutually exclusive.")
 
         sessionManager.upload(
             multipartFormData: { multipartFormData in
-                if let d = data {
-                    multipartFormData.append(d, withName: "ignored")
+                if let d = data, let f = filename {
+                    // mime-type doesn't matter; backend infers file type from filename extension
+                    multipartFormData.append(d, withName: "file", fileName: f, mimeType: "application/octet-stream")
                 }
                 if let f = fileURL {
-                    multipartFormData.append(f, withName: "ignored")
+                    multipartFormData.append(f, withName: "file")
                 }
                 if let token = self.apiToken {
                     multipartFormData.append(token.data(using: .utf8)!, withName: "api_password")
