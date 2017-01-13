@@ -31,10 +31,10 @@ public struct WistiaAsset {
         }
     }
 
-    /// The width of this specific asset, if applicable.
+    /// The width of this specific asset, if applicable (otherwise 0).
     public var width: Int64
 
-    /// The height of this specific asset, if applicable.
+    /// The height of this specific asset, if applicable (otherwise 0).
     public var height: Int64
 
     /// The size of the asset file that's referenced by url, measured in bytes.
@@ -75,10 +75,10 @@ extension WistiaAsset: WistiaJSONParsable {
             self.media = media
 
             urlString = try parser.fetch("url")
-            width = try parser.fetch("width", transformation: { (w:Int) in Int64(w) })
-            height = try parser.fetch("height", transformation: { (h:Int) in Int64(h) })
             type = try parser.fetch("type")
 
+            width = try parser.fetchOptional("width", default: 0, transformation: { (w:Int) in Int64(w) })
+            height = try parser.fetchOptional("height", default: 0, transformation: { (h:Int) in Int64(h) })
             size = parser.fetchOptional("size", transformation: { (s:Int) in Int64(s) })
             if size == nil {
                 size = parser.fetchOptional("filesize", transformation: { (s:Int) in Int64(s) })

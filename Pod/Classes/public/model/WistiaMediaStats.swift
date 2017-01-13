@@ -16,21 +16,21 @@ import Foundation
 public struct WistiaMediaStats {
 
     /// The total number of times that the page containing the embedded video has been loaded.
-    public var pageLoads: Int
+    public var pageLoads: Int?
 
     /// The number of unique visitors to the page containing the embedded video.
-    public var visitors: Int
+    public var visitors: Int?
 
     /// This is an integer between 0 and 100 that shows what percentage of the time someone who saw the 
     /// page containing the embedded video played the video.
-    public var percentOfVisitorsClickingPlay: Int
+    public var percentOfVisitorsClickingPlay: Int?
 
     /// The total number of times that the video has been played.
-    public var plays: Int
+    public var plays: Int?
 
     /// An integer between 0 and 100. It shows the average percentage of the video that was watched over 
     /// every time the video was played.
-    public var averagePercentWatched: Int
+    public var averagePercentWatched: Int?
 
 }
 
@@ -47,14 +47,14 @@ extension WistiaMediaStats: WistiaJSONParsable {
         guard dictionary != nil else { return nil }
         let parser = Parser(dictionary: dictionary)
         do {
-            pageLoads = try parser.fetch("pageLoads")
-            visitors = try parser.fetch("visitors")
-            percentOfVisitorsClickingPlay = try parser.fetch("percentOfVisitorsClickingPlay")
-            plays = try parser.fetch("plays")
-            averagePercentWatched = try parser.fetch("averagePercentWatched")
+            pageLoads = try parser.fetchOptional("pageLoads")
+            visitors = try parser.fetchOptional("visitors")
+            percentOfVisitorsClickingPlay = try parser.fetchOptional("percentOfVisitorsClickingPlay")
+            plays = try parser.fetchOptional("plays")
+            averagePercentWatched = try parser.fetchOptional("averagePercentWatched")
         } catch let error {
             // NB: The stats returned by the private media info route do not match this object.
-            // They will trigger this error branch but are not cause for concern.
+            // They no longer result in an error being thrown since all stats are optional
             print(error)
             return nil
         }
