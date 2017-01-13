@@ -361,6 +361,23 @@ internal extension WistiaPlayerViewController {
         posterStillImageContainer.isHidden = true
         showPlaybackControls(false, extraClose: true)
         present(forProgress: 0, currentTime: nil)
+
+        switch wPlayer.state {
+        case .videoPlaybackError(let desc):
+            alertAbout(title: "Video Playback Problem", message: desc)
+        case .videoLoadingError(let desc, _, _):
+            alertAbout(title: "Video Playback Problem", message: desc)
+        case .mediaNotFoundError:
+            alertAbout(title: "Video Playback Problem", message: "The requested media could not be found.")
+        default:
+            break
+        }
+    }
+
+    internal func alertAbout(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        present(alert, animated: true)
     }
 
     internal func presentForFirstPlayback() {
