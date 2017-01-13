@@ -60,7 +60,11 @@ internal extension WistiaPlayer {
         } catch URLDeterminationError.noHLSAsset {
             self.state = .videoLoadingError(description: "Media \(media.hashedID) has no HLS assets compatible with this WistiaPlayer, configured to require HLS for playback.", problemMedia: media, problemAsset: nil)
         } catch URLDeterminationError.assetNotReady(let asset) {
-            self.state = .videoLoadingError(description: "Asset with slug \(asset.slug), for media \(media.hashedID), is not ready.", problemMedia: media, problemAsset: asset)
+            var desc = "Asset with slug \(asset.slug ?? "n/a"), for media \(media.hashedID), is not ready."
+            if media.status == .processing {
+                desc += "  Media is still processing."
+            }
+            self.state = .videoLoadingError(description: desc, problemMedia: media, problemAsset: asset)
         } catch {
             self.state = .videoLoadingError(description: "Something unexpected happened looking for an asset to play for media \(media.hashedID).", problemMedia: media, problemAsset: nil)
         }
