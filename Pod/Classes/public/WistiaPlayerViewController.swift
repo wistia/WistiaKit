@@ -266,7 +266,7 @@ public final class WistiaPlayerViewController: UIViewController {
     //MARK: Player
 
     internal var referrer:String?
-    internal var requireHLS = true
+    internal var requireHLS = false
     //we don't care about the media, but we do care what it says about customizing the UI
     internal var activeEmbedOptions = WistiaMediaEmbedOptions() {
         didSet {
