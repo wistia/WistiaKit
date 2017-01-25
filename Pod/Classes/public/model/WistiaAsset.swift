@@ -77,8 +77,8 @@ extension WistiaAsset: WistiaJSONParsable {
             urlString = try parser.fetch("url")
             type = try parser.fetch("type")
 
-            width = try parser.fetchOptional("width", default: 0, transformation: { (w:Int) in Int64(w) })
-            height = try parser.fetchOptional("height", default: 0, transformation: { (h:Int) in Int64(h) })
+            width = parser.fetchOptional("width", default: 0, transformation: { (w:Int) in Int64(w) })
+            height = parser.fetchOptional("height", default: 0, transformation: { (h:Int) in Int64(h) })
             size = parser.fetchOptional("size", transformation: { (s:Int) in Int64(s) })
             if size == nil {
                 size = parser.fetchOptional("filesize", transformation: { (s:Int) in Int64(s) })
