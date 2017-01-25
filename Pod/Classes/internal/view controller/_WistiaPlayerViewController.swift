@@ -375,9 +375,12 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func alertAbout(title: String, message: String) {
+        print("\(title) -- \(message)")
+        /*
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
         present(alert, animated: true)
+         */
     }
 
     internal func presentForFirstPlayback() {
