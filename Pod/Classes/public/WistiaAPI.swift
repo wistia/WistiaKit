@@ -157,6 +157,46 @@ extension WistiaAPI {
 
 }
 
+//MARK: - User
+extension WistiaAPI {
+
+    /// Get information about the currently logged in user.
+    /// - Important: Only available when using oAuth.
+    ///
+    /// - Warning: This is unofficial; not part of the public API.  *Use at your own peril*
+    ///
+    /// - Parameter completionHander: The block to invoke when the API call completes.
+    /// - Parameter user: The `WistiaUser` created from the API response, unless there is an error.
+    /// - Parameter error: The `WistiaAPIError` describing the problem
+    public func showCurrentUser(_ completionHander: @escaping (_ user: WistiaUser?, _ error: WistiaAPIError?) -> () ){
+        guard apiToken == nil else {
+            let problemDescription = "showCurrentUser not available when using Token authentication"
+            print(problemDescription)
+            DispatchQueue.main.async {
+                completionHander(nil, WistiaAPIError.UnavailableAPI(problemDescription))
+            }
+            return
+        }
+        
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/contact.json", method: .get, parameters: paramsWithToken())
+            .responseJSON { response in
+
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let user = WistiaUser(from: JSON) {
+                        completionHander(user, nil)
+                    }
+                    else {
+                        completionHander(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaUser.self))
+                    }
+                }
+                else {
+                    completionHander(nil, WistiaAPIError.error(for: response))
+                }
+        }
+    }
+}
+
 //MARK: - Projects
 extension WistiaAPI {
 
@@ -1047,4 +1087,5 @@ public enum WistiaAPIError: Error {
 
     //possible before request is made
     case UploadEncodingError(Error)
+    case UnavailableAPI(String)
 }
