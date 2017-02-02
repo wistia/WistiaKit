@@ -86,22 +86,20 @@ internal extension WistiaPlayer {
             }
         }
 
-        // If HLS is required we use the "manifest of manifests" that includes all of the alternate streams
-        if requireHLS {
+        // If HLS is available, we prefer it
+        if media.hasHlsAssets() {
             delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: nil, usingHLSMasterIndexManifest: true)
             return media.hlsMasterIndexManifestURL
         }
-
-        //If HLS isn't required, still prefer playback of HLS assets, which come in m3u8 containers
-        let preferredAssets = media.assets.filter { $0.container == "m3u8" }
-        if let asset = largestAsset(in: preferredAssets, withoutGoingUnder: targetWidth) {
-            guard asset.status == .ready else { throw URLDeterminationError.assetNotReady(asset: asset) }
-            delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: asset, usingHLSMasterIndexManifest: false)
-            return asset.url
+        else if requireHLS {
+            // if HLS is required, but unavailable
+            throw URLDeterminationError.noHLSAsset
         }
 
-        // We can also playback assets in the mp4 container.
-        let playableAssets = media.assets.filter { $0.container == "mp4" }
+        // We can also playback mp4 assets
+        let playableAssets = media.assets.filter { $0.type == "Mp4VideoFile" ||
+                                                   $0.type == "MdMp4VideoFile" ||
+                                                   $0.type == "HdMp4VideoFile" }
         if let asset = largestAsset(in: playableAssets, withoutGoingUnder: targetWidth) {
             guard asset.status == .ready else { throw URLDeterminationError.assetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: asset, usingHLSMasterIndexManifest: false)

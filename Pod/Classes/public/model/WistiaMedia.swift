@@ -81,12 +81,21 @@ public struct WistiaMedia {
 
      - Note: The Master index manifest may also be called the "manifest of manifests" in some places.
      
-     - Note: Not all `WistiaMedia` has HLS derivatives available yet.
+     - Warning: Not all `WistiaMedia` has HLS derivatives available yet.  Check that hasHlsAssets() is true; result of this URL is undefined otherwise.
      */
     public var hlsMasterIndexManifestURL: URL {
         get {
             return URL(string: "https://fast.wistia.net/embed/medias/\(self.hashedID).m3u8")!
         }
+    }
+
+    /**
+     Returns true iff this media has at least one HLS asset.
+     
+     - Note: hlsMasterIndexManifestURL is valid for playback iff this returns true.
+     **/
+    public func hasHlsAssets() -> Bool {
+        return assets.contains { $0.type == "HlsVideoFile" }
     }
 
     // MARK: - ------------Internal------------
