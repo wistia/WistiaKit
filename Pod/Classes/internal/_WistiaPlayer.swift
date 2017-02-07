@@ -97,9 +97,7 @@ internal extension WistiaPlayer {
         }
 
         // We can also playback mp4 assets
-        let playableAssets = media.assets.filter { $0.type == "Mp4VideoFile" ||
-                                                   $0.type == "MdMp4VideoFile" ||
-                                                   $0.type == "HdMp4VideoFile" }
+        let playableAssets = media.assets.filter { $0.type.lowercased().contains("mp4") }
         if let asset = largestAsset(in: playableAssets, withoutGoingUnder: targetWidth) {
             guard asset.status == .ready else { throw URLDeterminationError.assetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: asset, usingHLSMasterIndexManifest: false)
