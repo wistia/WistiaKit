@@ -499,6 +499,7 @@ public final class WistiaPlayer: NSObject {
     deinit {
         removePlayerItemObservers(for: self.avPlayer.currentItem)
         removePlayerObservers(for: self.avPlayer)
+        WistiaStatsManager.sharedInstance.removeEventCollector(statsCollector)
     }
 
     internal(set) var state:State = .initialized {

@@ -46,6 +46,7 @@ internal extension WistiaPlayer {
             let url = try bestPlaybackUrl(for: media, andAssetWithSlug: slug, requiringHLS: self.requireHLS, atTargetWidth: targetAssetWidth)
             //-- Out with the old (if applicable)
             removePlayerItemObservers(for: avPlayer.currentItem)
+            WistiaStatsManager.sharedInstance.removeEventCollector(statsCollector)
 
             //-- In with the new
             self.state = .videoLoading
@@ -208,7 +209,11 @@ internal extension WistiaPlayer {
     internal func addPlayerObservers(for player:AVPlayer) {
         player.addObserver(self, forKeyPath: "rate", options: .new, context: &playerContext)
         //observe time updates every 0.1 seconds
-        periodicTimeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.1, preferredTimescale: 10), queue: nil, using: onPlayerTimeUpdate)
+        periodicTimeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.1, preferredTimescale: 10),
+                                                              queue: nil,
+                                                              using: { [weak self] (time) in
+            self?.onPlayerTimeUpdate(of: time)
+        })
     }
 
     internal func removePlayerObservers(for player:AVPlayer?) {

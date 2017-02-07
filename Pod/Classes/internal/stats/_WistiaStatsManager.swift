@@ -54,30 +54,49 @@ internal class WistiaStatsManager {
 
         eventCollectors.append(mediaCollector)
         mediaCollector.manager = self
+        startTimer(withInterval: WistiaStatsManager.StatsSendInterval)
         return mediaCollector
+    }
+
+    func removeEventCollector(_ eventCollector: WistiaMediaEventCollector?) {
+        guard let collector = eventCollector else { return }
+
+        if let removeIdx = eventCollectors.index(where: { $0 === collector }) {
+            eventCollectors.remove(at: removeIdx)
+            if eventCollectors.count == 0 {
+                stopTimer()
+            }
+        }
     }
 
     //MARK: - Private API
 
     init() {
         //Resign/Become Active just stops/starts timers
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillResignActive, object: nil, queue: nil) { (note) -> Void in
-            self.collectAndSend()
-            self.statsTimer?.invalidate()
-            self.statsTimer = nil
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillResignActive,
+                                               object: nil,
+                                               queue: nil) { [weak self] (note) -> Void in
+            self?.collectAndSend()
+            self?.stopTimer()
         }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { (note) -> Void in
-            self.startTimer(withInterval: type(of: self).StatsSendInterval)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive,
+                                               object: nil,
+                                               queue: nil) { [weak self] (note) -> Void in
+            self?.startTimer(withInterval: WistiaStatsManager.StatsSendInterval)
         }
 
         //Background persists events; Foreground restores events
         //By capturing lifecycle this way, we can ignore termination event
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { (note) -> Void in
-            self.collectEventDetails()
-            self.persistEvents()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground,
+                                               object: nil,
+                                               queue: nil) { [weak self] (note) -> Void in
+            self?.collectEventDetails()
+            self?.persistEvents()
         }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil, queue: nil) { (note) -> Void in
-            self.restoreEvents()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground,
+                                               object: nil,
+                                               queue: nil) { [weak self] (note) -> Void in
+            self?.restoreEvents()
         }
     }
 
@@ -94,6 +113,11 @@ internal class WistiaStatsManager {
         }
          */
         statsTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(WistiaStatsManager.collectAndSend), userInfo: nil, repeats: true)
+    }
+
+    fileprivate func stopTimer() {
+        statsTimer?.invalidate()
+        statsTimer = nil
     }
 
     @objc private func collectAndSend() {
