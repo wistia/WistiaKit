@@ -443,7 +443,12 @@ internal extension WistiaPlayerViewController {
         }
     }
 
-    internal func present(forProgress progress:Float, currentTime:CMTime?){
+    internal func present(forProgress progress: Float, currentTime: CMTime?){
+        guard progress.isFinite else {
+            assertionFailure("progress expected to be finite")
+            return
+        }
+
         scrubberCurrentProgressViewWidthConstraint.constant = scrubberTrackContainerView.bounds.width * min(max(CGFloat(progress), 0.0), 1.0)
         if !scrubbing {
             UIView.animate(withDuration: TimeInterval(0.1)) { () -> Void in
