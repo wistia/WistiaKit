@@ -27,7 +27,11 @@ internal extension WistiaPlayer {
 
     internal func readyPlayback(for media: WistiaMedia, choosingAssetWithSlug slug: String?) {
         self.media = media
-        self.state = .videoPreLoading
+        self.state = .videoPreLoading(media: media)
+
+        //-- Out with the old (always, if applicable)
+        removePlayerItemObservers(for: avPlayer.currentItem)
+        WistiaStatsManager.sharedInstance.removeEventCollector(statsCollector)
 
         guard media.status != .failed else {
             self.state = .videoLoadingError(description: "Media \(media.hashedID) failed processing", problemMedia: media, problemAsset: nil)
@@ -44,9 +48,6 @@ internal extension WistiaPlayer {
 
         do {
             let url = try bestPlaybackUrl(for: media, andAssetWithSlug: slug, requiringHLS: self.requireHLS, atTargetWidth: targetAssetWidth)
-            //-- Out with the old (if applicable)
-            removePlayerItemObservers(for: avPlayer.currentItem)
-            WistiaStatsManager.sharedInstance.removeEventCollector(statsCollector)
 
             //-- In with the new
             self.state = .videoLoading
@@ -56,17 +57,21 @@ internal extension WistiaPlayer {
             let avPlayerItem = AVPlayerItem(asset: avAsset)
             addPlayerItemObservers(for: avPlayerItem)
             avPlayer.replaceCurrentItem(with: avPlayerItem)
-        } catch URLDeterminationError.noAsset {
+        }
+        catch URLDeterminationError.noAsset {
             self.state = .videoLoadingError(description: "Media \(media.hashedID) has no assets compatible with this player's configuration.", problemMedia: media, problemAsset: nil)
-        } catch URLDeterminationError.noHLSAsset {
+        }
+        catch URLDeterminationError.noHLSAsset {
             self.state = .videoLoadingError(description: "Media \(media.hashedID) has no HLS assets compatible with this WistiaPlayer, configured to require HLS for playback.", problemMedia: media, problemAsset: nil)
-        } catch URLDeterminationError.assetNotReady(let asset) {
+        }
+        catch URLDeterminationError.assetNotReady(let asset) {
             var desc = "Asset with slug \(asset.slug ?? "n/a"), for media \(media.hashedID), is not ready."
             if media.status == .processing {
                 desc += "  Media is still processing."
             }
             self.state = .videoLoadingError(description: desc, problemMedia: media, problemAsset: asset)
-        } catch {
+        }
+        catch {
             self.state = .videoLoadingError(description: "Something unexpected happened looking for an asset to play for media \(media.hashedID).", problemMedia: media, problemAsset: nil)
         }
     }

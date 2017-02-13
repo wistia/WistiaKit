@@ -423,8 +423,8 @@ public final class WistiaPlayer: NSObject {
         /// `WistiaPlayer` instance created but has not yet started loading a video
         case initialized
 
-        /// About to examine a `WistiaMedia` and choose a `WistiaAsset` for playback
-        case videoPreLoading
+        /// About to examine the given `WistiaMedia` and choose a `WistiaAsset` for playback
+        case videoPreLoading(media: WistiaMedia)
 
         /// `WistiaAsset` has been chosen and underlying media file will start loading
         case videoLoading

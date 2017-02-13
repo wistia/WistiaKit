@@ -308,6 +308,9 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak internal var posterPlayButton: UIButton!
     @IBOutlet weak internal var posterLoadingIndicator: UIActivityIndicatorView!
 
+    //MARK: IB Outlets: Media Processing
+    @IBOutlet weak var mediaProcessingContainer: UIView!
+
     //MARK: IB Outlets: Playback controls
     @IBOutlet weak internal var posterErrorIndicator: UIImageView!
     @IBOutlet weak internal var playbackControlsContainer: UIVisualEffectView!

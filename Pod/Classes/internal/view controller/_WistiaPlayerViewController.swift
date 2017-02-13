@@ -185,9 +185,12 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
     /// Internal.
     public final func wistiaPlayer(_ player:WistiaPlayer, didChangeStateTo newState:WistiaPlayer.State) {
         switch newState {
-        case .initialized: fallthrough
-        case .videoPreLoading:
+        case .initialized:
             presentForPreLoading()
+
+        case .videoPreLoading(let media):
+            presentForPreLoading()
+            configurePlayerViews(for: media)
 
         case .videoLoading:
             presentForLoading()
@@ -203,13 +206,20 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
                 presentForPlaybackShowingChrome(true)
             }
 
+        case .videoLoadingError(_, _, _):
+            if wPlayer.media?.status == .processing {
+                presentForMediaProcessing()
+            }
+            else {
+                fallthrough
+            }
+
         case .mediaNotFoundError(_):
             fallthrough
-        case .videoLoadingError(_, _, _):
-            fallthrough
+
         case .videoPlaybackError(_):
             //IMPROVE ME: Show more useful errors to users depending on root cause
-            presentForError()
+            presentForError(newState)
         }
     }
 
@@ -251,21 +261,7 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
 
     /// Internal.
     public final func wistiaPlayer(_ player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
-        if media.isSpherical() {
-            playing360 = true
-            player360View.isHidden = false
-            player360View.wPlayer = wPlayer
-            playerFlatView.isHidden = true
-            playerFlatView.wistiaPlayer = nil
-        } else {
-            playing360 = false
-            player360View.isHidden = true
-            player360View.wPlayer = nil
-            playerFlatView.isHidden = false
-            playerFlatView.wistiaPlayer = wPlayer
-        }
-
-        currentMediaEmbedOptions = media.embedOptions
+        configurePlayerViews(for: media)
     }
 
 }
@@ -288,6 +284,24 @@ internal extension WistiaPlayerViewController {
 //Until we support 360 on TV, just killing this entire thing
 #if os(iOS)
 
+    internal func configurePlayerViews(for media: WistiaMedia) {
+        if media.isSpherical() {
+            playing360 = true
+            player360View.isHidden = false
+            player360View.wPlayer = wPlayer
+            playerFlatView.isHidden = true
+            playerFlatView.wistiaPlayer = nil
+        } else {
+            playing360 = false
+            player360View.isHidden = true
+            player360View.wPlayer = nil
+            playerFlatView.isHidden = false
+            playerFlatView.wistiaPlayer = wPlayer
+        }
+
+        currentMediaEmbedOptions = media.embedOptions
+    }
+
     internal func chooseActiveEmbedOptions() {
         if let overridingOptions = overridingEmbedOptions {
             activeEmbedOptions = overridingOptions
@@ -298,7 +312,7 @@ internal extension WistiaPlayerViewController {
         }
     }
 
-    internal func customizeView(for embedOptions:WistiaMediaEmbedOptions) {
+    internal func customizeView(for embedOptions: WistiaMediaEmbedOptions) {
         //playerColor
         playbackControlsContainer.backgroundColor = embedOptions.playerColor.withAlphaComponent(0.4)
         posterPlayButton.backgroundColor = playbackControlsContainer.backgroundColor
@@ -309,11 +323,18 @@ internal extension WistiaPlayerViewController {
         //playbar (aka scrubber)
         scrubberTrackContainerView.alpha = (embedOptions.playbar ? 1.0 : 0.0)
 
-        //stillURL
+        //stillURL (with a backup if it's not customized)
         if let stillURL = embedOptions.stillURL {
             posterStillImage.isHidden = false
             posterStillImage.af_setImage(withURL: stillURL)
-        } else {
+        }
+        else if let media = wPlayer.media,
+            let thumbString = media.thumbnail?.url,
+            let thumbnail = URL(string: thumbString) {
+            posterStillImage.isHidden = false
+            posterStillImage.af_setImage(withURL: thumbnail)
+        }
+        else {
             posterStillImage.isHidden = true
         }
 
@@ -324,7 +345,7 @@ internal extension WistiaPlayerViewController {
         //The following are implemented dynamically:
         // * bigPlayButton (see presentForFirstPlayback())
         // * controlsVisibleOnLoad (see presentForFirstPlayback())
-        // * stillURL (see presetnForFirstPlayback())
+        // * stillURL (see presentForFirstPlayback())
     }
 
     internal func presentForPreLoading() {
@@ -334,7 +355,8 @@ internal extension WistiaPlayerViewController {
         posterLoadingIndicator.stopAnimating()
         posterErrorIndicator.isHidden = true
         posterPlayButtonContainer.isHidden = true
-        posterStillImageContainer.isHidden = true
+        posterStillImageContainer.isHidden = false
+        mediaProcessingContainer.isHidden = true
         showPlaybackControls(false, extraClose: false)
         present(forProgress: 0, currentTime: nil)
     }
@@ -346,12 +368,27 @@ internal extension WistiaPlayerViewController {
         posterLoadingIndicator.startAnimating()
         posterErrorIndicator.isHidden = true
         posterPlayButtonContainer.isHidden = true
-        posterStillImageContainer.isHidden = true
+        posterStillImageContainer.isHidden = false
+        mediaProcessingContainer.isHidden = true
+        mediaProcessingContainer.isHidden = true
         showPlaybackControls(false, extraClose: true)
         present(forProgress: 0, currentTime: nil)
     }
 
-    internal func presentForError() {
+    internal func presentForMediaProcessing() {
+        loadViewIfNeeded()
+        cancelChromeInteractionTimer()
+        playerContainer.isHidden = true
+        posterLoadingIndicator.stopAnimating()
+        posterErrorIndicator.isHidden = true
+        posterPlayButtonContainer.isHidden = true
+        posterStillImageContainer.isHidden = false
+        mediaProcessingContainer.isHidden = false
+        showPlaybackControls(false, extraClose: true)
+        present(forProgress: 0, currentTime: nil)
+    }
+
+    internal func presentForError(_ errorState: WistiaPlayer.State) {
         loadViewIfNeeded()
         cancelChromeInteractionTimer()
         playerContainer.isHidden = true
@@ -359,10 +396,11 @@ internal extension WistiaPlayerViewController {
         posterErrorIndicator.isHidden = false
         posterPlayButtonContainer.isHidden = true
         posterStillImageContainer.isHidden = true
+        mediaProcessingContainer.isHidden = true
         showPlaybackControls(false, extraClose: true)
         present(forProgress: 0, currentTime: nil)
 
-        switch wPlayer.state {
+        switch errorState {
         case .videoPlaybackError(let desc):
             alertAbout(title: "Video Playback Problem", message: desc)
         case .videoLoadingError(let desc, _, _):
@@ -391,6 +429,7 @@ internal extension WistiaPlayerViewController {
         posterErrorIndicator.isHidden = true
         posterPlayButtonContainer.isHidden = !activeEmbedOptions.bigPlayButton
         posterStillImageContainer.isHidden = false
+        mediaProcessingContainer.isHidden = true
         showPlaybackControls(activeEmbedOptions.controlsVisibleOnLoad, extraClose: false)
         present(forProgress: 0, currentTime: nil)
     }
@@ -402,6 +441,7 @@ internal extension WistiaPlayerViewController {
         posterErrorIndicator.isHidden = true
         posterPlayButtonContainer.isHidden = true
         posterStillImageContainer.isHidden = true
+        mediaProcessingContainer.isHidden = true
 
         UIView.animate(withDuration: TimeInterval(0.5), animations: { () -> Void in
             //Don't change alpha of UIVisualEffectView.  
