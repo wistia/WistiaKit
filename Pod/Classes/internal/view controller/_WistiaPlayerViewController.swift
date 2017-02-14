@@ -534,7 +534,11 @@ internal extension WistiaPlayerViewController {
 
     internal func showPlaybackControls(_ showControls: Bool, extraClose showExtraClose: Bool) {
         playbackControlsContainer.isHidden = !showControls
-        extraCloseButton.isHidden = !showExtraClose
+        if delegate == nil && presentingViewController == nil {
+            extraCloseButton.isHidden = true
+        } else {
+            extraCloseButton.isHidden = !showExtraClose
+        }
     }
 
 #endif //os(iOS)
