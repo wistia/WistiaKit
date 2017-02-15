@@ -81,9 +81,6 @@ internal extension WistiaPlayer {
     //
     //We just need HLS (if required), otherwise mp4.  If there are options, we pick the best sized.
     internal func bestPlaybackUrl(for media: WistiaMedia, andAssetWithSlug assetSlug: String?, requiringHLS requireHLS: Bool, atTargetWidth targetWidth: Int64) throws -> URL {
-        //XXX TESTING
-        throw URLDeterminationError.noHLSAsset
-        //XXX TESTING
         //If a particular asset is requested using the slug, that overrides all other configuration
         if let slug = assetSlug {
             if let assetMatchingSlug = (media.assets.filter { $0.slug == slug }).first {

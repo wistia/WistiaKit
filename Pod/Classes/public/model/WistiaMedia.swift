@@ -168,9 +168,6 @@ extension WistiaMedia: WistiaJSONParsable {
             } else {
                 status = .failed
             }
-            //XXX TESTING
-            status = .processing
-            //XXX TESTING
 
             if let hid: String = try parser.fetchOptional("hashed_id") {
                 hashedID = hid
