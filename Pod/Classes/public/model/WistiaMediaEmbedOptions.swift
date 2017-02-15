@@ -255,3 +255,33 @@ extension WistiaMediaEmbedOptions: WistiaJSONParsable {
     }
     
 }
+
+//MARK: - WistiaMediaEmbedOptions Equality
+
+extension WistiaMediaEmbedOptions: Equatable { }
+
+/**
+ Compare two `WistiaMediaEmbedOptions`s for equality.
+
+ - Returns: `True` iff each customization option is equal.
+
+ */
+public func ==(lhs: WistiaMediaEmbedOptions, rhs: WistiaMediaEmbedOptions) -> Bool {
+
+    return lhs.playerColor == rhs.playerColor &&
+        lhs.bigPlayButton == rhs.bigPlayButton &&
+        lhs.smallPlayButton == rhs.smallPlayButton &&
+        lhs.playbar == rhs.playbar &&
+        lhs.fullscreenButton == rhs.fullscreenButton &&
+        lhs.controlsVisibleOnLoad == rhs.controlsVisibleOnLoad &&
+        lhs.autoplay == rhs.autoplay &&
+        lhs.endVideoBehavior == rhs.endVideoBehavior &&
+        lhs.stillURL == rhs.stillURL &&
+
+        lhs.actionButton == rhs.actionButton &&
+        lhs.actionShareURLString == rhs.actionShareURLString &&
+        lhs.actionShareTitle == rhs.actionShareTitle &&
+
+        lhs.captionsAvailable == rhs.captionsAvailable &&
+        lhs.captionsOnByDefault == rhs.captionsOnByDefault
+}

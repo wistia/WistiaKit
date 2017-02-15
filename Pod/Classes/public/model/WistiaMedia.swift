@@ -204,10 +204,15 @@ extension WistiaMedia: Equatable { }
 /**
  Compare two `WistiaMedia`s for equality.
  
- - Returns: `True` if the `hashedID`s of the given `WistiaMedia`s match.
+ - Returns: `True` iff the `hashedID`s of the given `WistiaMedia`s match, statuses are the same,
+    names are the same, descriptions are the same, and their embedOptions are equal.
  
  */
 public func ==(lhs: WistiaMedia, rhs: WistiaMedia) -> Bool {
 
-    return lhs.hashedID == rhs.hashedID
+    return lhs.hashedID == rhs.hashedID &&
+        lhs.status == rhs.status &&
+        lhs.name == rhs.name &&
+        lhs.description == rhs.description &&
+        lhs.embedOptions == rhs.embedOptions
 }
