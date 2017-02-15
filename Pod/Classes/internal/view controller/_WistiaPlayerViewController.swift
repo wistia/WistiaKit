@@ -513,7 +513,7 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func presentForCurrentProgress(){
-        if let duration = wPlayer.currentItem?.duration {
+        if let duration = wPlayer.currentItem?.duration, duration.isNumeric {
             present(forProgress: Float(wPlayer.currentTime().seconds / duration.seconds), currentTime: wPlayer.currentTime())
         }
     }
