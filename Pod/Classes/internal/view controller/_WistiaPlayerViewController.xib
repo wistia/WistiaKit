@@ -107,22 +107,33 @@
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyw-mZ-ulo" userLabel="Media Processing Container">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zR5-jH-PRT">
-                            <rect key="frame" x="76.5" y="323" width="20" height="20"/>
-                        </activityIndicatorView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media is Processing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7a7-In-Ibn">
-                            <rect key="frame" x="104.5" y="323.5" width="166.5" height="20.5"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VxO-7Q-eQT">
+                            <rect key="frame" x="0.0" y="318" width="375" height="32"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zR5-jH-PRT">
+                                    <rect key="frame" x="62.5" y="5.5" width="20" height="20"/>
+                                </activityIndicatorView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media is Processing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7a7-In-Ibn">
+                                    <rect key="frame" x="90.5" y="4" width="195.5" height="24"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <constraints>
+                                <constraint firstItem="7a7-In-Ibn" firstAttribute="centerX" secondItem="VxO-7Q-eQT" secondAttribute="centerX" id="1AX-Js-TFP"/>
+                                <constraint firstItem="zR5-jH-PRT" firstAttribute="centerY" secondItem="7a7-In-Ibn" secondAttribute="centerY" id="DV9-dk-TiP"/>
+                                <constraint firstItem="7a7-In-Ibn" firstAttribute="leading" secondItem="zR5-jH-PRT" secondAttribute="trailing" constant="8" id="JUj-pO-FRb"/>
+                                <constraint firstAttribute="height" secondItem="7a7-In-Ibn" secondAttribute="height" constant="8" id="ngX-xj-DCi"/>
+                                <constraint firstItem="7a7-In-Ibn" firstAttribute="centerY" secondItem="VxO-7Q-eQT" secondAttribute="centerY" id="ptF-j4-IOc"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="zR5-jH-PRT" firstAttribute="centerY" secondItem="7a7-In-Ibn" secondAttribute="centerY" id="Aau-Fm-muq"/>
-                        <constraint firstItem="7a7-In-Ibn" firstAttribute="centerY" secondItem="kyw-mZ-ulo" secondAttribute="centerY" id="KeF-lc-1ow"/>
-                        <constraint firstItem="7a7-In-Ibn" firstAttribute="leading" secondItem="zR5-jH-PRT" secondAttribute="trailing" constant="8" id="O7x-Sc-cIx"/>
-                        <constraint firstItem="7a7-In-Ibn" firstAttribute="centerX" secondItem="kyw-mZ-ulo" secondAttribute="centerX" id="xcv-OM-cjq"/>
+                        <constraint firstItem="VxO-7Q-eQT" firstAttribute="centerY" secondItem="kyw-mZ-ulo" secondAttribute="centerY" id="RgV-Y2-s3O"/>
+                        <constraint firstAttribute="trailing" secondItem="VxO-7Q-eQT" secondAttribute="trailing" id="UsE-gH-UhX"/>
+                        <constraint firstItem="VxO-7Q-eQT" firstAttribute="leading" secondItem="kyw-mZ-ulo" secondAttribute="leading" id="sDX-gt-u9C"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBy-7d-odP" userLabel="Overlay Container">
