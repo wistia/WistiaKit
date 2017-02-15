@@ -207,7 +207,8 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
             }
 
         case .videoLoadingError(_, _, _):
-            if wPlayer.media?.status == .processing {
+            if wPlayer.media?.status == .queued ||
+                wPlayer.media?.status == .processing {
                 presentForMediaProcessing()
             }
             else {

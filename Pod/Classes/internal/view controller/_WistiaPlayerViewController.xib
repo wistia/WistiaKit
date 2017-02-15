@@ -94,6 +94,7 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x6T-Ec-xgg" userLabel="poster still image">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
                     </subviews>
                     <constraints>
@@ -106,16 +107,21 @@
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyw-mZ-ulo" userLabel="Media Processing Container">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zR5-jH-PRT">
+                            <rect key="frame" x="76.5" y="323" width="20" height="20"/>
+                        </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media is Processing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7a7-In-Ibn">
-                            <rect key="frame" x="85.5" y="321" width="204.5" height="26.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                            <rect key="frame" x="104.5" y="323.5" width="166.5" height="20.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
-                            <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                         </label>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="zR5-jH-PRT" firstAttribute="centerY" secondItem="7a7-In-Ibn" secondAttribute="centerY" id="Aau-Fm-muq"/>
                         <constraint firstItem="7a7-In-Ibn" firstAttribute="centerY" secondItem="kyw-mZ-ulo" secondAttribute="centerY" id="KeF-lc-1ow"/>
+                        <constraint firstItem="7a7-In-Ibn" firstAttribute="leading" secondItem="zR5-jH-PRT" secondAttribute="trailing" constant="8" id="O7x-Sc-cIx"/>
                         <constraint firstItem="7a7-In-Ibn" firstAttribute="centerX" secondItem="kyw-mZ-ulo" secondAttribute="centerX" id="xcv-OM-cjq"/>
                     </constraints>
                 </view>
