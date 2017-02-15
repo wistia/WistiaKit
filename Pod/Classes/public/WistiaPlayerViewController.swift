@@ -210,14 +210,16 @@ public final class WistiaPlayerViewController: UIViewController {
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
      _which does not guarantee success of the asynchronous video load_.
      */
-    public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, autoplay: Bool = false) {
+    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, autoplay: Bool = false) -> Bool {
         autoplayVideoWhenReady = autoplay
         self.loadViewIfNeeded()
         let didReplace = wPlayer.replaceCurrentVideoWithVideo(forMedia: media, forcingAsset: asset)
         if !didReplace && autoplayVideoWhenReady {
+            //If didReplace == true, autoplay will be handled after video loads
             presentForPlaybackShowingChrome(true)
             play()
         }
+        return didReplace
     }
 
     //MARK: - Controlling Playback
