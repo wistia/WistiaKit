@@ -31,6 +31,7 @@ internal extension WistiaPlayer {
 
         //-- Out with the old (always, if applicable)
         removePlayerItemObservers(for: avPlayer.currentItem)
+        avPlayer.replaceCurrentItem(with: nil)
         WistiaStatsManager.sharedInstance.removeEventCollector(statsCollector)
 
         guard media.status != .failed else {
