@@ -95,7 +95,7 @@ public struct WistiaMedia {
      - Note: hlsMasterIndexManifestURL is valid for playback iff this returns true.
      **/
     public func hasHlsAssets() -> Bool {
-        return assets.contains { $0.type == "HlsVideoFile" }
+        return assets.contains { $0.type.lowercased().contains("hls") }
     }
 
     // MARK: - ------------Internal------------
