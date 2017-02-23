@@ -134,15 +134,7 @@ public final class WistiaPlayerViewController: UIViewController {
 
      - Warning: Do not change the `delegate` of this `WistiaPlayer` object.
      */
-    lazy public var wPlayer:WistiaPlayer = {
-        //Our single player that we will put into either the Flat or the 360 view
-        let wp = WistiaPlayer(referrer: self.referrer ?? "set_referrer_when_initializing_\(type(of: self))",
-            requireHLS: self.requireHLS)
-        wp.delegate = self
-        wp.captionsRenderer.delegate = self
-        wp.captionsRenderer.captionsView = self.captionsLabel
-        return wp
-    }()
+    public var wPlayer:WistiaPlayer!
 
     /**
      The object that acts as the delegate of the `WistiaPlayerViewController`.
@@ -357,6 +349,15 @@ public final class WistiaPlayerViewController: UIViewController {
 
     /// Internal override.
     override final public func viewDidLoad() {
+        super.viewDidLoad()
+
+        //configure player
+        wPlayer = WistiaPlayer(referrer: self.referrer ?? "set_referrer_when_initializing_\(type(of: self))", requireHLS: self.requireHLS)
+        wPlayer.delegate = self
+        wPlayer.captionsRenderer.delegate = self
+        wPlayer.captionsRenderer.captionsView = self.captionsLabel
+
+
         //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (_) -> Void in
             if self != nil && !self!.autoplayVideoWhenReady {
