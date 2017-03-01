@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import WistiaKitData
 import WistiaKit
 
 class WistiaAPIProjectTests: XCTestCase {
