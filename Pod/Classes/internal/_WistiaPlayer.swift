@@ -85,7 +85,9 @@ internal extension WistiaPlayer {
         //If a particular asset is requested using the slug, that overrides all other configuration
         if let slug = assetSlug {
             if let assetMatchingSlug = (media.assets.filter { $0.slug == slug }).first {
-                guard assetMatchingSlug.status == .ready else { throw URLDeterminationError.assetNotReady(asset: assetMatchingSlug) }
+                // The DataAPI v1 only returns ready assets (thus checking for nil), the embed API will include status
+                guard assetMatchingSlug.status == nil || assetMatchingSlug.status == .ready
+                    else { throw URLDeterminationError.assetNotReady(asset: assetMatchingSlug) }
                 delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: assetMatchingSlug, usingHLSMasterIndexManifest: false)
                 return assetMatchingSlug.url
             } else {
@@ -106,7 +108,9 @@ internal extension WistiaPlayer {
         // We can also playback mp4 assets
         let playableAssets = media.assets.filter { $0.type.lowercased().contains("mp4") }
         if let asset = largestAsset(in: playableAssets, withoutGoingUnder: targetWidth) {
-            guard asset.status == .ready else { throw URLDeterminationError.assetNotReady(asset: asset) }
+            // The DataAPI v1 only returns ready assets (thus checking for nil), the embed API will include status
+            guard asset.status == nil || asset.status == .ready
+                else { throw URLDeterminationError.assetNotReady(asset: asset) }
             delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: asset, usingHLSMasterIndexManifest: false)
             return asset.url
         } else {
