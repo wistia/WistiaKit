@@ -7,9 +7,13 @@ Pod::Spec.new do |data|
   data.name             = "WistiaKitData"
   data.module_name      = "WistiaKitData"
   data.version          = "0.1.0"
-  data.summary          = "TODO"
-  data.description      = "TODO"
-  data.homepage         = "TODO"
+  data.summary          = "Access all of your Wistia media."
+  data.description      = <<-DESC
+WistiaKitData is the lighter-weight and lower-level foundation upon which the full WistiaKit is built.  It defines the Wistia object model and provides API access.  Playback and UI is provided by WistiaKit.
+
+They are split into two individual Pods to allow for different module names (which isn't possible with subspecs).
+                             DESC
+  data.homepage         = "https://github.com/wistia/WistiaKit"
   data.license          = "MIT"
   data.author           = { "spinosa" => "spinosa@gmail.com" }
   data.source           = { :git => "https://github.com/wistia/WistiaKit.git", :tag => data.version.to_s }
