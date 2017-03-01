@@ -18,38 +18,38 @@
     "tvos": "9.0"
   },
   "requires_arc": true,
-  "ios": {
-    "source_files": "Pod/Classes/**/*",
-    "frameworks": [
-      "AdSupport",
-      "AVFoundation",
-      "AVKit",
-      "CoreMotion",
-      "Foundation",
-      "SceneKit",
-      "SpriteKit",
-      "UIKit"
-    ]
-  },
-  "tvos": {
-    "source_files": "Pod/Classes/**/*.swift",
-    "frameworks": [
-      "AdSupport",
-      "AVFoundation",
-      "AVKit",
-      "Foundation",
-      "SceneKit",
-      "SpriteKit",
-      "UIKit"
-    ]
-  },
-  "resources": "Pod/Assets/**/*.xcassets",
   "dependencies": {
-    "Alamofire": [
-      "~> 4.0"
+    "WistiaKitData": [
+
     ],
     "AlamofireImage": [
       "~> 3.0"
+    ]
+  },
+  "source_files": "Pod/Classes/Playback/**/*",
+  "resources": "Pod/Assets/**/*.xcassets",
+  "tvos": {
+    "exclude_files": "Pod/Classes/**/*.{xib,nib}",
+    "frameworks": [
+      "WistiaKitData",
+      "AdSupport",
+      "AVFoundation",
+      "AVKit",
+      "SceneKit",
+      "SpriteKit",
+      "UIKit"
+    ]
+  },
+  "ios": {
+    "frameworks": [
+      "WistiaKitData",
+      "AdSupport",
+      "AVFoundation",
+      "AVKit",
+      "SceneKit",
+      "SpriteKit",
+      "UIKit",
+      "CoreMotion"
     ]
   }
 }

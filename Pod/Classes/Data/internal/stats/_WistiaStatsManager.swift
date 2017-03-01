@@ -26,7 +26,7 @@
 import UIKit
 import Alamofire
 
-internal class WistiaStatsManager {
+public class WistiaStatsManager {
 
     //MARK: - Private Constants
 
@@ -42,14 +42,14 @@ internal class WistiaStatsManager {
 
     //MARK: - Public API
 
-    static let sharedInstance:WistiaStatsManager = {
+    public static let sharedInstance:WistiaStatsManager = {
         let mgr = WistiaStatsManager()
         mgr.startTimer(withInterval: StatsSendInterval)
         mgr.restoreEvents()
         return mgr
     }()
 
-    func newEventCollector(forMedia media:WistiaMedia, withReferrer referrer: String) -> WistiaMediaEventCollector? {
+    public func newEventCollector(forMedia media:WistiaMedia, withReferrer referrer: String) -> WistiaMediaEventCollector? {
         guard let mediaCollector = WistiaMediaEventCollector(media: media, referrer: referrer) else { return nil }
 
         eventCollectors.append(mediaCollector)
@@ -58,7 +58,7 @@ internal class WistiaStatsManager {
         return mediaCollector
     }
 
-    func removeEventCollector(_ eventCollector: WistiaMediaEventCollector?) {
+    public func removeEventCollector(_ eventCollector: WistiaMediaEventCollector?) {
         guard let collector = eventCollector else { return }
 
         if let removeIdx = eventCollectors.index(where: { $0 === collector }) {

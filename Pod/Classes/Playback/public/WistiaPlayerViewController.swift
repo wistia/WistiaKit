@@ -5,7 +5,9 @@
 //  Created by Daniel Spinosa on 4/22/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
+
 import Foundation
+import WistiaKitData
 
 /**
  The delegate of a `WistiaPlayerViewController` must adopt the `WistiaPlayerViewControllerDelegate`

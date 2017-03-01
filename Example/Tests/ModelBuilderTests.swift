@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import WistiaKitData
 @testable import WistiaKit
 
 class ModelBuilderTests: XCTestCase {

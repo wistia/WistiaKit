@@ -1,11 +1,7 @@
+# The full WistiaKit pod adds playback to the WistiaKitData pod
 #
-# Be sure to run `pod lib lint WistiaKit.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
+# They are split into two individual Pods to allow for different
+# module names (which isn't possible with subspecs).
 Pod::Spec.new do |s|
   s.name             = "WistiaKit"
   s.version          = "0.21.0"
@@ -30,22 +26,53 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.tvos.deployment_target = '9.0'
   s.requires_arc = true
 
-  s.ios.source_files = 'Pod/Classes/**/*'
-  # TODO: s.tvos.exclude_files = [...] to remove the xibs instead of
-  s.tvos.source_files = 'Pod/Classes/**/*.swift'
-
+  # s.subspec 'Data' do |data|
+  #   data.source_files = "Pod/Classes/Data/**/*"
+  #   data.module_name = "WistiaKitData"
+  #
+  #   data.dependency 'Alamofire', '~> 4.0'
+  #
+  #   data.frameworks = 'Foundation'
+  # end
+  
+  # s.subspec 'Playback' do |playback|
+  #   playback.dependency 'WistiaKit/Data'
+  #
+  #   playback.source_files = "Pod/Classes/Playback/**/*"
+  #   # Although resource_bundles is the new recommended hotness, it doesn't play well with Asset Catalogs.
+  #   # s.resource_bundles = {
+  #   #   'Assets' => ['Pod/Assets/**/*.xcassets']
+  #   # }
+  #   # Fortunately, the old resources method will faithfully copy the catalog in such a way that it 'just works'
+  #   playback.resources = 'Pod/Assets/**/*.xcassets'
+  #
+  #   # No xibs on tvOS
+  #   playback.tvos.exclude_files = 'Pod/Classes/**/*.{xib,nib}'
+  #
+  #   playback.dependency 'AlamofireImage', '~> 3.0'
+  #
+  #   # No CoreMotion on tvOS
+  #   playback.ios.frameworks =  'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit', 'CoreMotion'
+  #   playback.tvos.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit'
+  # end
+  
+  s.dependency 'WistiaKitData'
+  
+  s.source_files = "Pod/Classes/Playback/**/*"
   # Although resource_bundles is the new recommended hotness, it doesn't play well with Asset Catalogs.
-  # Fortunately, the old resources method will faithfully copy the catalog in such a way that it 'just works'
   # s.resource_bundles = {
   #   'Assets' => ['Pod/Assets/**/*.xcassets']
   # }
+  # Fortunately, the old resources method will faithfully copy the catalog in such a way that it 'just works'
   s.resources = 'Pod/Assets/**/*.xcassets'
 
-
-  # No CoreMotion on tvOS
-  s.ios.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'CoreMotion', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
-  s.tvos.frameworks = 'AdSupport', 'AVFoundation', 'AVKit', 'Foundation', 'SceneKit', 'SpriteKit', 'UIKit'
-
-  s.dependency 'Alamofire', '~> 4.0'
+  # No xibs on tvOS
+  s.tvos.exclude_files = 'Pod/Classes/**/*.{xib,nib}'
+  
   s.dependency 'AlamofireImage', '~> 3.0'
+  
+  # No CoreMotion on tvOS
+  s.ios.frameworks =  'WistiaKitData', 'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit', 'CoreMotion'
+  s.tvos.frameworks = 'WistiaKitData', 'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit'
+
 end

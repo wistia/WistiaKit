@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import WistiaKitData
 @testable import WistiaKit
 
 class WistiaAPICustomizationsTests: XCTestCase {
@@ -28,12 +29,7 @@ class WistiaAPICustomizationsTests: XCTestCase {
 
     //MARK: - Create
     func testWistiaMediaEmbedOptionsToJson() {
-        let e = WistiaMediaEmbedOptions(playerColor: UIColor(red: 0.18, green: 0.33, blue: 0.99, alpha: 1.0), bigPlayButton: false, smallPlayButton: true, playbar: true, fullscreenButton: false, controlsVisibleOnLoad: true, autoplay: true, endVideoBehaviorString: "pause", endVideoBehavior: .pauseOnLastFrame, stillURL: URL(string:"http://image.com"),
-
-                                        actionButton: true, actionShareURLString: "http://sharethis.com", actionShareTitle: "sharing is caring",
-
-                                        captionsAvailable: true, captionsOnByDefault: false)
-
+        let e = WistiaMediaEmbedOptions(playerColor: UIColor(red: 0.18, green: 0.33, blue: 0.99, alpha: 1.0), bigPlayButton: false, smallPlayButton: true, playbar: true, fullscreenButton: false, controlsVisibleOnLoad: true, autoplay: true, endVideoBehavior: .pauseOnLastFrame, stillURL: URL(string: "http://image.com"), actionButton: true, actionShareURLString: "http://sharethis.com", actionShareTitle: "sharing is caring", captionsAvailable: true, captionsOnByDefault: false)
 
         let json = e.toJson()
 
@@ -58,7 +54,7 @@ class WistiaAPICustomizationsTests: XCTestCase {
     }
 
     func testCreateCustomizations() {
-        let e = WistiaMediaEmbedOptions(playerColor: UIColor(red: 0.18, green: 0.33, blue: 0.99, alpha: 1.0), bigPlayButton: false, smallPlayButton: true, playbar: true, fullscreenButton: false, controlsVisibleOnLoad: true, autoplay: true, endVideoBehaviorString: "pause", endVideoBehavior: .pauseOnLastFrame, stillURL: URL(string:"http://image.com"), actionButton: true, actionShareURLString: "http://sharethis.com", actionShareTitle: "sharing is caring",captionsAvailable: true, captionsOnByDefault: false)
+        let e = WistiaMediaEmbedOptions(playerColor: UIColor(red: 0.18, green: 0.33, blue: 0.99, alpha: 1.0), bigPlayButton: false, smallPlayButton: true, playbar: true, fullscreenButton: false, controlsVisibleOnLoad: true, autoplay: true, endVideoBehavior: .pauseOnLastFrame, stillURL: URL(string:"http://image.com"), actionButton: true, actionShareURLString: "http://sharethis.com", actionShareTitle: "sharing is caring",captionsAvailable: true, captionsOnByDefault: false)
 
         let expectation = self.expectation(description: "create customizations")
 

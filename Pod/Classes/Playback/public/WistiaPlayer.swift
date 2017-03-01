@@ -6,6 +6,7 @@
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 
+import WistiaKitData
 import AVKit
 import AVFoundation
 

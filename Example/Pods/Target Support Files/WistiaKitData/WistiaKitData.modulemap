@@ -1,0 +1,6 @@
+framework module WistiaKitData {
+  umbrella header "WistiaKitData-umbrella.h"
+
+  export *
+  module * { export * }
+}

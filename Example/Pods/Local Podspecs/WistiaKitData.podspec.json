@@ -1,0 +1,29 @@
+{
+  "name": "WistiaKitData",
+  "module_name": "WistiaKitData",
+  "version": "0.1.0",
+  "summary": "TODO",
+  "description": "TODO",
+  "homepage": "TODO",
+  "license": "MIT",
+  "authors": {
+    "spinosa": "spinosa@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/wistia/WistiaKit.git",
+    "tag": "0.1.0"
+  },
+  "social_media_url": "http://twitter.com/wistia",
+  "platforms": {
+    "ios": "9.0",
+    "tvos": "9.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/Data/**/*",
+  "dependencies": {
+    "Alamofire": [
+      "~> 4.0"
+    ]
+  },
+  "frameworks": "Foundation"
+}

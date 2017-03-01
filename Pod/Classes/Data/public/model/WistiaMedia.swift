@@ -103,7 +103,7 @@ public struct WistiaMedia {
     var accountKey: String?
     var mediaKey: String?
     var spherical: Bool?
-    func isSpherical() -> Bool {
+    public func isSpherical() -> Bool {
         return spherical ?? false
     }
     var distilleryURL: URL? {
@@ -115,9 +115,9 @@ public struct WistiaMedia {
             }
         }
     }
-    var captions: [WistiaCaptions]? = nil
+    public var captions: [WistiaCaptions]? = nil
 
-    mutating func add(captions: [WistiaCaptions]) {
+    mutating public func add(captions: [WistiaCaptions]) {
         self.captions = captions
     }
 
