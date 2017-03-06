@@ -132,7 +132,7 @@ extension WistiaMedia: WistiaJSONParsable {
     ///   a child hash of WistiaAssets.
     ///
     /// - returns: A newly initialized WistiaMedia if parsing is successful.
-    static func create(from dictionary:[String: Any]) -> WistiaMedia? {
+    public static func create(from dictionary:[String: Any]) -> WistiaMedia? {
 
         if var wMedia = WistiaMedia(from: dictionary) {
             // -- Assets (are optional) --
