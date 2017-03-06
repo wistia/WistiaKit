@@ -550,13 +550,14 @@ extension WistiaAPI {
      - Parameter filterByType: A string specifying which type of media you would like to get. Values can be Video, Audio, Image,
         PdfDocument, MicrosoftOfficeDocument, Swf, or UnknownType.
      - Parameter filterByHashedID: Find the media by `hashedID`
+     - Parameter descriptionFormat: A string specifying the format for the media description. Currently "markdown" is the option supported value.
      - Parameter completionHandler: The block to invoke when the API call completes.
          The block takes one argument: \
          `medias` \
          An array of `WistiaMedia` objects returned by the API call.  Will be empty when request page starts beyond the last item.
 
      */
-    public func listMedias(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, filterByProject project: WistiaProject? = nil, filterByName name: String? = nil, filterByType type: String? = nil, filterByHashedID hashedID: String? = nil, completionHandler: @escaping (_ medias:[WistiaMedia], _ error: WistiaAPIError?)->() ) {
+    public func listMedias(page: Int = 1, perPage: Int = 10, sorting: (by: SortBy, direction: SortDirection)? = nil, filterByProject project: WistiaProject? = nil, filterByName name: String? = nil, filterByType type: String? = nil, filterByHashedID hashedID: String? = nil, descriptionFormat: String? = nil, completionHandler: @escaping (_ medias:[WistiaMedia], _ error: WistiaAPIError?)->() ) {
         var params = paramsWithToken()
         params["page"] = page
         params["per_page"] = perPage
@@ -572,6 +573,9 @@ extension WistiaAPI {
         }
         if let hid = hashedID {
             params["hashed_id"] = hid
+        }
+        if let df = descriptionFormat {
+            params["description_format"] = df
         }
 
         sessionManager.request("\(WistiaAPI.APIBaseURL)/medias.json", method: .get, parameters: params)
