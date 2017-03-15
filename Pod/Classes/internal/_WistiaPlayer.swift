@@ -54,7 +54,10 @@ internal extension WistiaPlayer {
             self.state = .videoLoading
             statsCollector = WistiaStatsManager.sharedInstance.newEventCollector(forMedia: media, withReferrer: self.referrer)
 
-            let avAsset = AVURLAsset(url: url)
+            // There is no officially sanctioned way to set headers on an AVURLAsset request.
+            // WebKit uses AVURLAssetHTTPHeaderFieldsKey, but it's private.
+            // Other solutions are cumbersome and this doesn't feel too brittle since it's used by WebKit...
+            let avAsset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": ["Referer": self.referrer]])
             let avPlayerItem = AVPlayerItem(asset: avAsset)
             addPlayerItemObservers(for: avPlayerItem)
             avPlayer.replaceCurrentItem(with: avPlayerItem)
@@ -99,6 +102,7 @@ internal extension WistiaPlayer {
         if media.hasHlsAssets() {
             delegate?.wistiaPlayer(self, willLoadVideoForMedia: media, usingAsset: nil, usingHLSMasterIndexManifest: true)
             return media.hlsMasterIndexManifestURL
+
         }
         else if requireHLS {
             // if HLS is required, but unavailable
@@ -261,4 +265,5 @@ internal extension WistiaPlayer {
     }
 
 }
+
 
