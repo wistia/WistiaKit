@@ -161,6 +161,28 @@ public final class WistiaPlayerViewController: UIViewController {
         }
     }
 
+    /**
+     The referrer shown when viewing your video statstics on Wistia.
+
+     We recommend using a universal link to the video.
+     This will allow you to click that link from the Wistia stats page
+     while still recording the in-app playback location.
+     
+     - Important: If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions),
+     referrer must match your whitelist or video will not load.
+
+     - Note: Changing referrer takes effect the next time the video is replaced; it does not affect the currently
+     playing video.
+
+     */
+    public var referrer: String? {
+        didSet {
+            if wPlayer != nil {
+                wPlayer.referrer = referrer ?? "WistiaKit"
+            }
+        }
+    }
+
     //MARK: - Changing Media
 
     /**
@@ -261,7 +283,6 @@ public final class WistiaPlayerViewController: UIViewController {
 
     //MARK: Player
 
-    internal var referrer:String?
     internal var requireHLS = false
     //we don't care about the media, but we do care what it says about customizing the UI
     internal var activeEmbedOptions = WistiaMediaEmbedOptions() {

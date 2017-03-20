@@ -521,8 +521,8 @@ public final class WistiaPlayer: NSObject {
             captionsRenderer.media = media
         }
     }
-    internal var statsCollector:WistiaMediaEventCollector?
-    internal let referrer:String
+    internal var statsCollector: WistiaMediaEventCollector?
+    internal var referrer: String
 
     // The 4K mp4s were not playing well.
     // Keeping max at 1920 seems good on testing thus far.
