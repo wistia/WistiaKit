@@ -9,6 +9,7 @@
 import WistiaKitData
 import AVKit
 import AVFoundation
+import MediaPlayer
 
 //MARK: - WistiaPlayerDelegate
 
@@ -371,8 +372,81 @@ public final class WistiaPlayer: NSObject {
             if finished {
                 self.log(.seek)
             }
+            self.updateNowPlayingWithCurrentTimeAndRate()
             completionHandler?(finished)
         }
+    }
+
+    //MARK: Remotely controlling playback
+
+    /**
+     Registers this `WistiaPlayer` as the handler for remote control events (ie. headphone controls, control center's
+     "Now Playing" panel, etc.).  As a side effect, the Now Playing panel of control center will begin showing information
+     for the media currently loaded by this player.  An additional side effect of that; the user can choose an AirPlay
+     destination for the current media.
+     
+     This player is automatically deregistered as a remote control event handler on deinitialization.
+     
+     - Important: Only one `WistiaPlayer` should be handling remote control events. Do not call this on a second 
+        `WistiaPlayer` unless and until you have called `endHandlingRemoteControlEvents` on this one (or this one
+        was deinitialized, acheiving the same).
+
+     - Note: Now playing information is automatically populated but it will not show up until an app begins
+        handling remote control events.  The old way to do this was calling 
+        `UIApplication.shared.beginReceivingRemoteControlEvents()`.  It is now done by registering a target-action
+        handler for one or more of the commands available from `MPRemoteCommandCenter.shared()`.
+
+     */
+    public func beginHandlingRemoteControlEvents() {
+        let r = MPRemoteCommandCenter.shared()
+        r.pauseCommand.addTarget(self, action: #selector(WistiaPlayer.pause))
+        r.stopCommand.addTarget(self, action: #selector(WistiaPlayer.pause))
+        r.playCommand.addTarget(self, action: #selector(WistiaPlayer.play))
+        r.togglePlayPauseCommand.addTarget(self, action: #selector(WistiaPlayer.togglePlayPause))
+
+        r.nextTrackCommand.isEnabled = false
+        r.previousTrackCommand.isEnabled = false
+
+        r.changePlaybackRateCommand.isEnabled = false
+        r.seekForwardCommand.isEnabled = false
+        r.seekBackwardCommand.isEnabled = false
+        r.skipForwardCommand.isEnabled = false
+        r.skipBackwardCommand.isEnabled = false
+
+        r.ratingCommand.isEnabled = false
+        r.likeCommand.isEnabled = false
+        r.dislikeCommand.isEnabled = false
+
+        r.bookmarkCommand.isEnabled = false
+
+        if #available(iOS 9.1, *) {
+            r.changePlaybackPositionCommand.addTarget(self, action: #selector(WistiaPlayer.seekFromRemoteCommand))
+        }
+    }
+
+    /**
+     Unregisters this `WistiaPlayer` as the handler for remote control events.
+     
+     This will happen automatically upon `deinit()`.
+     
+     - Important: Only one `WistiaPlayer` should be handling remote control events. You must call this on the current
+        handler (or allow it to `deinit()`) before registering a different `WistiaPlayer`.
+
+     */
+    public func endHandlingRemoteControlEvents() {
+        let r = MPRemoteCommandCenter.shared()
+        r.pauseCommand.removeTarget(self)
+        r.stopCommand.removeTarget(self)
+        r.playCommand.removeTarget(self)
+        r.togglePlayPauseCommand.removeTarget(self)
+
+        if #available(iOS 9.1, *) {
+            r.changePlaybackPositionCommand.removeTarget(self)
+        }
+    }
+
+    internal func seekFromRemoteCommand(_ event: MPChangePlaybackPositionCommandEvent) {
+        seek(to: CMTime(seconds: event.positionTime, preferredTimescale: 100), completionHandler: nil)
     }
 
     //MARK: - State Information
@@ -500,6 +574,7 @@ public final class WistiaPlayer: NSObject {
     deinit {
         removePlayerItemObservers(for: self.avPlayer.currentItem)
         removePlayerObservers(for: self.avPlayer)
+        endHandlingRemoteControlEvents()
         WistiaStatsManager.sharedInstance.removeEventCollector(statsCollector)
     }
 

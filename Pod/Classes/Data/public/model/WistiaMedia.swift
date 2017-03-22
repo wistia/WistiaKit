@@ -47,6 +47,33 @@ public struct WistiaMedia {
         }
     }
 
+    /**
+     Returns a URL you can use to download the thumbnail image for this media.
+     
+     If you do not specify `targetWidth`, the URL will use the default thumbnail size, 
+     as noted in `self.thumbnail.width` and `self.thumbnail.height`.
+     
+     If you specify `targetWidth`, the URL will request a server-side cropped image of that width
+     and a height calculated to maintain the original aspect ratio.
+     
+     - parameter targetWidth: The desired width of the image.  Height will be set to maintain aspect ratio.
+     
+     - returns: A URL to download the thumbnail image, or nil if this media doesn't have a `.thumbnail`
+     */
+    public func thumbnailURL(targetWidth: Int? = nil) -> URL? {
+        if let urlString = thumbnail?.url, let url = URL(string: urlString) {
+            if targetWidth != nil {
+                return url.wk_changingQueryParemeter("image_crop_resized", to: thumbnailQueryParameterStringAt(targetWidth: targetWidth!))
+            }
+            else {
+                return url
+            }
+        }
+        else {
+            return nil
+        }
+    }
+
     /// Specifies the length (in seconds) for audio and video files. Specifies number of pages in the document. Omitted for other types of media.
     public var duration: Float?
 
@@ -121,6 +148,17 @@ public struct WistiaMedia {
         self.captions = captions
     }
 
+    private func thumbnailQueryParameterStringAt(targetWidth: Int) -> String {
+        if let fullWidth = thumbnail?.width,
+            let fullHeight = thumbnail?.height {
+            let aspectRatio = Float(fullWidth) / Float(fullHeight)
+            let targetHeight = Float(targetWidth) / aspectRatio
+            return "\(targetWidth)x\(Int(targetHeight))"
+        }
+        else {
+            return "\(targetWidth)x\(Int(9.0*Float(targetWidth)/16.0))"
+        }
+    }
 }
 
 extension WistiaMedia: WistiaJSONParsable {
