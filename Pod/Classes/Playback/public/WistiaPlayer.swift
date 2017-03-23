@@ -204,6 +204,8 @@ public final class WistiaPlayer: NSObject {
      referrer must match your whitelist or video will not load.
 
      - Parameter media: The `WistiaMedia` you wish to load asynchronously.
+     
+     - Parameter project: The `WistiaProject` to which the media belongs.  Optional.
 
      - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
 
@@ -224,9 +226,9 @@ public final class WistiaPlayer: NSObject {
 
      - Returns: A `WistiaPlayer` that is initialized and asynchronously loading the media for playback.
      */
-    public convenience init(media: WistiaMedia, referrer: String, requireHLS: Bool = true) {
+    public convenience init(media: WistiaMedia, project: WistiaProject? = nil, referrer: String, requireHLS: Bool = true) {
         self.init(referrer:referrer, requireHLS:requireHLS)
-        self.replaceCurrentVideoWithVideo(forMedia: media)
+        self.replaceCurrentVideoWithVideo(forMedia: media, fromProject: project)
     }
 
     //MARK: - Instance Properties
@@ -264,6 +266,9 @@ public final class WistiaPlayer: NSObject {
      */
     public var requireHLS:Bool
 
+    /// This string is populated as "album title" in the Now Playing dictionary.
+    public var nowPlayingAttribution: String? = "Wistia"
+
     //MARK: - Changing Media
 
     /**
@@ -281,16 +286,17 @@ public final class WistiaPlayer: NSObject {
      - Parameter media: The `WistiaMedia` from which to choose an asset to load for playback.
      - Parameter asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.
         Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
+     - Parameter project: The `WistiaProject` to which the media belongs.  Optional.
      
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
         _which does not guarantee success of the asynchronous video load_.
     */
-    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
+    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, fromProject project: WistiaProject? = nil) -> Bool {
         guard media != self.media else { return false }
         pause()
 
         let slug:String? = (asset != nil ? asset!.slug : nil)
-        readyPlayback(for: media, choosingAssetWithSlug: slug)
+        readyPlayback(for: media, choosingAssetWithSlug: slug, fromProject: project)
         return true
     }
 
@@ -596,6 +602,9 @@ public final class WistiaPlayer: NSObject {
             captionsRenderer.media = media
         }
     }
+
+    internal var project: WistiaProject?
+
     internal var statsCollector: WistiaMediaEventCollector?
     internal var referrer: String
 

@@ -29,8 +29,9 @@ internal extension WistiaPlayer {
 
     //MARK: - Private Helpers
 
-    internal func readyPlayback(for media: WistiaMedia, choosingAssetWithSlug slug: String?) {
+    internal func readyPlayback(for media: WistiaMedia, choosingAssetWithSlug slug: String?, fromProject project: WistiaProject? = nil) {
         self.media = media
+        self.project = project
         self.state = .videoPreLoading(media: media)
 
         //-- Out with the old (always, if applicable)
@@ -66,7 +67,7 @@ internal extension WistiaPlayer {
             let avPlayerItem = AVPlayerItem(asset: avAsset)
             addPlayerItemObservers(for: avPlayerItem)
             avPlayer.replaceCurrentItem(with: avPlayerItem)
-            updateNowPlayingFor(media)
+            updateNowPlayingFor(media: media, project: project)
         }
         catch URLDeterminationError.noAsset {
             self.state = .videoLoadingError(description: "Media \(media.hashedID) has no assets compatible with this player's configuration.", problemMedia: media, problemAsset: nil)
@@ -162,12 +163,25 @@ internal extension WistiaPlayer {
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
     }
 
-    internal func updateNowPlayingFor(_ playingMedia: WistiaMedia) {
+    internal func updateNowPlayingFor(media playingMedia: WistiaMedia, project playingProject: WistiaProject? = nil) {
+        // We don't have control over how the Now Playing info is displayed.
+        // Control Panel allows title and artist to span a few lines, and looks nice like this:
+        //   Title (multiline)   -  Video Title
+        //   Artist (multiline)  -  Project Name
+        //   Album Title         -  Wistia
+        //
+        // The lock screen scrolls title and artist, doesn't show album title.  It also looks nice this way.
         var nowPlayingInfo: [String: Any] = [
             MPMediaItemPropertyTitle: playingMedia.name,
             MPMediaItemPropertyMediaType: NSNumber(value: MPMediaType.movie.rawValue),
             MPNowPlayingInfoPropertyDefaultPlaybackRate: NSNumber(value: Double(1.0)),
         ]
+        if let attribution = nowPlayingAttribution {
+            nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = attribution
+        }
+        if let projectTitle = playingProject?.name {
+            nowPlayingInfo[MPMediaItemPropertyArtist] = projectTitle
+        }
         if let duration = playingMedia.duration, duration.isFinite {
             nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = NSNumber(value: TimeInterval(duration))
 

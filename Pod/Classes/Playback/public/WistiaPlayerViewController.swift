@@ -219,6 +219,7 @@ public final class WistiaPlayerViewController: UIViewController {
 
      - Parameters media: The `WistiaMedia` from which to choose an asset to load for playback.
      - Parameter asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.
+     - Parameter project: The `WistiaProject` to which the media belongs.  Optional.
      Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
      - Parameter autoplay: If set to `True`, playback will begin immediately upon loading the video.  If the video is
         already loaded, playback will be resumed.
@@ -226,10 +227,10 @@ public final class WistiaPlayerViewController: UIViewController {
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
      _which does not guarantee success of the asynchronous video load_.
      */
-    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, autoplay: Bool = false) -> Bool {
+    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, fromProject project: WistiaProject? = nil, autoplay: Bool = false) -> Bool {
         autoplayVideoWhenReady = autoplay
         self.loadViewIfNeeded()
-        let didReplace = wPlayer.replaceCurrentVideoWithVideo(forMedia: media, forcingAsset: asset)
+        let didReplace = wPlayer.replaceCurrentVideoWithVideo(forMedia: media, forcingAsset: asset, fromProject: project)
         if !didReplace && autoplayVideoWhenReady {
             //If didReplace == true, autoplay will be handled after video loads
             presentForPlaybackShowingChrome(true)
