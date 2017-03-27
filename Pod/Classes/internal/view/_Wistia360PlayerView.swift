@@ -86,8 +86,8 @@ internal class Wistia360PlayerView: UIView {
 
     fileprivate var animatingPitch = false
     fileprivate var manualEuler = SCNVector3Make(0, 0, 0)
-    fileprivate let ManualPitchCapUp = Float(85.0*M_PI/180.0)
-    fileprivate let ManualPitchCapDown = Float(60.0*M_PI/180.0)
+    fileprivate let ManualPitchCapUp = 85.0*Float.pi/180.0
+    fileprivate let ManualPitchCapDown = 60.0*Float.pi/180.0
 
     //Look Vector (aka Camera Position) Tracking
     //mostly in the extension, but can't (easily) add stored variables in extensions
@@ -316,7 +316,7 @@ internal class Wistia360PlayerView: UIView {
         cameraHolderNode.position = cameraNode.position
         cameraHolderNode.addChildNode(cameraNode)
         // When running without device motion, camera should be setup to look ahead
-        cameraHolderNode.transform = SCNMatrix4MakeRotation(-Float(M_PI_2), -1, 0, 0)
+        cameraHolderNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, -1, 0, 0)
         scene.rootNode.addChildNode(cameraHolderNode)
 
         // 3b) Sphere
@@ -333,7 +333,7 @@ internal class Wistia360PlayerView: UIView {
         sphereNode = SCNNode(geometry: sphere)
         // Reorient sphere to account for default texture mapping (upside down, backwards)
         // and device motion (natural state is device laying on back)
-        sphereNode.transform = SCNMatrix4MakeRotation(-Float(M_PI_2), 1, 0, 0)
+        sphereNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
 
         scene.rootNode.addChildNode(sphereNode)
     }
@@ -378,8 +378,8 @@ internal class Wistia360PlayerView: UIView {
                 let endLat = asin(endHit.localCoordinates.y / Float(SphereRadius))
                 var deltaLong = endLong - startLong
                 //Keep delta small in correct direction when crossing from -pi to +pi (and vice versa)
-                if fabs(deltaLong) > Float(M_PI) {
-                    deltaLong = (Float(M_PI) - fabs(endLong)) + (Float(M_PI) - fabs(startLong))
+                if fabs(deltaLong) > Float.pi {
+                    deltaLong = (Float.pi - fabs(endLong)) + (Float.pi - fabs(startLong))
                     if translation.x < 0 {
                         deltaLong = -deltaLong
                     }
