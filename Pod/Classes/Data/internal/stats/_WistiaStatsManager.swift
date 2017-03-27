@@ -164,13 +164,21 @@ public class WistiaStatsManager {
     }
 
     fileprivate func restoreEvents() {
-        if let events = NSKeyedUnarchiver.unarchiveObject(withFile: type(of: self).persistenceFilename) as? [StatsEvent] {
-            do {
-                try FileManager.default.removeItem(atPath: type(of: self).persistenceFilename)
+        do {
+            if let events = try NSKeyedUnarchiver.unarchiveObject(withFile: WistiaStatsManager.persistenceFilename) as? [StatsEvent] {
                 self.eventsPending.append(contentsOf: events)
-            } catch {
-                //how could this happen? not a critical error
             }
+        }
+        catch {
+            //tho it's not marked as such, NSKeyedUnarchiver.unarchiveObject can throw
+        }
+
+        //delete that file every time, especially if it couldn't be unarchived
+        do {
+            try FileManager.default.removeItem(atPath: WistiaStatsManager.persistenceFilename)
+        }
+        catch {
+            //ignore
         }
     }
 }
