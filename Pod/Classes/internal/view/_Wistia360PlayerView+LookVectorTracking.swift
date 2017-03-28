@@ -84,8 +84,8 @@ internal extension Wistia360PlayerView {
 
     //Convert from latitude and longitude to the heading and pitch wanted for back end analytics
     fileprivate func correctedHeadingPitchFrom(_ latlon: LatitudeLongitude) -> HeadingPitch {
-        let heading = latlon.longitude * 90.0 / Float(M_PI_2)
-        let pitch = (latlon.latitude * 180.0 / Float(M_PI_2)) - 180.0
+        let heading = latlon.longitude * 90.0 / Float.pi/2
+        let pitch = latlon.latitude * 180.0 / Float.pi/2 - 180.0
         return (heading, pitch)
     }
     

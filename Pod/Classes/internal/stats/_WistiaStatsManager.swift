@@ -143,7 +143,7 @@ internal class WistiaStatsManager {
             Alamofire.request(event.url, method: .post, parameters: event.json, encoding: JsonToBase64InBodyEncoder(json: event.json), headers: nil)
                 .response(completionHandler: { (dataResponse) in
                     if dataResponse.error != nil {
-                        print("ERROR sending stats: \(dataResponse.error)")
+                        print("ERROR sending stats: \(String(describing: dataResponse.error))")
                         if event.ttl > 0 {
                             self.eventsPending.append(StatsEvent(url: event.url, json: event.json, ttl: event.ttl-1))
                         } else {
