@@ -40,13 +40,13 @@ extension WistiaPlayerViewController {
 
             switch UIApplication.shared.statusBarOrientation {
             case .landscapeLeft:
-                transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
                 invertSize = true
             case .landscapeRight:
-                transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+                transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2)
                 invertSize = true
             case .portraitUpsideDown:
-                transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+                transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
                 invertSize = false
             default: //.Portrait
                 transform = CGAffineTransform.identity
@@ -82,7 +82,7 @@ extension WistiaPlayerViewController {
                     //To counter-rotate against 180, we first (1) under-counter-rotate by some small amount in the
                     //animation block then (2) finish the rotation after the animation block.  As long as we under-rotate
                     //by a small enough amount, it's imperceptible, and our views stay perfectly square afterward.
-                    counterTransform = CGAffineTransform(rotationAngle: -1*(CGFloat(M_PI)-0.00001))
+                    counterTransform = CGAffineTransform(rotationAngle: -1*(CGFloat.pi-0.00001))
                     completionTransform = CGAffineTransform(rotationAngle: -0.00001)
                 } else {
                     //just invert the 90 degree transforms
