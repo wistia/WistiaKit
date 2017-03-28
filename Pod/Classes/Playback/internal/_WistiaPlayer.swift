@@ -172,7 +172,7 @@ internal extension WistiaPlayer {
         //
         // The lock screen scrolls title and artist, doesn't show album title.  It also looks nice this way.
         var nowPlayingInfo: [String: Any] = [
-            MPMediaItemPropertyTitle: playingMedia.name,
+            MPMediaItemPropertyTitle: playingMedia.name ?? "Untitled",
             MPMediaItemPropertyMediaType: NSNumber(value: MPMediaType.movie.rawValue),
             MPNowPlayingInfoPropertyDefaultPlaybackRate: NSNumber(value: Double(1.0)),
         ]
