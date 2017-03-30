@@ -385,6 +385,9 @@ public final class WistiaPlayer: NSObject {
 
     //MARK: Remotely controlling playback
 
+    // To make sure we don't register multiple times
+    private var handlingRemoteControlEvents = false
+
     /**
      Registers this `WistiaPlayer` as the handler for remote control events (ie. headphone controls, control center's
      "Now Playing" panel, etc.).  As a side effect, the Now Playing panel of control center will begin showing information
@@ -404,6 +407,9 @@ public final class WistiaPlayer: NSObject {
 
      */
     public func beginHandlingRemoteControlEvents() {
+        guard !handlingRemoteControlEvents else { return }
+        handlingRemoteControlEvents = true
+
         let r = MPRemoteCommandCenter.shared()
         r.pauseCommand.addTarget(self, action: #selector(WistiaPlayer.pause))
         r.stopCommand.addTarget(self, action: #selector(WistiaPlayer.pause))
@@ -440,6 +446,9 @@ public final class WistiaPlayer: NSObject {
 
      */
     public func endHandlingRemoteControlEvents() {
+        guard handlingRemoteControlEvents else { return }
+        handlingRemoteControlEvents = false
+
         let r = MPRemoteCommandCenter.shared()
         r.pauseCommand.removeTarget(self)
         r.stopCommand.removeTarget(self)
