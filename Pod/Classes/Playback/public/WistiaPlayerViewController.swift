@@ -290,6 +290,18 @@ public final class WistiaPlayerViewController: UIViewController {
             wPlayer.togglePlayPause()
         }
     }
+    
+    //MARK: - Fullscreen Playback
+    
+    /// Toggle fullscreen playback.
+    public func toggleFullscreen() {
+        controlsFullscreenPressed(nil)
+    }
+    
+    /// Current fullscreen state.
+    public func isFullscreen() -> Bool {
+        return fullscreenConstraints != nil
+    }
 
 
     //MARK: - -----------Internal-----------
