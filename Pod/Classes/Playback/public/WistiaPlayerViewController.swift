@@ -27,6 +27,18 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      - Parameter vc: The `WistiaPlayerViewController` requesting to be closed.
      */
     func close(wistiaPlayerViewController vc: WistiaPlayerViewController)
+    
+    /**
+     The player has entered fullscreen mode. You are responsible for hiding the status bar and
+     navigation bar, as well as performing any other UI work to prepare for fullscreen playback.
+    */
+    func didEnterFullscreen(wistiaPlayerViewController vc: WistiaPlayerViewController)
+    
+    /**
+     The player has exited fullscreen mode. You are responsible for un-hiding the status bar and
+     navigation bar, as well as performing any other UI work to prepare for normal playback.
+     */
+    func didExitFullscreen(wistiaPlayerViewController vc: WistiaPlayerViewController)
 
     /**
      Called during at the same time as the `UIKit` standard `ViewController.viewWillAppear()`.
