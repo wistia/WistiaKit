@@ -154,6 +154,9 @@ internal extension WistiaPlayerViewController {
             print("ERROR: could not find current media to share")
         }
     }
+    
+    @IBAction func controlsFullscreenPressed(_ sender: AnyObject?) {
+    }
 
     @IBAction func controlsClosePressed(_ sender: AnyObject) {
         pause()
