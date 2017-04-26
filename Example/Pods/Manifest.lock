@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.4.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
-  - WistiaKit (0.21.0):
+  - WistiaKit (0.21.1):
     - Alamofire (~> 4.0)
     - AlamofireImage (~> 3.0)
 
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
-  WistiaKit: 2636ef751efabb9c6d13722a2800c469a95d8657
+  WistiaKit: 26493031e42c1aa66fc30cb95d16adcdaa982c60
 
 PODFILE CHECKSUM: 932dd269919ae569103f7e2e7667feaeb47dd62d
 
