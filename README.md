@@ -137,7 +137,7 @@ For those of you who want total control, you want the `WistiaPlayer`.  To see th
 
 #### Initializing `WistiaPlayerViewController` or `WistiaPlayer`
 
-* `referrer` - We recommend using a universal link to the video.  This will allow you to click that link from the Wistia stats page while still recording the in-app playback location.  If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions), referrer must match your whitelist or video will not load.
+* `referrer` - We recommend using a universal link to the video.  This will allow you to click that link from the Wistia stats page while still recording the in-app playback location.  If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions), the referrer should include the http(s) protocol and match a domain in your whitelist or video will not load.
 * `requireHLS` - Apple has [specific requirements](https://developer.apple.com/app-store/review/guidelines/#media-content) for playing video within apps.  It boils down to this: if you want to play video over 10 minutes in length over the celluar network (ie. you don't force wifi), then you must use [HLS](https://developer.apple.com/streaming/).  And Wistia fully supports and has thoroughly tested our HLS implementation with Apple.   We recommend leaving this to `true` which is the default.
 
 
