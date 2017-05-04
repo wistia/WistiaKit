@@ -348,8 +348,8 @@ internal extension WistiaPlayerViewController {
             posterStillImage.af_setImage(withURL: stillURL)
         }
         else if let media = wPlayer.media,
-            let thumbString = media.thumbnail?.url,
-            let thumbnail = URL(string: thumbString) {
+                let thumbString = media.thumbnail?.url,
+                let thumbnail = URL(string: thumbString)?.deletingQuery() {
             posterStillImage.isHidden = false
             posterStillImage.af_setImage(withURL: thumbnail)
         }
