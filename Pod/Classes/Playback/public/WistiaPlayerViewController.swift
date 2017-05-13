@@ -300,7 +300,7 @@ public final class WistiaPlayerViewController: UIViewController {
     
     /// Current fullscreen state.
     public func isFullscreen() -> Bool {
-        return fullscreenConstraints != nil
+        return fullscreenController != nil
     }
 
 
@@ -342,7 +342,7 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak internal var player360ViewWidthConstraint: NSLayoutConstraint!
     internal var needsManualLayoutFor360View = true
     internal var playing360 = false
-    internal var fullscreenConstraints: [NSLayoutConstraint]?
+    internal var fullscreenController: FullscreenController?
 
     //MARK: IB Outlets: Poster
     @IBOutlet weak internal var posterStillImageContainer: UIView!
