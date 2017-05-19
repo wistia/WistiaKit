@@ -15,7 +15,7 @@ class ViewController: UIViewController {
 
     //MARK: - Common code 
 
-    // The playerChooser can switch between playback using a presented WistiaPlayerViewController
+    // The playerChooser can switch between playback using a presented WistiaVulcanPlayerViewController
     // or, at a lower level, using a WistiaPlayer displayed through a sublayer in a child view.
     @IBOutlet weak var playerChooser: UISegmentedControl!
 
@@ -31,6 +31,7 @@ class ViewController: UIViewController {
 
                 //Play using WistiaPlayerViewController
                 wistiaPlayerVC.replaceCurrentVideoWithVideo(forHashedID: hashedID)
+                wistiaPlayerVC.fullscreenEnabled = false
                 self.present(wistiaPlayerVC, animated: true, completion: nil)
 
             case 1:
@@ -48,7 +49,7 @@ class ViewController: UIViewController {
 
     //MARK: - WistiaPlayerViewController Specific
 
-    let wistiaPlayerVC = WistiaPlayerViewController(referrer: "WistiaKitDemo", requireHLS: false)
+    let wistiaPlayerVC = WistiaVulcanPlayerViewController(referrer: "https://wistia.com/WistiaKitDemo")
 
     //MARK: - WistiaPlayer Specific
 
