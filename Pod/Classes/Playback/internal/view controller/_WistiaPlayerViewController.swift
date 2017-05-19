@@ -156,19 +156,16 @@ internal extension WistiaPlayerViewController {
     }
     
     @IBAction func controlsFullscreenPressed(_ sender: AnyObject?) {
-        guard let keyWindow = UIApplication.shared.keyWindow else {
-            assert(false, "Failed to get key window")
-            return
-        }
-    
-        let enteringFullscreen = fullscreenConstraints == nil
-        if enteringFullscreen {
-            fullscreenConstraints = view.constrainTo(view: keyWindow)
-            delegate?.didEnterFullscreen(wistiaPlayerViewController: self)
+        if let fullscreenController = fullscreenController {
+            fullscreenController.dismiss {
+                    self.delegate?.didExitFullscreen(wistiaPlayerViewController: self)
+                    self.fullscreenController = nil
+            }
         } else {
-            fullscreenConstraints?.forEach { $0.isActive = false }
-            fullscreenConstraints = nil
-            delegate?.didExitFullscreen(wistiaPlayerViewController: self)
+            let fullscreenController = FullscreenController()
+            fullscreenController.presentFullscreen(viewController: self, view: self.view)
+            self.fullscreenController = fullscreenController
+            delegate?.didEnterFullscreen(wistiaPlayerViewController: self)
         }
     }
 

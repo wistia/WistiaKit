@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    func constrainTo(view: UIView) -> [NSLayoutConstraint] {
+    func constrainTo(view: UIView) {
         let constraints = [
             topAnchor.constraint(equalTo: view.topAnchor),
             bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -17,6 +17,5 @@ extension UIView {
             trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         constraints.forEach { $0.isActive = true }
-        return constraints
     }
 }
