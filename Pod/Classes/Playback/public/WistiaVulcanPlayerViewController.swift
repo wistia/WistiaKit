@@ -149,6 +149,11 @@ public final class WistiaVulcanPlayerViewController: UIViewController {
         }
     }
 
+    /// Toggle the fullscreen mode of this view controller.
+    public func toggleFullscreen() {
+        _toggleFullscreen()
+    }
+
     /// Current fullscreen state.
     public func isFullscreen() -> Bool {
         return fullscreenWindow != nil
@@ -458,7 +463,7 @@ extension WistiaVulcanPlayerViewController {
     }
 
 
-    fileprivate func toggleFullscreen() {
+    fileprivate func _toggleFullscreen() {
         if !isFullscreen() {
             delegate?.vulcanController(self, willEnterFullscreen: true)
             fullscreenWindow = UIWindow(frame: UIApplication.shared.keyWindow!.bounds)
