@@ -149,6 +149,11 @@ public final class WistiaVulcanPlayerViewController: UIViewController {
         }
     }
 
+    /// Current fullscreen state.
+    public func isFullscreen() -> Bool {
+        return fullscreenWindow != nil
+    }
+
     /// The current state of the underlying video player.
     /// Register a delegate to observe changes to this property.
     fileprivate(set) var playerState: VulcanPlayerState = .unloaded {
@@ -156,6 +161,22 @@ public final class WistiaVulcanPlayerViewController: UIViewController {
             delegate?.vulcanController(self, playerDidChangeStateTo: playerState)
         }
     }
+
+    /**
+     The referrer shown when viewing your video statstics on Wistia.
+
+     We recommend using a universal link to the video.
+     This will allow you to click that link from the Wistia stats page
+     while still recording the in-app playback location.
+
+     - Important: If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions),
+     referrer must match your whitelist or video will not load.
+
+     - Note: Changing referrer takes effect the next time the video is replaced; it does not affect the currently
+     playing video.
+     
+     */
+    public var referrer = "https://wistia.com"
 
     //MARK: - Changing Media
 
@@ -234,7 +255,6 @@ public final class WistiaVulcanPlayerViewController: UIViewController {
 
     fileprivate var webView: WKWebView?
     fileprivate var config: WKWebViewConfiguration!
-    fileprivate var referrer = "https://wistia.com"
 
     //fullscreen stuff
     fileprivate var fullscreenWindow: UIWindow?
@@ -437,8 +457,9 @@ extension WistiaVulcanPlayerViewController {
         return .fade
     }
 
-    func toggleFullscreen() {
-        if fullscreenWindow == nil {
+
+    fileprivate func toggleFullscreen() {
+        if !isFullscreen() {
             delegate?.vulcanController(self, willEnterFullscreen: true)
             fullscreenWindow = UIWindow(frame: UIApplication.shared.keyWindow!.bounds)
             fullscreenWindow?.windowLevel = UIWindowLevelNormal
