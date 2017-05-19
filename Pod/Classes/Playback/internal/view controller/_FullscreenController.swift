@@ -70,7 +70,7 @@ class FullscreenController: NSObject {
         
         fullscreenWindow.addSubview(snapshotView)
         returnChildViewControllerToOriginalState()
-        let _ = snapshotView.constrainTo(view: fullscreenWindow)
+        snapshotView.constrainTo(view: fullscreenWindow)
         fullscreenWindow.isHidden = false
         
         fullscreenWindow.layoutIfNeeded()
@@ -102,7 +102,7 @@ private extension FullscreenController {
         vc.removeFromParentViewController()
         vc.view.removeFromSuperview()
         fullscreenWindow.addSubview(fullscreenView)
-        let _ = fullscreenView.constrainTo(view: fullscreenWindow)
+        fullscreenView.constrainTo(view: fullscreenWindow)
         
         fullscreenWindow.rootViewController = viewController
     }
