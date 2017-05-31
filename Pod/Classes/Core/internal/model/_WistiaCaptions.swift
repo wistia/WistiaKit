@@ -16,25 +16,25 @@ import Foundation
  and the actual text to be displayed.
 
  */
-internal struct WistiaCaptions {
+public struct WistiaCaptions {
 
     /// A unique identifier for this captions object.
-    let captionsID:Int
+    public let captionsID:Int
 
     /// Three letter code specifying the language of these captions.
-    let languageCode:String
+    public let languageCode:String
 
     /// English name of the language of these captions.
-    let englishName:String
+    public let englishName:String
 
     /// Native name of the language of these captions.
-    let nativeName:String
+    public let nativeName:String
 
     /// Should this text be displayed right-to-left.
-    let rightToLeft:Bool
+    public let rightToLeft:Bool
 
     /// Array of individual caption segments with display timing.
-    let captionSegments:[WistiaCaptionSegment]
+    public let captionSegments:[WistiaCaptionSegment]
 }
 
 extension WistiaCaptions: WistiaJSONParsable {
@@ -87,15 +87,15 @@ extension WistiaCaptions: WistiaJSONParsable {
  specifies the time to begin and end showing it.
  
  */
-internal struct WistiaCaptionSegment {
+public struct WistiaCaptionSegment {
     /// Time in video to begin displaying this segment
-    let startTime:Float
+    public let startTime:Float
 
     /// Time in video to stop displaying this segment
-    let endTime:Float
+    public let endTime:Float
 
     /// (Ordered) Array of lines of text to show on screen together
-    let text:[String]
+    public let text:[String]
 }
 
 internal extension WistiaCaptionSegment {

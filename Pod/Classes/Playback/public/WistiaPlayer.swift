@@ -6,8 +6,10 @@
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
 
+import WistiaKitCore
 import AVKit
 import AVFoundation
+import MediaPlayer
 
 //MARK: - WistiaPlayerDelegate
 
@@ -202,6 +204,8 @@ public final class WistiaPlayer: NSObject {
      referrer must match your whitelist or video will not load.
 
      - Parameter media: The `WistiaMedia` you wish to load asynchronously.
+     
+     - Parameter project: The `WistiaProject` to which the media belongs.  Optional.
 
      - Parameter referrer: The referrer shown when viewing your video statstics on Wistia.
 
@@ -222,9 +226,9 @@ public final class WistiaPlayer: NSObject {
 
      - Returns: A `WistiaPlayer` that is initialized and asynchronously loading the media for playback.
      */
-    public convenience init(media: WistiaMedia, referrer: String, requireHLS: Bool = true) {
+    public convenience init(media: WistiaMedia, project: WistiaProject? = nil, referrer: String, requireHLS: Bool = true) {
         self.init(referrer:referrer, requireHLS:requireHLS)
-        self.replaceCurrentVideoWithVideo(forMedia: media)
+        self.replaceCurrentVideoWithVideo(forMedia: media, fromProject: project)
     }
 
     //MARK: - Instance Properties
@@ -262,6 +266,9 @@ public final class WistiaPlayer: NSObject {
      */
     public var requireHLS:Bool
 
+    /// This string is populated as "album title" in the Now Playing dictionary.
+    public var nowPlayingAttribution: String? = "Wistia"
+
     //MARK: - Changing Media
 
     /**
@@ -279,16 +286,17 @@ public final class WistiaPlayer: NSObject {
      - Parameter media: The `WistiaMedia` from which to choose an asset to load for playback.
      - Parameter asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.
         Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
+     - Parameter project: The `WistiaProject` to which the media belongs.  Optional.
      
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
         _which does not guarantee success of the asynchronous video load_.
     */
-    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media:WistiaMedia, forcingAsset asset:WistiaAsset? = nil) -> Bool {
+    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, fromProject project: WistiaProject? = nil) -> Bool {
         guard media != self.media else { return false }
         pause()
 
         let slug:String? = (asset != nil ? asset!.slug : nil)
-        readyPlayback(for: media, choosingAssetWithSlug: slug)
+        readyPlayback(for: media, choosingAssetWithSlug: slug, fromProject: project)
         return true
     }
 
@@ -370,8 +378,90 @@ public final class WistiaPlayer: NSObject {
             if finished {
                 self.log(.seek)
             }
+            self.updateNowPlayingWithCurrentTimeAndRate()
             completionHandler?(finished)
         }
+    }
+
+    //MARK: Remotely controlling playback
+
+    // To make sure we don't register multiple times
+    private var handlingRemoteControlEvents = false
+
+    /**
+     Registers this `WistiaPlayer` as the handler for remote control events (ie. headphone controls, control center's
+     "Now Playing" panel, etc.).  As a side effect, the Now Playing panel of control center will begin showing information
+     for the media currently loaded by this player.  An additional side effect of that; the user can choose an AirPlay
+     destination for the current media.
+     
+     This player is automatically deregistered as a remote control event handler on deinitialization.
+     
+     - Important: Only one `WistiaPlayer` should be handling remote control events. Do not call this on a second 
+        `WistiaPlayer` unless and until you have called `endHandlingRemoteControlEvents` on this one (or this one
+        was deinitialized, acheiving the same).
+
+     - Note: Now playing information is automatically populated but it will not show up until an app begins
+        handling remote control events.  The old way to do this was calling 
+        `UIApplication.shared.beginReceivingRemoteControlEvents()`.  It is now done by registering a target-action
+        handler for one or more of the commands available from `MPRemoteCommandCenter.shared()`.
+
+     */
+    public func beginHandlingRemoteControlEvents() {
+        guard !handlingRemoteControlEvents else { return }
+        handlingRemoteControlEvents = true
+
+        let r = MPRemoteCommandCenter.shared()
+        r.pauseCommand.addTarget(self, action: #selector(WistiaPlayer.pause))
+        r.stopCommand.addTarget(self, action: #selector(WistiaPlayer.pause))
+        r.playCommand.addTarget(self, action: #selector(WistiaPlayer.play))
+        r.togglePlayPauseCommand.addTarget(self, action: #selector(WistiaPlayer.togglePlayPause))
+
+        r.nextTrackCommand.isEnabled = false
+        r.previousTrackCommand.isEnabled = false
+
+        r.changePlaybackRateCommand.isEnabled = false
+        r.seekForwardCommand.isEnabled = false
+        r.seekBackwardCommand.isEnabled = false
+        r.skipForwardCommand.isEnabled = false
+        r.skipBackwardCommand.isEnabled = false
+
+        r.ratingCommand.isEnabled = false
+        r.likeCommand.isEnabled = false
+        r.dislikeCommand.isEnabled = false
+
+        r.bookmarkCommand.isEnabled = false
+
+        if #available(iOS 9.1, *) {
+            r.changePlaybackPositionCommand.addTarget(self, action: #selector(WistiaPlayer.seekFromRemoteCommand))
+        }
+    }
+
+    /**
+     Unregisters this `WistiaPlayer` as the handler for remote control events.
+     
+     This will happen automatically upon `deinit()`.
+     
+     - Important: Only one `WistiaPlayer` should be handling remote control events. You must call this on the current
+        handler (or allow it to `deinit()`) before registering a different `WistiaPlayer`.
+
+     */
+    public func endHandlingRemoteControlEvents() {
+        guard handlingRemoteControlEvents else { return }
+        handlingRemoteControlEvents = false
+
+        let r = MPRemoteCommandCenter.shared()
+        r.pauseCommand.removeTarget(self)
+        r.stopCommand.removeTarget(self)
+        r.playCommand.removeTarget(self)
+        r.togglePlayPauseCommand.removeTarget(self)
+
+        if #available(iOS 9.1, *) {
+            r.changePlaybackPositionCommand.removeTarget(self)
+        }
+    }
+
+    internal func seekFromRemoteCommand(_ event: MPChangePlaybackPositionCommandEvent) {
+        seek(to: CMTime(seconds: event.positionTime, preferredTimescale: 100), completionHandler: nil)
     }
 
     //MARK: - State Information
@@ -499,6 +589,7 @@ public final class WistiaPlayer: NSObject {
     deinit {
         removePlayerItemObservers(for: self.avPlayer.currentItem)
         removePlayerObservers(for: self.avPlayer)
+        endHandlingRemoteControlEvents()
         WistiaStatsManager.sharedInstance.removeEventCollector(statsCollector)
     }
 
@@ -520,8 +611,11 @@ public final class WistiaPlayer: NSObject {
             captionsRenderer.media = media
         }
     }
-    internal var statsCollector:WistiaMediaEventCollector?
-    internal let referrer:String
+
+    internal var project: WistiaProject?
+
+    internal var statsCollector: WistiaMediaEventCollector?
+    internal var referrer: String
 
     // The 4K mp4s were not playing well.
     // Keeping max at 1920 seems good on testing thus far.

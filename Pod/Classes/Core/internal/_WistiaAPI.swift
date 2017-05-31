@@ -9,9 +9,10 @@
 import Foundation
 import Alamofire
 
-internal extension WistiaAPI {
+extension WistiaAPI {
 
-    internal static func captions(for hash:String, completionHandler: @escaping (_ captions: [WistiaCaptions], _ error: WistiaAPIError?)->() ) {
+    /// Warning: Framework Internal API
+    public static func captions(for hash:String, completionHandler: @escaping (_ captions: [WistiaCaptions], _ error: WistiaAPIError?)->() ) {
         Alamofire.request("https://fast.wistia.com/embed/captions/\(hash).json", method: .get)
             .responseJSON { response in
 
@@ -39,7 +40,8 @@ internal extension WistiaAPI {
     }
 
     /// Domain Restrictions enforces HTTP Referer on this route
-    internal static func mediaInfo(for hash:String, referer:String? = nil, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
+    /// Warning: Framework Internal API
+    public static func mediaInfo(for hash:String, referer:String? = nil, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
         var headers = [String: String]()
         if let ref = referer {
             headers["Referer"] = ref

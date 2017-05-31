@@ -5,7 +5,9 @@
 //  Created by Daniel Spinosa on 4/22/16.
 //  Copyright © 2016 Wistia, Inc. All rights reserved.
 //
+
 import Foundation
+import WistiaKitCore
 
 /**
  The delegate of a `WistiaPlayerViewController` must adopt the `WistiaPlayerViewControllerDelegate`
@@ -25,6 +27,18 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      - Parameter vc: The `WistiaPlayerViewController` requesting to be closed.
      */
     func close(wistiaPlayerViewController vc: WistiaPlayerViewController)
+    
+    /**
+     The player has entered fullscreen mode. You are responsible for hiding the status bar and
+     navigation bar, as well as performing any other UI work to prepare for fullscreen playback.
+    */
+    func didEnterFullscreen(wistiaPlayerViewController vc: WistiaPlayerViewController)
+    
+    /**
+     The player has exited fullscreen mode. You are responsible for un-hiding the status bar and
+     navigation bar, as well as performing any other UI work to prepare for normal playback.
+     */
+    func didExitFullscreen(wistiaPlayerViewController vc: WistiaPlayerViewController)
 
     /**
      Called during at the same time as the `UIKit` standard `ViewController.viewWillAppear()`.
@@ -159,6 +173,28 @@ public final class WistiaPlayerViewController: UIViewController {
         }
     }
 
+    /**
+     The referrer shown when viewing your video statstics on Wistia.
+
+     We recommend using a universal link to the video.
+     This will allow you to click that link from the Wistia stats page
+     while still recording the in-app playback location.
+     
+     - Important: If you are using [Domain Restrictions](https://wistia.com/doc/account-setup#domain_restrictions),
+     referrer must match your whitelist or video will not load.
+
+     - Note: Changing referrer takes effect the next time the video is replaced; it does not affect the currently
+     playing video.
+
+     */
+    public var referrer: String? {
+        didSet {
+            if wPlayer != nil {
+                wPlayer.referrer = referrer ?? "WistiaKit"
+            }
+        }
+    }
+
     //MARK: - Changing Media
 
     /**
@@ -195,6 +231,7 @@ public final class WistiaPlayerViewController: UIViewController {
 
      - Parameters media: The `WistiaMedia` from which to choose an asset to load for playback.
      - Parameter asset: The `WistiaAsset` of the `WistiaMedia` to load for playback.
+     - Parameter project: The `WistiaProject` to which the media belongs.  Optional.
      Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
      - Parameter autoplay: If set to `True`, playback will begin immediately upon loading the video.  If the video is
         already loaded, playback will be resumed.
@@ -202,10 +239,10 @@ public final class WistiaPlayerViewController: UIViewController {
      - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
      _which does not guarantee success of the asynchronous video load_.
      */
-    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, autoplay: Bool = false) -> Bool {
+    @discardableResult public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, fromProject project: WistiaProject? = nil, autoplay: Bool = false) -> Bool {
         autoplayVideoWhenReady = autoplay
         self.loadViewIfNeeded()
-        let didReplace = wPlayer.replaceCurrentVideoWithVideo(forMedia: media, forcingAsset: asset)
+        let didReplace = wPlayer.replaceCurrentVideoWithVideo(forMedia: media, forcingAsset: asset, fromProject: project)
         if !didReplace && autoplayVideoWhenReady {
             //If didReplace == true, autoplay will be handled after video loads
             presentForPlaybackShowingChrome(true)
@@ -253,13 +290,24 @@ public final class WistiaPlayerViewController: UIViewController {
             wPlayer.togglePlayPause()
         }
     }
+    
+    //MARK: - Fullscreen Playback
+    
+    /// Toggle fullscreen playback.
+    public func toggleFullscreen() {
+        controlsFullscreenPressed(nil)
+    }
+    
+    /// Current fullscreen state.
+    public func isFullscreen() -> Bool {
+        return fullscreenController != nil
+    }
 
 
     //MARK: - -----------Internal-----------
 
     //MARK: Player
 
-    internal var referrer:String?
     internal var requireHLS = false
     //we don't care about the media, but we do care what it says about customizing the UI
     internal var activeEmbedOptions = WistiaMediaEmbedOptions() {
@@ -294,6 +342,7 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak internal var player360ViewWidthConstraint: NSLayoutConstraint!
     internal var needsManualLayoutFor360View = true
     internal var playing360 = false
+    internal var fullscreenController: FullscreenController?
 
     //MARK: IB Outlets: Poster
     @IBOutlet weak internal var posterStillImageContainer: UIView!

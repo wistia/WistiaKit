@@ -24,6 +24,10 @@ import Foundation
  */
 public struct WistiaMediaEmbedOptions {
 
+    /// Initialize using default values
+    public init(){
+    }
+
     /// Tint for controls (default: #7b796a)
     public var playerColor: UIColor = UIColor(red: 0.482, green: 0.475, blue: 0.4157, alpha: 1)
 
@@ -164,6 +168,7 @@ public extension WistiaMediaEmbedOptions {
         if let ca = captionsAvailable { self.captionsAvailable = ca }
         if let co = captionsOnByDefault { self.captionsOnByDefault = co }
     }
+
 }
 
 extension WistiaMediaEmbedOptions: WistiaJSONParsable {

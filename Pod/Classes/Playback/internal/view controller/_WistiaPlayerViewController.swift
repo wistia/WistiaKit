@@ -8,6 +8,7 @@
 
 //Until we support 360 on TV, just killing this entire thing
 #if os(iOS)
+import WistiaKitCore
 import UIKit
 import AVFoundation
 import AlamofireImage
@@ -151,6 +152,20 @@ internal extension WistiaPlayerViewController {
             
         } else {
             print("ERROR: could not find current media to share")
+        }
+    }
+    
+    @IBAction func controlsFullscreenPressed(_ sender: AnyObject?) {
+        if let fullscreenController = fullscreenController {
+            fullscreenController.dismiss {
+                    self.delegate?.didExitFullscreen(wistiaPlayerViewController: self)
+                    self.fullscreenController = nil
+            }
+        } else {
+            let fullscreenController = FullscreenController()
+            fullscreenController.presentFullscreen(viewController: self, view: self.view)
+            self.fullscreenController = fullscreenController
+            delegate?.didEnterFullscreen(wistiaPlayerViewController: self)
         }
     }
 
@@ -330,8 +345,8 @@ internal extension WistiaPlayerViewController {
             posterStillImage.af_setImage(withURL: stillURL)
         }
         else if let media = wPlayer.media,
-            let thumbString = media.thumbnail?.url,
-            let thumbnail = URL(string: thumbString) {
+                let thumbString = media.thumbnail?.url,
+                let thumbnail = URL(string: thumbString)?.deletingQuery() {
             posterStillImage.isHidden = false
             posterStillImage.af_setImage(withURL: thumbnail)
         }
