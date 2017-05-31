@@ -17,7 +17,7 @@
 //  of important Wistia statistics.  Common functionality of the AVPLayer is available through
 //  public API directly on WistiaPlayer and through the delegate.
 
-import WistiaKitData
+import WistiaKitCore
 import Alamofire
 import AlamofireImage
 import UIKit

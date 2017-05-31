@@ -32,7 +32,7 @@ Two caveats:
 
 ## You Improve WistiaKit
 
-We're still in the early phases of developing this thing.  Please get in touch with us (Create an issue, a pull request, email or tweet at Wistia, etc.) to let us know what you'd like to see in WistiaKit.
+We're still in the early phases of developing this thing.  Please get in touch with us (Create an issue, a pull request, email or tweet at Wistia, etc.) to let us know what you'd like to see in `WistiaKit`.
 
 ## Requirements 
 
@@ -52,24 +52,24 @@ pod "WistiaKit"
 
 ## Usage
 
-WistiaKit is conceptually divided into two tranches; **playback** and **data**.  Depending on your application, you may use both components -- which work seamlessly together -- or either of them independently.  Let's briefly get to know them before diving into the details.
+`WistiaKit` is conceptually divided into two tranches; **playback** and **core**.  Depending on your application, you may use both components -- which work seamlessly together -- or either of them independently.  Let's briefly get to know them before diving into the details.
 
 **Playback** is akin to a web embed.  You can present a `WistiaPlayerViewController` and play any of your videos using nothing but its `hashedID`.  Customizations are applied to the player and statistics are tracked like normal; you need do nothing extra.  Run the example project in this pod to see it in action (`pod try WistiaKit` then hit ▶ in Xcode >= 8.0).
 
 If you don't want all the chrome (ie. player controls, scrubber, time, initial poster, etc.) you can get a little lower level with `WistiaPlayer`.  You still need just a `hashedID`, but all you get is an `AVPlayerLayer` which you can present and gussy up however you wish.  All your Wistia statistics ~~are belong to us~~ are tracked like normal.  Psst: the `WistiaPlayerViewController` uses the `WistiaPlayer` under the hood.
 
-**Data** is provided through the [Data API](http://wistia.com/doc/data-api).  We've Swift'd it up, built a bunch of structs, and added some nice syntactic sugar.  And the end result -- we hope -- is that it feels natural whether you're coming from another code-level interface to the Data API or the web view you use to manage your account.  Initialize a `WistiaAPI` object with an API Token from your account and you're off to the races.  View account details, list your projects, dig into your medias; everything you can do from the Data API, you can do from here.
+**Core** is provided through the [Data API](http://wistia.com/doc/data-api).  We've Swift'd it up, built a bunch of structs, and added some nice syntactic sugar.  And the end result -- we hope -- is that it feels natural whether you're coming from another code-level interface to the Data API or the web view you use to manage your account.  Initialize a `WistiaAPI` object with an API Token from your account and you're off to the races.  View account details, list your projects, dig into your medias; everything you can do from the Data API, you can do from here.
 
 Bring them both together: create a `WistiaAPI` to browse your `WistiaProject`s, choose a `WistiaMedia`, use that `WistiaMedia` object to initialize a `WistiaPlayerViewController`, and then `self.presentViewController(_:animated:completion:)`!  It's so easy, I bet you could build a pretty nice Apple TV app in a hackathon...
 
 **Video upload** is where it all begins!  Technically part of the `WistiaAPI` but cool enough to get it's own section.  Simply create a `URL` pointing to a movie on the device, or a `Data` of the movie itself, and upload into your account with just one line.
 
-### Data
+### Core
 
 I guess there's not much to say here.  Mostly just refer to the [Data API](http://wistia.com/doc/data-api) docs.  And of course, you should use an instance of `WistiaAPI` to intrect with the API.  For example:
 
 ```swift
-import WistiaKit
+import WistiaKitCore
 
 let globalAPI = WistiaAPI(apiToken:"C4NTB3L13V3TH1S1SARAND0MT0K3N")
 
@@ -87,7 +87,7 @@ func printMediasByProject(){
 }
 ```
 
-Caveat: WistiaKit is not yet [Data API](http://wistia.com/doc/data-api) complete.  But it will be.  If there's some functionality that you want, but is not yet available, let us know by submitting a Pull Request ☺ or creating an issue.
+Caveat: WistiaKitCore is not yet [Data API](http://wistia.com/doc/data-api) complete.  But it will be.  If there's some functionality that you want, but is not yet available, let us know by submitting a Pull Request ☺ or creating an issue.
 
 
 >**A Note About Structs**
@@ -98,9 +98,9 @@ Caveat: WistiaKit is not yet [Data API](http://wistia.com/doc/data-api) complete
 >
 >But even then you had _value types_.  A good example were your integers.  If you said `a = 4` and `b = a`, you set both `a` and `b` to the value of 4.  They weren't pointing to an object.  So `b++` didn't change the value of `a`, it would remain 4.
 >
->Enter Swift and a whole lot more value types!  Now we have _struct_ s (and _enum_ s and tuples) that may remind us of reference types, but are actually value types.  In `WistiaKit`, your data objects are _struct_ s.  So if you `let a = someMedia` and `let b = a`, your variables `a` and `b` have independent copies of that `WistiaMedia`.  If you change something, like `a.name = "whatever"`, this won't affect `b.name`.
+>Enter Swift and a whole lot more value types!  Now we have _struct_ s (and _enum_ s and tuples) that may remind us of reference types, but are actually value types.  In `WistiaKitCore`, your data objects are _struct_ s.  So if you `let a = someMedia` and `let b = a`, your variables `a` and `b` have independent copies of that `WistiaMedia`.  If you change something, like `a.name = "whatever"`, this won't affect `b.name`.
 >
->We think this makes `WistiaKit` less error prone and makes it easier to reason about your code.
+>We think this makes `WistiaKitCore` less error prone and makes it easier to reason about your code.
 >
 >If you want to spend some guru meditation time on this, you could do worse than starting with the [Swift Blog](https://developer.apple.com/swift/blog/?id=10) and a [WWDC 2015 talk](https://developer.apple.com/videos/play/wwdc2015/414/).
 
@@ -109,7 +109,7 @@ Caveat: WistiaKit is not yet [Data API](http://wistia.com/doc/data-api) complete
 Whether you take a video with the camera, download it from the web, or pull it from iCloud, it's just one line to upload to Wistia.  The hardest part should be locating the file `URL` or `Data`.  And that's pretty easy ;-]
 
 ```swift
-import WistiaKit
+import WistiaKitCore
 
 let api = WistiaAPI(apiToken: "C4NTB3L13V3TH1S1SARAND0MT0K3N")
 
@@ -171,6 +171,7 @@ A standalone `AVPlayerLayer` is avaiable through an `WistiaPlayer`s `newPlayerLa
 
 
 ```swift
+import WistiaKitCore
 import WistiaKit
 
 class IntroductionViewController: UIViewController, WistiaPlayerDelegate {
@@ -216,7 +217,7 @@ For those interpid slingers of the codez using `WistiaPlayer` directly, we've ma
 
 ## Player APIs
 
-Up above are a bunch of words that explain how WistiaKit is structured, how to approach it, and some examples of how to use it.  It's good to know the lay of the land.  But as they say, _the map is not the terrain_.  You're ready young padawan, go forth and read the [appledoc](http://cocoadocs.org/docsets/WistiaKit).
+Up above are a bunch of words that explain how `WistiaKit` is structured, how to approach it, and some examples of how to use it.  It's good to know the lay of the land.  But as they say, _the map is not the terrain_.  You're ready young padawan, go forth and read the [appledoc](http://cocoadocs.org/docsets/WistiaKit).
 
 
 ## Author
@@ -225,4 +226,4 @@ d j spinosa, spinosa@gmail.com
 
 ## License
 
-WistiaKit is available under the MIT license. See the LICENSE file for more info.
+WistiaKit and WistiaKitCore are available under the MIT license. See the LICENSE file for more info.

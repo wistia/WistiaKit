@@ -19,7 +19,7 @@
   },
   "requires_arc": true,
   "dependencies": {
-    "WistiaKitData": [
+    "WistiaKitCore": [
 
     ],
     "AlamofireImage": [
@@ -31,7 +31,7 @@
   "tvos": {
     "exclude_files": "Pod/Classes/**/*.{xib,nib}",
     "frameworks": [
-      "WistiaKitData",
+      "WistiaKitCore",
       "AdSupport",
       "AVFoundation",
       "AVKit",
@@ -42,7 +42,7 @@
   },
   "ios": {
     "frameworks": [
-      "WistiaKitData",
+      "WistiaKitCore",
       "AdSupport",
       "AVFoundation",
       "AVKit",

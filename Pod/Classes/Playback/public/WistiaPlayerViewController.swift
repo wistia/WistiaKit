@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import WistiaKitData
+import WistiaKitCore
 
 /**
  The delegate of a `WistiaPlayerViewController` must adopt the `WistiaPlayerViewControllerDelegate`

@@ -8,7 +8,7 @@
 
 //Until we support 360 on TV, just killing this entire thing
 #if os(iOS)
-import WistiaKitData
+import WistiaKitCore
 import UIKit
 import AVFoundation
 import AlamofireImage

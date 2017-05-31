@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double WistiaKitDataVersionNumber;
-FOUNDATION_EXPORT const unsigned char WistiaKitDataVersionString[];
+FOUNDATION_EXPORT double WistiaKitCoreVersionNumber;
+FOUNDATION_EXPORT const unsigned char WistiaKitCoreVersionString[];
 

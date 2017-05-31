@@ -1,15 +1,15 @@
-# WistiaKitData is the lighter-weight lower-level foundation upon which
+# WistiaKitCore is the lighter-weight lower-level foundation upon which
 # the full WistiaKit pod is built.
 #
 # They are split into two individual Pods to allow for different
 # module names (which isn't possible with subspecs).
 Pod::Spec.new do |data|
-  data.name             = "WistiaKitData"
-  data.module_name      = "WistiaKitData"
+  data.name             = "WistiaKitCore"
+  data.module_name      = "WistiaKitCore"
   data.version          = "0.1.0"
   data.summary          = "Access all of your Wistia media."
   data.description      = <<-DESC
-WistiaKitData is the lighter-weight and lower-level foundation upon which the full WistiaKit is built.  It defines the Wistia object model and provides API access.  Playback and UI is provided by WistiaKit.
+WistiaKitCore is the lighter-weight and lower-level foundation upon which the full WistiaKit is built.  It defines the Wistia object model and provides API access.  Playback and UI is provided by WistiaKit.
 
 They are split into two individual Pods to allow for different module names (which isn't possible with subspecs).
                              DESC
@@ -23,7 +23,7 @@ They are split into two individual Pods to allow for different module names (whi
   data.tvos.deployment_target = '9.0'
   data.requires_arc = true
   
-  data.source_files = "Pod/Classes/Data/**/*"
+  data.source_files = "Pod/Classes/Core/**/*"
   
   data.dependency 'Alamofire', '~> 4.0'
   
