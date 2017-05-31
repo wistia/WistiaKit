@@ -342,11 +342,17 @@ extension WistiaVulcanPlayerViewController {
 
     fileprivate func showFullscreenButton(shouldShow: Bool) {
         let en = fullscreenEnabled ? "true" : "false"
-        webView?.evaluateJavaScript("wkVideo.fullscreenButtonEnabled(\(en))", completionHandler: nil)
+        webView?.evaluateJavaScript("wkVideo.fullscreenButtonEnabled(\(en));", completionHandler: nil)
+    }
+
+    //NB: This isn't yet deployed in the wistia player
+    fileprivate func setControlsScaling(_ scalingFactor: Float) {
+        webView?.evaluateJavaScript("wkVideo.controlScaling(\(scalingFactor));", completionHandler: nil)
     }
 
     fileprivate func configureVulcanUI() {
         showFullscreenButton(shouldShow: fullscreenEnabled)
+        setControlsScaling(1.0)
     }
 }
 
