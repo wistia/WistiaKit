@@ -23,7 +23,7 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.social_media_url = 'http://twitter.com/wistia'
 
   s.ios.deployment_target = '9.0'
-  s.tvos.deployment_target = '9.0'
+  s.tvos.deployment_target = '10.0'
   s.requires_arc = true
   
   s.dependency 'WistiaKitCore'

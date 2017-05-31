@@ -146,8 +146,11 @@ fileprivate class FullscreenViewController: UIViewController {
             self.view.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         }, completion: nil)
     }
-    
+
+//not used / unavailable on tvOS
+#if os(iOS)
     override var shouldAutorotate: Bool { return true }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.all }
+#endif
 }
