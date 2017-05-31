@@ -6,7 +6,7 @@
 Pod::Spec.new do |data|
   data.name             = "WistiaKitCore"
   data.module_name      = "WistiaKitCore"
-  data.version          = "0.30.0"
+  data.version          = "0.30.1"
   data.summary          = "Access all of your Wistia media."
   data.description      = <<-DESC
 WistiaKitCore is the lighter-weight and lower-level foundation upon which the full WistiaKit is built.  It defines the Wistia object model and provides API access.  Playback and UI is provided by WistiaKit.

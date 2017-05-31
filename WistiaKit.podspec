@@ -4,7 +4,7 @@
 # module names (which isn't possible with subspecs).
 Pod::Spec.new do |s|
   s.name             = "WistiaKit"
-  s.version          = "0.30.0"
+  s.version          = "0.30.1"
   s.summary          = "Access and playback all of your Wistia media"
 
   s.description      = <<-DESC
