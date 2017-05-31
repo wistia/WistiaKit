@@ -62,6 +62,8 @@ If you don't want all the chrome (ie. player controls, scrubber, time, initial p
 
 Bring them both together: create a `WistiaAPI` to browse your `WistiaProject`s, choose a `WistiaMedia`, use that `WistiaMedia` object to initialize a `WistiaPlayerViewController`, and then `self.presentViewController(_:animated:completion:)`!  It's so easy, I bet you could build a pretty nice Apple TV app in a hackathon...
 
+Why did we pull the API interface and data models into `WistiaKitCore`?  For the times when you _don't_ need playback.  Especially when some of the APIs used in `WistiaKit` are unavailable but you still wish to view or manipulate account data.  Example: include only `WistiaKitData` when implementing an App Extension (or a Framework that will be used in an App Extension).
+
 **Video upload** is where it all begins!  Technically part of the `WistiaAPI` but cool enough to get it's own section.  Simply create a `URL` pointing to a movie on the device, or a `Data` of the movie itself, and upload into your account with just one line.
 
 ### Core
