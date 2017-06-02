@@ -1,10 +1,10 @@
-# The full WistiaKit pod adds playback to the WistiaKitData pod
+# The full WistiaKit pod adds playback to the WistiaKitCore pod
 #
 # They are split into two individual Pods to allow for different
 # module names (which isn't possible with subspecs).
 Pod::Spec.new do |s|
   s.name             = "WistiaKit"
-  s.version          = "0.21.0"
+  s.version          = "0.30.1"
   s.summary          = "Access and playback all of your Wistia media"
 
   s.description      = <<-DESC
@@ -23,10 +23,10 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.social_media_url = 'http://twitter.com/wistia'
 
   s.ios.deployment_target = '9.0'
-  s.tvos.deployment_target = '9.0'
+  s.tvos.deployment_target = '10.0'
   s.requires_arc = true
   
-  s.dependency 'WistiaKitData'
+  s.dependency 'WistiaKitCore'
   
   s.source_files = "Pod/Classes/Playback/**/*"
   # Although resource_bundles is the new recommended hotness, it doesn't play well with Asset Catalogs.
@@ -42,7 +42,7 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
   s.dependency 'AlamofireImage', '~> 3.0'
   
   # No CoreMotion on tvOS
-  s.ios.frameworks =  'WistiaKitData', 'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit', 'CoreMotion'
-  s.tvos.frameworks = 'WistiaKitData', 'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit'
+  s.ios.frameworks =  'WistiaKitCore', 'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit', 'CoreMotion'
+  s.tvos.frameworks = 'WistiaKitCore', 'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit'
 
 end

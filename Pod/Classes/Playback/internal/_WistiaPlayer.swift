@@ -17,7 +17,7 @@
 //  of important Wistia statistics.  Common functionality of the AVPLayer is available through
 //  public API directly on WistiaPlayer and through the delegate.
 
-import WistiaKitData
+import WistiaKitCore
 import Alamofire
 import AlamofireImage
 import UIKit
@@ -173,9 +173,11 @@ internal extension WistiaPlayer {
         // The lock screen scrolls title and artist, doesn't show album title.  It also looks nice this way.
         var nowPlayingInfo: [String: Any] = [
             MPMediaItemPropertyTitle: playingMedia.name ?? "Untitled",
-            MPMediaItemPropertyMediaType: NSNumber(value: MPMediaType.movie.rawValue),
             MPNowPlayingInfoPropertyDefaultPlaybackRate: NSNumber(value: Double(1.0)),
         ]
+        #if os(iOS) //MPMediaType unavailable on tvOS
+            nowPlayingInfo[MPMediaItemPropertyMediaType] = NSNumber(value: MPMediaType.movie.rawValue)
+        #endif
         if let attribution = nowPlayingAttribution {
             nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = attribution
         }

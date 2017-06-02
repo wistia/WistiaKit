@@ -11,7 +11,7 @@
 
 import UIKit
 import WebKit
-import WistiaKitData
+import WistiaKitCore
 
 /**
  The delegate of a `WistiaVulcanPlayerViewController` must adopt the `WistiaVulcanPlayerViewControllerDelegate`
