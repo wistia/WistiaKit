@@ -243,6 +243,16 @@
                                                                 <action selector="controlsActionPressed:" destination="-1" eventType="touchUpInside" id="nbd-NX-04o"/>
                                                             </connections>
                                                         </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oo8-Qu-zUA" userLabel="Fullscreen Button">
+                                                            <rect key="frame" x="287" y="0.0" width="44" height="44"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" priority="999" constant="44" id="d3B-sF-X2P"/>
+                                                            </constraints>
+                                                            <state key="normal" image="fullscreen"/>
+                                                            <connections>
+                                                                <action selector="controlsFullscreenPressed:" destination="-1" eventType="touchUpInside" id="GLV-GP-Tj7"/>
+                                                            </connections>
+                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdA-x0-aCn" userLabel="Close Button">
                                                             <rect key="frame" x="331" y="0.0" width="44" height="44"/>
                                                             <constraints>
@@ -461,6 +471,7 @@
     <resources>
         <image name="action" width="44" height="44"/>
         <image name="closedCaptions" width="44" height="44"/>
+        <image name="fullscreen" width="29" height="20"/>
         <image name="largePlay" width="36" height="51"/>
         <image name="skullNBones" width="32" height="30"/>
         <image name="smallPlay" width="15" height="21"/>

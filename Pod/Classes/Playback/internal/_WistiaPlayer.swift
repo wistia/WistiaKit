@@ -17,22 +17,28 @@
 //  of important Wistia statistics.  Common functionality of the AVPLayer is available through
 //  public API directly on WistiaPlayer and through the delegate.
 
+import WistiaKitCore
+import Alamofire
+import AlamofireImage
 import UIKit
 import AVKit
 import AVFoundation
+import MediaPlayer
 
 internal extension WistiaPlayer {
 
     //MARK: - Private Helpers
 
-    internal func readyPlayback(for media: WistiaMedia, choosingAssetWithSlug slug: String?) {
+    internal func readyPlayback(for media: WistiaMedia, choosingAssetWithSlug slug: String?, fromProject project: WistiaProject? = nil) {
         self.media = media
+        self.project = project
         self.state = .videoPreLoading(media: media)
 
         //-- Out with the old (always, if applicable)
         removePlayerItemObservers(for: avPlayer.currentItem)
         avPlayer.replaceCurrentItem(with: nil)
         WistiaStatsManager.sharedInstance.removeEventCollector(statsCollector)
+        clearNowPlaying()
 
         guard media.status != .failed else {
             self.state = .videoLoadingError(description: "Media \(media.hashedID) failed processing", problemMedia: media, problemAsset: nil)
@@ -61,6 +67,7 @@ internal extension WistiaPlayer {
             let avPlayerItem = AVPlayerItem(asset: avAsset)
             addPlayerItemObservers(for: avPlayerItem)
             avPlayer.replaceCurrentItem(with: avPlayerItem)
+            updateNowPlayingFor(media: media, project: project)
         }
         catch URLDeterminationError.noAsset {
             self.state = .videoLoadingError(description: "Media \(media.hashedID) has no assets compatible with this player's configuration.", problemMedia: media, problemAsset: nil)
@@ -150,7 +157,82 @@ internal extension WistiaPlayer {
         }
     }
 
-    //MARK:- Value add observation
+    //MARK: - Now Playing Info
+
+    internal func clearNowPlaying() {
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+    }
+
+    internal func updateNowPlayingFor(media playingMedia: WistiaMedia, project playingProject: WistiaProject? = nil) {
+        // We don't have control over how the Now Playing info is displayed.
+        // Control Panel allows title and artist to span a few lines, and looks nice like this:
+        //   Title (multiline)   -  Video Title
+        //   Artist (multiline)  -  Project Name
+        //   Album Title         -  Wistia
+        //
+        // The lock screen scrolls title and artist, doesn't show album title.  It also looks nice this way.
+        var nowPlayingInfo: [String: Any] = [
+            MPMediaItemPropertyTitle: playingMedia.name ?? "Untitled",
+            MPNowPlayingInfoPropertyDefaultPlaybackRate: NSNumber(value: Double(1.0)),
+        ]
+        #if os(iOS) //MPMediaType unavailable on tvOS
+            nowPlayingInfo[MPMediaItemPropertyMediaType] = NSNumber(value: MPMediaType.movie.rawValue)
+        #endif
+        if let attribution = nowPlayingAttribution {
+            nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = attribution
+        }
+        if let projectTitle = playingProject?.name {
+            nowPlayingInfo[MPMediaItemPropertyArtist] = projectTitle
+        }
+        if let duration = playingMedia.duration, duration.isFinite {
+            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = NSNumber(value: TimeInterval(duration))
+
+        }
+        if let artwork = mediaItemArtwork(of: playingMedia, atWidth: 800) {
+            nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
+        }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+    }
+
+    internal func udpateNowPlayingWith(time: CMTime, rate: Float) {
+        // A few ways to get here, some in the AV callback/handler chain, during which
+        // timing issues can cause a deadlock waiting for MPNowPlayingInfoCenter.default().
+        // Resolved by dispatching onto a background queue (this isn't directly a UI update)
+        DispatchQueue.global().async {
+            if var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo {
+                nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = NSNumber(value: time.seconds)
+                nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = NSNumber(value: Double(rate))
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+            }
+        }
+    }
+
+    internal func updateNowPlayingWithCurrentTimeAndRate() {
+        udpateNowPlayingWith(time: avPlayer.currentTime(), rate: avPlayer.rate)
+    }
+
+    internal func mediaItemArtwork(of media: WistiaMedia, atWidth thumbnailWidth: Int) -> MPMediaItemArtwork? {
+        guard let thumbURL = media.thumbnailURL(targetWidth: thumbnailWidth),
+            #available(iOS 10.0, *)
+            else {
+                return nil
+            }
+
+        return MPMediaItemArtwork(boundsSize: CGSize(width: thumbnailWidth, height: thumbnailWidth), requestHandler: { (size) -> UIImage in
+            var image: UIImage?
+            let semaphore = DispatchSemaphore(value: 0)
+            Alamofire.request(thumbURL).responseImage { response in
+                if let img = response.result.value {
+                    image = img
+                }
+                semaphore.signal()
+            }
+            semaphore.wait()
+            return image ?? UIImage()
+        })
+    }
+
+    //MARK: - Value add observation
 
     internal func playerItem(_ playerItem:AVPlayerItem, statusWas oldStatus:AVPlayerStatus?, changedTo newStatus:AVPlayerStatus){
         switch newStatus {
@@ -174,6 +256,7 @@ internal extension WistiaPlayer {
         if preventIdleTimerDuringPlayback {
             UIApplication.shared.isIdleTimerDisabled = (rate > 0.0)
         }
+        udpateNowPlayingWith(time: avPlayer.currentTime(), rate: rate)
         log(.playbackRateChange, withValue: String(format:"%f", rate))
     }
 

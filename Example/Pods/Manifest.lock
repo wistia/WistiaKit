@@ -2,24 +2,28 @@ PODS:
   - Alamofire (4.4.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
-  - WistiaKit (0.21.1):
-    - Alamofire (~> 4.0)
+  - WistiaKit (0.30.1):
     - AlamofireImage (~> 3.0)
+    - WistiaKitCore
+  - WistiaKitCore (0.30.1):
+    - Alamofire (~> 4.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.0)
-  - AlamofireImage (~> 3.0)
   - WistiaKit (from `../`)
+  - WistiaKitCore (from `../`)
 
 EXTERNAL SOURCES:
   WistiaKit:
+    :path: "../"
+  WistiaKitCore:
     :path: "../"
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
-  WistiaKit: 26493031e42c1aa66fc30cb95d16adcdaa982c60
+  WistiaKit: 83a4423faf848181e664a50ad6978c1ef7ef6de9
+  WistiaKitCore: '05865950b92e1b856cb823ecd587857f4fb8394b'
 
-PODFILE CHECKSUM: 932dd269919ae569103f7e2e7667feaeb47dd62d
+PODFILE CHECKSUM: e38a40900283c690958294bef36f4fc37aa49e88
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

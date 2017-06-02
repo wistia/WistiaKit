@@ -13,7 +13,7 @@
 import UIKit
 import AdSupport
 
-internal class WistiaMediaEventCollector : WistiaEventCollector {
+public class WistiaMediaEventCollector : WistiaEventCollector {
 
     //MARK: - Private Constants
 
@@ -72,7 +72,7 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
 
     //MARK: - Public API
 
-    var associatedEmail:String? {
+    public var associatedEmail:String? {
         get {
             if let em = eventMetadata["email"] as? String {
                 return em
@@ -85,7 +85,7 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
         }
     }
 
-    var foreignData:String? {
+    public var foreignData:String? {
         get {
             if let fd = eventMetadata["foreignData"] as? String {
                 return fd
@@ -98,7 +98,7 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
         }
     }
 
-    internal func log(_ event:EventType, withValue value:String){
+    public func log(_ event:EventType, withValue value:String){
         //Reduce frequency of .Update and .Seek events
         guard shouldSend(event, withValue: value) else { return }
 
@@ -116,7 +116,7 @@ internal class WistiaMediaEventCollector : WistiaEventCollector {
         eventDetails.append(EventDetails(event: event, value: value, timeDelta: msSinceInit(), lastAccountInstance: lastAccount, lastMediaInstance: lastMedia))
     }
 
-    enum EventType : String {
+    public enum EventType : String {
         case initialized = "initialized"
         case play = "play"
         case pause = "pause"
