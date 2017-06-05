@@ -89,6 +89,14 @@ public protocol WistiaPlayerDelegate : class {
 
      */
     func wistiaPlayer(_ player:WistiaPlayer, willLoadVideoForMedia media:WistiaMedia, usingAsset asset:WistiaAsset?, usingHLSMasterIndexManifest: Bool)
+    
+    /**
+     Informs the delegate that the WistiaPlayer is attempting to determine a URL for loading a `WistiaAsset`, giving an opportunity
+     for the delegate to inject a url (such as a cached local asset url).
+     
+     - Parameter media: The 'WistiaMedia' from which an asset will be chosen.
+     */
+    func wistiaPlayer(_ player:WistiaPlayer, shouldLoadVideoForMedia media:WistiaMedia) -> URL?
 }
 
 
