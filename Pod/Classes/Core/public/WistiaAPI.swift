@@ -36,6 +36,8 @@ public class WistiaAPI {
     fileprivate let apiToken: String?
     public let sessionManager: SessionManager
 
+    public static let anonymous = WistiaAPI(withoutApiToken:true)
+    
     //MARK: - Initialization
 
     ///  Initialize the `WistiaAPI` with the access permissions as granted by the given `apiToken`.
@@ -120,6 +122,43 @@ public class WistiaAPI {
         }
         return params
     }
+}
+
+extension WistiaAPI {
+    //MARK: - thumbnail
+    
+    /**
+     Get thumbnail of a given movie hash id (does not need an API token).
+     
+     See [Wistia Working with images - https://wistia.com/doc/working-with-images#using_oembed)
+     
+     - parameter forHash: the hashId that identifies the movie
+     - parameter imageWidthPoints: desired width of the image in points (the function converts to pixels taken into account the screen's scale)
+     - parameter completionHander: The block to invoke when the API call completes. The block takes 2 arguments: the requested thumbnail and the error status code of the request (if an error occured)
+     */
+    public static func thumbnail(forHash movieHashedId: String, imageWidthPoints: CGFloat = 0, completionHander: @escaping (_ thumbnail: WistiaMedia.Thumbnail?, _ error: WistiaAPIError?) -> () ){
+        //convert from points to pixels or take default value of 640 pixels
+        let widthPixels = imageWidthPoints > 0 ? Int(imageWidthPoints * UIScreen.main.scale) : 640
+        //construct the url
+        let url = "http://fast.wistia.net/oembed?url=http://home.wistia.com/medias/$$movieHasedId$$?embedType=async&videoWidth=$$imageWidth$$".replacingOccurrences(of: "$$movieHasedId$$", with: movieHashedId).replacingOccurrences(of:"$$imageWidth$$", with: String(widthPixels))
+        //make the call using the anonymous singleton instance (does not required API token)
+        anonymous.sessionManager.request(url, method: .get)
+            .responseJSON { response in
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    if let thumbnail = WistiaMedia.Thumbnail(fromOEmbed: JSON) {
+                        completionHander(thumbnail, nil)
+                    }
+                    else {
+                        completionHander(nil, WistiaAPIError.JSONDecodingFailure(JSON, WistiaAccount.self))
+                    }
+                }
+                else {
+                    completionHander(nil, WistiaAPIError.error(for: response))
+                }
+        }
+    }
+    
 }
 
 extension WistiaAPI {
