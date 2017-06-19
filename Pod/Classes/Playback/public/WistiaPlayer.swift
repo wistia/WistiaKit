@@ -96,10 +96,21 @@ public protocol WistiaPlayerDelegate : class {
      for the delegate to inject a url (such as a cached local asset url). The `WistiaPlayer` will use the URL returned by this method
      for playback. Return nil to allow the `WistiaPlayer` to determine the best playback URL.
      
+     Optional. The default implementation returns `nil`, retaining standard functionality.
+     
      - Parameter player: The `WistiaPlayer` determining the URL for playback.
      - Parameter media: The 'WistiaMedia' from which a playback URL is needed.
      */
     func wistiaPlayer(_ player:WistiaPlayer, shouldLoadVideoForMedia media:WistiaMedia) -> URL?
+}
+
+public extension WistiaPlayerDelegate {
+    
+    //Default implementation retains standard functionality
+    public func wistiaPlayer(_ player: WistiaPlayer, shouldLoadVideoForMedia media: WistiaMedia) -> URL? {
+        return nil
+    }
+    
 }
 
 
