@@ -279,7 +279,6 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
     public final func wistiaPlayer(_ player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
         configurePlayerViews(for: media)
     }
-
 }
 #endif //os(iOS)
 
