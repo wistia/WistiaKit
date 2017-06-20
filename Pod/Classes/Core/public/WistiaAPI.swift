@@ -36,6 +36,7 @@ public class WistiaAPI {
     fileprivate let apiToken: String?
     public let sessionManager: SessionManager
 
+    ///A shared instance of the WistiaAPI instantiated withoutApiToken, can be used to do anonymous tasks
     public static let anonymous = WistiaAPI(withoutApiToken:true)
     
     //MARK: - Initialization
@@ -140,7 +141,7 @@ extension WistiaAPI {
         //convert from points to pixels or take default value of 640 pixels
         let widthPixels = imageWidthPoints > 0 ? Int(imageWidthPoints * UIScreen.main.scale) : 640
         //construct the url
-        let url = "http://fast.wistia.net/oembed?url=http://home.wistia.com/medias/$$movieHasedId$$?embedType=async&videoWidth=$$imageWidth$$".replacingOccurrences(of: "$$movieHasedId$$", with: movieHashedId).replacingOccurrences(of:"$$imageWidth$$", with: String(widthPixels))
+        let url = "http://fast.wistia.net/oembed?url=http://home.wistia.com/medias/\(movieHashedId)?embedType=async&videoWidth=\(widthPixels)"
         //make the call using the anonymous singleton instance (does not required API token)
         anonymous.sessionManager.request(url, method: .get)
             .responseJSON { response in
