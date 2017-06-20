@@ -45,6 +45,18 @@ public struct WistiaMedia {
                 return nil
             }
         }
+        
+        init?(fromOEmbed dictionary: [String: Any]) {
+            let parser = Parser(dictionary: dictionary)
+            do {
+                url = try parser.fetch("thumbnail_url")
+                width = try parser.fetch("thumbnail_width")
+                height = try parser.fetch("thumbnail_height")
+            } catch let error {
+                print(error)
+                return nil
+            }
+        }
     }
 
     /**
