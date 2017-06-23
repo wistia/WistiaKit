@@ -9,8 +9,6 @@
 import UIKit
 
 class FullscreenController: NSObject {
-    weak var delegate: FullscreenControllerDelegate?
-    
     fileprivate var fullscreenWindow: UIWindow?
     fileprivate var fullscreenView: UIView?
     fileprivate var originalContainerViewController: UIViewController?
@@ -18,7 +16,7 @@ class FullscreenController: NSObject {
     fileprivate var snapshotView: UIView?
     fileprivate var viewController: UIViewController?
     
-    init(delegate: FullscreenControllerDelegate? = nil) {
+    override init() {
         let fullscreenWindow = UIWindow(frame: UIScreen.main.bounds)
         fullscreenWindow.windowLevel = UIWindowLevelNormal
         self.fullscreenWindow = fullscreenWindow
@@ -82,10 +80,6 @@ class FullscreenController: NSObject {
             completion?()
         })
     }
-}
-
-protocol FullscreenControllerDelegate: class {
-    func finalFrameForViewWhenDismissing() -> CGRect
 }
 
 private extension FullscreenController {
