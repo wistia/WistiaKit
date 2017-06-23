@@ -131,20 +131,3 @@ private extension FullscreenController {
         viewController = nil
     }
 }
-
-fileprivate class FullscreenViewController: UIViewController {
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate(alongsideTransition: { context in
-            self.view.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        }, completion: nil)
-    }
-
-//not used / unavailable on tvOS
-#if os(iOS)
-    override var shouldAutorotate: Bool { return true }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.all }
-#endif
-}
