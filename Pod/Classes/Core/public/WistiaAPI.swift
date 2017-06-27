@@ -508,6 +508,63 @@ extension WistiaAPI {
     }
 }
 
+//MARK: - Stats
+// Following is part of API v1 but not publicly documented.  
+// WistiaKit is making these available for the first-and-best customer, Wistia mobile app.
+// (A proper stats API will be available as part of API v2.)
+// Use at your own peril.
+extension WistiaAPI {
+
+    /// Use at your own peril.
+    public func statsEngagementFor(_ media: WistiaMedia, completionHandler: @escaping (_ json: [String: Any]?, _ error: WistiaAPIError?)->()) {
+        let params = paramsWithToken()
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/stats/medias/\(media.hashedID)/engagement.json", method: .get, parameters: params)
+            .responseJSON { response in
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    completionHandler(JSON, nil)
+                }
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
+    }
+
+    /// Use at your own peril.
+    public func statsEventsFor(_ media: WistiaMedia, page: Int = 1, perPage: Int = 10, completionHandler: @escaping (_ json: [[String: Any]]?, _ error: WistiaAPIError?)->()) {
+        var params = paramsWithToken()
+        params["media_id"] = media.hashedID
+        params["page"] = page
+        params["per_page"] = perPage
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/stats/events.json", method: .get, parameters: params)
+            .responseJSON { response in
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [[String: Any]] {
+                    completionHandler(JSON, nil)
+                }
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
+    }
+
+    /// Use at your own peril.
+    public func statsEventInfoFor(_ eventKey: String, completionHandler: @escaping (_ json: [String: Any]?, _ error: WistiaAPIError?)->()) {
+        let params = paramsWithToken()
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/stats/events/\(eventKey).json", method: .get, parameters: params)
+            .responseJSON { response in
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    completionHandler(JSON, nil)
+                }
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
+    }
+
+}
+
 //MARK: - Medias
 extension WistiaAPI {
 
