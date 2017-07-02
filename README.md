@@ -39,6 +39,7 @@ We're still in the early phases of developing this thing.  Please get in touch w
 You need a [Wistia](http://wistia.com) account on the Platform plan.  You'll also need some videos in your account.  And at this point in the game, you need the Hashed ID of the video you'd like to play. 
 
 ## Installation
+### CocoaPods
 
 WistiaKit is available through [CocoaPods](http://cocoapods.org).
 
@@ -48,6 +49,21 @@ To install, simply add the following line to your Podfile:
 
 ```ruby
 pod "WistiaKit"
+```
+### Carthage
+Starting from `0.30.2` WistiaKit should work with Carthage, sample Cartfile:
+
+```ruby
+github "Wistia/Wistiakit" ~> 0.30.2
+```
+At this moment this creates 2 frameworks `WistiaKit` and `WistiaKitCore`.
+In the future this could be converted into one framework, but for now this is what we have, and its working!
+
+Just remember to include both of these frameworks in your swift code:
+
+```swift
+ import WistiaKit
+ import WistiaKitCore
 ```
 
 ## Usage
