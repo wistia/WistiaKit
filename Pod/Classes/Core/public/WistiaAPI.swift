@@ -563,6 +563,21 @@ extension WistiaAPI {
         }
     }
 
+    /// Use at your own peril.
+    public func statsVisitorInfoFor(_ visitorKey: String, completionHandler: @escaping (_ json: [String: Any]?, _ error: WistiaAPIError?)->()) {
+        let params = paramsWithToken()
+        sessionManager.request("\(WistiaAPI.APIBaseURL)/stats/visitors/\(visitorKey).json", method: .get, parameters: params)
+            .responseJSON { response in
+                if response.response?.statusCode == 200,
+                    let JSON = response.result.value as? [String: Any] {
+                    completionHandler(JSON, nil)
+                }
+                else {
+                    completionHandler(nil, WistiaAPIError.error(for: response))
+                }
+        }
+    }
+
 }
 
 //MARK: - Medias
@@ -573,7 +588,7 @@ extension WistiaAPI {
      instead of returning an array of media, group the media into their respective projects.
 
      See [Wistia Data API - Medias: List](http://wistia.com/doc/data-api#medias_list).
-     
+
      - Note: Convenience method.  See `listMedias(page:perPage:sorting:limitedToProject:completionHandler:)` 
      for the direct mirror of the Data API method.
 
