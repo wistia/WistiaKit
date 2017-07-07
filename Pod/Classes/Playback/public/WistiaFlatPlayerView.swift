@@ -15,6 +15,7 @@ import AVKit
 import AVFoundation
 
 public class WistiaFlatPlayerView: UIView {
+    private var detachedAVPlayer: AVPlayer?
 
     override public class var layerClass: AnyClass {
         get {
@@ -25,6 +26,20 @@ public class WistiaFlatPlayerView: UIView {
     public var wistiaPlayer:WistiaPlayer? {
         didSet {
             (self.layer as! AVPlayerLayer).player = wistiaPlayer?.avPlayer
+        }
+    }
+    
+    public func prepareForBackgroundPlayback() {
+        if let playerLayer = layer as? AVPlayerLayer {
+            detachedAVPlayer = playerLayer.player
+            playerLayer.player = nil
+        }
+    }
+    
+    public func returnToForegroundPlayback() {
+        if let playerLayer = layer as? AVPlayerLayer {
+            playerLayer.player = detachedAVPlayer
+            detachedAVPlayer = nil
         }
     }
 
