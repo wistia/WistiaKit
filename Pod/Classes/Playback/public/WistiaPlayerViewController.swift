@@ -46,6 +46,13 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      - Parameter vc: The `WistiaPlayerViewController` whose view is about to appear.
     */
     func willAppear(wistiaPlayerViewController vc: WistiaPlayerViewController)
+    
+    /**
+     Called during at the same time as the `UIKit` standard `ViewController.viewWillDisappear()`.
+     
+     - Parameter vc: The `WistiaPlayerViewController` whose view is about to disappear.
+     */
+    func willDisappear(wistiaPlayerViewController vc: WistiaPlayerViewController)
 
     /**
      The user has tapped the action button and the activity view will appear.  Called just before
