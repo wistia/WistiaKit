@@ -408,14 +408,21 @@ public final class WistiaPlayerViewController: UIViewController {
 
 
         //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (_) -> Void in
-            if self != nil && !self!.autoplayVideoWhenReady {
-                self?.pause()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] _ in
+            if let strongSelf = self {
+                strongSelf.playerFlatView.returnToForegroundPlayback()
+    
+                if !strongSelf.autoplayVideoWhenReady {
+                    strongSelf.pause()
+                }
             }
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] (note) -> Void in
-            self?.autoplayVideoWhenReady = false
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] note in
+            if let strongSelf = self {
+                strongSelf.autoplayVideoWhenReady = false
+                strongSelf.playerFlatView.prepareForBackgroundPlayback()
+            }
         }
         
         overlayTapGestureRecognizer.require(toFail: overlayDoubleTapGestureRecognizer)
