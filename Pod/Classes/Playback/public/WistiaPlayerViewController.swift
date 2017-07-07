@@ -440,7 +440,7 @@ public final class WistiaPlayerViewController: UIViewController {
     override final public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        pause()
+        delegate?.willDisappear(wistiaPlayerViewController: self)
         cancelChromeInteractionTimer()
         autoplayVideoWhenReady = false
     }
