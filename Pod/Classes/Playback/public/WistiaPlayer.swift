@@ -644,7 +644,7 @@ public final class WistiaPlayer: NSObject {
     // XXX: This should be revisited when we have HLS assets for 360 videos
     internal let SphericalTargetAssetWidth:Int64 = 1920
 
-    //Raw Observeration
+    //Raw Observation
     internal var playerItemContext = 1
     internal var playerContext = 2
     internal var periodicTimeObserver: Any?
