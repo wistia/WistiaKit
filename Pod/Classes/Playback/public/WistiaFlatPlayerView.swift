@@ -30,17 +30,14 @@ public class WistiaFlatPlayerView: UIView {
     }
     
     public func prepareForBackgroundPlayback() {
-        if let playerLayer = layer as? AVPlayerLayer {
-            detachedAVPlayer = playerLayer.player
-            playerLayer.player = nil
-        }
+        let playerLayer = layer as! AVPlayerLayer
+        detachedAVPlayer = playerLayer.player
+        playerLayer.player = nil
     }
     
     public func returnToForegroundPlayback() {
-        if let playerLayer = layer as? AVPlayerLayer {
-            playerLayer.player = detachedAVPlayer
-            detachedAVPlayer = nil
-        }
+        (layer as! AVPlayerLayer).player = detachedAVPlayer
+        detachedAVPlayer = nil
     }
 
 }
