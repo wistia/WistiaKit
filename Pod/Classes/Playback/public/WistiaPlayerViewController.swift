@@ -414,12 +414,12 @@ public final class WistiaPlayerViewController: UIViewController {
         wPlayer.captionsRenderer.captionsView = self.captionsLabel
 
 
-        //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] _ in
             if let strongSelf = self {
                 strongSelf.playerFlatView.returnToForegroundPlayback()
-    
-                if !strongSelf.autoplayVideoWhenReady {
+
+                //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
+                if strongSelf.playing360 && !strongSelf.autoplayVideoWhenReady {
                     strongSelf.pause()
                 }
             }
