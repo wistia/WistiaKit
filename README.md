@@ -51,22 +51,23 @@ To install, simply add the following line to your Podfile:
 pod "WistiaKit"
 ```
 ### Carthage
-Starting from `0.30.2` WistiaKit should work with Carthage, sample Cartfile:
+Starting from `0.30.2` WistiaKit should work with Carthage. Don't forget to include `Alamofire` and `AlamofireImage` as they are used by WistiaKit. Sample Cartfile:
 
 ```ruby
 github "Wistia/Wistiakit" ~> 0.30.2
+github "Alamofire/Alamofire" ~> 4.4
+github "Alamofire/AlamofireImage" ~> 3.1
 ```
-At this moment this creates 2 frameworks `WistiaKit` and `WistiaKitCore`.
-In the future this could be converted into one framework, but for now this is what we have, and its working!
+This creates 2 frameworks `WistiaKit` and `WistiaKitCore` as explained inthe Usage section below.
 
-Just remember to include both of these frameworks in your swift code:
+Just remember to include the necessary frameworks in your swift code like this:
 
 ```swift
  import WistiaKit
  import WistiaKitCore
 ```
 
-## Usage
+##Usage
 
 `WistiaKit` is conceptually divided into two tranches; **playback** and **core**.  Depending on your application, you may use both components -- which work seamlessly together -- or either of them independently.  Let's briefly get to know them before diving into the details.
 
