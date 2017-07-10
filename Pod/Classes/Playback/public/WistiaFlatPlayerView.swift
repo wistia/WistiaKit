@@ -7,7 +7,7 @@
 //
 //  A View backed by an AVPlayerLayer.
 //
-//  Set the wistiaPlayer and this view will pass it's AVPlayer through to the backing AVPlayerLayer.
+//  Set the wistiaPlayer and this view will pass its AVPlayer through to the backing AVPlayerLayer.
 //
 
 import UIKit

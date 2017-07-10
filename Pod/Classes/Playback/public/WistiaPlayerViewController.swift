@@ -41,14 +41,14 @@ public protocol WistiaPlayerViewControllerDelegate : class {
     func didExitFullscreen(wistiaPlayerViewController vc: WistiaPlayerViewController)
 
     /**
-     Called during at the same time as the `UIKit` standard `ViewController.viewWillAppear()`.
+     Called at the same time as the `UIKit` standard `ViewController.viewWillAppear()`.
      
      - Parameter vc: The `WistiaPlayerViewController` whose view is about to appear.
     */
     func willAppear(wistiaPlayerViewController vc: WistiaPlayerViewController)
     
     /**
-     Called during at the same time as the `UIKit` standard `ViewController.viewWillDisappear()`.
+     Called at the same time as the `UIKit` standard `ViewController.viewWillDisappear()`.
      
      - Parameter vc: The `WistiaPlayerViewController` whose view is about to disappear.
      */
