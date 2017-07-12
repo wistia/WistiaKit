@@ -218,17 +218,26 @@ public class WistiaMediaEventCollector : WistiaEventCollector {
             return savedID
         }
 
-        let newID:String
-        if let adId = ASIdentifierManager.shared().advertisingIdentifier, ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
-            //on web, this tracks user across all players on all pages in a single browser
-            newID = "\(guidPrefix())_\(adId.uuidString)"
-        } else {
-            newID = "\(guidPrefix())_\(UUID().uuidString)"
-        }
-        statsUserDefaults?.set(newID, forKey: key)
+        let newId:String
+        
+        let fallbackId = "\(guidPrefix())_\(UUID().uuidString)"
 
-        return newID
+        guard let adManager = ASIdentifierManager.shared() else {
+            return fallbackId
+        }
+        
+        if let adId = adManager.advertisingIdentifier, adManager.isAdvertisingTrackingEnabled {
+            //on web, this tracks user across all players on all pages in a single browser
+            newId = "\(guidPrefix())_\(adId.uuidString)"
+        } else {
+            newId = fallbackId
+        }
+
+        statsUserDefaults?.set(newId, forKey: key)
+
+        return newId
     }
+
 
     fileprivate static func guidPrefix() -> String {
         return "v\(guidPrefixDateFormatter.string(from: Date()))"
