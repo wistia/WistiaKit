@@ -54,7 +54,7 @@ pod "WistiaKit"
 Starting from `0.30.2` WistiaKit should work with Carthage. Don't forget to include `Alamofire` and `AlamofireImage` as they are used by WistiaKit. Sample Cartfile:
 
 ```ruby
-github "Wistia/Wistiakit" ~> 0.30.2
+github "Wistia/WistiaKit" ~> 0.30.2
 github "Alamofire/Alamofire" ~> 4.4
 github "Alamofire/AlamofireImage" ~> 3.1
 ```
