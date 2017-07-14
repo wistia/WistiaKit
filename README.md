@@ -39,6 +39,7 @@ We're still in the early phases of developing this thing.  Please get in touch w
 You need a [Wistia](http://wistia.com) account on the Platform plan.  You'll also need some videos in your account.  And at this point in the game, you need the Hashed ID of the video you'd like to play. 
 
 ## Installation
+### CocoaPods
 
 WistiaKit is available through [CocoaPods](http://cocoapods.org).
 
@@ -49,8 +50,24 @@ To install, simply add the following line to your Podfile:
 ```ruby
 pod "WistiaKit"
 ```
+### Carthage
+Starting from `0.30.2` WistiaKit should work with Carthage. Don't forget to include `Alamofire` and `AlamofireImage` as they are used by WistiaKit. Sample Cartfile:
 
-## Usage
+```ruby
+github "Wistia/WistiaKit" ~> 0.30.2
+github "Alamofire/Alamofire" ~> 4.4
+github "Alamofire/AlamofireImage" ~> 3.1
+```
+This creates 2 frameworks `WistiaKit` and `WistiaKitCore` as explained inthe Usage section below.
+
+Just remember to include the necessary frameworks in your swift code like this:
+
+```swift
+ import WistiaKit
+ import WistiaKitCore
+```
+
+##Usage
 
 `WistiaKit` is conceptually divided into two tranches; **playback** and **core**.  Depending on your application, you may use both components -- which work seamlessly together -- or either of them independently.  Let's briefly get to know them before diving into the details.
 
