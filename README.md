@@ -67,7 +67,7 @@ Just remember to include the necessary frameworks in your swift code like this:
  import WistiaKitCore
 ```
 
-##Usage
+## Usage
 
 `WistiaKit` is conceptually divided into two tranches; **playback** and **core**.  Depending on your application, you may use both components -- which work seamlessly together -- or either of them independently.  Let's briefly get to know them before diving into the details.
 
