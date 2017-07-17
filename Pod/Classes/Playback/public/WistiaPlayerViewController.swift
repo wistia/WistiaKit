@@ -83,6 +83,20 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      */
     func wistiaPlayerViewController(_ vc: WistiaPlayerViewController, activityViewControllerDidCompleteForMedia media:WistiaMedia, withActivityType activityType: String?, completed: Bool, activityError: Error?)
 
+    /**
+     Determines whether playback continues (with audio only) when your app enters the background.
+     
+     When your app is in the background, audio playback can be manipulated via the Control Center or using headphone controls.
+     
+     - Parameter vc: The `WistiaPlayerViewController` whose hosting app is entering the background.
+    */
+    func shouldContinuePlaybackWhenEnteringBackground(_ vc: WistiaPlayerViewController) -> Bool
+}
+
+public extension WistiaPlayerViewControllerDelegate {
+    public func shouldContinuePlaybackWhenEnteringBackground(_: WistiaPlayerViewController) -> Bool {
+        return false
+    }
 }
 
 
