@@ -435,7 +435,9 @@ public final class WistiaPlayerViewController: UIViewController {
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] _ in
             if let strongSelf = self {
-                strongSelf.playerFlatView.returnToForegroundPlayback()
+                if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
+                    strongSelf.playerFlatView.returnToForegroundPlayback()
+                }
 
                 //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
                 if strongSelf.playing360 && !strongSelf.autoplayVideoWhenReady {
@@ -447,7 +449,10 @@ public final class WistiaPlayerViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] note in
             if let strongSelf = self {
                 strongSelf.autoplayVideoWhenReady = false
-                strongSelf.playerFlatView.prepareForBackgroundPlayback()
+                
+                if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
+                    strongSelf.playerFlatView.prepareForBackgroundPlayback()
+                }
             }
         }
         
