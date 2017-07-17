@@ -7,7 +7,7 @@
 //
 //  A View backed by an AVPlayerLayer.
 //
-//  Set the wistiaPlayer and this view will pass it's AVPlayer through to the backing AVPlayerLayer.
+//  Set the wistiaPlayer and this view will pass its AVPlayer through to the backing AVPlayerLayer.
 //
 
 import UIKit
@@ -15,6 +15,7 @@ import AVKit
 import AVFoundation
 
 public class WistiaFlatPlayerView: UIView {
+    private var detachedAVPlayer: AVPlayer?
 
     override public class var layerClass: AnyClass {
         get {
@@ -26,6 +27,17 @@ public class WistiaFlatPlayerView: UIView {
         didSet {
             (self.layer as! AVPlayerLayer).player = wistiaPlayer?.avPlayer
         }
+    }
+    
+    public func prepareForBackgroundPlayback() {
+        let playerLayer = layer as! AVPlayerLayer
+        detachedAVPlayer = playerLayer.player
+        playerLayer.player = nil
+    }
+    
+    public func returnToForegroundPlayback() {
+        (layer as! AVPlayerLayer).player = detachedAVPlayer
+        detachedAVPlayer = nil
     }
 
 }
