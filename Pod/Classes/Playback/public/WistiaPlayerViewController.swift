@@ -434,25 +434,25 @@ public final class WistiaPlayerViewController: UIViewController {
 
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] _ in
-            if let strongSelf = self {
-                if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
-                    strongSelf.playerFlatView.returnToForegroundPlayback()
-                }
-
-                //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
-                if strongSelf.playing360 && !strongSelf.autoplayVideoWhenReady {
-                    strongSelf.pause()
-                }
+            guard let strongSelf = self else { return }
+            
+            if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
+                strongSelf.playerFlatView.returnToForegroundPlayback()
+            }
+            
+            //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
+            if strongSelf.playing360 && !strongSelf.autoplayVideoWhenReady {
+                strongSelf.pause()
             }
         }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] note in
-            if let strongSelf = self {
-                strongSelf.autoplayVideoWhenReady = false
-                
-                if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
-                    strongSelf.playerFlatView.prepareForBackgroundPlayback()
-                }
+            guard let strongSelf = self else { return }
+            
+            strongSelf.autoplayVideoWhenReady = false
+            
+            if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
+                strongSelf.playerFlatView.prepareForBackgroundPlayback()
             }
         }
         
