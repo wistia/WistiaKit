@@ -234,6 +234,16 @@ If you are using the `WistiaPlayerViewController`, closed captioning if fully su
 
 For those interpid slingers of the codez using `WistiaPlayer` directly, we've made it fairly simple to display captions.  Grab the `WistiaPlayer.captionsRenderer` -- an instance of `WistiaCaptionsRenderer` configured for that player -- and hook up its `captionsView` to a view in your UI that overlays the video view.  The renderer handles the under-the-hood work of retrieving the captions, timing data, updating the UI content, and mainting proper UI visibility.  Captions are kept up to date during playback and seeking across all videos loaded by the `WistiaPlayer`.  Control what captions, if any, are displayed with the `enabled` and `captionsLanguageCode` properties of the `WistiaCaptionsRenderer`.
 
+#### Audio Playback
+
+Enabling audio playback when the user has their device switched to vibrate mode must be done by you, in your application:
+
+```
+AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+```
+
+WistiaKit does not presume to read minds ;-]
+
 ## Player APIs
 
 Up above are a bunch of words that explain how `WistiaKit` is structured, how to approach it, and some examples of how to use it.  It's good to know the lay of the land.  But as they say, _the map is not the terrain_.  You're ready young padawan, go forth and read the [appledoc](http://cocoadocs.org/docsets/WistiaKit).
