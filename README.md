@@ -1,5 +1,5 @@
 # WistiaKit
-![WistiaKit](/../assets/wistia_kit_stack_logo.png)
+<img src="https://wistia.com/assets/platform/WistiaKit-c4c6f3d46b06507c7d2c0bf3755e683c.png" width="100">
 
 The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swift.
 
