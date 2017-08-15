@@ -21,7 +21,7 @@ Ok, got that out of the way.  Now for the fun and fairly easy part!
 2.  `pod try WistiaKit` will pull this Pod down and open it in Xcode
 3.  Choose the "WistiaKit-Example" project next to the play icon and press play!
 
-This simple app lets you enter the Hashed ID of any media and play it.  Look at the code in `WistiaKit/Example for Wistia Kit/ViewCongtroller.swift` and look at the basic interface in `WistiaKit/Example for Wistia Kit/Main.storyboard`.  That's all there is to it; two interface outlets, one custom instance variable, and three lines of code to play the video.
+This simple app lets you enter the Hashed ID of any media and play it.  Look at the code in `WistiaKit/Example for Wistia Kit/ViewController.swift` and look at the basic interface in `WistiaKit/Example for Wistia Kit/Main.storyboard`.  That's all there is to it; two interface outlets, one custom instance variable, and three lines of code to play the video.
 
 ## Your Video on tvOS (Apple TV)
 
