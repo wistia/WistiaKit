@@ -387,6 +387,7 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak internal var controlsPlayPauseButton: UIButton!
     @IBOutlet weak internal var controlsCaptionsButton: UIButton!
     @IBOutlet weak internal var controlsActionButton: UIButton!
+    @IBOutlet weak internal var controlsFullscreenButton: UIButton!
     @IBOutlet weak internal var controlsCloseButton: UIButton!
     @IBOutlet weak internal var scrubberTrackContainerView: UIView!
     @IBOutlet weak internal var scrubberCurrentProgressView: UIView!

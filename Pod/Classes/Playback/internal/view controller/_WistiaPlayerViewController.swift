@@ -26,6 +26,8 @@ extension WistiaPlayerViewController {
         super.viewWillAppear(animated)
         seekToStartIfAtEnd()
         needsManualLayoutFor360View = true
+        //We don't support (and it doesn't make much sense) to allow going fullscreen when already being presented modally (often fullscreen)
+        controlsFullscreenButton.isHidden = (self.presentingViewController != nil)
         self.delegate?.willAppear(wistiaPlayerViewController:  self)
     }
 
@@ -156,6 +158,11 @@ internal extension WistiaPlayerViewController {
     }
     
     @IBAction func controlsFullscreenPressed(_ sender: AnyObject?) {
+        guard presentingViewController == nil else {
+            assertionFailure("Doesn't make sense to present fullscreen when we're already being presented")
+            return
+        }
+
         if let fullscreenController = fullscreenController {
             fullscreenController.dismiss {
                     self.delegate?.didExitFullscreen(wistiaPlayerViewController: self)
