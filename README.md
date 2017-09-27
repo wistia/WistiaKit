@@ -1,5 +1,5 @@
 # WistiaKit
-![WistiaKit](/../assets/wistia_kit_stack_logo.png)
+<img src="https://wistia.com/assets/platform/WistiaKit-c4c6f3d46b06507c7d2c0bf3755e683c.png" width="100">
 
 The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swift.
 
@@ -7,6 +7,8 @@ The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swi
 [![Version](https://img.shields.io/cocoapods/v/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
 [![License](https://img.shields.io/cocoapods/l/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
 [![Platform](https://img.shields.io/cocoapods/p/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
+
+Swift 4 compatibility on the [djs/xcode-9](https://github.com/wistia/WistiaKit/tree/djs/xcode-9) branch
 
 ## Your Video on iOS in 5 minutes!
 
@@ -19,7 +21,7 @@ Ok, got that out of the way.  Now for the fun and fairly easy part!
 2.  `pod try WistiaKit` will pull this Pod down and open it in Xcode
 3.  Choose the "WistiaKit-Example" project next to the play icon and press play!
 
-This simple app lets you enter the Hashed ID of any media and play it.  Look at the code in `WistiaKit/Example for Wistia Kit/ViewCongtroller.swift` and look at the basic interface in `WistiaKit/Example for Wistia Kit/Main.storyboard`.  That's all there is to it; two interface outlets, one custom instance variable, and three lines of code to play the video.
+This simple app lets you enter the Hashed ID of any media and play it.  Look at the code in `WistiaKit/Example for Wistia Kit/ViewController.swift` and look at the basic interface in `WistiaKit/Example for Wistia Kit/Main.storyboard`.  That's all there is to it; two interface outlets, one custom instance variable, and three lines of code to play the video.
 
 ## Your Video on tvOS (Apple TV)
 
@@ -39,6 +41,7 @@ We're still in the early phases of developing this thing.  Please get in touch w
 You need a [Wistia](http://wistia.com) account on the Platform plan.  You'll also need some videos in your account.  And at this point in the game, you need the Hashed ID of the video you'd like to play. 
 
 ## Installation
+### CocoaPods
 
 WistiaKit is available through [CocoaPods](http://cocoapods.org).
 
@@ -48,6 +51,22 @@ To install, simply add the following line to your Podfile:
 
 ```ruby
 pod "WistiaKit"
+```
+### Carthage
+Starting from `0.30.2` WistiaKit should work with Carthage. Don't forget to include `Alamofire` and `AlamofireImage` as they are used by WistiaKit. Sample Cartfile:
+
+```ruby
+github "Wistia/WistiaKit" ~> 0.30.2
+github "Alamofire/Alamofire" ~> 4.4
+github "Alamofire/AlamofireImage" ~> 3.1
+```
+This creates 2 frameworks `WistiaKit` and `WistiaKitCore` as explained inthe Usage section below.
+
+Just remember to include the necessary frameworks in your swift code like this:
+
+```swift
+ import WistiaKit
+ import WistiaKitCore
 ```
 
 ## Usage
@@ -216,6 +235,16 @@ class IntroductionViewController: UIViewController, WistiaPlayerDelegate {
 If you are using the `WistiaPlayerViewController`, closed captioning if fully supported right out of the box.  You don't need to do anything more!
 
 For those interpid slingers of the codez using `WistiaPlayer` directly, we've made it fairly simple to display captions.  Grab the `WistiaPlayer.captionsRenderer` -- an instance of `WistiaCaptionsRenderer` configured for that player -- and hook up its `captionsView` to a view in your UI that overlays the video view.  The renderer handles the under-the-hood work of retrieving the captions, timing data, updating the UI content, and mainting proper UI visibility.  Captions are kept up to date during playback and seeking across all videos loaded by the `WistiaPlayer`.  Control what captions, if any, are displayed with the `enabled` and `captionsLanguageCode` properties of the `WistiaCaptionsRenderer`.
+
+#### Audio Playback
+
+Enabling audio playback when the user has their device switched to vibrate mode must be done by you, in your application:
+
+```
+AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+```
+
+WistiaKit does not presume to read minds ;-]
 
 ## Player APIs
 

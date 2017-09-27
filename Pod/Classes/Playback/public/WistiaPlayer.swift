@@ -82,6 +82,7 @@ public protocol WistiaPlayerDelegate : class {
      that will always be the one used.  Otherwise, heuristics will use the current value of `requireHLS` and
      device characteristics to select the best asset.
      
+     - Parameter player: The `WistiaPlayer` loading the asset.
      - Parameter media: The `WistiaMedia` from which this asset was chosen.
      - Parameter asset: The `WistiaAsset` that will be loaded for playback, if the HLS master index manifest was not used.
      - Parameter usingHLSMasterIndexManifest: `True` iff playback is using the HLS master index manifest 
@@ -89,6 +90,27 @@ public protocol WistiaPlayerDelegate : class {
 
      */
     func wistiaPlayer(_ player:WistiaPlayer, willLoadVideoForMedia media:WistiaMedia, usingAsset asset:WistiaAsset?, usingHLSMasterIndexManifest: Bool)
+    
+    /**
+     Informs the delegate that the `WistiaPlayer` is attempting to determine a URL for loading a `WistiaAsset`, giving an opportunity
+     for the delegate to inject a url (such as a cached local asset url). The `WistiaPlayer` will use the URL returned by this method
+     for playback. Return nil to allow the `WistiaPlayer` to determine the best playback URL.
+     
+     Optional. The default implementation returns `nil`, retaining standard functionality.
+     
+     - Parameter player: The `WistiaPlayer` determining the URL for playback.
+     - Parameter media: The 'WistiaMedia' from which a playback URL is needed.
+     */
+    func wistiaPlayer(_ player:WistiaPlayer, shouldLoadVideoForMedia media:WistiaMedia) -> URL?
+}
+
+public extension WistiaPlayerDelegate {
+    
+    //Default implementation retains standard functionality
+    public func wistiaPlayer(_ player: WistiaPlayer, shouldLoadVideoForMedia media: WistiaMedia) -> URL? {
+        return nil
+    }
+    
 }
 
 
@@ -622,7 +644,7 @@ public final class WistiaPlayer: NSObject {
     // XXX: This should be revisited when we have HLS assets for 360 videos
     internal let SphericalTargetAssetWidth:Int64 = 1920
 
-    //Raw Observeration
+    //Raw Observation
     internal var playerItemContext = 1
     internal var playerContext = 2
     internal var periodicTimeObserver: Any?

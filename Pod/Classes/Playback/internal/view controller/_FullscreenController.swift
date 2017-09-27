@@ -9,16 +9,14 @@
 import UIKit
 
 class FullscreenController: NSObject {
-    weak var delegate: FullscreenControllerDelegate?
-    
     fileprivate var fullscreenWindow: UIWindow?
     fileprivate var fullscreenView: UIView?
     fileprivate var originalContainerViewController: UIViewController?
     fileprivate var originalSuperview: UIView?
-    fileprivate var snapshotView: UIView?
     fileprivate var viewController: UIViewController?
+    fileprivate var placeholderView: UIView?
     
-    init(delegate: FullscreenControllerDelegate? = nil) {
+    override init() {
         let fullscreenWindow = UIWindow(frame: UIScreen.main.bounds)
         fullscreenWindow.windowLevel = UIWindowLevelNormal
         self.fullscreenWindow = fullscreenWindow
@@ -31,20 +29,16 @@ class FullscreenController: NSObject {
             let fullscreenWindow = fullscreenWindow,
             let parentVC = vc.parent,
             let superview = vc.view.superview,
-            let view = view ?? vc.view,
-            let originalSnapshotView = view.snapshotView(afterScreenUpdates: false)
+            let view = view ?? vc.view
         else {
             assert(false, "Couldn't get ancestral views/VCs for fullscreen")
             return
         }
         
-        originalSnapshotView.translatesAutoresizingMaskIntoConstraints = false
-        
         originalContainerViewController = parentVC
         originalSuperview = superview
         viewController = vc
         fullscreenView = view
-        snapshotView = originalSnapshotView
         
         fullscreenWindow.isHidden = false
         let originalFrame = view.convert(view.bounds, to: nil)
@@ -61,38 +55,31 @@ class FullscreenController: NSObject {
     func dismiss(completion: (() -> Void)?) {
         guard
             let fullscreenWindow = fullscreenWindow,
-            let fullscreenView = fullscreenView,
-            let snapshotView = snapshotView
+            let placeholderView = placeholderView
         else {
             assert(false, "Couldn't get container view")
             return
         }
         
-        fullscreenWindow.addSubview(snapshotView)
-        returnChildViewControllerToOriginalState()
-        snapshotView.constrainTo(view: fullscreenWindow)
-        fullscreenWindow.isHidden = false
-        
         fullscreenWindow.layoutIfNeeded()
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-            fullscreenWindow.frame = fullscreenView.convert(fullscreenView.bounds, to: nil)
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            fullscreenWindow.frame = placeholderView.convert(placeholderView.bounds, to: nil)
             fullscreenWindow.layoutIfNeeded()
         }, completion: { _ in
+            self.returnChildViewControllerToOriginalState()
+            placeholderView.removeFromSuperview()
             self.teardown()
             completion?()
         })
     }
 }
 
-protocol FullscreenControllerDelegate: class {
-    func finalFrameForViewWhenDismissing() -> CGRect
-}
-
 private extension FullscreenController {
     func configureChildViewController(_ vc: UIViewController) {
         guard
             let fullscreenWindow = fullscreenWindow,
-            let fullscreenView = fullscreenView
+            let fullscreenView = fullscreenView,
+            let originalSuperview = originalSuperview
         else {
             assert(false, "Couldn't configure child VC")
             return
@@ -105,6 +92,12 @@ private extension FullscreenController {
         fullscreenView.constrainTo(view: fullscreenWindow)
         
         fullscreenWindow.rootViewController = viewController
+        
+        let placeholderView = UIView()
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        originalSuperview.addSubview(placeholderView)
+        placeholderView.constrainTo(view: originalSuperview)
+        self.placeholderView = placeholderView
     }
     
     func returnChildViewControllerToOriginalState() {
@@ -131,26 +124,11 @@ private extension FullscreenController {
     }
     
     func teardown() {
+        fullscreenWindow?.isHidden = true
         fullscreenWindow = nil
+        placeholderView = nil
         originalSuperview = nil
         originalContainerViewController = nil
         viewController = nil
     }
-}
-
-fileprivate class FullscreenViewController: UIViewController {
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate(alongsideTransition: { context in
-            self.view.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        }, completion: nil)
-    }
-
-//not used / unavailable on tvOS
-#if os(iOS)
-    override var shouldAutorotate: Bool { return true }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.all }
-#endif
 }

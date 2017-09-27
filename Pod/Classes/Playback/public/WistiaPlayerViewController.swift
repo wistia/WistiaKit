@@ -29,23 +29,35 @@ public protocol WistiaPlayerViewControllerDelegate : class {
     func close(wistiaPlayerViewController vc: WistiaPlayerViewController)
     
     /**
-     The player has entered fullscreen mode. You are responsible for hiding the status bar and
-     navigation bar, as well as performing any other UI work to prepare for fullscreen playback.
+     Called when the player has entered fullscreen mode. You are responsible for hiding the status 
+     bar and navigation bar, as well as performing any other UI work to prepare for fullscreen 
+     playback.
+     
+     - Parameter vc: The `WistiaPlayerViewController` that entered fullscreen mode.
     */
     func didEnterFullscreen(wistiaPlayerViewController vc: WistiaPlayerViewController)
     
     /**
-     The player has exited fullscreen mode. You are responsible for un-hiding the status bar and
-     navigation bar, as well as performing any other UI work to prepare for normal playback.
+     Called when the player has exited fullscreen mode. You are responsible for un-hiding the status
+     bar and navigation bar, as well as performing any other UI work to prepare for normal playback.
+     
+     - Parameter vc: The `WistiaPlayerViewController` that exited fullscreen mode.
      */
     func didExitFullscreen(wistiaPlayerViewController vc: WistiaPlayerViewController)
 
     /**
-     Called during at the same time as the `UIKit` standard `ViewController.viewWillAppear()`.
+     Called at the same time as the `UIKit` standard `ViewController.viewWillAppear()`.
      
      - Parameter vc: The `WistiaPlayerViewController` whose view is about to appear.
     */
     func willAppear(wistiaPlayerViewController vc: WistiaPlayerViewController)
+    
+    /**
+     Called at the same time as the `UIKit` standard `ViewController.viewWillDisappear()`.
+     
+     - Parameter vc: The `WistiaPlayerViewController` whose view is about to disappear.
+     */
+    func willDisappear(wistiaPlayerViewController vc: WistiaPlayerViewController)
 
     /**
      The user has tapped the action button and the activity view will appear.  Called just before
@@ -71,6 +83,20 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      */
     func wistiaPlayerViewController(_ vc: WistiaPlayerViewController, activityViewControllerDidCompleteForMedia media:WistiaMedia, withActivityType activityType: String?, completed: Bool, activityError: Error?)
 
+    /**
+     Determines whether playback continues (with audio only) when your app enters the background.
+     
+     When your app is in the background, audio playback can be manipulated via the Control Center or using headphone controls.
+     
+     - Parameter vc: The `WistiaPlayerViewController` whose hosting app is entering the background.
+    */
+    func shouldContinuePlaybackWhenEnteringBackground(_ vc: WistiaPlayerViewController) -> Bool
+}
+
+public extension WistiaPlayerViewControllerDelegate {
+    public func shouldContinuePlaybackWhenEnteringBackground(_: WistiaPlayerViewController) -> Bool {
+        return false
+    }
 }
 
 
@@ -361,6 +387,7 @@ public final class WistiaPlayerViewController: UIViewController {
     @IBOutlet weak internal var controlsPlayPauseButton: UIButton!
     @IBOutlet weak internal var controlsCaptionsButton: UIButton!
     @IBOutlet weak internal var controlsActionButton: UIButton!
+    @IBOutlet weak internal var controlsFullscreenButton: UIButton!
     @IBOutlet weak internal var controlsCloseButton: UIButton!
     @IBOutlet weak internal var scrubberTrackContainerView: UIView!
     @IBOutlet weak internal var scrubberCurrentProgressView: UIView!
@@ -407,15 +434,27 @@ public final class WistiaPlayerViewController: UIViewController {
         wPlayer.captionsRenderer.captionsView = self.captionsLabel
 
 
-        //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (_) -> Void in
-            if self != nil && !self!.autoplayVideoWhenReady {
-                self?.pause()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            
+            if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
+                strongSelf.playerFlatView.returnToForegroundPlayback()
+            }
+            
+            //It seems that SpriteKit always resumes a SKVideoNode when app resumes, so we need to cancel
+            if strongSelf.playing360 && !strongSelf.autoplayVideoWhenReady {
+                strongSelf.pause()
             }
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] (note) -> Void in
-            self?.autoplayVideoWhenReady = false
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] note in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.autoplayVideoWhenReady = false
+            
+            if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
+                strongSelf.playerFlatView.prepareForBackgroundPlayback()
+            }
         }
         
         overlayTapGestureRecognizer.require(toFail: overlayDoubleTapGestureRecognizer)
@@ -426,7 +465,7 @@ public final class WistiaPlayerViewController: UIViewController {
     override final public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        pause()
+        delegate?.willDisappear(wistiaPlayerViewController: self)
         cancelChromeInteractionTimer()
         autoplayVideoWhenReady = false
     }
