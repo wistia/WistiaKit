@@ -156,26 +156,24 @@ public class WistiaStatsManager {
 
     //MARK: Event Persistence
 
-    static let persistenceFilename = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/StatsManager.EventsPending"
+    static let oldPersistenceFilename = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/StatsManager.EventsPending"
+    static let newPersistenceFilename = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/StatsManager.NewEventsPending"
 
     fileprivate func persistEvents() {
-        NSKeyedArchiver.archiveRootObject(eventsPending, toFile: type(of: self).persistenceFilename)
+        NSKeyedArchiver.archiveRootObject(eventsPending, toFile: WistiaStatsManager.newPersistenceFilename)
         eventsPending.removeAll()
     }
 
     fileprivate func restoreEvents() {
-        do {
-            if let events = try NSKeyedUnarchiver.unarchiveObject(withFile: WistiaStatsManager.persistenceFilename) as? [StatsEvent] {
-                self.eventsPending.append(contentsOf: events)
-            }
-        }
-        catch {
-            //tho it's not marked as such, NSKeyedUnarchiver.unarchiveObject can throw
+        if let events = NSKeyedUnarchiver.unarchiveObject(withFile: WistiaStatsManager.newPersistenceFilename) as? [StatsEvent] {
+            self.eventsPending.append(contentsOf: events)
         }
 
-        //delete that file every time, especially if it couldn't be unarchived
+        //delete that file every time, events will be persisted if needed
         do {
-            try FileManager.default.removeItem(atPath: WistiaStatsManager.persistenceFilename)
+            try FileManager.default.removeItem(atPath: WistiaStatsManager.newPersistenceFilename)
+            //and delete the old archive that had a potentially unstable object name
+            try FileManager.default.removeItem(atPath: WistiaStatsManager.oldPersistenceFilename)
         }
         catch {
             //ignore
@@ -204,7 +202,7 @@ internal protocol WistiaEventCollector : class {
 //
 // By making it an NSObject that conforms to NSCoding, it's easy to archive and unarchive.
 // Cant' wait until they update that sort of stuff for Swift.  but until then, we get bonus LOC...
-fileprivate class StatsEvent: NSObject, NSCoding {
+@objc(_TtC13WistiaKitCoreP33_7BBF6D837E25F572EB2C877506E5B04B10StatsEvent)fileprivate class StatsEvent: NSObject, NSCoding {
     let url: URL
     let json: [String: Any]
     let ttl: Int
