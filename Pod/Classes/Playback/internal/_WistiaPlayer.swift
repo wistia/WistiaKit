@@ -282,14 +282,14 @@ internal extension WistiaPlayer {
         log(.update)
     }
 
-    internal func playerItemPlayedToEnd(_ notification:Notification) {
+    @objc internal func playerItemPlayedToEnd(_ notification:Notification) {
         DispatchQueue.main.async {
             self.delegate?.didPlayToEndTime(of: self)
         }
         log(.end)
     }
 
-    internal func playerItemFailedToPlayToEnd(_ notification:Notification) {
+    @objc internal func playerItemFailedToPlayToEnd(_ notification:Notification) {
         //ignoring for now
     }
 

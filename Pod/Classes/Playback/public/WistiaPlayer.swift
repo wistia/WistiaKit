@@ -357,7 +357,7 @@ public final class WistiaPlayer: NSObject {
     //MARK: - Controlling Playback
 
     /// Play the video.  This method is idempotent.
-    public func play() {
+    @objc public func play() {
         if avPlayer.rate == 0 {
             avPlayer.play()
             log(.play)
@@ -365,7 +365,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     /// Pause the video.  This method is idempotent.
-    public func pause() {
+    @objc public func pause() {
         if avPlayer.rate > 0 {
             avPlayer.pause()
             log(.pause)
@@ -373,7 +373,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     /// Play the video if it's currently paused.  Pause if it's currently playing.
-    public func togglePlayPause() {
+    @objc public func togglePlayPause() {
         if avPlayer.rate > 0 {
             avPlayer.pause()
             log(.pause)
@@ -482,7 +482,7 @@ public final class WistiaPlayer: NSObject {
         }
     }
 
-    internal func seekFromRemoteCommand(_ event: MPChangePlaybackPositionCommandEvent) {
+    @objc internal func seekFromRemoteCommand(_ event: MPChangePlaybackPositionCommandEvent) {
         seek(to: CMTime(seconds: event.positionTime, preferredTimescale: 100), completionHandler: nil)
     }
 

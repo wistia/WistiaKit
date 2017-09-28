@@ -550,7 +550,7 @@ internal extension WistiaPlayerViewController {
         chromeInteractionTimer?.invalidate()
     }
 
-    internal func noChromeInteraction(){
+    @objc internal func noChromeInteraction(){
         presentForPlaybackShowingChrome(false)
     }
 
@@ -736,7 +736,7 @@ extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSou
             title = wPlayer.captionsRenderer.captionsLanguagesAvailable[row-1]
         }
 
-        return NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.white])
+        return NSAttributedString(string: title, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
     }
 
     //data source
