@@ -15,6 +15,7 @@ class FullscreenController: NSObject {
     fileprivate var originalSuperview: UIView?
     fileprivate var viewController: UIViewController?
     fileprivate var placeholderView: UIView?
+    fileprivate var originalSuperviewConstraints: [NSLayoutConstraint]?
     
     override init() {
         let fullscreenWindow = UIWindow(frame: UIScreen.main.bounds)
@@ -37,6 +38,7 @@ class FullscreenController: NSObject {
         
         originalContainerViewController = parentVC
         originalSuperview = superview
+        originalSuperviewConstraints = superview.constraints
         viewController = vc
         fullscreenView = view
         
@@ -87,6 +89,7 @@ private extension FullscreenController {
         
         vc.willMove(toParentViewController: nil)
         vc.removeFromParentViewController()
+        originalSuperviewConstraints = vc.view.superview?.constraints
         vc.view.removeFromSuperview()
         fullscreenWindow.addSubview(fullscreenView)
         fullscreenView.constrainTo(view: fullscreenWindow)
@@ -119,6 +122,12 @@ private extension FullscreenController {
         
         originalContainerViewController.addChildViewController(viewController)
         originalSuperview.addSubview(fullscreenView)
+        originalSuperviewConstraints?.forEach({ (originalConstraint) in
+            if !originalSuperview.constraints.contains(originalConstraint) {
+                originalSuperview.addConstraint(originalConstraint)
+                originalConstraint.isActive = true
+            }
+        })
         viewController.didMove(toParentViewController: originalContainerViewController)
         fullscreenView.frame = originalSuperview.frame
     }
