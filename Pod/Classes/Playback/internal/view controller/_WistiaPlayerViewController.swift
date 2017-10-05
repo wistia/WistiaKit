@@ -373,6 +373,11 @@ internal extension WistiaPlayerViewController {
             controlsFullscreenButton.isHidden = true
         }
 
+        //controls close button only makes sense when being presented modally
+        if self.presentingViewController == nil {
+            controlsCloseButton.isHidden = true
+        }
+
         //The following are implemented dynamically:
         // * bigPlayButton (see presentForFirstPlayback())
         // * controlsVisibleOnLoad (see presentForFirstPlayback())
@@ -565,7 +570,7 @@ internal extension WistiaPlayerViewController {
 
     internal func showPlaybackControls(_ showControls: Bool, extraClose showExtraClose: Bool) {
         playbackControlsContainer.isHidden = !showControls
-        if delegate == nil && presentingViewController == nil {
+        if presentingViewController == nil {
             extraCloseButton.isHidden = true
         } else {
             extraCloseButton.isHidden = !showExtraClose
