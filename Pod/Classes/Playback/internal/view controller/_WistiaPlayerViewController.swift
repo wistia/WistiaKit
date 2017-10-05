@@ -27,7 +27,9 @@ extension WistiaPlayerViewController {
         seekToStartIfAtEnd()
         needsManualLayoutFor360View = true
         //We don't support (and it doesn't make much sense) to allow going fullscreen when already being presented modally (often fullscreen)
-        controlsFullscreenButton.isHidden = (self.presentingViewController != nil)
+        if self.presentingViewController != nil {
+            controlsFullscreenButton.isHidden = true
+        }
         self.delegate?.willAppear(wistiaPlayerViewController:  self)
     }
 
@@ -335,6 +337,8 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func customizeView(for embedOptions: WistiaMediaEmbedOptions) {
+        loadViewIfNeeded()
+        
         //playerColor
         playbackControlsContainer.backgroundColor = embedOptions.playerColor.withAlphaComponent(0.4)
         posterPlayButton.backgroundColor = playbackControlsContainer.backgroundColor
@@ -363,6 +367,11 @@ internal extension WistiaPlayerViewController {
         //optional controls buttons
         controlsActionButton.isHidden = !embedOptions.actionButton
         controlsCaptionsButton.isHidden = !embedOptions.captionsAvailable
+
+        //we may have disabled fullscreen for other reasons; dont allow options to re-enable it
+        if !embedOptions.fullscreenButton {
+            controlsFullscreenButton.isHidden = true
+        }
 
         //The following are implemented dynamically:
         // * bigPlayButton (see presentForFirstPlayback())
