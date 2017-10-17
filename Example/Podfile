@@ -1,0 +1,10 @@
+platform :ios, '10.0'
+use_frameworks!
+
+target 'WistiaKit_Example' do
+    pod 'WistiaKit', :path => '../'
+end
+
+target 'WistiaKit_Tests' do
+    pod 'WistiaKit', :path => '../'
+end
