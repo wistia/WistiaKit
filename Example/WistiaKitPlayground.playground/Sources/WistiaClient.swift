@@ -1,0 +1,1 @@
+../../../WistiaKit/Classes/WistiaClient.swift
