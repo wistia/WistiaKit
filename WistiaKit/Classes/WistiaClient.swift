@@ -13,6 +13,15 @@ public enum WistiaError: Error {
     case apiErrors([[String:String]])
     case decodingError(DecodingError)
     case badResponse(Data)
+
+    static func forApiErrors(errors: [[String:String]]?) -> WistiaError? {
+        if let errors = errors {
+            return WistiaError.apiErrors(errors)
+        }
+        else {
+            return nil
+        }
+    }
 }
 
 //Every response has either a data or an error as the top level object
@@ -63,6 +72,12 @@ public class WistiaClient {
 extension WistiaClient {
 
     internal func handleDataTaskResult<T>(data: Data?, urlResponse: URLResponse?, error: Error?, completionHandler: @escaping ((T?, WistiaError?) ->())) where T: Codable {
+        guard (data != nil || error != nil) else {
+            //it could be argued that we should abort() here
+            //we're not because we can reasonably recover & retry (network is expected to be lossy)
+            completionHandler(nil, WistiaError.unknown)
+            return
+        }
 
         if let error = error {
             completionHandler(nil, WistiaError.other(error))
@@ -71,11 +86,8 @@ extension WistiaClient {
             let jsonDecoder = JSONDecoder()
             do {
                 let decoded = try jsonDecoder.decode(WistiaResponse<T>.self, from: data)
-                if let apiErrors = decoded.errors {
-                    completionHandler(nil, WistiaError.apiErrors(apiErrors))
-                }
-                else if let data = decoded.data {
-                    completionHandler(data, nil)
+                if decoded.data != nil || decoded.errors != nil {
+                    completionHandler(decoded.data, WistiaError.forApiErrors(errors: decoded.errors))
                 }
                 else {
                     completionHandler(nil, WistiaError.badResponse(data))
@@ -85,9 +97,6 @@ extension WistiaClient {
             } catch {
                 completionHandler(nil, WistiaError.other(error))
             }
-        }
-        else {
-            completionHandler(nil, WistiaError.unknown)
         }
     }
 
