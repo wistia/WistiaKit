@@ -69,7 +69,7 @@ public struct Media: WistiaObject {
 
     //MARK: Initialization
     public init(id: String? = nil, name: String? = nil, description: String? = nil, projectId: String? = nil) {
-        self.id = nil
+        self.id = id
         self.type = nil
         self.attributes = Attributes(type: nil, name: name, description: description, projectId: projectId, duration: nil, position: nil, url: nil, aspectRatio: nil)
         self.relationships = nil
