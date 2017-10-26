@@ -98,7 +98,6 @@ extension WistiaClient {
             completionHandler(nil, WistiaError.other(error))
         }
         else if let data = data {
-            print("Received from API: \(String(describing: String(data: data, encoding: .utf8)))")
             let jsonDecoder = JSONDecoder()
             do {
                 let decoded = try jsonDecoder.decode(WistiaResponse<T>.self, from: data)
