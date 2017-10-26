@@ -68,8 +68,12 @@ extension Decoder {
     // Some JSON is wrapped in a data dictionary:  {relationships: {data: {id: "https://wistia.com", name: "Title"}}}
     // The decoding process to flatten that is 1) get container for 'data', 2) get nested container for the actual CodingKeys, 3) decode
     // This method does steps 1 and 2, returning the inner container we can then use to do a flat decoding.
-    func dataWrappedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {
+    // Returns nil if the data dictionary is empty
+    func dataWrappedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey>? where NestedKey : CodingKey {
         let dataContainer = try self.container(keyedBy: DataWrapperKey.self)
+        if try !dataContainer.contains(.data) || dataContainer.decodeNil(forKey: .data) {
+            return nil
+        }
         let container = try dataContainer.nestedContainer(keyedBy: type, forKey: .data)
         return container
     }

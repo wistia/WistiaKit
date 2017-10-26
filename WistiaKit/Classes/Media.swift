@@ -41,23 +41,23 @@ public struct Media: WistiaObject {
 
     public let relationships: Relationships?
     public struct Relationships: Codable {
-        public let storyboard: Storyboard
+        public let storyboard: Storyboard?
         public struct Storyboard: Codable {
-            public let id: URL
+            public let id: URL?
 
             public init(from decoder: Decoder) throws {
                 let container = try decoder.dataWrappedContainer(keyedBy: CodingKeys.self)
-                id = try container.decode(URL.self, forKey: .id)
+                id = try container?.decode(URL.self, forKey: .id)
             }
         }
 
-        public let thumbnail: Thumbnail
+        public let thumbnail: Thumbnail?
         public struct Thumbnail: Codable {
-            public let id: URL
+            public let id: URL?
 
             public init(from decoder: Decoder) throws {
                 let container = try decoder.dataWrappedContainer(keyedBy: CodingKeys.self)
-                id = try container.decode(URL.self, forKey: .id)
+                id = try container?.decode(URL.self, forKey: .id)
             }
         }
     }
@@ -65,7 +65,7 @@ public struct Media: WistiaObject {
     //MARK: Convenience Attributes
     public var thumbnailURL: URL? {
         get {
-            return relationships?.thumbnail.id
+            return relationships?.thumbnail?.id
         }
     }
 
