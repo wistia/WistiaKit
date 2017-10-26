@@ -16,6 +16,7 @@ public struct Media: WistiaObject {
     public let type: MediaType?
     public enum MediaType: String, Codable {
         case video = "video"
+        case pdf = "pdf_document"
     }
 
     public let attributes: Attributes?
