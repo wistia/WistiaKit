@@ -13,6 +13,7 @@ public enum WistiaError: Error {
     case apiErrors([[String:String]])
     case decodingError(DecodingError)
     case badResponse(Data)
+    case preconditionFailure(String)
 
     static func forApiErrors(errors: [[String:String]]?) -> WistiaError? {
         if let errors = errors {
@@ -55,17 +56,31 @@ public class WistiaClient {
             params["api_password"] = token
         }
 
-        let urlRequest = getRequest(for: path, with: params)
+        let get = getRequest(for: path, with: params)
 
-        session.dataTask(with: urlRequest) { (data, urlResponse, error) in
+        session.dataTask(with: get) { (data, urlResponse, error) in
             self.handleDataTaskResult(data: data, urlResponse: urlResponse, error: error, completionHandler: completionHandler)
             }.resume()
     }
 
-    //public func post<T>
+    public func post<T>(_ path: String, parameters: [String: String] = [:], completionHandler: @escaping ((T?, WistiaError?) -> ())) where T: Codable {
+//        var params = parameters
+//        if token != nil {
+//            params["api_password"] = token
+//        }
+
+        let post = postRequest(for: path, token: token, with: parameters)
+        print("\(String(describing: post.httpMethod)): \(post) data is \(String(describing: String(data: post.httpBody!, encoding: .utf8)))")
+
+        session.dataTask(with: post) { (data, urlResponse, error) in
+            self.handleDataTaskResult(data: data, urlResponse: urlResponse, error: error, completionHandler: completionHandler)
+        }.resume()
+    }
+
     //public func put<T>
     //public func patch<T>
     //public func delete<T>
+    //public func upload
 }
 
 //MARK: - Result Handling
@@ -83,6 +98,7 @@ extension WistiaClient {
             completionHandler(nil, WistiaError.other(error))
         }
         else if let data = data {
+            print("Received from API: \(String(describing: String(data: data, encoding: .utf8)))")
             let jsonDecoder = JSONDecoder()
             do {
                 let decoded = try jsonDecoder.decode(WistiaResponse<T>.self, from: data)
@@ -109,14 +125,31 @@ extension WistiaClient {
         var urlRequest = URLRequest(url: URL(string: path, relativeTo: WistiaClient.APIBase)!)
         var urlComponents = URLComponents(url: urlRequest.url!, resolvingAgainstBaseURL: false)!
 
-        let queryParams = parameters.map { "\($0)=\($1)" }.joined(separator: "&")
         //XXX: May need to URL encode (escape) these params
+        let queryParams = parameters.map { "\($0)=\($1)" }.joined(separator: "&")
         urlComponents.percentEncodedQuery = queryParams
         urlRequest.url = urlComponents.url
 
         return urlRequest
     }
 
+    private func postRequest(for path: String, token: String?, with parameters: [String: String]) -> URLRequest {
+        var urlRequest = URLRequest(url: URL(string: path, relativeTo: WistiaClient.APIBase)!)
+        //api_password still needs to be in the URL
+        if let password = token {
+            var urlComponents = URLComponents(url: urlRequest.url!, resolvingAgainstBaseURL: false)!
+            urlComponents.percentEncodedQuery = "api_password=\(password)"
+            urlRequest.url = urlComponents.url
+        }
+
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+
+        //XXX: May need to URL encode (escape) these params
+        let queryParams = parameters.map { "\($0)=\($1)" }.joined(separator: "&")
+        urlRequest.httpBody = queryParams.data(using: .utf8, allowLossyConversion: false)
+
+        return urlRequest
+    }
+
 }
-
-
