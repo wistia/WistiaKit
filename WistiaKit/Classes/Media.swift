@@ -7,8 +7,8 @@
 
 import Foundation
 
-//MARK: - Media
 public struct Media: WistiaObject {
+    public typealias object = Media
 
     //MARK: Codable Attributes
     public let id: String?
@@ -70,7 +70,18 @@ public struct Media: WistiaObject {
     }
 
     //MARK: Initialization
-    public init(id: String? = nil, name: String? = nil, description: String? = nil, projectId: String? = nil) {
+
+    //Used when showing a new media
+    public init(id: String) {
+        self.init(id: id, name: nil, description: nil, projectId: nil)
+    }
+
+    //Used when creating a new media
+    public init(name: String? = nil, description: String? = nil, projectId: String? = nil) {
+        self.init(id: nil, name: name, description: description, projectId: projectId)
+    }
+
+    internal init(id: String? = nil, name: String? = nil, description: String? = nil, projectId: String? = nil) {
         self.id = id
         self.type = nil
         self.attributes = Attributes(type: nil, name: name, description: description, projectId: projectId, duration: nil, position: nil, url: nil, aspectRatio: nil)
@@ -78,11 +89,8 @@ public struct Media: WistiaObject {
     }
 }
 
-//MARK: - Custom API implementations
-
 //MARK: Show
 extension Media: WistiaClientShowable {
-
     public static let singularPath = "medias"
 }
 

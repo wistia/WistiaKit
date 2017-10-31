@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol WistiaObject: Codable {
-    typealias object = Self
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,9 +22,16 @@ public typealias arrayCompletionHandler<T> = ((_ objects: [T]?, _ error: WistiaE
 public protocol WistiaClientListable {
     associatedtype object: WistiaObject
 
+    static var pluralPath: String {get}
     static func list(usingClient: WistiaClient?, _ completionHander: @escaping arrayCompletionHandler<object>)
 }
-//TOOD: Extension with default implementation of list?
+
+public extension WistiaClientListable {
+    public static func list(usingClient: WistiaClient? = nil, _ completionHander: @escaping (([object]?, WistiaError?) -> ())) {
+        let client = usingClient ?? WistiaClient.default
+        client.get(self.pluralPath, parameters: [:], completionHandler: completionHander)
+    }
+}
 
 //MARK: - show
 public protocol WistiaClientShowable {
@@ -36,7 +43,8 @@ public protocol WistiaClientShowable {
 }
 
 public extension WistiaClientShowable {
-    public func show(usingClient: WistiaClient? = nil, _ completionHander: @escaping ((Media?, WistiaError?) -> ())) {
+
+    public func show(usingClient: WistiaClient? = nil, _ completionHander: @escaping ((object?, WistiaError?) -> ())) {
         guard let hashedId = self.id else {
             let errorDescription = "Cannot show without first setting the hashedID"
             assertionFailure(errorDescription)

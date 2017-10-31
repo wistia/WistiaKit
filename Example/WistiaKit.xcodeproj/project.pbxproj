@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31AF511D1FA8CCAF0000EF95 /* ProjectUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AF511C1FA8CCAF0000EF95 /* ProjectUnitTests.swift */; };
 		31FE25451F97A37B00FC5C7C /* WistiaErrorUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FE25441F97A37B00FC5C7C /* WistiaErrorUnitTests.swift */; };
 		3A2758FB379AFEDBD55DA9ED /* Pods_WistiaKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C37C82AD91638826E9F5B4 /* Pods_WistiaKit_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31AF511C1FA8CCAF0000EF95 /* ProjectUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectUnitTests.swift; sourceTree = "<group>"; };
 		31FE25441F97A37B00FC5C7C /* WistiaErrorUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WistiaErrorUnitTests.swift; sourceTree = "<group>"; };
 		47AAE726F0A775539408A9A4 /* WistiaKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WistiaKit.podspec; path = ../WistiaKit.podspec; sourceTree = "<group>"; };
 		56DC31C891F6CA43C2638CA1 /* Pods-WistiaKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WistiaKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACEB1AFB9204008FA782 /* MediaUnitTests.swift */,
+				31AF511C1FA8CCAF0000EF95 /* ProjectUnitTests.swift */,
 				31FE25441F97A37B00FC5C7C /* WistiaErrorUnitTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
@@ -387,6 +390,7 @@
 			files = (
 				607FACEC1AFB9204008FA782 /* MediaUnitTests.swift in Sources */,
 				31FE25451F97A37B00FC5C7C /* WistiaErrorUnitTests.swift in Sources */,
+				31AF511D1FA8CCAF0000EF95 /* ProjectUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
