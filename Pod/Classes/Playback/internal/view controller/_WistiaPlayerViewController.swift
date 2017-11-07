@@ -29,6 +29,10 @@ extension WistiaPlayerViewController {
         //We don't support (and it doesn't make much sense) to allow going fullscreen when already being presented modally (often fullscreen)
         if self.presentingViewController != nil {
             controlsFullscreenButton.isHidden = true
+            controlsCloseButton.isHidden = false
+        }
+        else {
+            controlsCloseButton.isHidden = true
         }
         self.delegate?.willAppear(wistiaPlayerViewController:  self)
     }
