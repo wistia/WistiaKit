@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 public enum WistiaError: Error {
     case unknown
@@ -32,6 +33,29 @@ public struct WistiaResponse<DataType: Codable>: Codable {
     public let errors: [[String: String]]?
 }
 
+public protocol PersistenceManager {
+
+    func downloadState(forMedia media: Media) -> Media.DownloadState
+
+    /// returns an asset either fully downloaded or associated with a current download
+    func asset(forMedia: Media) -> AVURLAsset?
+
+    /// returns a fully downloaded asset
+    func localAsset(forMedia media: Media) -> AVURLAsset?
+
+    /// Idempotently ensures media is downloading
+    /// Returns the result (ie. expect `.downloading`)
+    func download(media: Media) -> Media.DownloadState
+
+    /// Idempotently ensures `Media` is not downloading.
+    /// Returns the result, which may be `.downloaded` if the download completed before being cancelled.
+    func cancelDownload(media: Media) -> Media.DownloadState
+
+    /// Idempotently ensures there is no local asset for the given `Media`
+    /// Returns the result (ie. expect `.notDownloaded`)
+    func removeDownload(forMedia media: Media) -> Media.DownloadState
+}
+
 public class WistiaClient {
 
     fileprivate static let APIBase = URL(string: "https://api.wistia.com/v2/")
@@ -40,14 +64,25 @@ public class WistiaClient {
     public let token: String?
     public let session: URLSession
 
+    public let persistenceManager: PersistenceManager?
+
+    /// Requests on `WistiaObject`s that require API access have an optional parameter
+    /// where you may provide the `WistiaClient` used to complete the request.  If that
+    /// parameter is left `nil`, the default client it used.
+    /// It is configured without an access token, using a default URLSessionConfiguration,
+    /// and without persistence.
+    /// You can override this default client to provide your own configuration while
+    /// keeping the syntactical conveninece and callsite simplicity of not passing it on every
+    /// request that hits the API.
     open static var `default`: WistiaClient = {
         return WistiaClient()
     }()
 
-    public init(token: String? = nil, sessionConfiguration: URLSessionConfiguration? = nil) {
+    public init(token: String? = nil, sessionConfiguration: URLSessionConfiguration? = nil, persistenceManager: PersistenceManager? = nil) {
         let config = sessionConfiguration ?? URLSessionConfiguration.default
         self.session = URLSession(configuration: config)
         self.token = token
+        self.persistenceManager = persistenceManager
     }
 
     public func get<T>(_ path: String, parameters: [String: String] = [:], completionHandler: @escaping ((T?, WistiaError?) ->())) where T: Codable {

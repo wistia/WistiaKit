@@ -7,6 +7,8 @@
 
 import Foundation
 
+public typealias HashedID = String
+
 public protocol WistiaObject: Codable {
 
 }
