@@ -21,7 +21,7 @@ A lightweight framework to access and playback your media.  Taking advantage of 
   s.source           = { :git => 'https://github.com/wistia/WistiaKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/wistia'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'WistiaKit/Classes/**/*'
 

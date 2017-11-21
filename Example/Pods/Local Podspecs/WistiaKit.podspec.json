@@ -16,7 +16,7 @@
     "tag": "2.0.1"
   },
   "platforms": {
-    "ios": "10.0"
+    "ios": "11.0"
   },
   "source_files": "WistiaKit/Classes/**/*",
   "frameworks": [
