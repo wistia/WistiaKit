@@ -91,6 +91,13 @@ public protocol WistiaPlayerViewControllerDelegate : class {
      - Parameter vc: The `WistiaPlayerViewController` whose hosting app is entering the background.
     */
     func shouldContinuePlaybackWhenEnteringBackground(_ vc: WistiaPlayerViewController) -> Bool
+
+    /**
+     Informs delegate that end of video has been reached.
+
+     - Parameter vc: The `WistiaPlayerViewController` that finished playing video
+    */
+    func didPlayToEndTime(_ vc: WistiaPlayerViewController)
 }
 
 public extension WistiaPlayerViewControllerDelegate {
