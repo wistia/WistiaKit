@@ -104,6 +104,10 @@ public extension WistiaPlayerViewControllerDelegate {
     public func shouldContinuePlaybackWhenEnteringBackground(_: WistiaPlayerViewController) -> Bool {
         return false
     }
+
+    public func didPlayToEndTime(_ vc: WistiaPlayerViewController) {
+        return
+    }
 }
 
 
