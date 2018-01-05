@@ -286,6 +286,8 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
                 self.presentPlayPauseButton(forPlaying: false)
             })
         }
+
+        delegate?.didPlayToEndTime(self)
     }
 
     /// Internal.
