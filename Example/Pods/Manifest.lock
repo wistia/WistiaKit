@@ -5,7 +5,7 @@ PODS:
   - WistiaKit (0.30.2):
     - AlamofireImage (~> 3.0)
     - WistiaKitCore
-  - WistiaKitCore (0.30.2):
+  - WistiaKitCore (0.30.3):
     - Alamofire (~> 4.0)
 
 DEPENDENCIES:
