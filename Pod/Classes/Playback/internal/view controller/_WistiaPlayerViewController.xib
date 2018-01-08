@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -410,7 +411,7 @@
                 <constraint firstAttribute="bottom" secondItem="vEk-Kj-i2O" secondAttribute="bottom" id="e8o-dg-7VL"/>
                 <constraint firstItem="vEk-Kj-i2O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fRY-G3-SlN"/>
                 <constraint firstItem="BwG-ri-99v" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ijI-Re-22F"/>
-                <constraint firstAttribute="bottom" secondItem="lBy-7d-odP" secondAttribute="bottom" id="nj9-lt-6Jt"/>
+                <constraint firstAttribute="bottomMargin" secondItem="lBy-7d-odP" secondAttribute="bottom" id="nj9-lt-6Jt"/>
                 <constraint firstItem="vEk-Kj-i2O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="uJh-My-EK2"/>
                 <constraint firstItem="BwG-ri-99v" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="udY-Na-wMw"/>
                 <constraint firstAttribute="trailing" secondItem="vEk-Kj-i2O" secondAttribute="trailing" id="wkz-cp-FOP"/>
