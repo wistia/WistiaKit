@@ -8,7 +8,7 @@ The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swi
 [![License](https://img.shields.io/cocoapods/l/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
 [![Platform](https://img.shields.io/cocoapods/p/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
 
-Swift 4 compatibility on the [djs/xcode-9](https://github.com/wistia/WistiaKit/tree/djs/xcode-9) branch
+Swift 4 compatibility on the [swift4](https://github.com/wistia/WistiaKit/tree/swift4) branch
 
 ## Your Video on iOS in 5 minutes!
 
