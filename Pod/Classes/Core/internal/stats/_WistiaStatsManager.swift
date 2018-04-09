@@ -183,7 +183,7 @@ public class WistiaStatsManager {
 
 internal protocol WistiaEventCollector : class {
     //The manager that will process events held by this collector
-    weak var manager: WistiaStatsManager? { get set }
+    var manager: WistiaStatsManager? { get set }
 
     //Where all events are sent.  Should be constant for the life of a WistiaEventCollector.
     var eventEndpoint: URL! { get }

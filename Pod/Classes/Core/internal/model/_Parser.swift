@@ -34,6 +34,20 @@ struct Parser {
         return typed
     }
 
+    // Special case Float
+    // NSNumber bridging/casting is updated with Xcode 9.3 (Swift 4.1 and 3.3)
+    // see https://github.com/apple/swift-evolution/blob/master/proposals/0170-nsnumber_bridge.md
+    func fetch(_ key: String) throws -> Float {
+        let fetchedOptional = dictionary?[key]
+        guard let fetched = fetchedOptional else  {
+            throw ParserError(message: "The key '\(key)' was not found.")
+        }
+        guard let typed = fetched as? NSNumber else {
+            throw ParserError(message: "The key '\(key)' was not an NSNumber (to be converted to Float). It had value '\(fetched).'")
+        }
+        return typed.floatValue
+    }
+
     func fetch<T, U>(_ key: String, transformation: (T) -> U?) throws -> U {
         let fetched: T = try fetch(key)
         guard let transformed = transformation(fetched) else {
@@ -58,6 +72,23 @@ struct Parser {
         return typed
     }
 
+    // Special case Float
+    // NSNumber bridging/casting is updated with Xcode 9.3 (Swift 4.1 and 3.3)
+    // see https://github.com/apple/swift-evolution/blob/master/proposals/0170-nsnumber_bridge.md
+    func fetchOptional(_ key: String) throws -> Float? {
+        let fetchedOptional = dictionary?[key]
+        guard let fetched = fetchedOptional else {
+            return nil
+        }
+        guard let typed = fetched as? NSNumber else {
+            if let _ = fetched as? NSNull {
+                return nil
+            }
+            throw ParserError(message: "The key '\(key)\' was not an NSNumber (to be coverted to Float). It had value '\(fetched).'")
+        }
+        return typed.floatValue
+    }
+
     func fetchOptional<T>(_ key: String, default defaultValue: T) throws -> T {
         return try fetchOptional(key) ?? defaultValue
     }
@@ -74,12 +105,12 @@ struct Parser {
 
     func fetchArray<T, U>(_ key: String, transformation: (T) -> U?) throws -> [U] {
         let fetched: [T] = try fetch(key)
-        return fetched.flatMap(transformation)
+        return fetched.compactMap(transformation)
     }
 
     func fetchArrayOptional<T, U>(_ key: String, transformation: (T) -> U?) throws -> [U]? {
         if let fetched: [T] = try fetchOptional(key) {
-            return fetched.flatMap(transformation)
+            return fetched.compactMap(transformation)
         } else {
             return nil
         }
@@ -87,7 +118,7 @@ struct Parser {
 
     static let RFC3339DateFormatter: DateFormatter = {
         let df = DateFormatter()
-        df.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+        df.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         return df
     }()
