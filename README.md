@@ -8,16 +8,16 @@ The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swi
 [![License](https://img.shields.io/cocoapods/l/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
 [![Platform](https://img.shields.io/cocoapods/p/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
 
-Swift 4 compatibility on the [djs/xcode-9](https://github.com/wistia/WistiaKit/tree/djs/xcode-9) branch
+Swift 4 compatibility right here
 
 ## Your Video on iOS in 5 minutes!
 
-Disclaimer 1: You need to have [Xcode 8 GM Seed installed](https://developer.apple.com/xcode/) (which will take > 5 minutes if you don't already have it updated)
+Disclaimer 1: You need to have [Xcode 9 installed](https://developer.apple.com/xcode/) (which will take > 5 minutes if you don't already have it updated)
 Disclaimer 2: You need to have [RubyGems installed](https://rubygems.org/pages/download) (which may also take a little while)
 
 Ok, got that out of the way.  Now for the fun and fairly easy part!
 
-1.  Install [Cocoapods](https://cocoapods.org) if you haven't already: ~~`gem install cocoapods`~~ Until Cocoapods 1.1.0 is released, install the prerelease with `gem install cocoapods --pre`
+1.  Install [Cocoapods](https://cocoapods.org) if you haven't already: `gem install cocoapods`
 2.  `pod try WistiaKit` will pull this Pod down and open it in Xcode
 3.  Choose the "WistiaKit-Example" project next to the play icon and press play!
 
