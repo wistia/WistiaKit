@@ -25,7 +25,7 @@ They are split into two individual Pods to allow for different module names (whi
   
   data.source_files = "Pod/Classes/Core/**/*"
   
-  data.dependency 'Alamofire', '~> 4.0'
+  data.dependency 'Alamofire', '~> 4.7'
   
   data.frameworks = 'Foundation'
 end

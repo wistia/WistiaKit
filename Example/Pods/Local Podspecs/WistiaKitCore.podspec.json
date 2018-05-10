@@ -22,7 +22,7 @@
   "source_files": "Pod/Classes/Core/**/*",
   "dependencies": {
     "Alamofire": [
-      "~> 4.0"
+      "~> 4.7"
     ]
   },
   "frameworks": "Foundation"

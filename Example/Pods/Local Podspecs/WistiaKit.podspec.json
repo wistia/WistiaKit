@@ -23,7 +23,7 @@
 
     ],
     "AlamofireImage": [
-      "~> 3.0"
+      "~> 3.3"
     ]
   },
   "source_files": "Pod/Classes/Playback/**/*",
