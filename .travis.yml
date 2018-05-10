@@ -11,5 +11,5 @@ before_install:
 - pod repo update
 script:
 - set -o pipefail
-- xcodebuild test -workspace Example/WistiaKit.xcworkspace -scheme WistiaKit-Example -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' ONLY_ACTIVE_ARCH=NO | xcpretty
+- xcodebuild test -workspace Example/WistiaKit.xcworkspace -scheme WistiaKit-Example -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
