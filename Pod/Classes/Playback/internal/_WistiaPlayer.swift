@@ -59,6 +59,7 @@ internal extension WistiaPlayer {
             //-- In with the new
             self.state = .videoLoading
             statsCollector = WistiaStatsManager.sharedInstance.newEventCollector(forMedia: media, withReferrer: self.referrer)
+            statsCollector?.associatedEmail = associatedEmail
 
             // There is no officially sanctioned way to set headers on an AVURLAsset request.
             // WebKit uses AVURLAssetHTTPHeaderFieldsKey, but it's private.
