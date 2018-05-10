@@ -3,13 +3,13 @@
 # * https://github.com/supermarin/xcpretty#usage
 
 language: objective-c
-osx_image: xcode8
+osx_image: xcode9
 # cache: cocoapods
 # podfile: Example/Podfile
 before_install:
-- gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet # We need cocoapods 1.1 which is still prerelease
+- gem install cocoapods --no-rdoc --no-ri --no-document --quiet
 - pod repo update
 script:
 - set -o pipefail
-- xcodebuild test -workspace Example/WistiaKit.xcworkspace -scheme WistiaKit-Example -sdk iphonesimulator -destination 'name=iPhone 6' ONLY_ACTIVE_ARCH=NO | xcpretty
+- xcodebuild test -workspace Example/WistiaKit.xcworkspace -scheme WistiaKit-Example -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
