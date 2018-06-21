@@ -74,7 +74,7 @@ public class WistiaClient {
     /// You can override this default client to provide your own configuration while
     /// keeping the syntactical conveninece and callsite simplicity of not passing it on every
     /// request that hits the API.
-    open static var `default`: WistiaClient = {
+    public static var `default`: WistiaClient = {
         return WistiaClient()
     }()
 
