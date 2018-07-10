@@ -656,12 +656,12 @@ internal extension WistiaPlayerViewController {
     }
 
     internal func seekTimeForScrubberTrackContainerLocation(_ location:CGPoint?) -> CMTime? {
-        if let x = location?.x, let duration = wPlayer.currentItem?.duration {
-            let pct = min(max(0,x / scrubberTrackContainerView.bounds.width),1)
-            return CMTimeMultiplyByFloat64(duration, Float64(pct))
-        } else {
-            return nil
-        }
+        guard let x = location?.x,
+            let duration = wPlayer.currentItem?.duration,
+            duration.isValid, !duration.isIndefinite else { return nil }
+
+        let pct = min(max(0,x / scrubberTrackContainerView.bounds.width),1)
+        return CMTimeMultiplyByFloat64(duration, Float64(pct))
     }
 
     internal func storePlayerRateAndPause() {
