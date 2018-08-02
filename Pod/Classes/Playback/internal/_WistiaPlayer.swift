@@ -239,7 +239,7 @@ internal extension WistiaPlayer {
 
     //MARK: - Value add observation
 
-    internal func playerItem(_ playerItem:AVPlayerItem, statusWas oldStatus:AVPlayerStatus?, changedTo newStatus:AVPlayerStatus){
+    internal func playerItem(_ playerItem:AVPlayerItem, statusWas oldStatus:AVPlayer.Status?, changedTo newStatus:AVPlayer.Status){
         switch newStatus {
         case .failed:
             self.state = .videoPlaybackError(description: "Player Item Failed")
@@ -327,10 +327,10 @@ internal extension WistiaPlayer {
 
     internal func _wkObserveValue(forKeyPath keyPath: String?, ofObject object: AnyObject?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer) {
         if context == &playerItemContext {
-            if let newValue = change?[NSKeyValueChangeKey.newKey] as? Int, let newStatus = AVPlayerStatus(rawValue: newValue), let playerItem = object as? AVPlayerItem , keyPath == "status" {
-                let oldStatus:AVPlayerStatus?
+            if let newValue = change?[NSKeyValueChangeKey.newKey] as? Int, let newStatus = AVPlayer.Status(rawValue: newValue), let playerItem = object as? AVPlayerItem , keyPath == "status" {
+                let oldStatus:AVPlayer.Status?
                 if let oldValue = change?[NSKeyValueChangeKey.oldKey] as? Int {
-                    oldStatus = AVPlayerStatus(rawValue: oldValue)
+                    oldStatus = AVPlayer.Status(rawValue: oldValue)
                 } else {
                     oldStatus = nil
                 }

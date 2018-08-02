@@ -436,7 +436,7 @@ public final class WistiaPlayerViewController: UIViewController {
     /// Internal override.
     override final public func loadView() {
         let nib = Bundle(for: self.classForCoder).loadNibNamed("_WistiaPlayerViewController", owner: self, options: nil)
-        self.view = nib?.first as! UIView
+        self.view = (nib?.first as! UIView)
     }
 
     /// Internal override.
@@ -450,7 +450,7 @@ public final class WistiaPlayerViewController: UIViewController {
         wPlayer.captionsRenderer.captionsView = self.captionsLabel
 
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
             guard let strongSelf = self else { return }
             
             if let delegate = strongSelf.delegate, delegate.shouldContinuePlaybackWhenEnteringBackground(strongSelf) {
@@ -463,7 +463,7 @@ public final class WistiaPlayerViewController: UIViewController {
             }
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] note in
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] note in
             guard let strongSelf = self else { return }
             
             strongSelf.autoplayVideoWhenReady = false

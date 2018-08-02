@@ -519,9 +519,9 @@ internal extension WistiaPlayerViewController {
         loadViewIfNeeded()
         let podBundle = Bundle(for: self.classForCoder)
         if playing {
-            controlsPlayPauseButton.setImage(UIImage(named: "smallPause", in: podBundle, compatibleWith: nil), for: UIControlState())
+            controlsPlayPauseButton.setImage(UIImage(named: "smallPause", in: podBundle, compatibleWith: nil), for: UIControl.State())
         } else {
-            controlsPlayPauseButton.setImage(UIImage(named: "smallPlay", in: podBundle, compatibleWith: nil), for: UIControlState())
+            controlsPlayPauseButton.setImage(UIImage(named: "smallPlay", in: podBundle, compatibleWith: nil), for: UIControl.State())
         }
     }
 
@@ -563,7 +563,7 @@ internal extension WistiaPlayerViewController {
     internal func startOrResetChromeInteractionTimer(){
         chromeInteractionTimer?.invalidate()
         chromeInteractionTimer = Timer(timeInterval: TimeInterval(5), target: self, selector: #selector(WistiaPlayerViewController.noChromeInteraction), userInfo: nil, repeats: false)
-        RunLoop.main.add(chromeInteractionTimer!, forMode: RunLoopMode.defaultRunLoopMode)
+        RunLoop.main.add(chromeInteractionTimer!, forMode: RunLoop.Mode.default)
     }
 
     internal func cancelChromeInteractionTimer(){
@@ -661,7 +661,7 @@ internal extension WistiaPlayerViewController {
             duration.isValid, !duration.isIndefinite else { return nil }
 
         let pct = min(max(0,x / scrubberTrackContainerView.bounds.width),1)
-        return CMTimeMultiplyByFloat64(duration, Float64(pct))
+        return CMTimeMultiplyByFloat64(duration, multiplier: Float64(pct))
     }
 
     internal func storePlayerRateAndPause() {
@@ -756,7 +756,7 @@ extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSou
             title = wPlayer.captionsRenderer.captionsLanguagesAvailable[row-1]
         }
 
-        return NSAttributedString(string: title, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        return NSAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
     }
 
     //data source
