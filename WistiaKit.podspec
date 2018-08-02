@@ -38,8 +38,10 @@ We've built for you a beautiful high level view controller (like AVPlayerViewCon
 
   # No xibs on tvOS
   s.tvos.exclude_files = 'Pod/Classes/**/*.{xib,nib}'
-  
-  s.dependency 'AlamofireImage', '~> 3.3'
+
+  # AlamofireImage Swit 4.2 not on master yet.
+  # It is installed via the Podfile
+  s.dependency 'AlamofireImage', '~> 3.3.1'
   
   # No CoreMotion on tvOS
   s.ios.frameworks =  'WistiaKitCore', 'AdSupport', 'AVFoundation', 'AVKit', 'SceneKit', 'SpriteKit', 'UIKit', 'CoreMotion'

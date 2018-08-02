@@ -195,7 +195,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				A48B647AA98D99E8A33C3484 /* [CP] Embed Pods Frameworks */,
-				1F97B86D771530C7991E0E04 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -215,7 +214,6 @@
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
 				685F8AFC9876CEFBC27250E4 /* [CP] Embed Pods Frameworks */,
-				2D2D8125DF355C370D3CF92A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -290,36 +288,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1F97B86D771530C7991E0E04 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WistiaKit_Example/Pods-WistiaKit_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2D2D8125DF355C370D3CF92A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		685F8AFC9876CEFBC27250E4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

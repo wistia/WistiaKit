@@ -1,7 +1,7 @@
 //
 //  ImageCache.swift
 //
-//  Copyright (c) 2015-2017 Alamofire Software Foundation (http://alamofire.org/)
+//  Copyright (c) 2015-2018 Alamofire Software Foundation (http://alamofire.org/)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -151,12 +151,17 @@ open class AutoPurgingImageCache: ImageRequestCache {
         }()
 
         #if os(iOS) || os(tvOS)
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(AutoPurgingImageCache.removeAllImages),
-                name: Notification.Name.UIApplicationDidReceiveMemoryWarning,
-                object: nil
-            )
+        #if swift(>=4.2)
+        let notification = UIApplication.didReceiveMemoryWarningNotification
+        #else
+        let notification = Notification.Name.UIApplicationDidReceiveMemoryWarning
+        #endif
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(AutoPurgingImageCache.removeAllImages),
+            name: notification,
+            object: nil
+        )
         #endif
     }
 

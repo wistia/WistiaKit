@@ -1,6 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
+# Swift 4.2 support included here until it's on master
+# TODO: Update this and WistiaKit.podspec once AFImage Swift 4.2 support is on master
+pod 'AlamofireImage', git: 'https://github.com/Alamofire/AlamofireImage.git', branch: 'swift4.2'
+
 target 'WistiaKit_Example' do
   pod 'WistiaKitCore', :path => '../'
   pod 'WistiaKit', :path => '../'
