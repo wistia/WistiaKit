@@ -239,10 +239,8 @@ public class WistiaHLSPersistenceManager: NSObject, PersistenceManager {
     private func localAssetUrl(forBookmark bookmark: Data) -> URL? {
         do {
             var bookmarkDataIsStale = false
-            guard let url = try URL(resolvingBookmarkData: bookmark,
-                                    bookmarkDataIsStale: &bookmarkDataIsStale) else {
-                                        fatalError("Failed to create URL from bookmark!")
-            }
+            let url = try URL(resolvingBookmarkData: bookmark,
+                                    bookmarkDataIsStale: &bookmarkDataIsStale)
 
             if bookmarkDataIsStale {
                 fatalError("Bookmark data is stale!")
@@ -290,10 +288,8 @@ extension WistiaHLSPersistenceManager: AVAssetDownloadDelegate {
             do {
                 let bookmark = try downloadUrl.bookmarkData()
                 var bookmarkDataIsStale = false
-                guard let url = try URL(resolvingBookmarkData: bookmark,
-                                        bookmarkDataIsStale: &bookmarkDataIsStale) else {
-                                            fatalError("Failed to create URL from bookmark!")
-                }
+                let url = try URL(resolvingBookmarkData: bookmark,
+                                        bookmarkDataIsStale: &bookmarkDataIsStale)
                 removeFile(atURL: url)
                 UserDefaults.standard.removeObject(forKey: userDefaultsKey(forHashedId: downloadMetadata.hashedID))
             } catch {
