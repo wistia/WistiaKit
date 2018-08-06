@@ -41,13 +41,18 @@ extension WistiaAPI {
 
     /// Domain Restrictions enforces HTTP Referer on this route
     /// Warning: Framework Internal API
-    public static func mediaInfo(for hash:String, referer:String? = nil, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
+    public static func mediaInfo(for hash: String, referer: String? = nil, password: String? = nil, completionHandler: @escaping (_ media: WistiaMedia?, _ error: WistiaAPIError?)->() ) {
         var headers = [String: String]()
         if let ref = referer {
             headers["Referer"] = ref
         }
 
-        Alamofire.request("https://fast.wistia.net/embed/medias/\(hash).json", method: .get, headers: headers)
+        var queryString = ""
+        if let password = password {
+            queryString = "?password=\(password)"
+        }
+
+        Alamofire.request("https://fast.wistia.net/embed/medias/\(hash).json\(queryString)", method: .get, headers: headers)
             .responseJSON { response in
 
                 if response.response?.statusCode == 200,

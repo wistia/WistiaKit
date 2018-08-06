@@ -294,6 +294,28 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
     public final func wistiaPlayer(_ player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
         configurePlayerViews(for: media)
     }
+
+    /// Internal.
+    public final func wistiaPlayer(_ player: WistiaPlayer, couldNotPlayLocked media: WistiaMedia, trying password: String?) {
+
+        let pwPrompt = UIAlertController(title: "Video is Locked", message: media.embedOptions?.passwordChallenge ?? "Please enter the password", preferredStyle: .alert)
+        pwPrompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            if let d = self.delegate {
+                d.close(wistiaPlayerViewController: self)
+            } else {
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
+        }))
+        pwPrompt.addTextField { (pwField) in
+            pwField.isSecureTextEntry = true
+            pwPrompt.addAction(UIAlertAction(title: "Submit", style: .default, handler: { _ in
+                self.wPlayer.replaceCurrentVideoWithVideo(forHashedID: media.hashedID, assetWithSlug: nil, password: pwField.text)
+            }))
+        }
+
+        self.present(pwPrompt, animated: true, completion: nil)
+    }
+
 }
 #endif //os(iOS)
 
