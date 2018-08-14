@@ -257,7 +257,7 @@ internal extension WistiaPlayer {
     internal func player(_ player:AVPlayer, rateChangedTo rate:Float){
         DispatchQueue.main.async { () -> Void in
             self.delegate?.wistiaPlayer(self, didChangePlaybackRateTo: rate)
-            if preventIdleTimerDuringPlayback {
+            if self.preventIdleTimerDuringPlayback {
                 UIApplication.shared.isIdleTimerDisabled = (rate > 0.0)
             }
         }
