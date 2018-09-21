@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14C6FB1A21188ED3A803AAFA4E1AFA00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2E034BE7BC5BA464FC11EAF47FBB1E /* Foundation.framework */; };
-		350FA54F4D1C75650D7167049F1BA4BA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95534F4886E545E4C321AFD19E7615BC /* AVKit.framework */; };
-		373AC85927A15ABAE3359ACC06988D59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2E034BE7BC5BA464FC11EAF47FBB1E /* Foundation.framework */; };
-		3EC6E32A2E93E99E02838924E166FC24 /* WistiaHLSPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8176255D15A05CC24A1F333097CE0CF /* WistiaHLSPersistenceManager.swift */; };
-		48EDF4E5ABE906AC515AC387AD124D81 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFAC236F501FF5312E60AE91EA9A207 /* Project.swift */; };
-		5CC5823C78350D9838D96891FDED312E /* WistiaObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9CF3B62AD99B56D235341E28FC4EA9 /* WistiaObjects.swift */; };
-		6B6CC513A08FF60CC903DAC9C71BAA98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2E034BE7BC5BA464FC11EAF47FBB1E /* Foundation.framework */; };
-		AB1C6FAA3D0ED416E1427C1CFD4E358B /* Pods-WistiaKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 43BA3067FB4C1D9ABB79D440E6AE35FC /* Pods-WistiaKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ABED24A7CE847EC182A783A11D9D7C35 /* Pods-WistiaKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 407F047EBEF9ACEC944A3A07C925E20C /* Pods-WistiaKit_Tests-dummy.m */; };
-		AC585291095C3580D05119A4EE965AFE /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED54F0B615638B544627BE7FA04B0485 /* Media.swift */; };
-		AED82B244725252D6EA2ECB23EEF846A /* Pods-WistiaKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F253358F2CF5E56B33EC4A53BAFD35 /* Pods-WistiaKit_Example-dummy.m */; };
-		C88553F16CBD87AD52BBCF9F7CBF8AB2 /* WistiaKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E6AE2A3B131204E723B2CBC38C9058 /* WistiaKit-dummy.m */; };
-		DADA420E5DD2BB9B680A502FE3FEE5B2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE009C1495B2FFE29503924EF67C3F80 /* AVFoundation.framework */; };
-		E2F0362160369A936A4B89BF3BD1E6D6 /* WistiaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4130D1C8A71D0947801E5CA39D0B7 /* WistiaClient.swift */; };
-		E88253B8AAD52D43CBA2AE79F94DBD68 /* WistiaKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CADCC7BE308F465583713E33244A5437 /* WistiaKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F6C06AA14D96964E1B206FC594D28ACF /* Pods-WistiaKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 49DAB5A3EA3FC4027A4F5C2DA72F5023 /* Pods-WistiaKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		142DF9EDBF27FDF39AE3BA0832269B2A /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433F330695DA2E693D7C5FE3F27D78E1 /* AVKit.framework */; };
+		2F2E48F346A89F65F814595DB140B844 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1882A452400221BDE5B675F03D664841 /* Foundation.framework */; };
+		3EC6E32A2E93E99E02838924E166FC24 /* WistiaHLSPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421BF150277D6849EE4CAA6DFAE9D64 /* WistiaHLSPersistenceManager.swift */; };
+		48EDF4E5ABE906AC515AC387AD124D81 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452974FF9EA14DF48543DB25BEBE5757 /* Project.swift */; };
+		5CC5823C78350D9838D96891FDED312E /* WistiaObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5693D6ECDF8649A27905B7DCBF04B /* WistiaObjects.swift */; };
+		8B6098159CDD87603C66B08C293A5454 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1882A452400221BDE5B675F03D664841 /* Foundation.framework */; };
+		8FAF670B59E888A4217A168C6585D2D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1882A452400221BDE5B675F03D664841 /* Foundation.framework */; };
+		AB1C6FAA3D0ED416E1427C1CFD4E358B /* Pods-WistiaKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5036B6A129F99BEA0B66E129ACA66E31 /* Pods-WistiaKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABED24A7CE847EC182A783A11D9D7C35 /* Pods-WistiaKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F7DBDF398FE45744DD98CDC7B1A3 /* Pods-WistiaKit_Tests-dummy.m */; };
+		AC585291095C3580D05119A4EE965AFE /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7979928CE165D9DF7267667B29D518 /* Media.swift */; };
+		AED82B244725252D6EA2ECB23EEF846A /* Pods-WistiaKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72158482CD7AF7E0A1AC627F29B83 /* Pods-WistiaKit_Example-dummy.m */; };
+		C88553F16CBD87AD52BBCF9F7CBF8AB2 /* WistiaKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C81F58AE26BF833CDBCF4BE75BE74B9 /* WistiaKit-dummy.m */; };
+		CF6454CF77A18B9A3669FF9DAE487718 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1045BA0CFBEE366570E400B958FC0745 /* AVFoundation.framework */; };
+		E2F0362160369A936A4B89BF3BD1E6D6 /* WistiaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFEA3B926B0EB3B919B8F49A58105E7 /* WistiaClient.swift */; };
+		E88253B8AAD52D43CBA2AE79F94DBD68 /* WistiaKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7573F15E5A967206B52768901BBAE286 /* WistiaKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6C06AA14D96964E1B206FC594D28ACF /* Pods-WistiaKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DC9F423AD9AAB4B0CF3549BDCAFDD5 /* Pods-WistiaKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,44 +43,47 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		063E65B684DE11CA3246DA05B7E91FD6 /* WistiaKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WistiaKit.xcconfig; sourceTree = "<group>"; };
-		0A6AE74AD66A84BDB0441456AA5DFD66 /* WistiaKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WistiaKit-prefix.pch"; sourceTree = "<group>"; };
-		157689B5247A0B5E1ED5F4029627BBB8 /* Pods-WistiaKit_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Example-resources.sh"; sourceTree = "<group>"; };
-		178377ADB996DB4290A6CF1550CD916D /* Pods-WistiaKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WistiaKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		225B63EF335E5941E8D3D51B958373E0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22833EA8BF539CB47F20DBA7266DFE69 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28F253358F2CF5E56B33EC4A53BAFD35 /* Pods-WistiaKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WistiaKit_Example-dummy.m"; sourceTree = "<group>"; };
-		366B8065FE98F48548F8B50A715FFD48 /* Pods-WistiaKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		38ED92BC8DF5BD07EA20DCF24AEAD04A /* WistiaKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = WistiaKit.modulemap; sourceTree = "<group>"; };
-		407F047EBEF9ACEC944A3A07C925E20C /* Pods-WistiaKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WistiaKit_Tests-dummy.m"; sourceTree = "<group>"; };
-		43087C8D315AA446F58DB0E7A7A82223 /* Pods-WistiaKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		43BA3067FB4C1D9ABB79D440E6AE35FC /* Pods-WistiaKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WistiaKit_Example-umbrella.h"; sourceTree = "<group>"; };
-		49D7C24EB3225D4472BA9871B96FA195 /* Pods-WistiaKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		49DAB5A3EA3FC4027A4F5C2DA72F5023 /* Pods-WistiaKit_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WistiaKit_Tests-umbrella.h"; sourceTree = "<group>"; };
-		4E9CF3B62AD99B56D235341E28FC4EA9 /* WistiaObjects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WistiaObjects.swift; path = WistiaKit/Classes/WistiaObjects.swift; sourceTree = "<group>"; };
-		54D8F2298C2398D87688EAE097ECC4C9 /* Pods-WistiaKit_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		5CF4130D1C8A71D0947801E5CA39D0B7 /* WistiaClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WistiaClient.swift; path = WistiaKit/Classes/WistiaClient.swift; sourceTree = "<group>"; };
-		5F961182D78126B18F0194B8FDCDEADA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6B96ABB8731941B18090A6057D01FDEE /* Pods_WistiaKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WistiaKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B2BAF2265A47E1C666B60B232E02E6F /* Pods-WistiaKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Example-frameworks.sh"; sourceTree = "<group>"; };
-		7D2E034BE7BC5BA464FC11EAF47FBB1E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7D8FE52D183CE55F049BCCD05F0FD9C1 /* Pods-WistiaKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WistiaKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		954DFF83096B2C34928E142024B88DF9 /* Pods-WistiaKit_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Tests-resources.sh"; sourceTree = "<group>"; };
-		95534F4886E545E4C321AFD19E7615BC /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
-		A8176255D15A05CC24A1F333097CE0CF /* WistiaHLSPersistenceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WistiaHLSPersistenceManager.swift; path = WistiaKit/Classes/WistiaHLSPersistenceManager.swift; sourceTree = "<group>"; };
-		B271B854D60706772EE28F9F603B41FE /* Pods-WistiaKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WistiaKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		B49CDF66765ED76C9CB61465DD306E90 /* Pods-WistiaKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		CADCC7BE308F465583713E33244A5437 /* WistiaKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WistiaKit-umbrella.h"; sourceTree = "<group>"; };
-		CCFAC236F501FF5312E60AE91EA9A207 /* Project.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Project.swift; path = WistiaKit/Classes/Project.swift; sourceTree = "<group>"; };
-		D4117873CC55AACDC0405826C46ABC2D /* Pods-WistiaKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-WistiaKit_Tests.modulemap"; sourceTree = "<group>"; };
-		DE009C1495B2FFE29503924EF67C3F80 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		ED54F0B615638B544627BE7FA04B0485 /* Media.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Media.swift; path = WistiaKit/Classes/Media.swift; sourceTree = "<group>"; };
-		F1DC9DF5DA7E7E2CE7EC17D2D6ECA500 /* Pods_WistiaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WistiaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2E6AE2A3B131204E723B2CBC38C9058 /* WistiaKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WistiaKit-dummy.m"; sourceTree = "<group>"; };
-		F78BB899597323EAEAD83389F18AF86E /* Pods-WistiaKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WistiaKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F800F015948C94CCC08A79FA0E876BC5 /* Pods-WistiaKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-WistiaKit_Example.modulemap"; sourceTree = "<group>"; };
-		F9C3ACA5EF631B765866F0598307D766 /* WistiaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WistiaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		04DC9F423AD9AAB4B0CF3549BDCAFDD5 /* Pods-WistiaKit_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WistiaKit_Tests-umbrella.h"; sourceTree = "<group>"; };
+		05FD4E432D1C167E2418793B425CB180 /* Pods-WistiaKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WistiaKit_Example.modulemap"; sourceTree = "<group>"; };
+		08C5693D6ECDF8649A27905B7DCBF04B /* WistiaObjects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WistiaObjects.swift; path = WistiaKit/Classes/WistiaObjects.swift; sourceTree = "<group>"; };
+		096BB047472C9C958829A53EEE89F386 /* Pods-WistiaKit_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		0B98B3A18F81138134F7502640D71CB2 /* Pods-WistiaKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		1045BA0CFBEE366570E400B958FC0745 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		1882A452400221BDE5B675F03D664841 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		1B54E7920F42E7EEA76952C4413C4570 /* WistiaKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = WistiaKit.modulemap; sourceTree = "<group>"; };
+		21195C89781363C2427375AC177307BC /* WistiaKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WistiaKit.xcconfig; sourceTree = "<group>"; };
+		2BD72158482CD7AF7E0A1AC627F29B83 /* Pods-WistiaKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WistiaKit_Example-dummy.m"; sourceTree = "<group>"; };
+		2F25F7DBDF398FE45744DD98CDC7B1A3 /* Pods-WistiaKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WistiaKit_Tests-dummy.m"; sourceTree = "<group>"; };
+		34F1D073A317F276131659CB314458F8 /* WistiaKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WistiaKit-prefix.pch"; sourceTree = "<group>"; };
+		383961C96DB3C9AAAEB746FA5E3A4B25 /* Pods-WistiaKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WistiaKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3AD8F433B13CB7422B03812370C9146B /* Pods-WistiaKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WistiaKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		433F330695DA2E693D7C5FE3F27D78E1 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
+		452974FF9EA14DF48543DB25BEBE5757 /* Project.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Project.swift; path = WistiaKit/Classes/Project.swift; sourceTree = "<group>"; };
+		5036B6A129F99BEA0B66E129ACA66E31 /* Pods-WistiaKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WistiaKit_Example-umbrella.h"; sourceTree = "<group>"; };
+		5C81F58AE26BF833CDBCF4BE75BE74B9 /* WistiaKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WistiaKit-dummy.m"; sourceTree = "<group>"; };
+		696AB6ABE612F6243C4908B81D8F220A /* Pods-WistiaKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Example-frameworks.sh"; sourceTree = "<group>"; };
+		6B96ABB8731941B18090A6057D01FDEE /* Pods_WistiaKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WistiaKit_Example.framework; path = "Pods-WistiaKit_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EE557F7551039A950F4AF600C05C098 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7573F15E5A967206B52768901BBAE286 /* WistiaKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WistiaKit-umbrella.h"; sourceTree = "<group>"; };
+		78F0D0BE5C6CC158FB9C86C7E4C02013 /* WistiaKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = WistiaKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		82BD55F80BB91333C807A5834666EA8D /* Pods-WistiaKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9CFEA3B926B0EB3B919B8F49A58105E7 /* WistiaClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WistiaClient.swift; path = WistiaKit/Classes/WistiaClient.swift; sourceTree = "<group>"; };
+		9E99B961729F2022F2AFC2E32EABA088 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FC47EAD08064CC397AF18E40F87E88B /* Pods-WistiaKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WistiaKit_Tests.modulemap"; sourceTree = "<group>"; };
+		AC36AF88E10015C35637EDAEA193D9AA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		B0DD6B4C33A753581E3F3A55EC26A668 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		B7A8E16150545083CC4CC13715F9CB3B /* Pods-WistiaKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		C421BF150277D6849EE4CAA6DFAE9D64 /* WistiaHLSPersistenceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WistiaHLSPersistenceManager.swift; path = WistiaKit/Classes/WistiaHLSPersistenceManager.swift; sourceTree = "<group>"; };
+		C6F5BD8E62E5FD6E69AD86870E46DE18 /* Pods-WistiaKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WistiaKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		CB7979928CE165D9DF7267667B29D518 /* Media.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Media.swift; path = WistiaKit/Classes/Media.swift; sourceTree = "<group>"; };
+		D05BD743F03A56ADA8CBC58D1232D602 /* Pods-WistiaKit_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Tests-resources.sh"; sourceTree = "<group>"; };
+		DB719B4BF840D98FE350ACD388540C19 /* Pods-WistiaKit_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WistiaKit_Example-resources.sh"; sourceTree = "<group>"; };
+		E84834A32B9588B2BD494CB97F8B2CF6 /* Pods-WistiaKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WistiaKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		F1DC9DF5DA7E7E2CE7EC17D2D6ECA500 /* Pods_WistiaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WistiaKit_Tests.framework; path = "Pods-WistiaKit_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2084D5E817232F5F2D80E1013F654D5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9C3ACA5EF631B765866F0598307D766 /* WistiaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = WistiaKit.framework; path = WistiaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBA5FA816A3B6B27A32795A78AEACCC8 /* Pods-WistiaKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WistiaKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14C6FB1A21188ED3A803AAFA4E1AFA00 /* Foundation.framework in Frameworks */,
+				2F2E48F346A89F65F814595DB140B844 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B6CC513A08FF60CC903DAC9C71BAA98 /* Foundation.framework in Frameworks */,
+				8FAF670B59E888A4217A168C6585D2D2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,35 +107,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DADA420E5DD2BB9B680A502FE3FEE5B2 /* AVFoundation.framework in Frameworks */,
-				350FA54F4D1C75650D7167049F1BA4BA /* AVKit.framework in Frameworks */,
-				373AC85927A15ABAE3359ACC06988D59 /* Foundation.framework in Frameworks */,
+				CF6454CF77A18B9A3669FF9DAE487718 /* AVFoundation.framework in Frameworks */,
+				142DF9EDBF27FDF39AE3BA0832269B2A /* AVKit.framework in Frameworks */,
+				8B6098159CDD87603C66B08C293A5454 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		104C1D2E3172784FF7215D047A5AFF13 /* Pods-WistiaKit_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9E99B961729F2022F2AFC2E32EABA088 /* Info.plist */,
+				9FC47EAD08064CC397AF18E40F87E88B /* Pods-WistiaKit_Tests.modulemap */,
+				383961C96DB3C9AAAEB746FA5E3A4B25 /* Pods-WistiaKit_Tests-acknowledgements.markdown */,
+				3AD8F433B13CB7422B03812370C9146B /* Pods-WistiaKit_Tests-acknowledgements.plist */,
+				2F25F7DBDF398FE45744DD98CDC7B1A3 /* Pods-WistiaKit_Tests-dummy.m */,
+				096BB047472C9C958829A53EEE89F386 /* Pods-WistiaKit_Tests-frameworks.sh */,
+				D05BD743F03A56ADA8CBC58D1232D602 /* Pods-WistiaKit_Tests-resources.sh */,
+				04DC9F423AD9AAB4B0CF3549BDCAFDD5 /* Pods-WistiaKit_Tests-umbrella.h */,
+				0B98B3A18F81138134F7502640D71CB2 /* Pods-WistiaKit_Tests.debug.xcconfig */,
+				82BD55F80BB91333C807A5834666EA8D /* Pods-WistiaKit_Tests.release.xcconfig */,
+			);
+			name = "Pods-WistiaKit_Tests";
+			path = "Target Support Files/Pods-WistiaKit_Tests";
+			sourceTree = "<group>";
+		};
 		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6AC1E245BF9152E7F805C46626DC71A6 /* iOS */,
+				E968FABB052C5CB75059B4A547A3EE28 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		239B120A36CAA426353F7E5858971CE1 /* WistiaKit */ = {
-			isa = PBXGroup;
-			children = (
-				ED54F0B615638B544627BE7FA04B0485 /* Media.swift */,
-				CCFAC236F501FF5312E60AE91EA9A207 /* Project.swift */,
-				5CF4130D1C8A71D0947801E5CA39D0B7 /* WistiaClient.swift */,
-				A8176255D15A05CC24A1F333097CE0CF /* WistiaHLSPersistenceManager.swift */,
-				4E9CF3B62AD99B56D235341E28FC4EA9 /* WistiaObjects.swift */,
-				E7E32D58D1CC7DA6E71EC54CA29C187F /* Support Files */,
-			);
-			name = WistiaKit;
-			path = ../..;
 			sourceTree = "<group>";
 		};
 		3CEA762D9DE60518626F0FDA1A64402D /* Products */ = {
@@ -145,92 +152,99 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		45F984A0A4DB511FB999456D9051D7DB /* WistiaKit */ = {
+			isa = PBXGroup;
+			children = (
+				CB7979928CE165D9DF7267667B29D518 /* Media.swift */,
+				452974FF9EA14DF48543DB25BEBE5757 /* Project.swift */,
+				9CFEA3B926B0EB3B919B8F49A58105E7 /* WistiaClient.swift */,
+				C421BF150277D6849EE4CAA6DFAE9D64 /* WistiaHLSPersistenceManager.swift */,
+				08C5693D6ECDF8649A27905B7DCBF04B /* WistiaObjects.swift */,
+				F51D435F58BFA408F83378B4BDB98892 /* Pod */,
+				9A6D3C02A3212219A23D733197DB784A /* Support Files */,
+			);
+			name = WistiaKit;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		498D150B3A7C9589BC3880082E71AFB1 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				9639BE24A0786E41D96083916B6810D2 /* Pods-WistiaKit_Example */,
-				77B6B5E1E011A0C04B85DDB3C6340B80 /* Pods-WistiaKit_Tests */,
+				642C994804CD90274F44D2664B23269B /* Pods-WistiaKit_Example */,
+				104C1D2E3172784FF7215D047A5AFF13 /* Pods-WistiaKit_Tests */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		6AC1E245BF9152E7F805C46626DC71A6 /* iOS */ = {
+		642C994804CD90274F44D2664B23269B /* Pods-WistiaKit_Example */ = {
 			isa = PBXGroup;
 			children = (
-				DE009C1495B2FFE29503924EF67C3F80 /* AVFoundation.framework */,
-				95534F4886E545E4C321AFD19E7615BC /* AVKit.framework */,
-				7D2E034BE7BC5BA464FC11EAF47FBB1E /* Foundation.framework */,
+				6EE557F7551039A950F4AF600C05C098 /* Info.plist */,
+				05FD4E432D1C167E2418793B425CB180 /* Pods-WistiaKit_Example.modulemap */,
+				FBA5FA816A3B6B27A32795A78AEACCC8 /* Pods-WistiaKit_Example-acknowledgements.markdown */,
+				E84834A32B9588B2BD494CB97F8B2CF6 /* Pods-WistiaKit_Example-acknowledgements.plist */,
+				2BD72158482CD7AF7E0A1AC627F29B83 /* Pods-WistiaKit_Example-dummy.m */,
+				696AB6ABE612F6243C4908B81D8F220A /* Pods-WistiaKit_Example-frameworks.sh */,
+				DB719B4BF840D98FE350ACD388540C19 /* Pods-WistiaKit_Example-resources.sh */,
+				5036B6A129F99BEA0B66E129ACA66E31 /* Pods-WistiaKit_Example-umbrella.h */,
+				C6F5BD8E62E5FD6E69AD86870E46DE18 /* Pods-WistiaKit_Example.debug.xcconfig */,
+				B7A8E16150545083CC4CC13715F9CB3B /* Pods-WistiaKit_Example.release.xcconfig */,
 			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		77B6B5E1E011A0C04B85DDB3C6340B80 /* Pods-WistiaKit_Tests */ = {
-			isa = PBXGroup;
-			children = (
-				22833EA8BF539CB47F20DBA7266DFE69 /* Info.plist */,
-				D4117873CC55AACDC0405826C46ABC2D /* Pods-WistiaKit_Tests.modulemap */,
-				B271B854D60706772EE28F9F603B41FE /* Pods-WistiaKit_Tests-acknowledgements.markdown */,
-				7D8FE52D183CE55F049BCCD05F0FD9C1 /* Pods-WistiaKit_Tests-acknowledgements.plist */,
-				407F047EBEF9ACEC944A3A07C925E20C /* Pods-WistiaKit_Tests-dummy.m */,
-				54D8F2298C2398D87688EAE097ECC4C9 /* Pods-WistiaKit_Tests-frameworks.sh */,
-				954DFF83096B2C34928E142024B88DF9 /* Pods-WistiaKit_Tests-resources.sh */,
-				49DAB5A3EA3FC4027A4F5C2DA72F5023 /* Pods-WistiaKit_Tests-umbrella.h */,
-				49D7C24EB3225D4472BA9871B96FA195 /* Pods-WistiaKit_Tests.debug.xcconfig */,
-				43087C8D315AA446F58DB0E7A7A82223 /* Pods-WistiaKit_Tests.release.xcconfig */,
-			);
-			name = "Pods-WistiaKit_Tests";
-			path = "Target Support Files/Pods-WistiaKit_Tests";
+			name = "Pods-WistiaKit_Example";
+			path = "Target Support Files/Pods-WistiaKit_Example";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				7DEA55F07C76A991024F562FC5B50DF2 /* Development Pods */,
+				8922062569CEE1127CE304895EF001B2 /* Development Pods */,
 				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
 				3CEA762D9DE60518626F0FDA1A64402D /* Products */,
 				498D150B3A7C9589BC3880082E71AFB1 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		7DEA55F07C76A991024F562FC5B50DF2 /* Development Pods */ = {
+		8922062569CEE1127CE304895EF001B2 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				239B120A36CAA426353F7E5858971CE1 /* WistiaKit */,
+				45F984A0A4DB511FB999456D9051D7DB /* WistiaKit */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		9639BE24A0786E41D96083916B6810D2 /* Pods-WistiaKit_Example */ = {
+		9A6D3C02A3212219A23D733197DB784A /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				225B63EF335E5941E8D3D51B958373E0 /* Info.plist */,
-				F800F015948C94CCC08A79FA0E876BC5 /* Pods-WistiaKit_Example.modulemap */,
-				F78BB899597323EAEAD83389F18AF86E /* Pods-WistiaKit_Example-acknowledgements.markdown */,
-				178377ADB996DB4290A6CF1550CD916D /* Pods-WistiaKit_Example-acknowledgements.plist */,
-				28F253358F2CF5E56B33EC4A53BAFD35 /* Pods-WistiaKit_Example-dummy.m */,
-				7B2BAF2265A47E1C666B60B232E02E6F /* Pods-WistiaKit_Example-frameworks.sh */,
-				157689B5247A0B5E1ED5F4029627BBB8 /* Pods-WistiaKit_Example-resources.sh */,
-				43BA3067FB4C1D9ABB79D440E6AE35FC /* Pods-WistiaKit_Example-umbrella.h */,
-				366B8065FE98F48548F8B50A715FFD48 /* Pods-WistiaKit_Example.debug.xcconfig */,
-				B49CDF66765ED76C9CB61465DD306E90 /* Pods-WistiaKit_Example.release.xcconfig */,
-			);
-			name = "Pods-WistiaKit_Example";
-			path = "Target Support Files/Pods-WistiaKit_Example";
-			sourceTree = "<group>";
-		};
-		E7E32D58D1CC7DA6E71EC54CA29C187F /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				5F961182D78126B18F0194B8FDCDEADA /* Info.plist */,
-				38ED92BC8DF5BD07EA20DCF24AEAD04A /* WistiaKit.modulemap */,
-				063E65B684DE11CA3246DA05B7E91FD6 /* WistiaKit.xcconfig */,
-				F2E6AE2A3B131204E723B2CBC38C9058 /* WistiaKit-dummy.m */,
-				0A6AE74AD66A84BDB0441456AA5DFD66 /* WistiaKit-prefix.pch */,
-				CADCC7BE308F465583713E33244A5437 /* WistiaKit-umbrella.h */,
+				F2084D5E817232F5F2D80E1013F654D5 /* Info.plist */,
+				1B54E7920F42E7EEA76952C4413C4570 /* WistiaKit.modulemap */,
+				21195C89781363C2427375AC177307BC /* WistiaKit.xcconfig */,
+				5C81F58AE26BF833CDBCF4BE75BE74B9 /* WistiaKit-dummy.m */,
+				34F1D073A317F276131659CB314458F8 /* WistiaKit-prefix.pch */,
+				7573F15E5A967206B52768901BBAE286 /* WistiaKit-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/WistiaKit";
+			sourceTree = "<group>";
+		};
+		E968FABB052C5CB75059B4A547A3EE28 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1045BA0CFBEE366570E400B958FC0745 /* AVFoundation.framework */,
+				433F330695DA2E693D7C5FE3F27D78E1 /* AVKit.framework */,
+				1882A452400221BDE5B675F03D664841 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		F51D435F58BFA408F83378B4BDB98892 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				AC36AF88E10015C35637EDAEA193D9AA /* LICENSE */,
+				B0DD6B4C33A753581E3F3A55EC26A668 /* README.md */,
+				78F0D0BE5C6CC158FB9C86C7E4C02013 /* WistiaKit.podspec */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,13 +336,8 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1000;
-				TargetAttributes = {
-					9BC3D527B8E3426AD8C1F8487FFA85B7 = {
-						LastSwiftMigration = 1000;
-					};
-				};
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -397,60 +406,23 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1336D33B48F207F4D904090AF9AF0BE4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B49CDF66765ED76C9CB61465DD306E90 /* Pods-WistiaKit_Example.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Example/Pods-WistiaKit_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_WistiaKit_Example;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1A41B15D3AA834993ADDD808FA9D8764 /* Release */ = {
+		08638A96A528B1EC32DE62F8A728389D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -459,171 +431,96 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		2F527BFBACA4FCC83DB3E000C157466F /* Release */ = {
+		48128AC699DF45A79DE336D7F42BF787 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43087C8D315AA446F58DB0E7A7A82223 /* Pods-WistiaKit_Tests.release.xcconfig */;
+			baseConfigurationReference = C6F5BD8E62E5FD6E69AD86870E46DE18 /* Pods-WistiaKit_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Tests/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Example/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Example/Pods-WistiaKit_Example.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_WistiaKit_Tests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		686DB7500BD32EFCE3D4BD652E9AE150 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 063E65B684DE11CA3246DA05B7E91FD6 /* WistiaKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/WistiaKit/WistiaKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WistiaKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WistiaKit/WistiaKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = WistiaKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		68DF1959709D18642B8312A99B9AD898 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49D7C24EB3225D4472BA9871B96FA195 /* Pods-WistiaKit_Tests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_WistiaKit_Tests;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		799CC7EC503044E0EA92E1329913F2C4 /* Release */ = {
+		49C9AD58C9D9FDBA2567EA55B510FC44 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 063E65B684DE11CA3246DA05B7E91FD6 /* WistiaKit.xcconfig */;
+			baseConfigurationReference = 21195C89781363C2427375AC177307BC /* WistiaKit.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/WistiaKit/WistiaKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/WistiaKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/WistiaKit/WistiaKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = WistiaKit;
 				PRODUCT_NAME = WistiaKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -631,27 +528,101 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		BC80BBB5C066539FFFC0B2127CA5D3C4 /* Debug */ = {
+		861FE70058421781E7748B7C429CBD2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7A8E16150545083CC4CC13715F9CB3B /* Pods-WistiaKit_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Example/Pods-WistiaKit_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9A57A8F964428464AB30227939F538F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82BD55F80BB91333C807A5834666EA8D /* Pods-WistiaKit_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -660,17 +631,20 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -679,55 +653,85 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		E00E7CE2FA132027C7DB4640570D3F8C /* Debug */ = {
+		E0BE81D00AD58404378786FE0DF79D6F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 366B8065FE98F48548F8B50A715FFD48 /* Pods-WistiaKit_Example.debug.xcconfig */;
+			baseConfigurationReference = 0B98B3A18F81138134F7502640D71CB2 /* Pods-WistiaKit_Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Example/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Example/Pods-WistiaKit_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_WistiaKit_Example;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F70969FAD6098F2ABC899DB8ACBEF7E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21195C89781363C2427375AC177307BC /* WistiaKit.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/WistiaKit/WistiaKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WistiaKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WistiaKit/WistiaKit.modulemap";
+				PRODUCT_MODULE_NAME = WistiaKit;
+				PRODUCT_NAME = WistiaKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -740,8 +744,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BC80BBB5C066539FFFC0B2127CA5D3C4 /* Debug */,
-				1A41B15D3AA834993ADDD808FA9D8764 /* Release */,
+				9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */,
+				08638A96A528B1EC32DE62F8A728389D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -749,8 +753,8 @@
 		41DF3312BB9DF032790B44976832C0F1 /* Build configuration list for PBXNativeTarget "WistiaKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				686DB7500BD32EFCE3D4BD652E9AE150 /* Debug */,
-				799CC7EC503044E0EA92E1329913F2C4 /* Release */,
+				F70969FAD6098F2ABC899DB8ACBEF7E9 /* Debug */,
+				49C9AD58C9D9FDBA2567EA55B510FC44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -758,8 +762,8 @@
 		6B313733088F87776EE85D8872A28256 /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E00E7CE2FA132027C7DB4640570D3F8C /* Debug */,
-				1336D33B48F207F4D904090AF9AF0BE4 /* Release */,
+				48128AC699DF45A79DE336D7F42BF787 /* Debug */,
+				861FE70058421781E7748B7C429CBD2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -767,8 +771,8 @@
 		C7D605A1D2AC83F028F9CD57CD057ADA /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				68DF1959709D18642B8312A99B9AD898 /* Debug */,
-				2F527BFBACA4FCC83DB3E000C157466F /* Release */,
+				E0BE81D00AD58404378786FE0DF79D6F /* Debug */,
+				9A57A8F964428464AB30227939F538F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -31,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		31AF511C1FA8CCAF0000EF95 /* ProjectUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectUnitTests.swift; sourceTree = "<group>"; };
+		31BD9861215534160061CB3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31FE25441F97A37B00FC5C7C /* WistiaErrorUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WistiaErrorUnitTests.swift; sourceTree = "<group>"; };
 		47AAE726F0A775539408A9A4 /* WistiaKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WistiaKit.podspec; path = ../WistiaKit.podspec; sourceTree = "<group>"; };
 		56DC31C891F6CA43C2638CA1 /* Pods-WistiaKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WistiaKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +160,7 @@
 		D43E54CAF896113147BB05F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				31BD9861215534160061CB3B /* Foundation.framework */,
 				87C37C82AD91638826E9F5B4 /* Pods_WistiaKit_Example.framework */,
 				A3830041AF09D40953467A81 /* Pods_WistiaKit_Tests.framework */,
 			);
@@ -177,7 +179,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				3AEEC626D4509E7C6127AA4E /* [CP] Embed Pods Frameworks */,
-				F48A020ADEB970AE7D985A8B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,7 +198,6 @@
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
 				AF12D4FFE2905359816CEAC4 /* [CP] Embed Pods Frameworks */,
-				D0E4171E6679CA4F3BF26C00 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -331,21 +331,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D0E4171E6679CA4F3BF26C00 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D945732E83ED57350EF7EC41 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -362,21 +347,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F48A020ADEB970AE7D985A8B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WistiaKit_Example/Pods-WistiaKit_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -571,10 +541,6 @@
 			baseConfigurationReference = 87C9263BAD159137650FFB7C /* Pods-WistiaKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = HXJRVHPX9B;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -585,6 +551,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WistiaKit_Example.app/WistiaKit_Example";
 			};
 			name = Debug;
 		};
@@ -593,16 +560,13 @@
 			baseConfigurationReference = 56DC31C891F6CA43C2638CA1 /* Pods-WistiaKit_Tests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = HXJRVHPX9B;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WistiaKit_Example.app/WistiaKit_Example";
 			};
 			name = Release;
 		};
