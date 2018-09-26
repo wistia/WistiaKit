@@ -10,8 +10,6 @@ The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swi
 
 Swift 4.2 compatibility right here
 
-Swift 4.2 compatibility on the [swift4_2](https://github.com/wistia/WistiaKit/tree/swift4_2) branch
-
 ## Your Video on iOS in 5 minutes!
 
 Disclaimer 1: You need to have [Xcode 9 installed](https://developer.apple.com/xcode/) (which will take > 5 minutes if you don't already have it updated)

@@ -1,6 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
+platform :ios, '11.0'
+
 target 'WistiaKit_Example' do
   pod 'WistiaKitCore', :path => '../'
   pod 'WistiaKit', :path => '../'

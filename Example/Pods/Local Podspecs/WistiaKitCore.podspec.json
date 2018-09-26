@@ -1,7 +1,7 @@
 {
   "name": "WistiaKitCore",
   "module_name": "WistiaKitCore",
-  "version": "0.30.4",
+  "version": "0.42.0",
   "summary": "Access all of your Wistia media.",
   "description": "WistiaKitCore is the lighter-weight and lower-level foundation upon which the full WistiaKit is built.  It defines the Wistia object model and provides API access.  Playback and UI is provided by WistiaKit.\n\nThey are split into two individual Pods to allow for different module names (which isn't possible with subspecs).",
   "homepage": "https://github.com/wistia/WistiaKit",
@@ -11,7 +11,7 @@
   },
   "source": {
     "git": "https://github.com/wistia/WistiaKit.git",
-    "tag": "0.30.4"
+    "tag": "0.42.0"
   },
   "social_media_url": "http://twitter.com/wistia",
   "platforms": {
