@@ -51,10 +51,10 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* WistiaKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WistiaKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AFBB3813F3C480958BA308D /* WistiaKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WistiaKit.podspec; path = ../WistiaKit.podspec; sourceTree = "<group>"; };
+		8AFBB3813F3C480958BA308D /* WistiaKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WistiaKit.podspec; path = ../WistiaKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		91042EE21DDF6A1400BEC039 /* WistiaAPIUploadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIUploadTests.swift; sourceTree = "<group>"; };
 		91042EEB1DDF739700BEC039 /* clipXS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = clipXS.m4v; sourceTree = "<group>"; };
-		912AF9561EDF04EC00F9473C /* WistiaKitCore.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WistiaKitCore.podspec; path = ../WistiaKitCore.podspec; sourceTree = "<group>"; };
+		912AF9561EDF04EC00F9473C /* WistiaKitCore.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WistiaKitCore.podspec; path = ../WistiaKitCore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		916DE0691D0EF91F005E4EDD /* WistiaMediaEventCollectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaMediaEventCollectorTests.swift; sourceTree = "<group>"; };
 		918568F21DAD29E900D7CCE8 /* WistiaAPICustomizationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPICustomizationsTests.swift; sourceTree = "<group>"; };
 		91D1AADE1CEDFB2000356871 /* WistiaAPIAccountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WistiaAPIAccountTests.swift; sourceTree = "<group>"; };

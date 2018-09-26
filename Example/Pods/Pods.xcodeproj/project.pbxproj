@@ -7,187 +7,187 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05006BDD7301FCF2678618DEDCC69B94 /* UIImage+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40925083A89DB524274043A5544403F4 /* UIImage+AlamofireImage.swift */; };
-		09A91BAB28ADB091BBB1B303AA880394 /* _WistiaStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA667ADA6B1371CAA9B37AC3690EAF /* _WistiaStatsManager.swift */; };
-		10EB23E9ECC4B33E16933BB1EA560B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A86E4845F495D22067D31DD2444516 /* Timeline.swift */; };
-		129B9429057B7F51AB18D466111EE920 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
-		151C325F3AD98D9D5A9B9F098BC49BE0 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D82CB4027422840ADC35D1CB8E79228 /* AVKit.framework */; };
-		17A3E66AA1C722492F75B64189DC235E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
-		1B9EDEDC964E6B08F78920B4F4B9DB84 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F7CB86E5445E708C236651606143CDEA /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D9C9A28513339E4D06AB402AEBBF70D /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F109619F283D8BC18633303B901F2C /* SpriteKit.framework */; };
-		202822E4668C16D115A8F68F3ADF0E0F /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6EFA1B14F4F2AC1C907F7D8D75E2A2 /* ImageDownloader.swift */; };
-		20F1543C9E4738D9CB9DDD2A11D36439 /* _URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C98E4476273F1C72F3BF479DDEB47F /* _URLExtensions.swift */; };
-		24E2DC34FE04980248F2C9B9A77565CC /* WistiaKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DACE5CD70B220743C204E120256ED2D5 /* WistiaKitCore.framework */; };
-		25FF30A6E8AEB5C007F18E5744B25367 /* WistiaProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D34D888DC2FFF1CCDC8F167F4416F8D /* WistiaProject.swift */; };
-		27996F52CCABBD6D0874B79D1B913598 /* ImageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78F0C59D72E536A49A29DF9551B2FC /* ImageFilter.swift */; };
-		2A7E477B0301F8FB37437AE996EE25D9 /* Pods-WistiaKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F7DBDF398FE45744DD98CDC7B1A3 /* Pods-WistiaKit_Tests-dummy.m */; };
-		2B43C95AAD5AA7191A0C4755117027F0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB2294856E6E6C223F183476AF924C4 /* Alamofire.framework */; };
-		2B456E17CD4D2656A82C47F74E930092 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB41950316FE43343DC9A4483B07E53 /* UIKit.framework */; };
-		2BD7CFD41DACC439E8C0A527F1643495 /* Request+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39A0238C2D2ED7E1BCF74C638704BCC /* Request+AlamofireImage.swift */; };
-		2EA0415A1A8A4FFC7403E201F915F9A4 /* AFIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99FF6D0367AC8FAF28B714B9C517B09 /* AFIError.swift */; };
-		304C5736AC5D49B526C709397D0CF048 /* UIImageView+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F864B86D55C1EBA65BB1005488236 /* UIImageView+AlamofireImage.swift */; };
-		3053EDA4176549FAA0D7414F66FBE893 /* WistiaKitCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 646C8F2340FC93E91C4C454172D0CE80 /* WistiaKitCore-dummy.m */; };
-		30718830D37B0A15750B7444FFF121FF /* _URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B91A93B82FADFD203FCBFAA0212DF /* _URLExtensions.swift */; };
-		32EDA9ED83F4442303A46839027E152E /* AlamofireImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6AE7280F92BC48588D6A2AE0AFCD38D /* AlamofireImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		353A6D73CA24032A7652213AA3C5D227 /* WistiaKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9550BB8231725A853F51F8906C5A5451 /* WistiaKit-dummy.m */; };
-		35D82DFB29446C86BE80EF3A5BF312D1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C22065CDC73CEA2CA346F3E71DBFCFEB /* CoreMotion.framework */; };
-		3626B94094672CB1C9DEA32B9F9502E1 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45CF505DC4805961C6AE375E9B4449 /* TaskDelegate.swift */; };
-		37F951F2BDB75BD682C2999EB7B51A35 /* AlamofireImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7944BB03BFA1F1121ADEE78BA6A9DC62 /* AlamofireImage-dummy.m */; };
-		3BB247B212F8702A29A46A925730508D /* _WistiaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1252D6B599F358E9FF9973B926686 /* _WistiaAPI.swift */; };
-		3C7E31F0B35FC2FC40491691AC62E371 /* _CaptionsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399CAD2AA073C7B320AEA6D5E95B0B1C /* _CaptionsLabel.swift */; };
-		3C8D05D7F28013D0D2C8098E1A04BDD3 /* _WistiaPlayerViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = C99158FD225342D17C046DEC60FA0CEF /* _WistiaPlayerViewController.xib */; };
-		3D332D36A8A5CAE45B5B53C07DCE8FEC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D28EBBA5FC455749680B1A1EE28127D /* AdSupport.framework */; };
-		423E3D8455D59ED52034BAFBA849C007 /* _Wistia360PlayerView+LookVectorTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066D28899F3BEB1410D8C4CD51CFDB1 /* _Wistia360PlayerView+LookVectorTracking.swift */; };
-		50DE8EF001434A527F7FEABD9D83B383 /* WistiaCaptionsRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392D20DF595AE4C8A59AFE5387D7A05 /* WistiaCaptionsRenderer.swift */; };
-		5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C040C3370B9A89F31C2BC19AF5D1C /* Request.swift */; };
-		55BD03F429A219FBAF4A7ACE5FDFB20A /* _UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D46845E4161CDE25E573A11DC9A5B8A /* _UIViewExtensions.swift */; };
-		5691F1A902B44A94842DF4F7D6E9A251 /* WistiaMediaStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADA164603AF0426B80CE1A9C769199 /* WistiaMediaStats.swift */; };
-		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46909E67FE468BAA9A40190506BC2DD /* DispatchQueue+Alamofire.swift */; };
-		613167D898FF421A6F75D1FE5D145B9B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB2294856E6E6C223F183476AF924C4 /* Alamofire.framework */; };
-		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61BFE0C2AB6D5B144D90851B0FBBDA /* ServerTrustPolicy.swift */; };
-		64510BA9010147C69A3BB8D091525E65 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
-		6ABF14BD3B20A26CE688B41EE6D7369E /* _WistiaCaptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660566B0536402845F313171918A052 /* _WistiaCaptions.swift */; };
-		767E4CDF77052F7EB02B0D2C31CA5D2B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB2294856E6E6C223F183476AF924C4 /* Alamofire.framework */; };
-		7B5FE28C7EA4122B0598738E54DBEBD8 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB169F7011C3AE22F10E4FB8BB941D0 /* SessionDelegate.swift */; };
-		7B9E1F683D720CAFC4D0A368E93F9D0D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370A0DC495A039A8C01F559991AD82E4 /* AVFoundation.framework */; };
-		7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB939DAB70B7498BD951FDFBB552630 /* Result.swift */; };
-		7F99ABD655905666A302E83F74D52A6A /* WistiaKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 476380150C90FFAAAA45E53FFA13F5A0 /* WistiaKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		834F4D9819C6010E611A7E151B8899C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
-		88EF6F74BBA5762B0180B9DEB4A2B6CE /* WistiaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147788924D389D7417AF14FEB95C018C /* WistiaUser.swift */; };
-		8E4B06B4A3A6BB86308FB46570974835 /* _WistiaMediaEventCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB41154D827E16F0503F546C82087D2 /* _WistiaMediaEventCollector.swift */; };
-		9217540BF8F157F165EDBCA9989DA108 /* _UINavigationControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1B5C4A5639E2D367B728557AE0C510 /* _UINavigationControllerExtensions.swift */; };
-		93DE5F205991483F127026FCA344430C /* WistiaAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4FE53EFDBB4814D2B670843A059C1 /* WistiaAsset.swift */; };
-		95EE79F1B502403C7B827403A17D9C35 /* WistiaMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90ECA15F4A86D8AF3481C39F1E3CAB /* WistiaMedia.swift */; };
-		9ED2BB2981896E0A39EFA365503F58CE /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA7696A230A8C5098EDB1708AB122B /* AFError.swift */; };
-		9FF7D44666F15D1ED6D0B7EDDE530275 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
-		A1EA73F747BBB030ADE0948AC5FAF247 /* WistiaObjectStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDBFE625822ADE834EFF1A71B02487D /* WistiaObjectStatus.swift */; };
-		A2706B2B44DFC82E3F2673A1495C37E3 /* _FullscreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBD1C1E4EE4E3D7AF2ECE798E68A597 /* _FullscreenController.swift */; };
-		A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F750B175C7230B153936AECFDF9D4B69 /* NetworkReachabilityManager.swift */; };
-		A44AB0ACD56E35E519B48CECA55A860D /* WistiaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CA01D156E268071520B1B7C10A5160 /* WistiaPlayer.swift */; };
-		A5310D26FB41E06140A9CEBB2C1895E0 /* WistiaFlatPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7623E55C26C782641C420D5318E306B6 /* WistiaFlatPlayerView.swift */; };
-		A9EEEA7477981DEEBC72432DE9990A4B /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE026AA0127DEED5833CC06E4854B0FF /* Alamofire-dummy.m */; };
-		ABD05C559CFFA2FDF71D5D3C9C4330AA /* _WistiaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D12A5DC4D3DE2DC7C7936A66FEF8 /* _WistiaPlayer.swift */; };
-		AE1EF48399533730D0066E04B22CA2D6 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0D298505D12F22418F96BD2D6DE4F /* SessionManager.swift */; };
-		B00962A7451F0A9AEEBBCC2A35C938F1 /* WistiaKitAssetCatalog.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BB220A733B7EE987997102F53288B74 /* WistiaKitAssetCatalog.xcassets */; };
-		B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A337CF61ED3C76DCDB6CABF7DDA57F4 /* MultipartFormData.swift */; };
-		B7F9588AF66C7D4F470E61458E7ACAFD /* WistiaMediaEmbedOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E1610F22F61368FBD47385905614A /* WistiaMediaEmbedOptions.swift */; };
-		BA0237EC19F9B0300B4F483D009CB5A4 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E0274869A5718853EA111547AE8D34 /* AlamofireImage.framework */; };
-		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B347EC7347C5B752DAEF7EFC85B3D /* Validation.swift */; };
-		BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E36A061568443C4892C00390B9395C /* ParameterEncoding.swift */; };
-		C36AB0C700381C26D63E426DE416B088 /* _Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12459447E22DA5164E9EF095E752B37A /* _Parser.swift */; };
-		C73BF39A4CCC3E450E102C23027F8FF8 /* UIButton+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F506873F53797C3F19F6F175128C827D /* UIButton+AlamofireImage.swift */; };
-		C90BF8BBA5AAD7E0252A1CE792AF4032 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE276A2CA780A879865751A43D9496D5 /* SceneKit.framework */; };
-		CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF21FE9D010AA7E8064CAB3DDEE4D01 /* Response.swift */; };
-		CFEDA7D507C506864C7F3BD287B72134 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
-		D2206E86BF46ADFD33E04EC9C3D6C09E /* WistiaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D174BD38731198281B7697F9C28A /* WistiaPlayerViewController.swift */; };
-		D9E544B8CB42DA8DD44838F83610D8E0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1B46CA3DB56C3D2E677654A1304B15 /* ImageCache.swift */; };
-		DAFE595E0FD08B2F9144E1BAB5A64880 /* WistiaKitCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E0B8899865458F8D0B938C83FB945021 /* WistiaKitCore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DB3362E46A90333F5DC5C161ADA4BB4C /* Pods-WistiaKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72158482CD7AF7E0A1AC627F29B83 /* Pods-WistiaKit_Example-dummy.m */; };
-		E1F9E10F8D5D41EB63296B9F1BD01018 /* WistiaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318B6CE3B120F317C27C495A1440EF51 /* WistiaAPI.swift */; };
-		E1FF4985892E23B75A3381EFF830DFD5 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8303DFF4F0412C06016FB01FE8A0AE2C /* Image.swift */; };
-		E30AF121D603B1958860CF5BCEE0B349 /* WistiaKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E10CDD310CCC6306817B1ED39F413B7 /* WistiaKitCore.framework */; };
-		EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD48160E946CF60C44697D4766239A69 /* Notifications.swift */; };
-		F13CA7BA2680E23B42E260E3B7BCF20E /* _SCNVector3Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE0091493913451AAAFA7CA2D23BDB /* _SCNVector3Extensions.swift */; };
-		F38EDD9B807EEB57B3E70434BD66D5A9 /* Pods-WistiaKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DC9F423AD9AAB4B0CF3549BDCAFDD5 /* Pods-WistiaKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F5ECDA9294203A779670A7CE09796649 /* _WistiaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A5AA3908FB6B75F37DF2AD7D65377 /* _WistiaPlayerViewController.swift */; };
-		F6BECD98B97CBFEBE2C96F0E9E72A6C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F2DAC9C123E8BF5B8BBA7C3F17E4E /* ResponseSerialization.swift */; };
-		F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD180178B74D26C52790871D11EA82 /* Alamofire.swift */; };
-		F98A44F66A0F6B0C8C50094C0B30C89B /* Pods-WistiaKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5036B6A129F99BEA0B66E129ACA66E31 /* Pods-WistiaKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FA656BC76B90BE1D96F96C5985B3E337 /* WistiaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AB8E3E233E01A5E947FFAEE20AEB8B /* WistiaAccount.swift */; };
-		FBB8B1182E2A079B3711DF5756F38A2F /* _UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BB2718C2A60526BA3CCE2D5573914D /* _UIColorExtensions.swift */; };
-		FC1AC52360A9304112056CEA2FDFD803 /* _Wistia360PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7561C3A0BC359C0D7C8F097B97B0E4 /* _Wistia360PlayerView.swift */; };
+		0BFB6F172162229449F8A1ADBEB0D85C /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6EFA1B14F4F2AC1C907F7D8D75E2A2 /* ImageDownloader.swift */; };
+		113B20131EAE1156CBE61EDA336EDF63 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E0274869A5718853EA111547AE8D34 /* AlamofireImage.framework */; };
+		19D685600F6386B8562C200B7C0F6BE3 /* WistiaProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D34D888DC2FFF1CCDC8F167F4416F8D /* WistiaProject.swift */; };
+		1A41D9C9073E55451D2E830FD70EE269 /* WistiaKitCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 646C8F2340FC93E91C4C454172D0CE80 /* WistiaKitCore-dummy.m */; };
+		1DB3BD1494A05C19B77AA18F746BE6C6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D82CB4027422840ADC35D1CB8E79228 /* AVKit.framework */; };
+		1FC3FD39157C2FFFF3869A1300730086 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB169F7011C3AE22F10E4FB8BB941D0 /* SessionDelegate.swift */; };
+		20F72CA5C3444FE464F3E505E7B358AF /* ImageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78F0C59D72E536A49A29DF9551B2FC /* ImageFilter.swift */; };
+		2542CE9CBB45AC75A7F2569CD36035AC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D28EBBA5FC455749680B1A1EE28127D /* AdSupport.framework */; };
+		26D43D7EB969CBD6EAD8C2A42805411D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
+		3044F8CC65360700C256FD1816EAD872 /* AlamofireImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7944BB03BFA1F1121ADEE78BA6A9DC62 /* AlamofireImage-dummy.m */; };
+		30B8F42F12F0D7977BE4D501CADA0CD3 /* Pods-WistiaKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5036B6A129F99BEA0B66E129ACA66E31 /* Pods-WistiaKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32C7598831C3EFDED7F2F38BA9BC9915 /* Pods-WistiaKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 04DC9F423AD9AAB4B0CF3549BDCAFDD5 /* Pods-WistiaKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33113ABBA2028971165CB224EDCD6083 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F109619F283D8BC18633303B901F2C /* SpriteKit.framework */; };
+		34660B447B3407EAF0435A3A145A21A1 /* WistiaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CA01D156E268071520B1B7C10A5160 /* WistiaPlayer.swift */; };
+		36FF8853CB34A9297AFAA8F5F7456324 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45CF505DC4805961C6AE375E9B4449 /* TaskDelegate.swift */; };
+		37995B7A0223D4BC753201522C28AABE /* _WistiaCaptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660566B0536402845F313171918A052 /* _WistiaCaptions.swift */; };
+		39302BCC11BDF184550E3A05FCF01042 /* _WistiaPlayerViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = C99158FD225342D17C046DEC60FA0CEF /* _WistiaPlayerViewController.xib */; };
+		3E87E7CB5B4A10C78BB5AA0FEBFB94C8 /* AlamofireImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6AE7280F92BC48588D6A2AE0AFCD38D /* AlamofireImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40482EDFBF274F197D52E6AC5E5D2421 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
+		428D5D6D815EF6CCD624289C59335FF6 /* WistiaKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 476380150C90FFAAAA45E53FFA13F5A0 /* WistiaKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43B823C1B43D07F90622C5D1DA6DC95C /* Request+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39A0238C2D2ED7E1BCF74C638704BCC /* Request+AlamofireImage.swift */; };
+		4473835B42BA39FEC00AEAC98F8A681A /* Pods-WistiaKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD72158482CD7AF7E0A1AC627F29B83 /* Pods-WistiaKit_Example-dummy.m */; };
+		4C5A75FFB574960CB199089276621E28 /* WistiaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AB8E3E233E01A5E947FFAEE20AEB8B /* WistiaAccount.swift */; };
+		4E1A913EFB404FB11524718FF0298EFE /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD180178B74D26C52790871D11EA82 /* Alamofire.swift */; };
+		500C8EDA60C07B0F127C7FC385E17D38 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD48160E946CF60C44697D4766239A69 /* Notifications.swift */; };
+		52237C35642089F77DD4D723CEB25737 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF21FE9D010AA7E8064CAB3DDEE4D01 /* Response.swift */; };
+		5227C5691672C22D9B30CE2D05C4CF50 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1B46CA3DB56C3D2E677654A1304B15 /* ImageCache.swift */; };
+		541C5B6F7D07577D8780B97F83EDD2BE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8303DFF4F0412C06016FB01FE8A0AE2C /* Image.swift */; };
+		58A9719584AFA2D108D9E5C585A79329 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B347EC7347C5B752DAEF7EFC85B3D /* Validation.swift */; };
+		5EE5FED83B90A606A763CF1114D1D6FB /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F2DAC9C123E8BF5B8BBA7C3F17E4E /* ResponseSerialization.swift */; };
+		5F64F95700D0E01EF2CBAEEF6FC7B499 /* UIImage+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40925083A89DB524274043A5544403F4 /* UIImage+AlamofireImage.swift */; };
+		69D205DC58BD38CE024C4F6CC072F68C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C22065CDC73CEA2CA346F3E71DBFCFEB /* CoreMotion.framework */; };
+		6AEFBB5B30DC9E05A82DF28A17BDB2FD /* UIButton+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F506873F53797C3F19F6F175128C827D /* UIButton+AlamofireImage.swift */; };
+		6B48703E4F1D763BEE248C2C62784EA8 /* WistiaMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD90ECA15F4A86D8AF3481C39F1E3CAB /* WistiaMedia.swift */; };
+		6BEA14EC335E07C7063CD1383C0C443C /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D61BFE0C2AB6D5B144D90851B0FBBDA /* ServerTrustPolicy.swift */; };
+		6D1F04422A1E1A0B7B0E942AD35916F6 /* _WistiaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A5AA3908FB6B75F37DF2AD7D65377 /* _WistiaPlayerViewController.swift */; };
+		6FB40B8EE956E83EFC38BA4DDC407FBA /* WistiaFlatPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7623E55C26C782641C420D5318E306B6 /* WistiaFlatPlayerView.swift */; };
+		7068E8A7DDC1424EE8F24BC77E8746F4 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0D298505D12F22418F96BD2D6DE4F /* SessionManager.swift */; };
+		7489D2A583245918C5E81E62EA2768A3 /* _UINavigationControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1B5C4A5639E2D367B728557AE0C510 /* _UINavigationControllerExtensions.swift */; };
+		74A4F3E1AB9D69CD72A28195E3B662A0 /* WistiaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318B6CE3B120F317C27C495A1440EF51 /* WistiaAPI.swift */; };
+		796177DE2762F24DAC16A709FD954838 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E36A061568443C4892C00390B9395C /* ParameterEncoding.swift */; };
+		8200E87EE785166E890017761FEF9327 /* WistiaKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E10CDD310CCC6306817B1ED39F413B7 /* WistiaKitCore.framework */; };
+		8CE32D7F0C7F17075A4651F85EE86325 /* WistiaCaptionsRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392D20DF595AE4C8A59AFE5387D7A05 /* WistiaCaptionsRenderer.swift */; };
+		8D5BE7A45D9F992648CB8E69F8E844BA /* _Wistia360PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7561C3A0BC359C0D7C8F097B97B0E4 /* _Wistia360PlayerView.swift */; };
+		8D7175DB1328FE324C17D0FA5C20D01E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
+		8D82EFD461A2579EB956249A6B314ED7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB2294856E6E6C223F183476AF924C4 /* Alamofire.framework */; };
+		9645F89261BA745E21BC1685D3F07BE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
+		965DACF3DC02857ECBE66C5CBA3DA5D4 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C040C3370B9A89F31C2BC19AF5D1C /* Request.swift */; };
+		977B42772A3C494DA87749F7241FDBA4 /* WistiaObjectStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDBFE625822ADE834EFF1A71B02487D /* WistiaObjectStatus.swift */; };
+		994BEFD0E999D733EBF588899EFF05E9 /* _FullscreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBD1C1E4EE4E3D7AF2ECE798E68A597 /* _FullscreenController.swift */; };
+		9B7D3C55E274E38D22D03397537AE03A /* _URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C98E4476273F1C72F3BF479DDEB47F /* _URLExtensions.swift */; };
+		9C416665647D032E21EEC7237BD478A4 /* _WistiaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1252D6B599F358E9FF9973B926686 /* _WistiaAPI.swift */; };
+		A2A5D759C4C2A29F4F79CF9C0BE738A2 /* WistiaKitCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E0B8899865458F8D0B938C83FB945021 /* WistiaKitCore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A55E52AE3BAFDC28035747DCF81D79A6 /* WistiaKitAssetCatalog.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BB220A733B7EE987997102F53288B74 /* WistiaKitAssetCatalog.xcassets */; };
+		AAE3E08C8B9C42C42D2E58B5839FF420 /* _UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D46845E4161CDE25E573A11DC9A5B8A /* _UIViewExtensions.swift */; };
+		B02AAAF4F3B0BCA6B36D99ABC91E79C5 /* WistiaAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4FE53EFDBB4814D2B670843A059C1 /* WistiaAsset.swift */; };
+		B239D094480E5C76A46FF6687D8C70A9 /* WistiaKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DACE5CD70B220743C204E120256ED2D5 /* WistiaKitCore.framework */; };
+		B41C25CCDF2C72111C16188B9B8C3B55 /* _Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12459447E22DA5164E9EF095E752B37A /* _Parser.swift */; };
+		B424F524BBBE34E685129945993809A8 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A86E4845F495D22067D31DD2444516 /* Timeline.swift */; };
+		B6EE390DF42DCABA2E50DF8D70FFAC93 /* WistiaMediaStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADA164603AF0426B80CE1A9C769199 /* WistiaMediaStats.swift */; };
+		B77705737566AE83ED7E448923D7FA60 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F750B175C7230B153936AECFDF9D4B69 /* NetworkReachabilityManager.swift */; };
+		BE4BA1EDE444A770F834605F4B65348E /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA7696A230A8C5098EDB1708AB122B /* AFError.swift */; };
+		C12FBC6FCBE621C6DDE01DC20EF8EA9C /* _UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BB2718C2A60526BA3CCE2D5573914D /* _UIColorExtensions.swift */; };
+		C24049579B409AA4F1062F049CAC1648 /* _CaptionsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399CAD2AA073C7B320AEA6D5E95B0B1C /* _CaptionsLabel.swift */; };
+		C3CF23BDB1B6DF1512118BA20259CBF4 /* _Wistia360PlayerView+LookVectorTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066D28899F3BEB1410D8C4CD51CFDB1 /* _Wistia360PlayerView+LookVectorTracking.swift */; };
+		C8D6285E67F415EE13439FC604E8FF19 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE276A2CA780A879865751A43D9496D5 /* SceneKit.framework */; };
+		C995AD64A48C9E6C7366B6124672DB57 /* WistiaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147788924D389D7417AF14FEB95C018C /* WistiaUser.swift */; };
+		CAD57F97DE056670E901A7ADB513394B /* _URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B91A93B82FADFD203FCBFAA0212DF /* _URLExtensions.swift */; };
+		D15529313AA76983928DA6B63FEFA3C2 /* WistiaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D174BD38731198281B7697F9C28A /* WistiaPlayerViewController.swift */; };
+		D287DBC79B5ED7F99A78A90834C1B726 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB2294856E6E6C223F183476AF924C4 /* Alamofire.framework */; };
+		D45D4B7C78D3DCB6313DF562761B5EE9 /* UIImageView+AlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F864B86D55C1EBA65BB1005488236 /* UIImageView+AlamofireImage.swift */; };
+		D4C3899574E9D5DF5E5DA52310560BCC /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE026AA0127DEED5833CC06E4854B0FF /* Alamofire-dummy.m */; };
+		D6E2E6A814150B42F98B93F499F18B77 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB41950316FE43343DC9A4483B07E53 /* UIKit.framework */; };
+		D8BE3A89A3EE198843F0F85676561CCA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
+		D8EC5B74B9B5DC842F4179D19E6DE6D4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A482B285A928CF139AAC95A2F6C67CB7 /* Foundation.framework */; };
+		DA670EB9A4591F03511EA315AA25070D /* _WistiaStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CA667ADA6B1371CAA9B37AC3690EAF /* _WistiaStatsManager.swift */; };
+		DB2C7F41E4B1EA6774B982BC0F9BEE46 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB2294856E6E6C223F183476AF924C4 /* Alamofire.framework */; };
+		DBE6E2E4D205545E7988CFA5057C31D6 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46909E67FE468BAA9A40190506BC2DD /* DispatchQueue+Alamofire.swift */; };
+		DCF6FCAB7228F6D8103330A9A353E410 /* _WistiaMediaEventCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB41154D827E16F0503F546C82087D2 /* _WistiaMediaEventCollector.swift */; };
+		DD55056D9CA62A21DD873975AF4CA453 /* AFIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99FF6D0367AC8FAF28B714B9C517B09 /* AFIError.swift */; };
+		DFBAF033C0B82E2721132C71643BEF8D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370A0DC495A039A8C01F559991AD82E4 /* AVFoundation.framework */; };
+		E877105FD9BE7A8F3D89D6FCF926B0AE /* WistiaMediaEmbedOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E1610F22F61368FBD47385905614A /* WistiaMediaEmbedOptions.swift */; };
+		EF1461221681BCA12A4147900A704727 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F7CB86E5445E708C236651606143CDEA /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F19A4AF0A33CB9B9C354870B9C8ACC3A /* WistiaKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9550BB8231725A853F51F8906C5A5451 /* WistiaKit-dummy.m */; };
+		F1E7B6D604A012AE86877831ACB5EB9E /* _WistiaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA1D12A5DC4D3DE2DC7C7936A66FEF8 /* _WistiaPlayer.swift */; };
+		F4E6D379E8467DFEA6A766B8BF8120C3 /* Pods-WistiaKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F25F7DBDF398FE45744DD98CDC7B1A3 /* Pods-WistiaKit_Tests-dummy.m */; };
+		F9EA61D484CC15FDDAB0D8C0D26D7949 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB939DAB70B7498BD951FDFBB552630 /* Result.swift */; };
+		FB893D6A4369EB12CE8FA27B8D64D224 /* _SCNVector3Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE0091493913451AAAFA7CA2D23BDB /* _SCNVector3Extensions.swift */; };
+		FF9C7BC64DB23D2CED48197DE67F0335 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A337CF61ED3C76DCDB6CABF7DDA57F4 /* MultipartFormData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1733921AFCBD0784AC9C6F0E5577DD6E /* PBXContainerItemProxy */ = {
+		45598A14A79C22F04C08C66E02F48D1C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9EFE4C70245EE2857D336B8B9FA4E825;
+			remoteGlobalIDString = E76458C58C9140B6A16D60547E68E80C;
+			remoteInfo = Alamofire;
+		};
+		4BF0525AF6FCCB448CDDB513D7DBC34F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 277CF01435F1108030116A52131B15EB;
+			remoteInfo = WistiaKitCore;
+		};
+		4EEEEE85F353327F392F2AC0A59048E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F4BA8B4D605B684ABBD2FB009E45151;
 			remoteInfo = AlamofireImage;
 		};
-		1B4CED93A498F5DE8C71C6604E9B3C43 /* PBXContainerItemProxy */ = {
+		54593BA5D594DE5B7179715FDCEBA0C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1BD2A9716AFF1962C493AE06BD687713;
+			remoteGlobalIDString = E76458C58C9140B6A16D60547E68E80C;
+			remoteInfo = Alamofire;
+		};
+		57D6E447609D4739D5841995F257B19F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC99A76C01B547EC5FA1F2D1DEC67EE3;
 			remoteInfo = WistiaKit;
 		};
-		331222240D4DAC09D18BAD992A44DBA9 /* PBXContainerItemProxy */ = {
+		6316715C34B70BC33398D115850C6B27 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 88E9EC28B8B46C3631E6B242B50F4442;
-			remoteInfo = Alamofire;
+			remoteGlobalIDString = 277CF01435F1108030116A52131B15EB;
+			remoteInfo = WistiaKitCore;
 		};
-		63539024BA999007254596BACFD0857D /* PBXContainerItemProxy */ = {
+		7FEDAD75465809BC8003297866F1432A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 88E9EC28B8B46C3631E6B242B50F4442;
-			remoteInfo = Alamofire;
-		};
-		69636E21FE2C777B24E1AE6B9308AE9A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9EFE4C70245EE2857D336B8B9FA4E825;
+			remoteGlobalIDString = 5F4BA8B4D605B684ABBD2FB009E45151;
 			remoteInfo = AlamofireImage;
 		};
-		6F0D740867200F9325EF627E72869669 /* PBXContainerItemProxy */ = {
+		837176D3D347BCFF3FF1844F78D05069 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9EFE4C70245EE2857D336B8B9FA4E825;
+			remoteGlobalIDString = 5F4BA8B4D605B684ABBD2FB009E45151;
 			remoteInfo = AlamofireImage;
 		};
-		854D53D48F368776B849FD120EFCF448 /* PBXContainerItemProxy */ = {
+		84DE9D25FE685AFA1B87C7FACEEDB4B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1BD2A9716AFF1962C493AE06BD687713;
+			remoteGlobalIDString = E76458C58C9140B6A16D60547E68E80C;
+			remoteInfo = Alamofire;
+		};
+		BCB5C3FD830595D9F91DF68AE6099C6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC99A76C01B547EC5FA1F2D1DEC67EE3;
 			remoteInfo = WistiaKit;
 		};
-		9418B5171FB14E434FC01715026E2857 /* PBXContainerItemProxy */ = {
+		C8B0EDC15423897EDB608CDF97147CDD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CB5FC90DBBA624FD112E98F42E052A6D;
+			remoteGlobalIDString = 277CF01435F1108030116A52131B15EB;
 			remoteInfo = WistiaKitCore;
 		};
-		A1758AA696D56310AA192B587162169A /* PBXContainerItemProxy */ = {
+		DAA370080D61907B1086EC978DBAC9E4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 88E9EC28B8B46C3631E6B242B50F4442;
+			remoteGlobalIDString = E76458C58C9140B6A16D60547E68E80C;
 			remoteInfo = Alamofire;
 		};
-		A3E0C1F8388353305C0ADF8781A93452 /* PBXContainerItemProxy */ = {
+		EB6F7267E12E3DD0F2744447F1C189E7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CB5FC90DBBA624FD112E98F42E052A6D;
-			remoteInfo = WistiaKitCore;
-		};
-		C7D97807908DEE281EEC054FB5799E34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CB5FC90DBBA624FD112E98F42E052A6D;
-			remoteInfo = WistiaKitCore;
-		};
-		CE24198CB4131358EF14BDD699DDDC06 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 88E9EC28B8B46C3631E6B242B50F4442;
-			remoteInfo = Alamofire;
-		};
-		EAD3E93A2D7BAC0996DDF58CE50A2CDF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 88E9EC28B8B46C3631E6B242B50F4442;
+			remoteGlobalIDString = E76458C58C9140B6A16D60547E68E80C;
 			remoteInfo = Alamofire;
 		};
 /* End PBXContainerItemProxy section */
@@ -319,64 +319,64 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4D6013C0D3D93C54D066102EDE0FCDDC /* Frameworks */ = {
+		1A048BCBFC3C7B781E466EFD73AEDA4A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64510BA9010147C69A3BB8D091525E65 /* Foundation.framework in Frameworks */,
+				26D43D7EB969CBD6EAD8C2A42805411D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		99195E4207764744AEC07ECCBCD550EB /* Frameworks */ = {
+		2C1047F6C4EE52C8AA60B562CA27EF88 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834F4D9819C6010E611A7E151B8899C3 /* Foundation.framework in Frameworks */,
+				8D82EFD461A2579EB956249A6B314ED7 /* Alamofire.framework in Frameworks */,
+				9645F89261BA745E21BC1685D3F07BE7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A19CC8CB3DC2AE57A1E1CD4E157646B8 /* Frameworks */ = {
+		2C2EA66FEF8BC0A39C910C9C5A23CD9D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FF7D44666F15D1ED6D0B7EDDE530275 /* Foundation.framework in Frameworks */,
+				40482EDFBF274F197D52E6AC5E5D2421 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BF98FBBDC964E0CC738F6B323B4C1BB8 /* Frameworks */ = {
+		33FB1D4E91A537B82257679DD749219A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				613167D898FF421A6F75D1FE5D145B9B /* Alamofire.framework in Frameworks */,
-				CFEDA7D507C506864C7F3BD287B72134 /* Foundation.framework in Frameworks */,
+				DB2C7F41E4B1EA6774B982BC0F9BEE46 /* Alamofire.framework in Frameworks */,
+				D8BE3A89A3EE198843F0F85676561CCA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9EB717749F45DC0E83CEC2A3FE8E4D3 /* Frameworks */ = {
+		6E8AF668A2161F7D6F680F721DB65D2D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D332D36A8A5CAE45B5B53C07DCE8FEC /* AdSupport.framework in Frameworks */,
-				2B43C95AAD5AA7191A0C4755117027F0 /* Alamofire.framework in Frameworks */,
-				BA0237EC19F9B0300B4F483D009CB5A4 /* AlamofireImage.framework in Frameworks */,
-				7B9E1F683D720CAFC4D0A368E93F9D0D /* AVFoundation.framework in Frameworks */,
-				151C325F3AD98D9D5A9B9F098BC49BE0 /* AVKit.framework in Frameworks */,
-				35D82DFB29446C86BE80EF3A5BF312D1 /* CoreMotion.framework in Frameworks */,
-				129B9429057B7F51AB18D466111EE920 /* Foundation.framework in Frameworks */,
-				C90BF8BBA5AAD7E0252A1CE792AF4032 /* SceneKit.framework in Frameworks */,
-				1D9C9A28513339E4D06AB402AEBBF70D /* SpriteKit.framework in Frameworks */,
-				2B456E17CD4D2656A82C47F74E930092 /* UIKit.framework in Frameworks */,
-				E30AF121D603B1958860CF5BCEE0B349 /* WistiaKitCore.framework in Frameworks */,
-				24E2DC34FE04980248F2C9B9A77565CC /* WistiaKitCore.framework in Frameworks */,
+				D8EC5B74B9B5DC842F4179D19E6DE6D4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EE576435B42EE23BCF5384468A7AB433 /* Frameworks */ = {
+		F29F7590CA5D61492285F7E0C7D5EDF8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				767E4CDF77052F7EB02B0D2C31CA5D2B /* Alamofire.framework in Frameworks */,
-				17A3E66AA1C722492F75B64189DC235E /* Foundation.framework in Frameworks */,
+				2542CE9CBB45AC75A7F2569CD36035AC /* AdSupport.framework in Frameworks */,
+				D287DBC79B5ED7F99A78A90834C1B726 /* Alamofire.framework in Frameworks */,
+				113B20131EAE1156CBE61EDA336EDF63 /* AlamofireImage.framework in Frameworks */,
+				DFBAF033C0B82E2721132C71643BEF8D /* AVFoundation.framework in Frameworks */,
+				1DB3BD1494A05C19B77AA18F746BE6C6 /* AVKit.framework in Frameworks */,
+				69D205DC58BD38CE024C4F6CC072F68C /* CoreMotion.framework in Frameworks */,
+				8D7175DB1328FE324C17D0FA5C20D01E /* Foundation.framework in Frameworks */,
+				C8D6285E67F415EE13439FC604E8FF19 /* SceneKit.framework in Frameworks */,
+				33113ABBA2028971165CB224EDCD6083 /* SpriteKit.framework in Frameworks */,
+				D6E2E6A814150B42F98B93F499F18B77 /* UIKit.framework in Frameworks */,
+				8200E87EE785166E890017761FEF9327 /* WistiaKitCore.framework in Frameworks */,
+				B239D094480E5C76A46FF6687D8C70A9 /* WistiaKitCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,85 +776,147 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		3363FA532780EDC380D0184CAED36B43 /* Headers */ = {
+		73194501A83C8C4242A1D2780EC881FD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAFE595E0FD08B2F9144E1BAB5A64880 /* WistiaKitCore-umbrella.h in Headers */,
+				A2A5D759C4C2A29F4F79CF9C0BE738A2 /* WistiaKitCore-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3923C48A6FB4F7619FE4C28D35604F3D /* Headers */ = {
+		7FA567A4DA3073A911ACEBE2DD8CD44E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F38EDD9B807EEB57B3E70434BD66D5A9 /* Pods-WistiaKit_Tests-umbrella.h in Headers */,
+				428D5D6D815EF6CCD624289C59335FF6 /* WistiaKit-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53F412EB00F70B5A05D6E29091AB65CC /* Headers */ = {
+		A3B1AEB67122D55C8A21800EB10F009D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F98A44F66A0F6B0C8C50094C0B30C89B /* Pods-WistiaKit_Example-umbrella.h in Headers */,
+				32C7598831C3EFDED7F2F38BA9BC9915 /* Pods-WistiaKit_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B4002B6E97835FDCCAA5963EFE09A3E0 /* Headers */ = {
+		A6A607506FEAAC7C41268D3E5CF4E5FE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B9EDEDC964E6B08F78920B4F4B9DB84 /* Alamofire-umbrella.h in Headers */,
+				EF1461221681BCA12A4147900A704727 /* Alamofire-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CBD60C88C746329AD7ED33D2129D95DC /* Headers */ = {
+		CC4BD7DC3B6C66E0D660E5AE137D5EFA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F99ABD655905666A302E83F74D52A6A /* WistiaKit-umbrella.h in Headers */,
+				3E87E7CB5B4A10C78BB5AA0FEBFB94C8 /* AlamofireImage-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EB21FD03B7703901958C3CE43325DAE9 /* Headers */ = {
+		E1C3EC6204CE87B74217DCE56FE13EC2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32EDA9ED83F4442303A46839027E152E /* AlamofireImage-umbrella.h in Headers */,
+				30B8F42F12F0D7977BE4D501CADA0CD3 /* Pods-WistiaKit_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1BD2A9716AFF1962C493AE06BD687713 /* WistiaKit */ = {
+		277CF01435F1108030116A52131B15EB /* WistiaKitCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DDEDD5CF050A58384E8D1B770BD4A190 /* Build configuration list for PBXNativeTarget "WistiaKit" */;
+			buildConfigurationList = 9496A657447E8ECC5288A48F1E9776D9 /* Build configuration list for PBXNativeTarget "WistiaKitCore" */;
 			buildPhases = (
-				2D906B45F69FA35110D9BF021CD3E052 /* Sources */,
-				D9EB717749F45DC0E83CEC2A3FE8E4D3 /* Frameworks */,
-				F3174A3B9C9363065DDE8CB03AA99DBF /* Resources */,
-				CBD60C88C746329AD7ED33D2129D95DC /* Headers */,
+				73194501A83C8C4242A1D2780EC881FD /* Headers */,
+				7A649B2733F48C48FCA1B8C2B42BE62E /* Sources */,
+				33FB1D4E91A537B82257679DD749219A /* Frameworks */,
+				06D6B985324A7A3798929C25225517C4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6AADC70A31A691E50B74E79C6AA1E1F5 /* PBXTargetDependency */,
-				7CC834F464F593F4C09EA573922B9FB7 /* PBXTargetDependency */,
-				A534583C458389490F01D60C51051273 /* PBXTargetDependency */,
+				22638AFB31D8335BD7F0E9920638A9E4 /* PBXTargetDependency */,
 			);
-			name = WistiaKit;
-			productName = WistiaKit;
-			productReference = 75A1F9E653373CACAC5FF2A902FEFB9C /* WistiaKit.framework */;
+			name = WistiaKitCore;
+			productName = WistiaKitCore;
+			productReference = 9D66C63F64ED3DBA7A7BD666E4D16FFB /* WistiaKitCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */ = {
+		5F4BA8B4D605B684ABBD2FB009E45151 /* AlamofireImage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 419E5D95491847CD79841B971A8A3277 /* Build configuration list for PBXNativeTarget "Alamofire" */;
+			buildConfigurationList = FECA52B188EB8A276F28B478D92AF353 /* Build configuration list for PBXNativeTarget "AlamofireImage" */;
 			buildPhases = (
-				32B9974868188C4803318E36329C87FE /* Sources */,
-				99195E4207764744AEC07ECCBCD550EB /* Frameworks */,
-				B4002B6E97835FDCCAA5963EFE09A3E0 /* Headers */,
+				CC4BD7DC3B6C66E0D660E5AE137D5EFA /* Headers */,
+				CFC3605BD58A257A8D2611B01BC03F4C /* Sources */,
+				2C1047F6C4EE52C8AA60B562CA27EF88 /* Frameworks */,
+				02D2C3712053831212DD40D64DCC1E27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6C1BEAD2D55745FC5FC741F8C60CBEEA /* PBXTargetDependency */,
+			);
+			name = AlamofireImage;
+			productName = AlamofireImage;
+			productReference = 58A13ABC8648A91EA8498DC768F87615 /* AlamofireImage.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8F38E0FCB822898E57E725CC9FA06748 /* Pods-WistiaKit_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E94704390E67052DDBF6407A6027D2C7 /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Tests" */;
+			buildPhases = (
+				A3B1AEB67122D55C8A21800EB10F009D /* Headers */,
+				80081B32E88D4E065B1EA782F26F0541 /* Sources */,
+				1A048BCBFC3C7B781E466EFD73AEDA4A /* Frameworks */,
+				DA64AD363096653F80764D6927D15595 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3068D05929464ACC32D0E1A53B62C2B7 /* PBXTargetDependency */,
+				265424D0BBE8C017BA303F846B7D9A18 /* PBXTargetDependency */,
+				BC1216C0745AAF469104C68C0B1AA3DD /* PBXTargetDependency */,
+				BC91EC979A2DFA15D6D33591CD1512EF /* PBXTargetDependency */,
+			);
+			name = "Pods-WistiaKit_Tests";
+			productName = "Pods-WistiaKit_Tests";
+			productReference = A6D941FE11AE82B7F46620A65240AB1E /* Pods_WistiaKit_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E130B9539DC6F5481CDC6C4856F62361 /* Pods-WistiaKit_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4D78B056B097C01E2E6445FB13335DA /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Example" */;
+			buildPhases = (
+				E1C3EC6204CE87B74217DCE56FE13EC2 /* Headers */,
+				510F8E4F1F9487D8E09D1917A6AC4E19 /* Sources */,
+				2C2EA66FEF8BC0A39C910C9C5A23CD9D /* Frameworks */,
+				BED2077A7BCC6506E0114CEF342D0953 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE0D8413968B1EB492741D05F8D6AE19 /* PBXTargetDependency */,
+				1779315F8AC77B9DDCEFBDA383005069 /* PBXTargetDependency */,
+				6CAF0746DFE58272ADED1C1A526C0843 /* PBXTargetDependency */,
+				D9323ACBC28072FCCCFD78401D9C2D41 /* PBXTargetDependency */,
+			);
+			name = "Pods-WistiaKit_Example";
+			productName = "Pods-WistiaKit_Example";
+			productReference = 9CD73B72B32A4214599D5FE12FC9EBDD /* Pods_WistiaKit_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E76458C58C9140B6A16D60547E68E80C /* Alamofire */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 427F0F003A1AD80AE00155AFCDEFAC20 /* Build configuration list for PBXNativeTarget "Alamofire" */;
+			buildPhases = (
+				A6A607506FEAAC7C41268D3E5CF4E5FE /* Headers */,
+				CC399CEC576B42C962CEB290481CAF95 /* Sources */,
+				6E8AF668A2161F7D6F680F721DB65D2D /* Frameworks */,
+				3DDB7E21141D7764AE4658D5B6AFF8C6 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -865,82 +927,25 @@
 			productReference = 1F3FAF49DC72A7AB02B03E88D8476816 /* Alamofire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9EFE4C70245EE2857D336B8B9FA4E825 /* AlamofireImage */ = {
+		FC99A76C01B547EC5FA1F2D1DEC67EE3 /* WistiaKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 01F2198AF9DCCF3700AE9DD21E64D480 /* Build configuration list for PBXNativeTarget "AlamofireImage" */;
+			buildConfigurationList = 31FD312369366C7C153E7D2F263AACC8 /* Build configuration list for PBXNativeTarget "WistiaKit" */;
 			buildPhases = (
-				DB0BE2FBB4DB070AD3C57C41C562C32B /* Sources */,
-				BF98FBBDC964E0CC738F6B323B4C1BB8 /* Frameworks */,
-				EB21FD03B7703901958C3CE43325DAE9 /* Headers */,
+				7FA567A4DA3073A911ACEBE2DD8CD44E /* Headers */,
+				4ECC630EF3671BD9EE5C9EE4E1D9925D /* Sources */,
+				F29F7590CA5D61492285F7E0C7D5EDF8 /* Frameworks */,
+				9E53D24285F6864EB72499013C4CAF90 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8937A2057A0DAADF003B7C65E7CE115D /* PBXTargetDependency */,
+				1745D5642E3984102E1A3502BA774341 /* PBXTargetDependency */,
+				EB0C1595DE33250991B6D210E7C06953 /* PBXTargetDependency */,
+				B1BC5A08E30224D4B223DCBE2F6D5A3A /* PBXTargetDependency */,
 			);
-			name = AlamofireImage;
-			productName = AlamofireImage;
-			productReference = 58A13ABC8648A91EA8498DC768F87615 /* AlamofireImage.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		CB5FC90DBBA624FD112E98F42E052A6D /* WistiaKitCore */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 345ED58CF3317569D53D74525918D7D5 /* Build configuration list for PBXNativeTarget "WistiaKitCore" */;
-			buildPhases = (
-				01C04AD2025802BDBBDBED0BF67E1C58 /* Sources */,
-				EE576435B42EE23BCF5384468A7AB433 /* Frameworks */,
-				3363FA532780EDC380D0184CAED36B43 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E14FB196FE228F9FF92C5A4F9D2B9402 /* PBXTargetDependency */,
-			);
-			name = WistiaKitCore;
-			productName = WistiaKitCore;
-			productReference = 9D66C63F64ED3DBA7A7BD666E4D16FFB /* WistiaKitCore.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		D1309FBF24DED7806DB1BF3F30AB9AB2 /* Pods-WistiaKit_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6E2C3CA24C9FA24A8746D329C7A1CA5C /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Tests" */;
-			buildPhases = (
-				C692A5E358C7528BBA0626E8AEFF0AA2 /* Sources */,
-				4D6013C0D3D93C54D066102EDE0FCDDC /* Frameworks */,
-				3923C48A6FB4F7619FE4C28D35604F3D /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				61CB36718FE8586448C3B9DE8FCA950B /* PBXTargetDependency */,
-				F2679135EF748F63B127028D4AD3234D /* PBXTargetDependency */,
-				F18F1FF60FCBE1D0E1DE5F0214034E62 /* PBXTargetDependency */,
-				F1DE28C01AC05D4DF3A090DE5ADA7220 /* PBXTargetDependency */,
-			);
-			name = "Pods-WistiaKit_Tests";
-			productName = "Pods-WistiaKit_Tests";
-			productReference = A6D941FE11AE82B7F46620A65240AB1E /* Pods_WistiaKit_Tests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		F2B457A71BD0AE25A2EB01356D41646A /* Pods-WistiaKit_Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DD3A034351DC653F9664ED64FE0DEDFA /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Example" */;
-			buildPhases = (
-				1B21B82A28CD5E424EBB65183D49D89B /* Sources */,
-				A19CC8CB3DC2AE57A1E1CD4E157646B8 /* Frameworks */,
-				53F412EB00F70B5A05D6E29091AB65CC /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				72F00A1571E19E3BE94946F3A22792E8 /* PBXTargetDependency */,
-				D5E2FC35CD7AC026912E9D0CE12D90D3 /* PBXTargetDependency */,
-				280696B49FAB4E9DA6C94FA11CCAFA07 /* PBXTargetDependency */,
-				3ADD041E1FF024F6DD6D56C3CE517F55 /* PBXTargetDependency */,
-			);
-			name = "Pods-WistiaKit_Example";
-			productName = "Pods-WistiaKit_Example";
-			productReference = 9CD73B72B32A4214599D5FE12FC9EBDD /* Pods_WistiaKit_Example.framework */;
+			name = WistiaKit;
+			productName = WistiaKit;
+			productReference = 75A1F9E653373CACAC5FF2A902FEFB9C /* WistiaKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -964,218 +969,456 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */,
-				9EFE4C70245EE2857D336B8B9FA4E825 /* AlamofireImage */,
-				F2B457A71BD0AE25A2EB01356D41646A /* Pods-WistiaKit_Example */,
-				D1309FBF24DED7806DB1BF3F30AB9AB2 /* Pods-WistiaKit_Tests */,
-				1BD2A9716AFF1962C493AE06BD687713 /* WistiaKit */,
-				CB5FC90DBBA624FD112E98F42E052A6D /* WistiaKitCore */,
+				E76458C58C9140B6A16D60547E68E80C /* Alamofire */,
+				5F4BA8B4D605B684ABBD2FB009E45151 /* AlamofireImage */,
+				E130B9539DC6F5481CDC6C4856F62361 /* Pods-WistiaKit_Example */,
+				8F38E0FCB822898E57E725CC9FA06748 /* Pods-WistiaKit_Tests */,
+				FC99A76C01B547EC5FA1F2D1DEC67EE3 /* WistiaKit */,
+				277CF01435F1108030116A52131B15EB /* WistiaKitCore */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F3174A3B9C9363065DDE8CB03AA99DBF /* Resources */ = {
+		02D2C3712053831212DD40D64DCC1E27 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B00962A7451F0A9AEEBBCC2A35C938F1 /* WistiaKitAssetCatalog.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06D6B985324A7A3798929C25225517C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDB7E21141D7764AE4658D5B6AFF8C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E53D24285F6864EB72499013C4CAF90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55E52AE3BAFDC28035747DCF81D79A6 /* WistiaKitAssetCatalog.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BED2077A7BCC6506E0114CEF342D0953 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA64AD363096653F80764D6927D15595 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		01C04AD2025802BDBBDBED0BF67E1C58 /* Sources */ = {
+		4ECC630EF3671BD9EE5C9EE4E1D9925D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C36AB0C700381C26D63E426DE416B088 /* _Parser.swift in Sources */,
-				FBB8B1182E2A079B3711DF5756F38A2F /* _UIColorExtensions.swift in Sources */,
-				20F1543C9E4738D9CB9DDD2A11D36439 /* _URLExtensions.swift in Sources */,
-				3BB247B212F8702A29A46A925730508D /* _WistiaAPI.swift in Sources */,
-				6ABF14BD3B20A26CE688B41EE6D7369E /* _WistiaCaptions.swift in Sources */,
-				8E4B06B4A3A6BB86308FB46570974835 /* _WistiaMediaEventCollector.swift in Sources */,
-				09A91BAB28ADB091BBB1B303AA880394 /* _WistiaStatsManager.swift in Sources */,
-				FA656BC76B90BE1D96F96C5985B3E337 /* WistiaAccount.swift in Sources */,
-				E1F9E10F8D5D41EB63296B9F1BD01018 /* WistiaAPI.swift in Sources */,
-				93DE5F205991483F127026FCA344430C /* WistiaAsset.swift in Sources */,
-				3053EDA4176549FAA0D7414F66FBE893 /* WistiaKitCore-dummy.m in Sources */,
-				95EE79F1B502403C7B827403A17D9C35 /* WistiaMedia.swift in Sources */,
-				B7F9588AF66C7D4F470E61458E7ACAFD /* WistiaMediaEmbedOptions.swift in Sources */,
-				5691F1A902B44A94842DF4F7D6E9A251 /* WistiaMediaStats.swift in Sources */,
-				A1EA73F747BBB030ADE0948AC5FAF247 /* WistiaObjectStatus.swift in Sources */,
-				25FF30A6E8AEB5C007F18E5744B25367 /* WistiaProject.swift in Sources */,
-				88EF6F74BBA5762B0180B9DEB4A2B6CE /* WistiaUser.swift in Sources */,
+				C24049579B409AA4F1062F049CAC1648 /* _CaptionsLabel.swift in Sources */,
+				994BEFD0E999D733EBF588899EFF05E9 /* _FullscreenController.swift in Sources */,
+				FB893D6A4369EB12CE8FA27B8D64D224 /* _SCNVector3Extensions.swift in Sources */,
+				7489D2A583245918C5E81E62EA2768A3 /* _UINavigationControllerExtensions.swift in Sources */,
+				AAE3E08C8B9C42C42D2E58B5839FF420 /* _UIViewExtensions.swift in Sources */,
+				CAD57F97DE056670E901A7ADB513394B /* _URLExtensions.swift in Sources */,
+				C3CF23BDB1B6DF1512118BA20259CBF4 /* _Wistia360PlayerView+LookVectorTracking.swift in Sources */,
+				8D5BE7A45D9F992648CB8E69F8E844BA /* _Wistia360PlayerView.swift in Sources */,
+				F1E7B6D604A012AE86877831ACB5EB9E /* _WistiaPlayer.swift in Sources */,
+				6D1F04422A1E1A0B7B0E942AD35916F6 /* _WistiaPlayerViewController.swift in Sources */,
+				39302BCC11BDF184550E3A05FCF01042 /* _WistiaPlayerViewController.xib in Sources */,
+				8CE32D7F0C7F17075A4651F85EE86325 /* WistiaCaptionsRenderer.swift in Sources */,
+				6FB40B8EE956E83EFC38BA4DDC407FBA /* WistiaFlatPlayerView.swift in Sources */,
+				F19A4AF0A33CB9B9C354870B9C8ACC3A /* WistiaKit-dummy.m in Sources */,
+				34660B447B3407EAF0435A3A145A21A1 /* WistiaPlayer.swift in Sources */,
+				D15529313AA76983928DA6B63FEFA3C2 /* WistiaPlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1B21B82A28CD5E424EBB65183D49D89B /* Sources */ = {
+		510F8E4F1F9487D8E09D1917A6AC4E19 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB3362E46A90333F5DC5C161ADA4BB4C /* Pods-WistiaKit_Example-dummy.m in Sources */,
+				4473835B42BA39FEC00AEAC98F8A681A /* Pods-WistiaKit_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D906B45F69FA35110D9BF021CD3E052 /* Sources */ = {
+		7A649B2733F48C48FCA1B8C2B42BE62E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C7E31F0B35FC2FC40491691AC62E371 /* _CaptionsLabel.swift in Sources */,
-				A2706B2B44DFC82E3F2673A1495C37E3 /* _FullscreenController.swift in Sources */,
-				F13CA7BA2680E23B42E260E3B7BCF20E /* _SCNVector3Extensions.swift in Sources */,
-				9217540BF8F157F165EDBCA9989DA108 /* _UINavigationControllerExtensions.swift in Sources */,
-				55BD03F429A219FBAF4A7ACE5FDFB20A /* _UIViewExtensions.swift in Sources */,
-				30718830D37B0A15750B7444FFF121FF /* _URLExtensions.swift in Sources */,
-				423E3D8455D59ED52034BAFBA849C007 /* _Wistia360PlayerView+LookVectorTracking.swift in Sources */,
-				FC1AC52360A9304112056CEA2FDFD803 /* _Wistia360PlayerView.swift in Sources */,
-				ABD05C559CFFA2FDF71D5D3C9C4330AA /* _WistiaPlayer.swift in Sources */,
-				F5ECDA9294203A779670A7CE09796649 /* _WistiaPlayerViewController.swift in Sources */,
-				3C8D05D7F28013D0D2C8098E1A04BDD3 /* _WistiaPlayerViewController.xib in Sources */,
-				50DE8EF001434A527F7FEABD9D83B383 /* WistiaCaptionsRenderer.swift in Sources */,
-				A5310D26FB41E06140A9CEBB2C1895E0 /* WistiaFlatPlayerView.swift in Sources */,
-				353A6D73CA24032A7652213AA3C5D227 /* WistiaKit-dummy.m in Sources */,
-				A44AB0ACD56E35E519B48CECA55A860D /* WistiaPlayer.swift in Sources */,
-				D2206E86BF46ADFD33E04EC9C3D6C09E /* WistiaPlayerViewController.swift in Sources */,
+				B41C25CCDF2C72111C16188B9B8C3B55 /* _Parser.swift in Sources */,
+				C12FBC6FCBE621C6DDE01DC20EF8EA9C /* _UIColorExtensions.swift in Sources */,
+				9B7D3C55E274E38D22D03397537AE03A /* _URLExtensions.swift in Sources */,
+				9C416665647D032E21EEC7237BD478A4 /* _WistiaAPI.swift in Sources */,
+				37995B7A0223D4BC753201522C28AABE /* _WistiaCaptions.swift in Sources */,
+				DCF6FCAB7228F6D8103330A9A353E410 /* _WistiaMediaEventCollector.swift in Sources */,
+				DA670EB9A4591F03511EA315AA25070D /* _WistiaStatsManager.swift in Sources */,
+				4C5A75FFB574960CB199089276621E28 /* WistiaAccount.swift in Sources */,
+				74A4F3E1AB9D69CD72A28195E3B662A0 /* WistiaAPI.swift in Sources */,
+				B02AAAF4F3B0BCA6B36D99ABC91E79C5 /* WistiaAsset.swift in Sources */,
+				1A41D9C9073E55451D2E830FD70EE269 /* WistiaKitCore-dummy.m in Sources */,
+				6B48703E4F1D763BEE248C2C62784EA8 /* WistiaMedia.swift in Sources */,
+				E877105FD9BE7A8F3D89D6FCF926B0AE /* WistiaMediaEmbedOptions.swift in Sources */,
+				B6EE390DF42DCABA2E50DF8D70FFAC93 /* WistiaMediaStats.swift in Sources */,
+				977B42772A3C494DA87749F7241FDBA4 /* WistiaObjectStatus.swift in Sources */,
+				19D685600F6386B8562C200B7C0F6BE3 /* WistiaProject.swift in Sources */,
+				C995AD64A48C9E6C7366B6124672DB57 /* WistiaUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		32B9974868188C4803318E36329C87FE /* Sources */ = {
+		80081B32E88D4E065B1EA782F26F0541 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9ED2BB2981896E0A39EFA365503F58CE /* AFError.swift in Sources */,
-				A9EEEA7477981DEEBC72432DE9990A4B /* Alamofire-dummy.m in Sources */,
-				F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */,
-				61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */,
-				B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */,
-				A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */,
-				EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */,
-				BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */,
-				5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */,
-				CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */,
-				F6BECD98B97CBFEBE2C96F0E9E72A6C0 /* ResponseSerialization.swift in Sources */,
-				7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */,
-				62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */,
-				7B5FE28C7EA4122B0598738E54DBEBD8 /* SessionDelegate.swift in Sources */,
-				AE1EF48399533730D0066E04B22CA2D6 /* SessionManager.swift in Sources */,
-				3626B94094672CB1C9DEA32B9F9502E1 /* TaskDelegate.swift in Sources */,
-				10EB23E9ECC4B33E16933BB1EA560B6A /* Timeline.swift in Sources */,
-				BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */,
+				F4E6D379E8467DFEA6A766B8BF8120C3 /* Pods-WistiaKit_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C692A5E358C7528BBA0626E8AEFF0AA2 /* Sources */ = {
+		CC399CEC576B42C962CEB290481CAF95 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A7E477B0301F8FB37437AE996EE25D9 /* Pods-WistiaKit_Tests-dummy.m in Sources */,
+				BE4BA1EDE444A770F834605F4B65348E /* AFError.swift in Sources */,
+				D4C3899574E9D5DF5E5DA52310560BCC /* Alamofire-dummy.m in Sources */,
+				4E1A913EFB404FB11524718FF0298EFE /* Alamofire.swift in Sources */,
+				DBE6E2E4D205545E7988CFA5057C31D6 /* DispatchQueue+Alamofire.swift in Sources */,
+				FF9C7BC64DB23D2CED48197DE67F0335 /* MultipartFormData.swift in Sources */,
+				B77705737566AE83ED7E448923D7FA60 /* NetworkReachabilityManager.swift in Sources */,
+				500C8EDA60C07B0F127C7FC385E17D38 /* Notifications.swift in Sources */,
+				796177DE2762F24DAC16A709FD954838 /* ParameterEncoding.swift in Sources */,
+				965DACF3DC02857ECBE66C5CBA3DA5D4 /* Request.swift in Sources */,
+				52237C35642089F77DD4D723CEB25737 /* Response.swift in Sources */,
+				5EE5FED83B90A606A763CF1114D1D6FB /* ResponseSerialization.swift in Sources */,
+				F9EA61D484CC15FDDAB0D8C0D26D7949 /* Result.swift in Sources */,
+				6BEA14EC335E07C7063CD1383C0C443C /* ServerTrustPolicy.swift in Sources */,
+				1FC3FD39157C2FFFF3869A1300730086 /* SessionDelegate.swift in Sources */,
+				7068E8A7DDC1424EE8F24BC77E8746F4 /* SessionManager.swift in Sources */,
+				36FF8853CB34A9297AFAA8F5F7456324 /* TaskDelegate.swift in Sources */,
+				B424F524BBBE34E685129945993809A8 /* Timeline.swift in Sources */,
+				58A9719584AFA2D108D9E5C585A79329 /* Validation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DB0BE2FBB4DB070AD3C57C41C562C32B /* Sources */ = {
+		CFC3605BD58A257A8D2611B01BC03F4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EA0415A1A8A4FFC7403E201F915F9A4 /* AFIError.swift in Sources */,
-				37F951F2BDB75BD682C2999EB7B51A35 /* AlamofireImage-dummy.m in Sources */,
-				E1FF4985892E23B75A3381EFF830DFD5 /* Image.swift in Sources */,
-				D9E544B8CB42DA8DD44838F83610D8E0 /* ImageCache.swift in Sources */,
-				202822E4668C16D115A8F68F3ADF0E0F /* ImageDownloader.swift in Sources */,
-				27996F52CCABBD6D0874B79D1B913598 /* ImageFilter.swift in Sources */,
-				2BD7CFD41DACC439E8C0A527F1643495 /* Request+AlamofireImage.swift in Sources */,
-				C73BF39A4CCC3E450E102C23027F8FF8 /* UIButton+AlamofireImage.swift in Sources */,
-				05006BDD7301FCF2678618DEDCC69B94 /* UIImage+AlamofireImage.swift in Sources */,
-				304C5736AC5D49B526C709397D0CF048 /* UIImageView+AlamofireImage.swift in Sources */,
+				DD55056D9CA62A21DD873975AF4CA453 /* AFIError.swift in Sources */,
+				3044F8CC65360700C256FD1816EAD872 /* AlamofireImage-dummy.m in Sources */,
+				541C5B6F7D07577D8780B97F83EDD2BE /* Image.swift in Sources */,
+				5227C5691672C22D9B30CE2D05C4CF50 /* ImageCache.swift in Sources */,
+				0BFB6F172162229449F8A1ADBEB0D85C /* ImageDownloader.swift in Sources */,
+				20F72CA5C3444FE464F3E505E7B358AF /* ImageFilter.swift in Sources */,
+				43B823C1B43D07F90622C5D1DA6DC95C /* Request+AlamofireImage.swift in Sources */,
+				6AEFBB5B30DC9E05A82DF28A17BDB2FD /* UIButton+AlamofireImage.swift in Sources */,
+				5F64F95700D0E01EF2CBAEEF6FC7B499 /* UIImage+AlamofireImage.swift in Sources */,
+				D45D4B7C78D3DCB6313DF562761B5EE9 /* UIImageView+AlamofireImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		280696B49FAB4E9DA6C94FA11CCAFA07 /* PBXTargetDependency */ = {
+		1745D5642E3984102E1A3502BA774341 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = E76458C58C9140B6A16D60547E68E80C /* Alamofire */;
+			targetProxy = 45598A14A79C22F04C08C66E02F48D1C /* PBXContainerItemProxy */;
+		};
+		1779315F8AC77B9DDCEFBDA383005069 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AlamofireImage;
+			target = 5F4BA8B4D605B684ABBD2FB009E45151 /* AlamofireImage */;
+			targetProxy = 7FEDAD75465809BC8003297866F1432A /* PBXContainerItemProxy */;
+		};
+		22638AFB31D8335BD7F0E9920638A9E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = E76458C58C9140B6A16D60547E68E80C /* Alamofire */;
+			targetProxy = EB6F7267E12E3DD0F2744447F1C189E7 /* PBXContainerItemProxy */;
+		};
+		265424D0BBE8C017BA303F846B7D9A18 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AlamofireImage;
+			target = 5F4BA8B4D605B684ABBD2FB009E45151 /* AlamofireImage */;
+			targetProxy = 837176D3D347BCFF3FF1844F78D05069 /* PBXContainerItemProxy */;
+		};
+		3068D05929464ACC32D0E1A53B62C2B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = E76458C58C9140B6A16D60547E68E80C /* Alamofire */;
+			targetProxy = DAA370080D61907B1086EC978DBAC9E4 /* PBXContainerItemProxy */;
+		};
+		6C1BEAD2D55745FC5FC741F8C60CBEEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = E76458C58C9140B6A16D60547E68E80C /* Alamofire */;
+			targetProxy = 84DE9D25FE685AFA1B87C7FACEEDB4B4 /* PBXContainerItemProxy */;
+		};
+		6CAF0746DFE58272ADED1C1A526C0843 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = WistiaKit;
-			target = 1BD2A9716AFF1962C493AE06BD687713 /* WistiaKit */;
-			targetProxy = 854D53D48F368776B849FD120EFCF448 /* PBXContainerItemProxy */;
+			target = FC99A76C01B547EC5FA1F2D1DEC67EE3 /* WistiaKit */;
+			targetProxy = BCB5C3FD830595D9F91DF68AE6099C6F /* PBXContainerItemProxy */;
 		};
-		3ADD041E1FF024F6DD6D56C3CE517F55 /* PBXTargetDependency */ = {
+		B1BC5A08E30224D4B223DCBE2F6D5A3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = WistiaKitCore;
-			target = CB5FC90DBBA624FD112E98F42E052A6D /* WistiaKitCore */;
-			targetProxy = C7D97807908DEE281EEC054FB5799E34 /* PBXContainerItemProxy */;
+			target = 277CF01435F1108030116A52131B15EB /* WistiaKitCore */;
+			targetProxy = C8B0EDC15423897EDB608CDF97147CDD /* PBXContainerItemProxy */;
 		};
-		61CB36718FE8586448C3B9DE8FCA950B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = 88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */;
-			targetProxy = EAD3E93A2D7BAC0996DDF58CE50A2CDF /* PBXContainerItemProxy */;
-		};
-		6AADC70A31A691E50B74E79C6AA1E1F5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = 88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */;
-			targetProxy = 331222240D4DAC09D18BAD992A44DBA9 /* PBXContainerItemProxy */;
-		};
-		72F00A1571E19E3BE94946F3A22792E8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = 88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */;
-			targetProxy = CE24198CB4131358EF14BDD699DDDC06 /* PBXContainerItemProxy */;
-		};
-		7CC834F464F593F4C09EA573922B9FB7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AlamofireImage;
-			target = 9EFE4C70245EE2857D336B8B9FA4E825 /* AlamofireImage */;
-			targetProxy = 1733921AFCBD0784AC9C6F0E5577DD6E /* PBXContainerItemProxy */;
-		};
-		8937A2057A0DAADF003B7C65E7CE115D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = 88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */;
-			targetProxy = A1758AA696D56310AA192B587162169A /* PBXContainerItemProxy */;
-		};
-		A534583C458389490F01D60C51051273 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = WistiaKitCore;
-			target = CB5FC90DBBA624FD112E98F42E052A6D /* WistiaKitCore */;
-			targetProxy = A3E0C1F8388353305C0ADF8781A93452 /* PBXContainerItemProxy */;
-		};
-		D5E2FC35CD7AC026912E9D0CE12D90D3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AlamofireImage;
-			target = 9EFE4C70245EE2857D336B8B9FA4E825 /* AlamofireImage */;
-			targetProxy = 69636E21FE2C777B24E1AE6B9308AE9A /* PBXContainerItemProxy */;
-		};
-		E14FB196FE228F9FF92C5A4F9D2B9402 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = 88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */;
-			targetProxy = 63539024BA999007254596BACFD0857D /* PBXContainerItemProxy */;
-		};
-		F18F1FF60FCBE1D0E1DE5F0214034E62 /* PBXTargetDependency */ = {
+		BC1216C0745AAF469104C68C0B1AA3DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = WistiaKit;
-			target = 1BD2A9716AFF1962C493AE06BD687713 /* WistiaKit */;
-			targetProxy = 1B4CED93A498F5DE8C71C6604E9B3C43 /* PBXContainerItemProxy */;
+			target = FC99A76C01B547EC5FA1F2D1DEC67EE3 /* WistiaKit */;
+			targetProxy = 57D6E447609D4739D5841995F257B19F /* PBXContainerItemProxy */;
 		};
-		F1DE28C01AC05D4DF3A090DE5ADA7220 /* PBXTargetDependency */ = {
+		BC91EC979A2DFA15D6D33591CD1512EF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = WistiaKitCore;
-			target = CB5FC90DBBA624FD112E98F42E052A6D /* WistiaKitCore */;
-			targetProxy = 9418B5171FB14E434FC01715026E2857 /* PBXContainerItemProxy */;
+			target = 277CF01435F1108030116A52131B15EB /* WistiaKitCore */;
+			targetProxy = 4BF0525AF6FCCB448CDDB513D7DBC34F /* PBXContainerItemProxy */;
 		};
-		F2679135EF748F63B127028D4AD3234D /* PBXTargetDependency */ = {
+		D9323ACBC28072FCCCFD78401D9C2D41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WistiaKitCore;
+			target = 277CF01435F1108030116A52131B15EB /* WistiaKitCore */;
+			targetProxy = 6316715C34B70BC33398D115850C6B27 /* PBXContainerItemProxy */;
+		};
+		EB0C1595DE33250991B6D210E7C06953 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AlamofireImage;
-			target = 9EFE4C70245EE2857D336B8B9FA4E825 /* AlamofireImage */;
-			targetProxy = 6F0D740867200F9325EF627E72869669 /* PBXContainerItemProxy */;
+			target = 5F4BA8B4D605B684ABBD2FB009E45151 /* AlamofireImage */;
+			targetProxy = 4EEEEE85F353327F392F2AC0A59048E9 /* PBXContainerItemProxy */;
+		};
+		EE0D8413968B1EB492741D05F8D6AE19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = E76458C58C9140B6A16D60547E68E80C /* Alamofire */;
+			targetProxy = 54593BA5D594DE5B7179715FDCEBA0C5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		199D972A13F2B4C56847F7A89CCA83BC /* Debug */ = {
+		0CE3AF37574381AF901BDA40A1F17C0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5982CEBEDECD8EED6E707EF56C6A95AD /* Alamofire.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Alamofire/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
+				PRODUCT_MODULE_NAME = Alamofire;
+				PRODUCT_NAME = Alamofire;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		143C739AB517F9CB30972D386CB0AE0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B98B3A18F81138134F7502640D71CB2 /* Pods-WistiaKit_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		29461B23402771DC36BB84FE023D99B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5982CEBEDECD8EED6E707EF56C6A95AD /* Alamofire.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Alamofire/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
+				PRODUCT_MODULE_NAME = Alamofire;
+				PRODUCT_NAME = Alamofire;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3C68EE7C6FFEDC56B0D2E5BEEAAD7D3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FF412495B96C47D00A5ED647B81E313 /* WistiaKitCore.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/WistiaKitCore/WistiaKitCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WistiaKitCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WistiaKitCore/WistiaKitCore.modulemap";
+				PRODUCT_MODULE_NAME = WistiaKitCore;
+				PRODUCT_NAME = WistiaKitCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		46E1CF85B5179175D11172C0F1F2EBF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82BD55F80BB91333C807A5834666EA8D /* Pods-WistiaKit_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		60D9B164C2D92A9D5E15B21E3DE597E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93EE4728C7931E90C8B32E868889213E /* AlamofireImage.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/AlamofireImage/AlamofireImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AlamofireImage/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AlamofireImage/AlamofireImage.modulemap";
+				PRODUCT_MODULE_NAME = AlamofireImage;
+				PRODUCT_NAME = AlamofireImage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		60DAF49CA7A9F362148D49C3C3123B2A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1229,7 +1472,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -1238,307 +1482,7 @@
 			};
 			name = Debug;
 		};
-		34E77E2E24311F3D2D8A6311074F3DC3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5982CEBEDECD8EED6E707EF56C6A95AD /* Alamofire.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Alamofire/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
-				PRODUCT_MODULE_NAME = Alamofire;
-				PRODUCT_NAME = Alamofire;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		42AE0731D4717BA978CA54A6C25C8465 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6F5BD8E62E5FD6E69AD86870E46DE18 /* Pods-WistiaKit_Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Example/Pods-WistiaKit_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		5B0706543CD70F93B2F51ECE81C9F898 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B98B3A18F81138134F7502640D71CB2 /* Pods-WistiaKit_Tests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		773E25B5E9FD0C87D2A18185708D79FD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FF412495B96C47D00A5ED647B81E313 /* WistiaKitCore.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/WistiaKitCore/WistiaKitCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WistiaKitCore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WistiaKitCore/WistiaKitCore.modulemap";
-				PRODUCT_MODULE_NAME = WistiaKitCore;
-				PRODUCT_NAME = WistiaKitCore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7E3A905E762F7AEF3CC1570F82B93B67 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FF412495B96C47D00A5ED647B81E313 /* WistiaKitCore.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/WistiaKitCore/WistiaKitCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WistiaKitCore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WistiaKitCore/WistiaKitCore.modulemap";
-				PRODUCT_MODULE_NAME = WistiaKitCore;
-				PRODUCT_NAME = WistiaKitCore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B0034B72F31EE2A19E1C5CA1202FF5DF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93EE4728C7931E90C8B32E868889213E /* AlamofireImage.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/AlamofireImage/AlamofireImage-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AlamofireImage/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AlamofireImage/AlamofireImage.modulemap";
-				PRODUCT_MODULE_NAME = AlamofireImage;
-				PRODUCT_NAME = AlamofireImage;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C18155DB6746473143748B65E6B3CD05 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5982CEBEDECD8EED6E707EF56C6A95AD /* Alamofire.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Alamofire/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
-				PRODUCT_MODULE_NAME = Alamofire;
-				PRODUCT_NAME = Alamofire;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		D5AF75444C54A83F4A458BE05729C5C1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93EE4728C7931E90C8B32E868889213E /* AlamofireImage.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/AlamofireImage/AlamofireImage-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AlamofireImage/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AlamofireImage/AlamofireImage.modulemap";
-				PRODUCT_MODULE_NAME = AlamofireImage;
-				PRODUCT_NAME = AlamofireImage;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		DCFB7668E3E338103D36139CDC55AC06 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82BD55F80BB91333C807A5834666EA8D /* Pods-WistiaKit_Tests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E60846EC57319315DA1FDBFF923884E1 /* Release */ = {
+		8B620AACD609C86E20D14633D14A0A60 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7A8E16150545083CC4CC13715F9CB3B /* Pods-WistiaKit_Example.release.xcconfig */;
 			buildSettings = {
@@ -1565,7 +1509,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1573,72 +1518,7 @@
 			};
 			name = Release;
 		};
-		EACAEC98E6E74A36DC56BFF08F4171B5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2DFB301ED6402A6B2514EA1DD027D92D /* WistiaKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/WistiaKit/WistiaKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WistiaKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WistiaKit/WistiaKit.modulemap";
-				PRODUCT_MODULE_NAME = WistiaKit;
-				PRODUCT_NAME = WistiaKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		ED618AE887F8B05FB430F2AC63E267BC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2DFB301ED6402A6B2514EA1DD027D92D /* WistiaKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/WistiaKit/WistiaKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WistiaKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WistiaKit/WistiaKit.modulemap";
-				PRODUCT_MODULE_NAME = WistiaKit;
-				PRODUCT_NAME = WistiaKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		FDB2FC4A1E5891381CD9D922145497F1 /* Release */ = {
+		C4EAA84F44D044E108500A81C635F21E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1690,74 +1570,242 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
+		DA05E2C718ED1F9EE85FDAE1B91C7E6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6F5BD8E62E5FD6E69AD86870E46DE18 /* Pods-WistiaKit_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-WistiaKit_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WistiaKit_Example/Pods-WistiaKit_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E8AB2814F0B0E651CF640C80FEB01886 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DFB301ED6402A6B2514EA1DD027D92D /* WistiaKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/WistiaKit/WistiaKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WistiaKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WistiaKit/WistiaKit.modulemap";
+				PRODUCT_MODULE_NAME = WistiaKit;
+				PRODUCT_NAME = WistiaKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F220FC10DED6A706DC6CDC282CD5306A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DFB301ED6402A6B2514EA1DD027D92D /* WistiaKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/WistiaKit/WistiaKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WistiaKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WistiaKit/WistiaKit.modulemap";
+				PRODUCT_MODULE_NAME = WistiaKit;
+				PRODUCT_NAME = WistiaKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FBDAB5F63B53C58D96A033D067133059 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FF412495B96C47D00A5ED647B81E313 /* WistiaKitCore.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/WistiaKitCore/WistiaKitCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WistiaKitCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WistiaKitCore/WistiaKitCore.modulemap";
+				PRODUCT_MODULE_NAME = WistiaKitCore;
+				PRODUCT_NAME = WistiaKitCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FDF6ACECC103C62769643F4CB4DF6B3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93EE4728C7931E90C8B32E868889213E /* AlamofireImage.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/AlamofireImage/AlamofireImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AlamofireImage/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AlamofireImage/AlamofireImage.modulemap";
+				PRODUCT_MODULE_NAME = AlamofireImage;
+				PRODUCT_NAME = AlamofireImage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		01F2198AF9DCCF3700AE9DD21E64D480 /* Build configuration list for PBXNativeTarget "AlamofireImage" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B0034B72F31EE2A19E1C5CA1202FF5DF /* Debug */,
-				D5AF75444C54A83F4A458BE05729C5C1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				199D972A13F2B4C56847F7A89CCA83BC /* Debug */,
-				FDB2FC4A1E5891381CD9D922145497F1 /* Release */,
+				60DAF49CA7A9F362148D49C3C3123B2A /* Debug */,
+				C4EAA84F44D044E108500A81C635F21E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		345ED58CF3317569D53D74525918D7D5 /* Build configuration list for PBXNativeTarget "WistiaKitCore" */ = {
+		31FD312369366C7C153E7D2F263AACC8 /* Build configuration list for PBXNativeTarget "WistiaKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7E3A905E762F7AEF3CC1570F82B93B67 /* Debug */,
-				773E25B5E9FD0C87D2A18185708D79FD /* Release */,
+				F220FC10DED6A706DC6CDC282CD5306A /* Debug */,
+				E8AB2814F0B0E651CF640C80FEB01886 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		419E5D95491847CD79841B971A8A3277 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
+		427F0F003A1AD80AE00155AFCDEFAC20 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C18155DB6746473143748B65E6B3CD05 /* Debug */,
-				34E77E2E24311F3D2D8A6311074F3DC3 /* Release */,
+				0CE3AF37574381AF901BDA40A1F17C0E /* Debug */,
+				29461B23402771DC36BB84FE023D99B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E2C3CA24C9FA24A8746D329C7A1CA5C /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Tests" */ = {
+		9496A657447E8ECC5288A48F1E9776D9 /* Build configuration list for PBXNativeTarget "WistiaKitCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5B0706543CD70F93B2F51ECE81C9F898 /* Debug */,
-				DCFB7668E3E338103D36139CDC55AC06 /* Release */,
+				3C68EE7C6FFEDC56B0D2E5BEEAAD7D3C /* Debug */,
+				FBDAB5F63B53C58D96A033D067133059 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DD3A034351DC653F9664ED64FE0DEDFA /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Example" */ = {
+		E94704390E67052DDBF6407A6027D2C7 /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				42AE0731D4717BA978CA54A6C25C8465 /* Debug */,
-				E60846EC57319315DA1FDBFF923884E1 /* Release */,
+				143C739AB517F9CB30972D386CB0AE0E /* Debug */,
+				46E1CF85B5179175D11172C0F1F2EBF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DDEDD5CF050A58384E8D1B770BD4A190 /* Build configuration list for PBXNativeTarget "WistiaKit" */ = {
+		F4D78B056B097C01E2E6445FB13335DA /* Build configuration list for PBXNativeTarget "Pods-WistiaKit_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ED618AE887F8B05FB430F2AC63E267BC /* Debug */,
-				EACAEC98E6E74A36DC56BFF08F4171B5 /* Release */,
+				DA05E2C718ED1F9EE85FDAE1B91C7E6B /* Debug */,
+				8B620AACD609C86E20D14633D14A0A60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FECA52B188EB8A276F28B478D92AF353 /* Build configuration list for PBXNativeTarget "AlamofireImage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDF6ACECC103C62769643F4CB4DF6B3A /* Debug */,
+				60D9B164C2D92A9D5E15B21E3DE597E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
