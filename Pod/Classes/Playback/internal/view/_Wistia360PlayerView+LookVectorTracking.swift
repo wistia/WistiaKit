@@ -40,7 +40,7 @@ internal extension Wistia360PlayerView {
     }
 
     //Assumes time between calls is the required time look vector needs to remain unchanged
-    internal func checkLookVector() {
+    @objc internal func checkLookVector() {
         guard let currentTime = wPlayer?.currentTime().seconds else { return }
         let currentLookVector = correctedHeadingPitchFrom(latitudeLongitudeOfPoint(lookVectorIntersectionWithSphereNode(), onSphereWithRadius: Float(SphereRadius)))
         let timeHeadingPitchString = String(format: "%f,%.0f,%.0f", currentTime, currentLookVector.heading, currentLookVector.pitch)

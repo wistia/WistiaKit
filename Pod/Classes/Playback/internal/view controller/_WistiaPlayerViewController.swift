@@ -294,6 +294,28 @@ extension WistiaPlayerViewController: WistiaPlayerDelegate {
     public final func wistiaPlayer(_ player: WistiaPlayer, willLoadVideoForMedia media: WistiaMedia, usingAsset asset: WistiaAsset?, usingHLSMasterIndexManifest: Bool) {
         configurePlayerViews(for: media)
     }
+
+    /// Internal.
+    public final func wistiaPlayer(_ player: WistiaPlayer, couldNotPlayLocked media: WistiaMedia, trying password: String?) {
+
+        let pwPrompt = UIAlertController(title: "Video is Locked", message: media.embedOptions?.passwordChallenge ?? "Please enter the password", preferredStyle: .alert)
+        pwPrompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            if let d = self.delegate {
+                d.close(wistiaPlayerViewController: self)
+            } else {
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
+        }))
+        pwPrompt.addTextField { (pwField) in
+            pwField.isSecureTextEntry = true
+            pwPrompt.addAction(UIAlertAction(title: "Submit", style: .default, handler: { _ in
+                self.wPlayer.replaceCurrentVideoWithVideo(forHashedID: media.hashedID, assetWithSlug: nil, password: pwField.text)
+            }))
+        }
+
+        self.present(pwPrompt, animated: true, completion: nil)
+    }
+
 }
 #endif //os(iOS)
 
@@ -519,9 +541,9 @@ internal extension WistiaPlayerViewController {
         loadViewIfNeeded()
         let podBundle = Bundle(for: self.classForCoder)
         if playing {
-            controlsPlayPauseButton.setImage(UIImage(named: "smallPause", in: podBundle, compatibleWith: nil), for: UIControlState())
+            controlsPlayPauseButton.setImage(UIImage(named: "smallPause", in: podBundle, compatibleWith: nil), for: UIControl.State())
         } else {
-            controlsPlayPauseButton.setImage(UIImage(named: "smallPlay", in: podBundle, compatibleWith: nil), for: UIControlState())
+            controlsPlayPauseButton.setImage(UIImage(named: "smallPlay", in: podBundle, compatibleWith: nil), for: UIControl.State())
         }
     }
 
@@ -563,14 +585,14 @@ internal extension WistiaPlayerViewController {
     internal func startOrResetChromeInteractionTimer(){
         chromeInteractionTimer?.invalidate()
         chromeInteractionTimer = Timer(timeInterval: TimeInterval(5), target: self, selector: #selector(WistiaPlayerViewController.noChromeInteraction), userInfo: nil, repeats: false)
-        RunLoop.main.add(chromeInteractionTimer!, forMode: RunLoopMode.defaultRunLoopMode)
+        RunLoop.main.add(chromeInteractionTimer!, forMode: RunLoop.Mode.default)
     }
 
     internal func cancelChromeInteractionTimer(){
         chromeInteractionTimer?.invalidate()
     }
 
-    internal func noChromeInteraction(){
+    @objc internal func noChromeInteraction(){
         presentForPlaybackShowingChrome(false)
     }
 
@@ -661,7 +683,7 @@ internal extension WistiaPlayerViewController {
             duration.isValid, !duration.isIndefinite else { return nil }
 
         let pct = min(max(0,x / scrubberTrackContainerView.bounds.width),1)
-        return CMTimeMultiplyByFloat64(duration, Float64(pct))
+        return CMTimeMultiplyByFloat64(duration, multiplier: Float64(pct))
     }
 
     internal func storePlayerRateAndPause() {
@@ -756,7 +778,7 @@ extension WistiaPlayerViewController : UIPickerViewDelegate, UIPickerViewDataSou
             title = wPlayer.captionsRenderer.captionsLanguagesAvailable[row-1]
         }
 
-        return NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: UIColor.white])
+        return NSAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
     }
 
     //data source

@@ -370,23 +370,23 @@ internal class Wistia360PlayerView: UIView {
         if let startHit = sceneView.hitTest(startLocation, options: [SCNHitTestOption.firstFoundOnly: NSNumber(value: true), SCNHitTestOption.backFaceCulling: NSNumber(value: true)]).first,
             let endHit = sceneView.hitTest(currentLocation, options: [SCNHitTestOption.firstFoundOnly: NSNumber(value: true), SCNHitTestOption.backFaceCulling: NSNumber(value: true)]).first {
 
-                //longitude = yaw = atan2(x, z)
-                //latitude = pitch = arcsin(y / r)
-                let startLong = atan2(startHit.localCoordinates.x, startHit.localCoordinates.z)
-                let startLat = asin(startHit.localCoordinates.y / Float(SphereRadius))
-                let endLong = atan2(endHit.localCoordinates.x, endHit.localCoordinates.z)
-                let endLat = asin(endHit.localCoordinates.y / Float(SphereRadius))
-                var deltaLong = endLong - startLong
-                //Keep delta small in correct direction when crossing from -pi to +pi (and vice versa)
-                if fabs(deltaLong) > Float.pi {
-                    deltaLong = (Float.pi - fabs(endLong)) + (Float.pi - fabs(startLong))
-                    if translation.x < 0 {
-                        deltaLong = -deltaLong
-                    }
+            //longitude = yaw = atan2(x, z)
+            //latitude = pitch = arcsin(y / r)
+            let startLong = atan2(startHit.localCoordinates.x, startHit.localCoordinates.z)
+            let startLat = asin(startHit.localCoordinates.y / Float(SphereRadius))
+            let endLong = atan2(endHit.localCoordinates.x, endHit.localCoordinates.z)
+            let endLat = asin(endHit.localCoordinates.y / Float(SphereRadius))
+            var deltaLong = endLong - startLong
+            //Keep delta small in correct direction when crossing from -pi to +pi (and vice versa)
+            if abs(deltaLong) > Float.pi {
+                deltaLong = (Float.pi - abs(endLong)) + (Float.pi - abs(startLong))
+                if translation.x < 0 {
+                    deltaLong = -deltaLong
                 }
-                let deltaLat = endLat - startLat
+            }
+            let deltaLat = endLat - startLat
 
-                return (deltaLat, deltaLong)
+            return (deltaLat, deltaLong)
         }
         return (0, 0)
     }

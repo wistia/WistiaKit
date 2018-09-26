@@ -102,6 +102,20 @@ public protocol WistiaPlayerDelegate : class {
      - Parameter media: The 'WistiaMedia' from which a playback URL is needed.
      */
     func wistiaPlayer(_ player:WistiaPlayer, shouldLoadVideoForMedia media:WistiaMedia) -> URL?
+
+    /**
+     Informs the delegate about a password protected media.
+
+     The owner of this player should call replaceCurrentVideoWithVideo(hashedID:slug:password:) with a password to try
+     loading the media again.
+
+     Optinoal.  The default implementation is a no-op.
+
+     - Parameter player: The `WistiaPlayer` trying to play the password protected media.
+     - Parameter media: The 'WistiaMedia' which is password protected.  Use `media.hashedID` when reloading.
+         See `media.embedOptions.passwordChallenge` for the password request prompt.
+     */
+    func wistiaPlayer(_ player: WistiaPlayer, couldNotPlayLocked media: WistiaMedia, trying password: String?)
 }
 
 public extension WistiaPlayerDelegate {
@@ -110,7 +124,11 @@ public extension WistiaPlayerDelegate {
     public func wistiaPlayer(_ player: WistiaPlayer, shouldLoadVideoForMedia media: WistiaMedia) -> URL? {
         return nil
     }
-    
+
+    //Default implementation does nothing, retaining standard functionality
+    public func wistiaPlayer(_ player: WistiaPlayer, couldNotPlayLocked media: WistiaMedia, trying password: String?) {
+        //noop
+    }
 }
 
 
@@ -308,8 +326,8 @@ public final class WistiaPlayer: NSObject {
      
      - Note: This method is a no-op if the given `WistiaMedia` matches the currently loaded `WistiaMedia`.  Will return
      `False` in that case and will not change the current playback rate.
-     
-     - Important: The `WistiaMedia` should be fully fleshed out from the API and include assets.  Otherwise, use the 
+
+     - Important: The `WistiaMedia` should be fully fleshed out from the API and include assets.  Otherwise, use the
      _hashedID_ version of this method directly, **do not create a `WistiaMedia` and set the _hashedID_**.
      
      - Parameter media: The `WistiaMedia` from which to choose an asset to load for playback.
@@ -317,12 +335,18 @@ public final class WistiaPlayer: NSObject {
         Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
      - Parameter project: The `WistiaProject` to which the media belongs.  Optional.
      
-     - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  `True` otherwise,
+     - Returns: `False` if the current `WistiaMedia` matches the parameter (resulting in a no-op).  Also returns `False` if
+        `media.embedOptions.lockedByPassword == true`, after informing the delegate of this state.  Returns `True` otherwise,
         _which does not guarantee success of the asynchronous video load_.
     */
     @discardableResult public func replaceCurrentVideoWithVideo(forMedia media: WistiaMedia, forcingAsset asset: WistiaAsset? = nil, fromProject project: WistiaProject? = nil) -> Bool {
         guard media != self.media else { return false }
         pause()
+
+        if let eo = media.embedOptions, eo.lockedByPassword {
+            self.delegate?.wistiaPlayer(self, couldNotPlayLocked: media, trying: nil)
+            return false
+        }
 
         let slug:String? = (asset != nil ? asset!.slug : nil)
         readyPlayback(for: media, choosingAssetWithSlug: slug, fromProject: project)
@@ -341,18 +365,25 @@ public final class WistiaPlayer: NSObject {
      - Parameter hashedID: The ID of a Wistia media from which to choose an asset to load for playback.
      - Parameter slug: The slug of a Wistia asset (of the media matching the given `hashedID`) to load for playback.
         Leave this nil to have the `WistiaPlayer` choose an optimal asset for the current player configuration and device characteristics.
+     - Parameter password: The password to use to access this video.  The delgate will be informed when the video requested is password protected,
+        but a correct password was not provided.
 
      - Returns: `False` if the current `WistiaMedia.hashedID` matches the parameter (resulting in a no-op).  `True` otherwise,
-     _which does not guarantee success of the asynchronous video load_.
+        _which does not guarantee success of the asynchronous video load_ (ex: video may be password protected).
      */
-    @discardableResult public func replaceCurrentVideoWithVideo(forHashedID hashedID: String, assetWithSlug slug: String? = nil) -> Bool {
+    @discardableResult public func replaceCurrentVideoWithVideo(forHashedID hashedID: String, assetWithSlug slug: String? = nil, password: String? = nil) -> Bool {
         guard media?.hashedID != hashedID else { return false }
         avPlayer.pause()
 
-        WistiaAPI.mediaInfo(for: hashedID, referer: referrer) { media, error in
+        WistiaAPI.mediaInfo(for: hashedID, referer: referrer, password: password) { media, error in
             if let m = media {
-                self.media = m
-                self.readyPlayback(for: m, choosingAssetWithSlug: slug)
+                if let eo = m.embedOptions, eo.lockedByPassword {
+                    self.delegate?.wistiaPlayer(self, couldNotPlayLocked: m, trying: password)
+                }
+                else {
+                    self.media = m
+                    self.readyPlayback(for: m, choosingAssetWithSlug: slug)
+                }
             } else {
                 self.media = nil
                 self.state = .mediaNotFoundError(badHashedID: hashedID)
@@ -364,7 +395,7 @@ public final class WistiaPlayer: NSObject {
     //MARK: - Controlling Playback
 
     /// Play the video.  This method is idempotent.
-    public func play() {
+    @objc public func play() {
         if avPlayer.rate == 0 {
             avPlayer.play()
             log(.play)
@@ -372,7 +403,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     /// Pause the video.  This method is idempotent.
-    public func pause() {
+    @objc public func pause() {
         if avPlayer.rate > 0 {
             avPlayer.pause()
             log(.pause)
@@ -380,7 +411,7 @@ public final class WistiaPlayer: NSObject {
     }
 
     /// Play the video if it's currently paused.  Pause if it's currently playing.
-    public func togglePlayPause() {
+    @objc public func togglePlayPause() {
         if avPlayer.rate > 0 {
             avPlayer.pause()
             log(.pause)
@@ -489,7 +520,7 @@ public final class WistiaPlayer: NSObject {
         }
     }
 
-    internal func seekFromRemoteCommand(_ event: MPChangePlaybackPositionCommandEvent) {
+    @objc internal func seekFromRemoteCommand(_ event: MPChangePlaybackPositionCommandEvent) {
         seek(to: CMTime(seconds: event.positionTime, preferredTimescale: 100), completionHandler: nil)
     }
 

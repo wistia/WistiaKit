@@ -81,6 +81,14 @@ public struct WistiaMediaEmbedOptions {
     /// Show captions by default (default: false)
     public var captionsOnByDefault: Bool = false
 
+    /// A password protected video will have `lockedByPassword = true`.
+    /// You must provide the password as a query parameter (ie. password=XXX) to get asset info from the API.
+    /// A value of false indicates the video is either not password protected, or the API request included the correct password.
+    public var lockedByPassword: Bool = false
+
+    /// A message to use when prompting the user for the password.
+    public var passwordChallenge: String? = nil
+
     /**
      Enumeration of options of what should happen automatically when a video reaches the end.
      - `PauseOnLastFrame` : Continue to diplay the last frame, remain paused (deafult).
@@ -222,6 +230,19 @@ extension WistiaMediaEmbedOptions: WistiaJSONParsable {
                     // presence of this hash means captions are available unless stated otherwise
                     captionsAvailable = captionsParser.fetchOptional("on", default: true) { (s: NSString) -> Bool in s.boolValue }
                     captionsOnByDefault = captionsAvailable && captionsParser.fetchOptional("onByDefault", default: false) { (s: NSString) -> Bool in s.boolValue }
+                }
+
+                // The `embedOptions` also have a `passwordProtectedVideo` key (ie. not within the `plugin` dictionary),
+                // but `embedOptions.passwordProtectedVideo.on` does not tell us if the request was made with the correct password or not.
+                // Whereas `embedOptions.plugins.passwordProtectedVideo.on` does provide this informtion.
+                if let passwordParser = pluginParser.fetchOptional("passwordProtectedVideo", transformation: { (dict: [String: Any]) -> Parser? in
+                    Parser(dictionary: dict)
+                }) {
+                    // when `on` is set to true, the Media is password protected and it was not requested with the correct password
+                    // when `on` is set to false, the Media is password protected and it was requested with the correct password.
+                    // when the passwordProtectedVideo dictionary does not exist, the video is not password protected
+                    lockedByPassword = passwordParser.fetchOptional("on", default: false) { (s: NSString) -> Bool in s.boolValue }
+                    passwordChallenge = try passwordParser.fetchOptional("challenge")
                 }
 
             }

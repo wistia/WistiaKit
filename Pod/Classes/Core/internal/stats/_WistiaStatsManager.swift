@@ -73,13 +73,13 @@ public class WistiaStatsManager {
 
     init() {
         //Resign/Become Active just stops/starts timers
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillResignActive,
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification,
                                                object: nil,
                                                queue: nil) { [weak self] (note) -> Void in
             self?.collectAndSend()
             self?.stopTimer()
         }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive,
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
                                                object: nil,
                                                queue: nil) { [weak self] (note) -> Void in
             self?.startTimer(withInterval: WistiaStatsManager.StatsSendInterval)
@@ -87,13 +87,13 @@ public class WistiaStatsManager {
 
         //Background persists events; Foreground restores events
         //By capturing lifecycle this way, we can ignore termination event
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground,
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification,
                                                object: nil,
                                                queue: nil) { [weak self] (note) -> Void in
             self?.collectEventDetails()
             self?.persistEvents()
         }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground,
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification,
                                                object: nil,
                                                queue: nil) { [weak self] (note) -> Void in
             self?.restoreEvents()
@@ -183,7 +183,7 @@ public class WistiaStatsManager {
 
 internal protocol WistiaEventCollector : class {
     //The manager that will process events held by this collector
-    weak var manager: WistiaStatsManager? { get set }
+    var manager: WistiaStatsManager? { get set }
 
     //Where all events are sent.  Should be constant for the life of a WistiaEventCollector.
     var eventEndpoint: URL! { get }
