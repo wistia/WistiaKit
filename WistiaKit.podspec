@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WistiaKit'
-  s.version          = '2.0.1'
+  s.version          = '2.0.2'
   s.summary          = 'Access and playback your Wistia media.'
 
   s.description      = <<-DESC
