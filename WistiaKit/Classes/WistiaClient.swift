@@ -86,12 +86,7 @@ public class WistiaClient {
     }
 
     public func get<T>(_ path: String, parameters: [String: String] = [:], completionHandler: @escaping ((T?, WistiaError?) ->())) where T: Codable {
-        var params = parameters
-        if token != nil {
-            params["api_password"] = token
-        }
-
-        let get = getRequest(for: path, with: params)
+        let get = getRequest(for: path, token: token, with: parameters)
 
         session.dataTask(with: get) { (data, urlResponse, error) in
             self.handleDataTaskResult(data: data, urlResponse: urlResponse, error: error, completionHandler: completionHandler)
@@ -99,11 +94,6 @@ public class WistiaClient {
     }
 
     public func post<T>(_ path: String, parameters: [String: String] = [:], completionHandler: @escaping ((T?, WistiaError?) -> ())) where T: Codable {
-//        var params = parameters
-//        if token != nil {
-//            params["api_password"] = token
-//        }
-
         let post = postRequest(for: path, token: token, with: parameters)
         print("\(String(describing: post.httpMethod)): \(post) data is \(String(describing: String(data: post.httpBody!, encoding: .utf8)))")
 
@@ -155,13 +145,17 @@ extension WistiaClient {
 //MARK: - URL Building
 extension WistiaClient {
 
-    private func getRequest(for path: String, with parameters: [String: String]) -> URLRequest {
+    private func getRequest(for path: String, token: String?, with parameters: [String: String]) -> URLRequest {
         var urlRequest = URLRequest(url: URL(string: path, relativeTo: WistiaClient.APIBase)!)
         var urlComponents = URLComponents(url: urlRequest.url!, resolvingAgainstBaseURL: false)!
 
-        //XXX: May need to URL encode (escape) these params
-        let queryParams = parameters.map { "\($0)=\($1)" }.joined(separator: "&")
-        urlComponents.percentEncodedQuery = queryParams
+        var queryParams = parameters.map { "\($0)=\($1)" }.joined(separator: "&")
+        //api_password needs to be in the URL
+        if let password = token {
+            queryParams.append("&api_password=\(password)")
+        }
+
+        urlComponents.percentEncodedQuery = queryParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         urlRequest.url = urlComponents.url
 
         return urlRequest
@@ -169,7 +163,7 @@ extension WistiaClient {
 
     private func postRequest(for path: String, token: String?, with parameters: [String: String]) -> URLRequest {
         var urlRequest = URLRequest(url: URL(string: path, relativeTo: WistiaClient.APIBase)!)
-        //api_password still needs to be in the URL
+        //api_password needs to be in the URL
         if let password = token {
             var urlComponents = URLComponents(url: urlRequest.url!, resolvingAgainstBaseURL: false)!
             urlComponents.percentEncodedQuery = "api_password=\(password)"
@@ -179,9 +173,8 @@ extension WistiaClient {
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
 
-        //XXX: May need to URL encode (escape) these params
         let queryParams = parameters.map { "\($0)=\($1)" }.joined(separator: "&")
-        urlRequest.httpBody = queryParams.data(using: .utf8, allowLossyConversion: false)
+        urlRequest.httpBody = queryParams.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)?.data(using: .utf8, allowLossyConversion: false)
 
         return urlRequest
     }
