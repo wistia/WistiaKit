@@ -30,13 +30,6 @@ public struct Media: WistiaObject {
         public let position: Int?
         public let url: URL?
         public let aspectRatio: Float?
-
-        enum CodingKeys: String, CodingKey {
-            case type, name, description
-            case projectId = "project_id"
-            case duration, position, url
-            case aspectRatio = "aspect_ratio"
-        }
     }
 
     public let relationships: Relationships?

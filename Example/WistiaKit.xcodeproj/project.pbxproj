@@ -33,7 +33,7 @@
 		31AF511C1FA8CCAF0000EF95 /* ProjectUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectUnitTests.swift; sourceTree = "<group>"; };
 		31BD9861215534160061CB3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31FE25441F97A37B00FC5C7C /* WistiaErrorUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WistiaErrorUnitTests.swift; sourceTree = "<group>"; };
-		47AAE726F0A775539408A9A4 /* WistiaKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WistiaKit.podspec; path = ../WistiaKit.podspec; sourceTree = "<group>"; };
+		47AAE726F0A775539408A9A4 /* WistiaKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WistiaKit.podspec; path = ../WistiaKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		56DC31C891F6CA43C2638CA1 /* Pods-WistiaKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WistiaKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WistiaKit_Tests/Pods-WistiaKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* WistiaKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WistiaKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };

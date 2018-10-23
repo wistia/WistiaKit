@@ -19,12 +19,6 @@ public struct Project: WistiaObject {
         public let mediaCount: Int
         public let videoCount: Int
         public let locked: Bool
-
-        enum CodingKeys: String, CodingKey {
-            case name, locked,
-            mediaCount = "media_count",
-            videoCount = "video_count"
-        }
     }
 }
 

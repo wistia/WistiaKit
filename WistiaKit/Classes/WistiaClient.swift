@@ -59,7 +59,6 @@ public protocol PersistenceManager {
 public class WistiaClient {
 
     fileprivate static let APIBase = URL(string: "https://api.wistia.com/v2/")
-    //fileprivate static let APIUploadURL = "https://upload.wistia.com"
 
     public let token: String?
     public let session: URLSession
@@ -124,6 +123,7 @@ extension WistiaClient {
         }
         else if let data = data {
             let jsonDecoder = JSONDecoder()
+            jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
             do {
                 let decoded = try jsonDecoder.decode(WistiaResponse<T>.self, from: data)
                 if decoded.data != nil || decoded.errors != nil {
