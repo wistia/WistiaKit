@@ -18,6 +18,19 @@ public struct Media: WistiaObject {
         case video = "video"
         case pdf = "pdf_document"
         case image = "image"
+
+        public init?(rawValue: String) {
+            switch rawValue.lowercased() {
+            case "pdf_document":
+                self = .pdf
+            case "image":
+                self = .image
+            case "video":
+                self = .video
+            default:
+                return nil
+            }
+        }
     }
 
     public let attributes: Attributes?
@@ -25,11 +38,28 @@ public struct Media: WistiaObject {
         public let type: MediaType?
         public let name: String?
         public let description: String?
-        public let projectId: String?
+        public let projectId: Int?
         public let duration: Float?
         public let position: Int?
         public let url: URL?
         public let aspectRatio: Float?
+
+        public let thumbnail: Thumbnail?
+        public struct Thumbnail: Codable {
+            public let url: URL?
+            public let width: Int?
+            public let height: Int?
+        }
+
+        public let stats: Stats?
+        public struct Stats: Codable {
+            public let loads: Int?
+            public let visitors: Int?
+            public let playRate: String?
+            public let plays: Int?
+            public let hoursWatched: Int?
+            public let engagement: String?
+        }
     }
 
     public let relationships: Relationships?
@@ -43,23 +73,6 @@ public struct Media: WistiaObject {
                 id = try container?.decode(URL.self, forKey: .id)
             }
         }
-
-        public let thumbnail: Thumbnail?
-        public struct Thumbnail: Codable {
-            public let id: URL?
-
-            public init(from decoder: Decoder) throws {
-                let container = try decoder.dataWrappedContainer(keyedBy: CodingKeys.self)
-                id = try container?.decode(URL.self, forKey: .id)
-            }
-        }
-    }
-
-    //MARK: Convenience Attributes
-    public var thumbnailURL: URL? {
-        get {
-            return relationships?.thumbnail?.id
-        }
     }
 
     //MARK: Initialization
@@ -70,14 +83,14 @@ public struct Media: WistiaObject {
     }
 
     //Used when creating a new media
-    public init(name: String? = nil, description: String? = nil, projectId: String? = nil) {
+    public init(name: String? = nil, description: String? = nil, projectId: Int? = nil) {
         self.init(id: nil, name: name, description: description, projectId: projectId)
     }
 
-    internal init(id: String? = nil, name: String? = nil, description: String? = nil, projectId: String? = nil) {
+    internal init(id: String? = nil, name: String? = nil, description: String? = nil, projectId: Int? = nil) {
         self.id = id
         self.type = nil
-        self.attributes = Attributes(type: nil, name: name, description: description, projectId: projectId, duration: nil, position: nil, url: nil, aspectRatio: nil)
+        self.attributes = Attributes(type: nil, name: name, description: description, projectId: projectId, duration: nil, position: nil, url: nil, aspectRatio: nil, thumbnail: nil, stats: nil)
         self.relationships = nil
     }
 
@@ -211,7 +224,7 @@ extension Media: WistiaClientCreatable {
             params["description"] = description
         }
         if let projectId = self.attributes?.projectId {
-            params["project_id"] = projectId
+            params["project_id"] = "\(projectId)"
         }
         //TODO: Add section_id when it's added to API v2
 

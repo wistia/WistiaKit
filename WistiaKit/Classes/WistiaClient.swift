@@ -94,7 +94,6 @@ public class WistiaClient {
 
     public func post<T>(_ path: String, parameters: [String: String] = [:], completionHandler: @escaping ((T?, WistiaError?) -> ())) where T: Codable {
         let post = postRequest(for: path, token: token, with: parameters)
-        print("\(String(describing: post.httpMethod)): \(post) data is \(String(describing: String(data: post.httpBody!, encoding: .utf8)))")
 
         session.dataTask(with: post) { (data, urlResponse, error) in
             self.handleDataTaskResult(data: data, urlResponse: urlResponse, error: error, completionHandler: completionHandler)

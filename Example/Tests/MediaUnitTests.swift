@@ -31,64 +31,34 @@ class MediaUnitTests: XCTestCase {
     func testDecodeCompleteMediaResponse() {
         let x = XCTestExpectation()
 
-        let mediaJson = """
-                        {"data":{"id":"abc123","type":"video","attributes":{"type":"video","name":"No","description":"UpdateTwoKolkkaMhmm","project_id":"projJJ33","duration":4.399,"position":-3,"url":"https://test.wistia.com/medias/abc123","aspect_ratio":1.8181818181818181},"relationships":{"media_group":{"data":{"id":"3688934","type":"media_group"}},"storyboard":{"data":{"id":"https://embed-ssl.wistia.com/deliveries/storyboarduuid.bin","type":"storyboard"}},"thumbnail":{"data":{"id":"https://embed-ssl.wistia.com/deliveries/thumbnailuuid.jpg?image_crop_resized=200x120image_quality=100ssl=true","type":"thumbnail"}}}}}
-                        """
+        let mediaJson = "{\"data\":{\"id\":\"123456\",\"type\":\"video\",\"attributes\":{\"account_name\":\"spinosa-5\",\"project_name\":\"Uploads on 2018-10-23\",\"name\":\"Untitled\",\"display_name\":\"Untitled\",\"hashed_id\":\"jqhrpu4jca\",\"project_hashed_id\":\"y3ck12j6a7\",\"media_group_id\":5041440,\"duration\":8.365,\"position\":-4,\"progress\":0.1111111111111111,\"status\":0,\"status_in_words\":\"queued\",\"type\":\"Video\",\"thumbnail\":{\"url\":\"https://embed-ssl.wistia.com/deliveries/c922a781311f3855bb971544d2054719.jpg?image_crop_resized=200x120\\u0026video_still_time=4\",\"width\":200,\"height\":120},\"created_at\":\"2018-10-23T14:20:29+00:00\",\"updated_at\":\"2018-10-23T14:20:29+00:00\",\"description\":\"des\",\"account_host\":\"spinosa-5.wistia.com\",\"can_delete\":true,\"can_update\":true,\"can_view_stats\":true,\"comment_count\":0,\"play_count\":0,\"kind\":\"video\",\"raw_description\":\"\",\"stats\":{\"loads\":0,\"visitors\":0,\"play_rate\":\"0 %\",\"plays\":0,\"hours_watched\":0,\"engagement\":\"0 %\"},\"mp3_url\":null,\"can_create\":true,\"can_download\":true,\"show_comments\":true,\"ghost\":false,\"markdown_description\":null,\"project_id\":3886042,\"download_url\":\"/medias/jqhrpu4jca/download?asset=original\"},\"relationships\":{\"comments\":{\"data\":[]}}}}"
+
+
         let c = WistiaClient()
         c.handleDataTaskResult(data: mediaJson.data(using: .utf8), urlResponse: nil, error: nil) { (media: Media?, error) in
             XCTAssertNotNil(media, error.debugDescription)
-            XCTAssertEqual(media?.id, "abc123")
+            XCTAssertEqual(media?.id, "123456")
             XCTAssertEqual(media?.type, .video)
 
             XCTAssertEqual(media?.attributes?.type, .video)
-            XCTAssertEqual(media?.attributes?.name, "No")
-            XCTAssertEqual(media?.attributes?.description, "UpdateTwoKolkkaMhmm")
-            XCTAssertEqual(media?.attributes?.projectId, "projJJ33")
-            XCTAssertEqual((media?.attributes?.duration)!, 4.399, accuracy: 0.01)
-            XCTAssertEqual(media?.attributes?.position, -3)
-            XCTAssertEqual(media?.attributes?.url, URL(string: "https://test.wistia.com/medias/abc123"))
-            XCTAssertEqual((media?.attributes?.aspectRatio)!, 1.81, accuracy: 0.01)
+            XCTAssertEqual(media?.attributes?.name, "Untitled")
+            XCTAssertEqual(media?.attributes?.description, "des")
+            XCTAssertEqual(media?.attributes?.projectId, 3886042)
+            XCTAssertEqual((media?.attributes?.duration)!, 8.365, accuracy: 0.01)
+            XCTAssertEqual(media?.attributes?.position, -4)
+            XCTAssertEqual(media?.attributes?.url, nil)
 
-            XCTAssertEqual(media?.relationships?.storyboard?.id, URL(string: "https://embed-ssl.wistia.com/deliveries/storyboarduuid.bin"))
+            XCTAssertEqual(media?.attributes?.thumbnail?.url, URL(string: "https://embed-ssl.wistia.com/deliveries/c922a781311f3855bb971544d2054719.jpg?image_crop_resized=200x120&video_still_time=4"))
 
-            XCTAssertEqual(media?.relationships?.thumbnail?.id, URL(string: "https://embed-ssl.wistia.com/deliveries/thumbnailuuid.jpg?image_crop_resized=200x120image_quality=100ssl=true"))
-            XCTAssertEqual(media?.thumbnailURL, URL(string: "https://embed-ssl.wistia.com/deliveries/thumbnailuuid.jpg?image_crop_resized=200x120image_quality=100ssl=true"))
+            XCTAssertEqual(media?.attributes?.stats?.loads, 0)
+            XCTAssertEqual(media?.attributes?.stats?.visitors, 0)
+            XCTAssertEqual(media?.attributes?.stats?.playRate, "0 %")
+            XCTAssertEqual(media?.attributes?.stats?.plays, 0)
+            XCTAssertEqual(media?.attributes?.stats?.hoursWatched, 0)
+            XCTAssertEqual(media?.attributes?.stats?.engagement, "0 %")
 
-            x.fulfill()
-        }
+            XCTAssertEqual(media?.relationships?.storyboard?.id, nil)
 
-        wait(for: [x], timeout: 1)
-    }
-
-    //The API returns a Storyboard object with its normal data inner wrapper, but that data is empty.  We mirror the API in our final object.
-    func testDecodeNullDataContainerForStoryboard() {
-        let x = XCTestExpectation()
-
-        let mediaJson = "{\"data\":{\"id\":\"acvtbaj7ly\",\"type\":\"image\",\"attributes\":{\"type\":\"image\",\"name\":\"flags-500x500\",\"description\":null,\"project_id\":\"32ko9arq7m\",\"duration\":null,\"position\":27,\"url\":\"https://acj.wistia.com/medias/acvtbaj7ly\",\"aspect_ratio\":1.0},\"relationships\":{\"media_group\":{\"data\":{\"id\":\"3785382\",\"type\":\"media_group\"}},\"storyboard\":{\"data\":null},\"thumbnail\":{\"data\":{\"id\":\"https://embed-ssl.wistia.com/deliveries/c05c3b79630488dd18a6b82a895ed2dfa8f68c5d.jpg?image_crop_resized=200x120\\u0026image_quality=100\\u0026ssl=true\",\"type\":\"thumbnail\"}}}}}"
-
-        let c = WistiaClient()
-        c.handleDataTaskResult(data: mediaJson.data(using: .utf8), urlResponse: nil, error: nil) { (media: Media?, error) in
-            XCTAssertNotNil(media)
-            XCTAssertNotNil(media?.relationships)
-            XCTAssertNotNil(media?.relationships?.storyboard)
-            XCTAssertNil(media?.relationships?.storyboard?.id)
-            x.fulfill()
-        }
-
-        wait(for: [x], timeout: 1)
-    }
-
-    //My guess is that the API may someday not even return storyboard in the degenerate case.  So we handle it now.
-    func testDecodeNullStoryboard() {
-        let x = XCTestExpectation()
-
-        let mediaJson = "{\"data\":{\"id\":\"acvtbaj7ly\",\"type\":\"image\",\"attributes\":{\"type\":\"image\",\"name\":\"flags-500x500\",\"description\":null,\"project_id\":\"32ko9arq7m\",\"duration\":null,\"position\":27,\"url\":\"https://acj.wistia.com/medias/acvtbaj7ly\",\"aspect_ratio\":1.0},\"relationships\":{\"media_group\":{\"data\":{\"id\":\"3785382\",\"type\":\"media_group\"}},\"thumbnail\":{\"data\":{\"id\":\"https://embed-ssl.wistia.com/deliveries/c05c3b79630488dd18a6b82a895ed2dfa8f68c5d.jpg?image_crop_resized=200x120\\u0026image_quality=100\\u0026ssl=true\",\"type\":\"thumbnail\"}}}}}"
-
-        let c = WistiaClient()
-        c.handleDataTaskResult(data: mediaJson.data(using: .utf8), urlResponse: nil, error: nil) { (media: Media?, error) in
-            XCTAssertNotNil(media)
-            XCTAssertNotNil(media?.relationships)
-            XCTAssertNil(media?.relationships?.storyboard)
             x.fulfill()
         }
 
