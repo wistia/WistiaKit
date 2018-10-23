@@ -1,5 +1,5 @@
 PODS:
-  - WistiaKit (2.0.2)
+  - WistiaKit (2.0.3)
 
 DEPENDENCIES:
   - WistiaKit (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  WistiaKit: 69acaa28d17ef651cfdaebe43e1c0999faf03cfb
+  WistiaKit: 27f4fd32877fb44b7ef4edf377d11c06fb2b3465
 
 PODFILE CHECKSUM: 528b7be0002f6698ce9128f792540cab1363d248
 

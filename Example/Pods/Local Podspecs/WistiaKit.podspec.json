@@ -1,6 +1,6 @@
 {
   "name": "WistiaKit",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "summary": "Access and playback your Wistia media.",
   "description": "A lightweight framework to access and playback your media.  Taking advantage of Swift 4, the web-based Vulcan player, and experience gained from The Original WistiaKit (tm).",
   "homepage": "https://github.com/wistia/WistiaKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/wistia/WistiaKit.git",
-    "tag": "2.0.2"
+    "tag": "2.0.3"
   },
   "platforms": {
     "ios": "11.0"
