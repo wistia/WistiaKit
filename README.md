@@ -1,14 +1,10 @@
+# NO LONGER MAINTAINED
+
+This repository remains available for Wistia customers to use, but please be aware that it is not maintained and will not be receiving updates, bug fixes, or new features. We appreciate all of the feedback and contributions that our customers have given to WistiaKit.
+
 # WistiaKit
-<img src="https://wistia.com/assets/platform/WistiaKit-c4c6f3d46b06507c7d2c0bf3755e683c.png" width="100">
 
 The best way to play Wistia video on iPhone, iPad, and Apple TV.  Written in Swift.
-
-[![CI Status](http://img.shields.io/travis/wistia/WistiaKit.svg?style=flat)](https://travis-ci.org/wistia/WistiaKit)
-[![Version](https://img.shields.io/cocoapods/v/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
-[![License](https://img.shields.io/cocoapods/l/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
-[![Platform](https://img.shields.io/cocoapods/p/WistiaKit.svg?style=flat)](http://cocoapods.org/pods/WistiaKit)
-
-Swift 4.2 compatibility right here
 
 ## Your Video on iOS in 5 minutes!
 
